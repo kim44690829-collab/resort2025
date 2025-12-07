@@ -50,11 +50,11 @@ export default function Detail(){
     const wishLoad = () =>{
         let wishList = JSON.parse(cookie.get('wishList') || '[]');  
         
-        let now = new Date();
+        let now = Date.now();
 
         wishList = wishList.filter(item=>item.expires > now);
  
-        cookie.set('wishList', JSON.stringify(wishList), {expires: Date(now + 60*1000), path:'/'});
+        cookie.set('wishList', JSON.stringify(wishList), {expires: 7, path:'/'});
     }
 
     useEffect(()=>{
@@ -65,13 +65,13 @@ export default function Detail(){
     const wishSave = () =>{
         let wishList = JSON.parse(cookie.get('wishList') || '[]');  
         
-        let now = new Date();
+        let now = Date.now();
 
         wishList = wishList.filter(item=>item.expires > now);
 
         wishList.push({id: Number(id), expires: now + 60*1000});
 
-        cookie.set('wishList', JSON.stringify(wishList), {expires: now + 60*1000, path:'/'});
+        cookie.set('wishList', JSON.stringify(wishList), {expires: 7, path:'/'});
         
     }
 // let now = Date.now();
