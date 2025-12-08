@@ -1,0 +1,129 @@
+/* #root{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    margin: 0 auto;
+}
+ul,li{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+} */
+.detail-wrap{
+    width: 1200px;
+    margin: 50px auto 0;
+    font-family: sans-serif;
+}
+.detail-wrap .detail-img{
+    display: flex;
+    flex-wrap: wrap;
+    height: 512px;
+    width: 100%;
+    gap: 0px;
+    flex-direction: column;
+    border-radius: 13px;
+    overflow: hidden;
+}
+.detail-wrap .detail-img li:nth-child(1){
+    width: 49%;
+    height: 100%;
+}
+.detail-wrap .detail-img li{
+    width: 25%;
+    height: 49.4%;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-right: 0.5%;
+}
+.detail-wrap .detail-img li:nth-child(2),
+.detail-wrap .detail-img li:nth-child(4){
+    margin-bottom: 0.5%;
+}
+.detail-wrap .detail-img li:nth-child(4),
+.detail-wrap .detail-img li:nth-child(5){
+    margin-right: 0;
+}
+.detail-wrap .detail-img li:hover{
+    opacity: 0.8;
+}
+
+.detail-wrap .detail-img li img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: block;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+}
+
+
+.detail-wrap .detail-title{
+    overflow: hidden;
+    margin-top: 25px;
+}
+.detail-wrap .detail-title .title-left{
+    float: left;
+}
+.detail-wrap .detail-title .title-left p{
+    font-size: 15px;
+    color: #707070;
+}
+.detail-wrap .detail-title .title-left h1{
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 40px;
+}
+.detail-wrap .detail-title .title-left img{
+    margin-right: 1px;
+    width: 15px;
+}
+.detail-wrap .detail-title .title-right{
+    float: right;
+}
+.detail-wrap .detail-title .title-right .discount{
+    text-align: right;
+}
+.detail-wrap .detail-title .title-right .discount .red{
+    background-color: #ffedea;
+    color: #f94239;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 5px;
+    text-decoration: none !important;
+}
+.detail-wrap .detail-title .title-right .discount .origin-price{
+    font-size: 15px;
+    color: #707070;    
+    text-decoration: line-through;
+}
+.detail-wrap .detail-title .title-right .final-price{
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 40px;
+    text-align: right;
+}
+.detail-wrap .detail-title .title-right .final-price span{
+    font-size: 15px;
+    color: #707070;
+}
+.detail-wrap .detail-title .title-right .btns{
+    width: 100%;
+    text-align: right;
+    margin-top: 6px;
+}
+.detail-wrap .detail-title .title-right .btns button{
+    border: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.detail-wrap .detail-title .title-right .btns button i{
+    font-size: 21px;
+    color: #848484;
+    text-align: center;
+}
