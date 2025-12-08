@@ -15,7 +15,8 @@ export default function Detail(){
     
     console.log(Hotel);
     console.log(Room);
-
+    //
+    
     //별점이미지
     const[starImg, setStarImg] = useState([]);
 
