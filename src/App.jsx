@@ -4,6 +4,7 @@
 // import './App.css'
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import ResortDate from './Api/ResortDate'
+import Room from './Page/Room'
 import Main from './Page/Main'
 import Detail from './Page/Detail'
 

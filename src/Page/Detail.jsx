@@ -15,8 +15,7 @@ export default function Detail(){
     
     console.log(Hotel);
     console.log(Room);
-    //
-    
+
     //별점이미지
     const[starImg, setStarImg] = useState([]);
 
@@ -47,41 +46,47 @@ export default function Detail(){
 
     },[id]);
 
-    //찜목록 불러오기
-    const wishLoad = () =>{
-        let wishList = JSON.parse(cookie.get('wishList') || '[]');  
-        
-        let now = Date.now();
-
-        wishList = wishList.filter(item=>item.expires > now);
- 
-        cookie.set('wishList', JSON.stringify(wishList), {expires: 7, path:'/'});
-    }
+    
+    const [wish, setWish] = useState([]);
 
     useEffect(()=>{
-        wishLoad;
+        //찜목록 불러오기
+        let wishList = JSON.parse(cookie.get('wishList') || '[]');          
+        let now = Date.now();
+        wishList = wishList.filter(item=>item.expires > now);
+        cookie.set('wishList', JSON.stringify(wishList), {expires: 30, path:'/'});
+        setWish(wishList);
+        //console.log(wishList.length);
     },[]);
+    //console.log(wish);
 
-    //찜목록 쿠키 저장
-    const wishSave = () =>{
-        let wishList = JSON.parse(cookie.get('wishList') || '[]');  
-        
+    //찜목록 쿠키 저장 및 삭제
+    const wishHandler = () =>{
+        let wishList = JSON.parse(cookie.get('wishList') || '[]');          
         let now = Date.now();
 
         wishList = wishList.filter(item=>item.expires > now);
 
-        wishList.push({id: Number(id), expires: now + 60*1000});
+        //이미 추가된 아이디가 있으면 삭제
+        for(let i=0; i<wishList.length; i++){
+            if(wishList[i].id === Number(id)){
+                wishList = wishList.filter((item)=>item.id !== Number(id));
+                cookie.set('wishList', JSON.stringify(wishList), {expires: 30, path:'/'});
+                return;
+            }
+        }
+        //갯수 50개 제한
+        if(wishList.length >= 50){
+            alert('찜은 50개까지만 담으실 수 있습니다.');
+            return;
+        }
+        //30일간 보관(추가한 리스트 개별로)
+        wishList.push({id: Number(id), expires: now + 30*24*60*60*1000});
 
-        cookie.set('wishList', JSON.stringify(wishList), {expires: 7, path:'/'});
-        
+        cookie.set('wishList', JSON.stringify(wishList), {expires: 30, path:'/'});   
     }
-// let now = Date.now();
-// console.log(Date(now));
-//     console.log(Date(now + 60*60*1000));
 
-    //console.log(Date(now() + 3000));
 
-    
     //예외처리
     if(!Hotel) return <p>잠시만 기다려주세요...</p>
 
@@ -115,7 +120,7 @@ export default function Detail(){
                         </>
                     )}
                     <div className="btns">
-                        <button type='button' onClick={wishSave}>
+                        <button type='button' onClick={wishHandler}>
                             <i className="fa-regular fa-heart"></i>
                         </button>                        
                     </div>
