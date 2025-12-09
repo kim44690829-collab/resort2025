@@ -9,6 +9,7 @@ export default function Room(){
     /* 필터 된 목록 */
     const [myFilter,setMyfilter] = useState([])
     //
+    //
     /* 필터의 항목 클릭시 적용 함수 */
     const filterHandeler=(item)=>{
         const myFilterCopy = [...myFilter]
