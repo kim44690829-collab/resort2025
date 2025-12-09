@@ -1,0 +1,35 @@
+.signup2_container{
+    width: 1200px;
+    margin: 10px auto;
+}
+.signup2_container h1{
+    text-align: center;
+    font-size: 30px;
+    margin: 50px 0 50px 0;
+}
+.signup2_container .tel_form{
+    width: 360px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+}
+.signup2_container .tel_form > label{
+    margin-bottom: 10px;
+}
+.signup2_container .tel_form #usertel{
+    margin-bottom: 30px;
+    padding: 15px;
+    border-radius: 10px;
+}
+.signup2_container .tel_form #smsCode{
+    margin-bottom: 30px;
+    padding: 15px;
+    border-radius: 10px;
+}
+.signup2_container .tel_form .telBtn{
+    margin-bottom: 30px;
+    padding: 15px;
+    border-radius: 10px;
+    width: 360px;
+    cursor: pointer;
+}

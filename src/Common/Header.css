@@ -1,0 +1,15 @@
+/* Header 전체 css */
+.Header_container{
+    width: 1200px;
+    display: flex;
+    margin: 20px auto;
+    justify-content: space-between;
+}
+/* Header 우측 버튼 css */
+.Header_container .Header_right  button{
+    margin-right: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
