@@ -1,11 +1,14 @@
-export default function ResortDate(){
+import { createContext } from "react";
+
+export const ResortDateContext = createContext();
+
+export default function ResortDate({children}){
     const RoomData = [
         /* 한국 - 서울 */
         {
         id: 1,
         hotelName: "서울 스카이베이 프라임 호텔",
         roomName: "슈페리얼 201호",
-        img: "/img/1-1.jpg",
         maxOccupancy: 3,
         score: [5,4,3,4,5,4],
         comment: ["최고였어요","좋았어요","보통이에요","무난했어요","만족했어요","괜찮았어요"]
@@ -14,7 +17,6 @@ export default function ResortDate(){
         id: 2,
         hotelName: "서울 스카이베이 프라임 호텔",
         roomName: "골져스 203호",
-        img: "/img/2-1.jpg",
         maxOccupancy: 4,
         score: [2,3,1,2,3,2],
         comment: ["별로예요","그저 그랬어요","최악이에요","기대이하","무난했어요","아쉬웠어요"]
@@ -23,7 +25,6 @@ export default function ResortDate(){
         id: 3,
         hotelName: "서울 스카이베이 프라임 호텔",
         roomName: "슈페리얼 205호",
-        img: "/img/3-1.jpg",
         maxOccupancy: 2,
         score: [4,5,4,5,4,5],
         comment: ["좋았어요","최고예요","만족했어요","완벽했어요","아주좋아요","훌륭했어요"]
@@ -32,7 +33,6 @@ export default function ResortDate(){
         id: 4,
         hotelName: "서울 라이트하버 호텔",
         roomName: "디럭스 301호",
-        img: "/img/4-1.jpg",
         maxOccupancy: 3,
         score: [3,2,3,2,3,2],
         comment: ["보통이에요","기대이하","그저그래요","무난해요","그럭저럭","별로예요"]
@@ -41,7 +41,6 @@ export default function ResortDate(){
         id: 5,
         hotelName: "서울 라이트하버 호텔",
         roomName: "이그제큐티브 303호",
-        img: "/img/5-1.jpg",
         maxOccupancy: 4,
         score: [5,5,4,5,5,4],
         comment: ["최고예요","완벽했어요","좋았어요","아주좋아요","만족했어요","훌륭해요"]
@@ -50,7 +49,6 @@ export default function ResortDate(){
         id: 6,
         hotelName: "서울 라이트하버 호텔",
         roomName: "디럭스 305호",
-        img: "/img/6-1.jpg",
         maxOccupancy: 2,
         score: [1,2,1,1,2,1],
         comment: ["불만이에요","별로예요","최악이에요","끔찍했어요","아쉬워요","별로예요"]
@@ -59,7 +57,6 @@ export default function ResortDate(){
         id: 7,
         hotelName: "서울 헤리티지 스타 라운지",
         roomName: "스텐다드 401호",
-        img: "/img/7-1.jpg",
         maxOccupancy: 3,
         score: [4,4,5,4,5,4],
         comment: ["좋았어요","만족했어요","최고예요","괜찮았어요","아주좋아요","좋아요"]
@@ -68,7 +65,6 @@ export default function ResortDate(){
         id: 8,
         hotelName: "서울 헤리티지 스타 라운지",
         roomName: "프리미어 403호",
-        img: "/img/8-1.jpg",
         maxOccupancy: 4,
         score: [2,3,2,3,2,3],
         comment: ["별로예요","그저그래요","불만이에요","무난해요","그럭저럭","아쉬워요"]
@@ -77,7 +73,6 @@ export default function ResortDate(){
         id: 9,
         hotelName: "서울 헤리티지 스타 라운지",
         roomName: "스텐다드 405호",
-        img: "/img/9-1.jpg",
         maxOccupancy: 2,
         score: [5,5,5,4,5,5],
         comment: ["완벽했어요","최고예요","아주좋아요","좋았어요","만족해요","훌륭했어요"]
@@ -86,7 +81,6 @@ export default function ResortDate(){
         id: 10,
         hotelName: "서울 프레미어 모던 스테이",
         roomName: "디럭스 101호",
-        img: "/img/10-1.jpg",
         maxOccupancy: 3,
         score: [3,3,2,3,3,2],
         comment: ["보통이에요","무난해요","그저그랬어요","보통이에요","무난해요","그저그래요"]
@@ -95,7 +89,6 @@ export default function ResortDate(){
         id: 11,
         hotelName: "서울 프레미어 모던 스테이",
         roomName: "이그제큐티브 103호",
-        img: "/img/11-1.jpg",
         maxOccupancy: 4,
         score: [4,4,4,5,4,5],
         comment: ["좋았어요","만족했어요","괜찮아요","최고예요","좋아요","아주좋아요"]
@@ -104,7 +97,6 @@ export default function ResortDate(){
         id: 12,
         hotelName: "서울 프레미어 모던 스테이",
         roomName: "디럭스 105호",
-        img: "/img/12-1.jpg",
         maxOccupancy: 2,
         score: [1,2,1,2,1,2],
         comment: ["불만이에요","별로예요","최악이에요","아쉬워요","불만이에요","별로예요"]
@@ -113,7 +105,6 @@ export default function ResortDate(){
         id: 13,
         hotelName: "서울 오션루프 스위트",
         roomName: "슈페리얼 201호",
-        img: "/img/13-1.jpg",
         maxOccupancy: 3,
         score: [5,5,5,5,4,5],
         comment: ["최고예요","완벽했어요","아주좋아요","완벽했어요","좋았어요","최고예요"]
@@ -122,7 +113,6 @@ export default function ResortDate(){
         id: 14,
         hotelName: "서울 오션루프 스위트",
         roomName: "골져스 203호",
-        img: "/img/14-1.jpg",
         maxOccupancy: 4,
         score: [2,1,2,1,2,1],
         comment: ["불만이에요","최악이에요","별로예요","끔찍했어요","불만이에요","최악이에요"]
@@ -131,7 +121,6 @@ export default function ResortDate(){
         id: 15,
         hotelName: "서울 오션루프 스위트",
         roomName: "슈페리얼 205호",
-        img: "/img/15-1.jpg",
         maxOccupancy: 2,
         score: [4,4,5,4,5,4],
         comment: ["좋았어요","만족했어요","최고예요","좋았어요","아주좋아요","좋아요"]
@@ -140,7 +129,6 @@ export default function ResortDate(){
         id: 16,
         hotelName: "서울 리버사이드 프라임 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/16-1.jpg",
         maxOccupancy: 3,
         score: [3,2,3,2,3,2],
         comment: ["보통이에요","기대이하","무난해요","그저그래요","무난했어요","아쉬웠어요"]
@@ -149,7 +137,6 @@ export default function ResortDate(){
         id: 17,
         hotelName: "서울 리버사이드 프라임 호텔",
         roomName: "프리미어 303호",
-        img: "/img/17-1.jpg",
         maxOccupancy: 4,
         score: [5,4,5,5,4,5],
         comment: ["최고예요","좋았어요","최고예요","완벽했어요","좋아요","아주좋아요"]
@@ -158,7 +145,6 @@ export default function ResortDate(){
         id: 18,
         hotelName: "서울 리버사이드 프라임 호텔",
         roomName: "스텐다드 305호",
-        img: "/img/18-1.jpg",
         maxOccupancy: 2,
         score: [1,1,2,1,2,1],
         comment: ["최악이에요","불만이에요","별로예요","끔찍했어요","불만이에요","최악이에요"]
@@ -170,7 +156,6 @@ export default function ResortDate(){
         id: 19,
         hotelName: "부산 오션클라우드 호텔",
         roomName: "슈페리얼 201호",
-        img: "/img/19-1.jpg",
         maxOccupancy: 3,
         score: [5,4,4,5,5,4],
         comment: ["좋았어요","만족해요","괜찮아요","아주좋아요","최고예요","좋아요"]
@@ -179,7 +164,6 @@ export default function ResortDate(){
         id: 20,
         hotelName: "부산 오션클라우드 호텔",
         roomName: "골져스 203호",
-        img: "/img/20-1.jpg",
         maxOccupancy: 4,
         score: [2,3,2,3,2,3],
         comment: ["별로예요","그저그래요","무난해요","그럭저럭","아쉬워요","그저그래요"]
@@ -188,7 +172,6 @@ export default function ResortDate(){
         id: 21,
         hotelName: "부산 오션클라우드 호텔",
         roomName: "슈페리얼 205호",
-        img: "/img/21-1.jpg",
         maxOccupancy: 2,
         score: [4,5,4,5,4,5],
         comment: ["좋았어요","최고예요","만족해요","아주좋아요","좋아요","완벽해요"]
@@ -197,7 +180,6 @@ export default function ResortDate(){
         id: 22,
         hotelName: "부산 마리나 스위트",
         roomName: "디럭스 301호",
-        img: "/img/22-1.jpg",
         maxOccupancy: 3,
         score: [3,2,3,2,3,2],
         comment: ["보통이에요","기대이하","무난해요","그저그래요","그럭저럭","별로예요"]
@@ -206,7 +188,6 @@ export default function ResortDate(){
         id: 23,
         hotelName: "부산 마리나 스위트",
         roomName: "이그제큐티브 303호",
-        img: "/img/23-1.jpg",
         maxOccupancy: 4,
         score: [5,5,4,5,5,4],
         comment: ["최고예요","완벽해요","좋았어요","아주좋아요","만족해요","훌륭해요"]
@@ -215,7 +196,6 @@ export default function ResortDate(){
         id: 24,
         hotelName: "부산 마리나 스위트",
         roomName: "디럭스 305호",
-        img: "/img/24-1.jpg",
         maxOccupancy: 2,
         score: [1,2,1,2,1,2],
         comment: ["불만이에요","별로예요","최악이에요","아쉬워요","불만이에요","별로예요"]
@@ -224,7 +204,6 @@ export default function ResortDate(){
         id: 25,
         hotelName: "부산 블루웨이브 호텔",
         roomName: "스텐다드 401호",
-        img: "/img/25-1.jpg",
         maxOccupancy: 3,
         score: [4,4,5,4,5,4],
         comment: ["좋았어요","만족해요","최고예요","괜찮아요","아주좋아요","좋아요"]
@@ -233,7 +212,6 @@ export default function ResortDate(){
         id: 26,
         hotelName: "부산 블루웨이브 호텔",
         roomName: "프리미어 403호",
-        img: "/img/26-1.jpg",
         maxOccupancy: 4,
         score: [2,3,2,3,2,3],
         comment: ["별로예요","그저그래요","무난해요","그럭저럭","아쉬워요","그저그래요"]
@@ -242,7 +220,6 @@ export default function ResortDate(){
         id: 27,
         hotelName: "부산 블루웨이브 호텔",
         roomName: "스텐다드 405호",
-        img: "/img/27-1.jpg",
         maxOccupancy: 2,
         score: [5,5,5,4,5,5],
         comment: ["완벽해요","최고예요","아주좋아요","좋았어요","만족해요","훌륭해요"]
@@ -251,7 +228,6 @@ export default function ResortDate(){
         id: 28,
         hotelName: "부산 센트럴힐 호텔",
         roomName: "디럭스 101호",
-        img: "/img/28-1.jpg",
         maxOccupancy: 3,
         score: [3,3,2,3,3,2],
         comment: ["보통이에요","무난해요","그저그랬어요","보통이에요","무난해요","그저그래요"]
@@ -260,7 +236,6 @@ export default function ResortDate(){
         id: 29,
         hotelName: "부산 센트럴힐 호텔",
         roomName: "이그제큐티브 103호",
-        img: "/img/29-1.jpg",
         maxOccupancy: 4,
         score: [4,4,4,5,4,5],
         comment: ["좋았어요","만족해요","괜찮아요","최고예요","좋아요","아주좋아요"]
@@ -269,7 +244,6 @@ export default function ResortDate(){
         id: 30,
         hotelName: "부산 센트럴힐 호텔",
         roomName: "디럭스 105호",
-        img: "/img/30-1.jpg",
         maxOccupancy: 2,
         score: [1,2,1,2,1,2],
         comment: ["불만이에요","별로예요","최악이에요","아쉬워요","불만이에요","별로예요"]
@@ -278,7 +252,6 @@ export default function ResortDate(){
         id: 31,
         hotelName: "부산 더레인 하버 스테이",
         roomName: "슈페리얼 201호",
-        img: "/img/31-1.jpg",
         maxOccupancy: 3,
         score: [5,5,5,5,4,5],
         comment: ["최고예요","완벽해요","아주좋아요","완벽해요","좋았어요","최고예요"]
@@ -287,7 +260,6 @@ export default function ResortDate(){
         id: 32,
         hotelName: "부산 더레인 하버 스테이",
         roomName: "골져스 203호",
-        img: "/img/32-1.jpg",
         maxOccupancy: 4,
         score: [2,1,2,1,2,1],
         comment: ["불만이에요","최악이에요","별로예요","끔찍해요","불만이에요","최악이에요"]
@@ -296,7 +268,6 @@ export default function ResortDate(){
         id: 33,
         hotelName: "부산 더레인 하버 스테이",
         roomName: "슈페리얼 205호",
-        img: "/img/33-1.jpg",
         maxOccupancy: 2,
         score: [4,4,5,4,5,4],
         comment: ["좋았어요","만족해요","최고예요","좋았어요","아주좋아요","좋아요"]
@@ -305,7 +276,6 @@ export default function ResortDate(){
         id: 34,
         hotelName: "부산 글로우 포레스트 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/34-1.jpg",
         maxOccupancy: 3,
         score: [3,2,3,2,3,2],
         comment: ["보통이에요","기대이하","무난해요","그저그래요","무난했어요","아쉬워요"]
@@ -314,7 +284,6 @@ export default function ResortDate(){
         id: 35,
         hotelName: "부산 글로우 포레스트 호텔",
         roomName: "프리미어 303호",
-        img: "/img/35-1.jpg",
         maxOccupancy: 4,
         score: [5,4,5,5,4,5],
         comment: ["최고예요","좋았어요","최고예요","완벽해요","좋아요","아주좋아요"]
@@ -323,7 +292,6 @@ export default function ResortDate(){
         id: 36,
         hotelName: "부산 글로우 포레스트 호텔",
         roomName: "스텐다드 305호",
-        img: "/img/36-1.jpg",
         maxOccupancy: 2,
         score: [1,1,2,1,2,1],
         comment: ["최악이에요","불만이에요","별로예요","끔찍해요","불만이에요","최악이에요"]
@@ -336,7 +304,6 @@ export default function ResortDate(){
         id: 37,
         hotelName: "강릉 코랄베이 오션 호텔",
         roomName: "슈페리얼 201호",
-        img: "/img/37-1.jpg",
         maxOccupancy: 3,
         score: [5,4,4,5,5,4],
         comment: ["좋았어요","만족해요","괜찮아요","아주좋아요","최고예요","좋아요"]
@@ -345,7 +312,6 @@ export default function ResortDate(){
         id: 38,
         hotelName: "강릉 코랄베이 오션 호텔",
         roomName: "골져스 203호",
-        img: "/img/38-1.jpg",
         maxOccupancy: 4,
         score: [2,3,2,3,2,3],
         comment: ["별로예요","그저그래요","무난해요","그럭저럭","아쉬워요","그저그래요"]
@@ -354,7 +320,6 @@ export default function ResortDate(){
         id: 39,
         hotelName: "강릉 코랄베이 오션 호텔",
         roomName: "슈페리얼 205호",
-        img: "/img/39-1.jpg",
         maxOccupancy: 2,
         score: [4,5,4,5,4,5],
         comment: ["좋았어요","최고예요","만족해요","아주좋아요","좋아요","완벽해요"]
@@ -363,7 +328,6 @@ export default function ResortDate(){
         id: 40,
         hotelName: "강릉 마운틴힐 프라임 스테이",
         roomName: "디럭스 301호",
-        img: "/img/40-1.jpg",
         maxOccupancy: 3,
         score: [3,2,3,2,3,2],
         comment: ["보통이에요","기대이하","무난해요","그저그래요","그럭저럭","별로예요"]
@@ -372,7 +336,6 @@ export default function ResortDate(){
         id: 41,
         hotelName: "강릉 마운틴힐 프라임 스테이",
         roomName: "이그제큐티브 303호",
-        img: "/img/41-1.jpg",
         maxOccupancy: 4,
         score: [5,5,4,5,5,4],
         comment: ["최고예요","완벽해요","좋았어요","아주좋아요","만족해요","훌륭해요"]
@@ -381,7 +344,6 @@ export default function ResortDate(){
         id: 42,
         hotelName: "강릉 마운틴힐 프라임 스테이",
         roomName: "디럭스 305호",
-        img: "/img/42-1.jpg",
         maxOccupancy: 2,
         score: [1,2,1,2,1,2],
         comment: ["불만이에요","별로예요","최악이에요","아쉬워요","불만이에요","별로예요"]
@@ -390,7 +352,6 @@ export default function ResortDate(){
         id: 43,
         hotelName: "강릉 블루하버 씨앤스테이",
         roomName: "스텐다드 401호",
-        img: "/img/43-1.jpg",
         maxOccupancy: 3,
         score: [4,4,5,4,5,4],
         comment: ["좋았어요","만족해요","최고예요","괜찮아요","아주좋아요","좋아요"]
@@ -399,7 +360,6 @@ export default function ResortDate(){
         id: 44,
         hotelName: "강릉 블루하버 씨앤스테이",
         roomName: "프리미어 403호",
-        img: "/img/44-1.jpg",
         maxOccupancy: 4,
         score: [2,3,2,3,2,3],
         comment: ["별로예요","그저그래요","무난해요","그럭저럭","아쉬워요","그저그래요"]
@@ -408,7 +368,6 @@ export default function ResortDate(){
         id: 45,
         hotelName: "강릉 블루하버 씨앤스테이",
         roomName: "스텐다드 405호",
-        img: "/img/45-1.jpg",
         maxOccupancy: 2,
         score: [5,5,5,4,5,5],
         comment: ["완벽해요","최고예요","아주좋아요","좋았어요","만족해요","훌륭해요"]
@@ -417,7 +376,6 @@ export default function ResortDate(){
         id: 46,
         hotelName: "강릉 에코브리즈 호텔",
         roomName: "디럭스 101호",
-        img: "/img/46-1.jpg",
         maxOccupancy: 3,
         score: [3,3,2,3,3,2],
         comment: ["보통이에요","무난해요","그저그랬어요","보통이에요","무난해요","그저그래요"]
@@ -426,7 +384,6 @@ export default function ResortDate(){
         id: 47,
         hotelName: "강릉 에코브리즈 호텔",
         roomName: "이그제큐티브 103호",
-        img: "/img/47-1.jpg",
         maxOccupancy: 4,
         score: [4,4,4,5,4,5],
         comment: ["좋았어요","만족해요","괜찮아요","최고예요","좋아요","아주좋아요"]
@@ -435,7 +392,6 @@ export default function ResortDate(){
         id: 48,
         hotelName: "강릉 에코브리즈 호텔",
         roomName: "디럭스 105호",
-        img: "/img/48-1.jpg",
         maxOccupancy: 2,
         score: [1,2,1,2,1,2],
         comment: ["불만이에요","별로예요","최악이에요","아쉬워요","불만이에요","별로예요"]
@@ -444,7 +400,6 @@ export default function ResortDate(){
         id: 49,
         hotelName: "강릉 소울베이 더스위트",
         roomName: "슈페리얼 201호",
-        img: "/img/49-1.jpg",
         maxOccupancy: 3,
         score: [5,5,5,5,4,5],
         comment: ["최고예요","완벽해요","아주좋아요","완벽해요","좋았어요","최고예요"]
@@ -453,7 +408,6 @@ export default function ResortDate(){
         id: 50,
         hotelName: "강릉 소울베이 더스위트",
         roomName: "골져스 203호",
-        img: "/img/50-1.jpg",
         maxOccupancy: 4,
         score: [2,1,2,1,2,1],
         comment: ["불만이에요","최악이에요","별로예요","끔찍해요","불만이에요","최악이에요"]
@@ -462,7 +416,6 @@ export default function ResortDate(){
         id: 51,
         hotelName: "강릉 소울베이 더스위트",
         roomName: "슈페리얼 205호",
-        img: "/img/51-1.jpg",
         maxOccupancy: 2,
         score: [4,4,5,4,5,4],
         comment: ["좋았어요","만족해요","최고예요","좋았어요","아주좋아요","좋아요"]
@@ -471,7 +424,6 @@ export default function ResortDate(){
         id: 52,
         hotelName: "강릉 씨사이드 리프 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/52-1.jpg",
         maxOccupancy: 3,
         score: [3,2,3,2,3,2],
         comment: ["보통이에요","기대이하","무난해요","그저그래요","무난했어요","아쉬워요"]
@@ -480,7 +432,6 @@ export default function ResortDate(){
         id: 53,
         hotelName: "강릉 씨사이드 리프 호텔",
         roomName: "프리미어 303호",
-        img: "/img/53-1.jpg",
         maxOccupancy: 4,
         score: [5,4,5,5,4,5],
         comment: ["최고예요","좋았어요","최고예요","완벽해요","좋아요","아주좋아요"]
@@ -489,7 +440,6 @@ export default function ResortDate(){
         id: 54,
         hotelName: "강릉 씨사이드 리프 호텔",
         roomName: "스텐다드 305호",
-        img: "/img/54-1.jpg",
         maxOccupancy: 2,
         score: [1,1,2,1,2,1],
         comment: ["최악이에요","불만이에요","별로예요","끔찍해요","불만이에요","최악이에요"]
@@ -502,7 +452,6 @@ export default function ResortDate(){
         id: 55,
         hotelName: "속초 오션브리즈 시티호텔",
         roomName: "슈페리얼 201호",
-        img: "/img/55-1.jpg",
         maxOccupancy: 3,
         score: [5,4,5,5,4,5],
         comment: ["최고예요","좋았어요","만족해요","아주좋아요","좋아요","훌륭해요"]
@@ -511,7 +460,6 @@ export default function ResortDate(){
         id: 56,
         hotelName: "속초 오션브리즈 시티호텔",
         roomName: "골져스 203호",
-        img: "/img/56-1.jpg",
         maxOccupancy: 4,
         score: [2,1,2,2,1,2],
         comment: ["별로예요","최악이에요","무난해요","아쉬워요","불만이에요","별로예요"]
@@ -520,7 +468,6 @@ export default function ResortDate(){
         id: 57,
         hotelName: "속초 오션브리즈 시티호텔",
         roomName: "슈페리얼 205호",
-        img: "/img/57-1.jpg",
         maxOccupancy: 2,
         score: [4,4,3,4,5,4],
         comment: ["좋았어요","만족해요","그저그래요","괜찮아요","아주좋아요","좋아요"]
@@ -529,7 +476,6 @@ export default function ResortDate(){
         id: 58,
         hotelName: "속초 힐크레스트 베이뷰 리조트",
         roomName: "디럭스 301호",
-        img: "/img/58-1.jpg",
         maxOccupancy: 3,
         score: [3,2,3,2,3,2],
         comment: ["무난해요","기대이하","보통이에요","그저그래요","그럭저럭","별로예요"]
@@ -538,7 +484,6 @@ export default function ResortDate(){
         id: 59,
         hotelName: "속초 힐크레스트 베이뷰 리조트",
         roomName: "이그제큐티브 303호",
-        img: "/img/59-1.jpg",
         maxOccupancy: 4,
         score: [5,5,4,5,5,4],
         comment: ["최고예요","완벽해요","좋았어요","아주좋아요","만족해요","괜찮아요"]
@@ -547,7 +492,6 @@ export default function ResortDate(){
         id: 60,
         hotelName: "속초 힐크레스트 베이뷰 리조트",
         roomName: "디럭스 305호",
-        img: "/img/60-1.jpg",
         maxOccupancy: 2,
         score: [1,2,1,2,1,2],
         comment: ["불만이에요","별로예요","최악이에요","아쉬워요","불만이에요","별로예요"]
@@ -556,7 +500,6 @@ export default function ResortDate(){
         id: 61,
         hotelName: "속초 블루문 스테이",
         roomName: "스텐다드 401호",
-        img: "/img/61-1.jpg",
         maxOccupancy: 3,
         score: [4,5,4,4,5,4],
         comment: ["좋았어요","최고예요","만족해요","괜찮아요","아주좋아요","좋아요"]
@@ -565,7 +508,6 @@ export default function ResortDate(){
         id: 62,
         hotelName: "속초 블루문 스테이",
         roomName: "프리미어 403호",
-        img: "/img/62-1.jpg",
         maxOccupancy: 4,
         score: [2,3,2,3,2,3],
         comment: ["별로예요","무난해요","그저그래요","그럭저럭","아쉬워요","무난해요"]
@@ -574,7 +516,6 @@ export default function ResortDate(){
         id: 63,
         hotelName: "속초 블루문 스테이",
         roomName: "스텐다드 405호",
-        img: "/img/63-1.jpg",
         maxOccupancy: 2,
         score: [5,5,5,4,5,5],
         comment: ["완벽해요","최고예요","아주좋아요","좋았어요","만족해요","훌륭해요"]
@@ -583,7 +524,6 @@ export default function ResortDate(){
         id: 64,
         hotelName: "속초 씨포레스트 마운틴뷰 호텔",
         roomName: "디럭스 101호",
-        img: "/img/64-1.jpg",
         maxOccupancy: 3,
         score: [3,3,2,3,3,2],
         comment: ["보통이에요","무난해요","그저그랬어요","보통이에요","무난해요","그저그래요"]
@@ -592,7 +532,6 @@ export default function ResortDate(){
         id: 65,
         hotelName: "속초 씨포레스트 마운틴뷰 호텔",
         roomName: "이그제큐티브 103호",
-        img: "/img/65-1.jpg",
         maxOccupancy: 4,
         score: [4,4,4,5,4,5],
         comment: ["좋았어요","만족해요","괜찮아요","최고예요","좋아요","아주좋아요"]
@@ -601,7 +540,6 @@ export default function ResortDate(){
         id: 66,
         hotelName: "속코 씨포레스트 마운틴뷰 호텔",
         roomName: "디럭스 105호",
-        img: "/img/66-1.jpg",
         maxOccupancy: 2,
         score: [1,1,1,2,1,2],
         comment: ["최악이에요","불만이에요","별로예요","아쉬워요","불만이에요","별로예요"]
@@ -610,7 +548,6 @@ export default function ResortDate(){
         id: 67,
         hotelName: "속초 클라우드베이 스위트",
         roomName: "슈페리얼 201호",
-        img: "/img/67-1.jpg",
         maxOccupancy: 3,
         score: [5,5,5,5,4,5],
         comment: ["최고예요","완벽해요","아주좋아요","완벽해요","좋아요","최고예요"]
@@ -619,7 +556,6 @@ export default function ResortDate(){
         id: 68,
         hotelName: "속초 클라우드베이 스위트",
         roomName: "골져스 203호",
-        img: "/img/68-1.jpg",
         maxOccupancy: 4,
         score: [2,1,2,1,2,1],
         comment: ["불만이에요","최악이에요","별로예요","끔찍해요","불만이에요","최악이에요"]
@@ -628,7 +564,6 @@ export default function ResortDate(){
         id: 69,
         hotelName: "속초 클라우드베이 스위트",
         roomName: "슈페리얼 205호",
-        img: "/img/69-1.jpg",
         maxOccupancy: 2,
         score: [4,4,5,4,5,4],
         comment: ["좋았어요","만족해요","최고예요","좋았어요","아주좋아요","좋아요"]
@@ -637,7 +572,6 @@ export default function ResortDate(){
         id: 70,
         hotelName: "속초 레이크브리즈 캠프로그",
         roomName: "스텐다드 301호",
-        img: "/img/70-1.jpg",
         maxOccupancy: 3,
         score: [3,2,3,2,3,2],
         comment: ["무난해요","기대이하","보통이에요","그저그래요","그럭저럭","아쉬워요"]
@@ -646,7 +580,6 @@ export default function ResortDate(){
         id: 71,
         hotelName: "속초 레이크브리즈 캠프로그",
         roomName: "프리미어 303호",
-        img: "/img/71-1.jpg",
         maxOccupancy: 4,
         score: [5,4,5,5,4,5],
         comment: ["최고예요","좋았어요","최고예요","완벽해요","좋아요","훌륭해요"]
@@ -655,7 +588,6 @@ export default function ResortDate(){
         id: 72,
         hotelName: "속초 레이크브리즈 캠프로그",
         roomName: "스텐다드 305호",
-        img: "/img/72-1.jpg",
         maxOccupancy: 2,
         score: [1,1,2,1,2,1],
         comment: ["최악이에요","불만이에요","별로예요","끔찍해요","불만이에요","최악이에요"]
@@ -668,7 +600,6 @@ export default function ResortDate(){
         id: 73,
         hotelName: "경주 로열가든 힐스 호텔",
         roomName: "슈페리얼 201호",
-        img: "/img/73-1.jpg",
         maxOccupancy: 3,
         score: [5,4,5,5,4,5],
         comment: ["최고예요","좋았어요","만족해요","아주좋아요","좋아요","훌륭해요"]
@@ -677,7 +608,6 @@ export default function ResortDate(){
         id: 74,
         hotelName: "경주 로열가든 힐스 호텔",
         roomName: "골져스 203호",
-        img: "/img/74-1.jpg",
         maxOccupancy: 4,
         score: [2,1,2,2,1,2],
         comment: ["별로예요","최악이에요","무난해요","아쉬워요","불만이에요","별로예요"]
@@ -686,7 +616,6 @@ export default function ResortDate(){
         id: 75,
         hotelName: "경주 로열가든 힐스 호텔",
         roomName: "슈페리얼 205호",
-        img: "/img/75-1.jpg",
         maxOccupancy: 2,
         score: [4,4,3,4,5,4],
         comment: ["좋았어요","만족해요","그저그래요","괜찮아요","아주좋아요","좋아요"]
@@ -695,7 +624,6 @@ export default function ResortDate(){
         id: 76,
         hotelName: "경주 크라운레이크 리조트",
         roomName: "디럭스 301호",
-        img: "/img/76-1.jpg",
         maxOccupancy: 3,
         score: [3,2,3,2,3,2],
         comment: ["보통이에요","기대이하","무난해요","그저그래요","그럭저럭","별로예요"]
@@ -704,7 +632,6 @@ export default function ResortDate(){
         id: 77,
         hotelName: "경주 크라운레이크 리조트",
         roomName: "이그제큐티브 303호",
-        img: "/img/77-1.jpg",
         maxOccupancy: 4,
         score: [5,5,4,5,5,4],
         comment: ["최고예요","완벽해요","좋았어요","아주좋아요","만족해요","괜찮아요"]
@@ -713,7 +640,6 @@ export default function ResortDate(){
         id: 78,
         hotelName: "경주 크라운레이크 리조트",
         roomName: "디럭스 305호",
-        img: "/img/78-1.jpg",
         maxOccupancy: 2,
         score: [1,2,1,2,1,2],
         comment: ["불만이에요","별로예요","최악이에요","아쉬워요","불만이에요","별로예요"]
@@ -722,7 +648,6 @@ export default function ResortDate(){
         id: 79,
         hotelName: "경주 하모니 스테이션 게스트하우스",
         roomName: "스텐다드 401호",
-        img: "/img/79-1.jpg",
         maxOccupancy: 3,
         score: [4,5,4,4,5,4],
         comment: ["좋았어요","최고예요","만족해요","괜찮아요","아주좋아요","좋아요"]
@@ -731,7 +656,6 @@ export default function ResortDate(){
         id: 80,
         hotelName: "경주 하모니 스테이션 게스트하우스",
         roomName: "프리미어 403호",
-        img: "/img/80-1.jpg",
         maxOccupancy: 4,
         score: [2,3,2,3,2,3],
         comment: ["별로예요","무난해요","그저그래요","그럭저럭","아쉬워요","무난해요"]
@@ -740,7 +664,6 @@ export default function ResortDate(){
         id: 81,
         hotelName: "경주 하모니 스테이션 게스트하우스",
         roomName: "스텐다드 405호",
-        img: "/img/81-1.jpg",
         maxOccupancy: 2,
         score: [5,5,5,4,5,5],
         comment: ["완벽해요","최고예요","아주좋아요","좋았어요","만족해요","훌륭해요"]
@@ -749,7 +672,6 @@ export default function ResortDate(){
         id: 82,
         hotelName: "경주 네이처힐 프리미어 호텔",
         roomName: "디럭스 101호",
-        img: "/img/82-1.jpg",
         maxOccupancy: 3,
         score: [3,3,2,3,3,2],
         comment: ["보통이에요","무난해요","그저그랬어요","보통이에요","무난해요","그저그래요"]
@@ -758,7 +680,6 @@ export default function ResortDate(){
         id: 83,
         hotelName: "경주 네이처힐 프리미어 호텔",
         roomName: "이그제큐티브 103호",
-        img: "/img/83-1.jpg",
         maxOccupancy: 4,
         score: [4,4,4,5,4,5],
         comment: ["좋았어요","만족해요","괜찮아요","최고예요","좋아요","아주좋아요"]
@@ -767,7 +688,6 @@ export default function ResortDate(){
         id: 84,
         hotelName: "경주 네이처힐 프리미어 호텔",
         roomName: "디럭스 105호",
-        img: "/img/84-1.jpg",
         maxOccupancy: 2,
         score: [1,1,2,1,2,1],
         comment: ["최악이에요","불만이에요","별로예요","끔찍해요","불만이에요","최악이에요"]
@@ -776,7 +696,6 @@ export default function ResortDate(){
         id: 85,
         hotelName: "경주 스카이라인 파노라마 콘도",
         roomName: "슈페리얼 201호",
-        img: "/img/85-1.jpg",
         maxOccupancy: 3,
         score: [5,5,5,5,4,5],
         comment: ["최고예요","완벽해요","아주좋아요","완벽해요","좋아요","최고예요"]
@@ -785,7 +704,6 @@ export default function ResortDate(){
         id: 86,
         hotelName: "경주 스카이라인 파노라마 콘도",
         roomName: "골져스 203호",
-        img: "/img/86-1.jpg",
         maxOccupancy: 4,
         score: [2,1,2,1,2,1],
         comment: ["불만이에요","최악이에요","별로예요","끔찍해요","불만이에요","최악이에요"]
@@ -794,7 +712,6 @@ export default function ResortDate(){
         id: 87,
         hotelName: "경주 스카이라인 파노라마 콘도",
         roomName: "슈페리얼 205호",
-        img: "/img/87-1.jpg",
         maxOccupancy: 2,
         score: [4,4,5,4,5,4],
         comment: ["좋았어요","만족해요","최고예요","좋았어요","아주좋아요","좋아요"]
@@ -803,7 +720,6 @@ export default function ResortDate(){
         id: 88,
         hotelName: "경주 포레스트캠프 휴글로우",
         roomName: "스텐다드 301호",
-        img: "/img/88-1.jpg",
         maxOccupancy: 3,
         score: [3,2,3,2,3,2],
         comment: ["무난해요","기대이하","보통이에요","그저그래요","그럭저럭","아쉬워요"]
@@ -812,7 +728,6 @@ export default function ResortDate(){
         id: 89,
         hotelName: "경주 포레스트캠프 휴글로우",
         roomName: "프리미어 303호",
-        img: "/img/89-1.jpg",
         maxOccupancy: 4,
         score: [5,4,5,5,4,5],
         comment: ["최고예요","좋았어요","최고예요","완벽해요","좋아요","훌륭해요"]
@@ -821,7 +736,6 @@ export default function ResortDate(){
         id: 90,
         hotelName: "경주 포레스트캠프 휴글로우",
         roomName: "스텐다드 305호",
-        img: "/img/90-1.jpg",
         maxOccupancy: 2,
         score: [1,1,2,1,2,1],
         comment: ["최악이에요","불만이에요","별로예요","끔찍해요","불만이에요","최악이에요"]
@@ -833,7 +747,6 @@ export default function ResortDate(){
         id: 91,
         hotelName: "여수 오션프레임 스테이",
         roomName: "슈페리얼 201호",
-        img: "/img/91-1.jpg",
         maxOccupancy: 3,
         score: [5,5,4,5,5,4],
         comment: ["최고예요","완벽해요","좋았어요","아주좋아요","만족해요","좋아요"]
@@ -842,7 +755,6 @@ export default function ResortDate(){
         id: 92,
         hotelName: "여수 오션프레임 스테이",
         roomName: "골져스 203호",
-        img: "/img/92-1.jpg",
         maxOccupancy: 4,
         score: [2,3,2,3,2,3],
         comment: ["별로예요","그저그래요","무난해요","그럭저럭","아쉬워요","그저그래요"]
@@ -851,7 +763,6 @@ export default function ResortDate(){
         id: 93,
         hotelName: "여수 오션프레임 스테이",
         roomName: "슈페리얼 205호",
-        img: "/img/93-1.jpg",
         maxOccupancy: 2,
         score: [4,4,5,4,5,4],
         comment: ["좋았어요","만족해요","최고예요","좋았어요","아주좋아요","좋아요"]
@@ -860,7 +771,6 @@ export default function ResortDate(){
         id: 94,
         hotelName: "여수 블루코스트 리조트",
         roomName: "디럭스 301호",
-        img: "/img/94-1.jpg",
         maxOccupancy: 3,
         score: [3,2,3,2,3,2],
         comment: ["보통이에요","기대이하","무난해요","그저그래요","그럭저럭","별로예요"]
@@ -869,7 +779,6 @@ export default function ResortDate(){
         id: 95,
         hotelName: "여수 블루코스트 리조트",
         roomName: "이그제큐티브 303호",
-        img: "/img/95-1.jpg",
         maxOccupancy: 4,
         score: [5,5,4,5,5,4],
         comment: ["최고예요","완벽해요","좋았어요","아주좋아요","만족해요","괜찮아요"]
@@ -878,7 +787,6 @@ export default function ResortDate(){
         id: 96,
         hotelName: "여수 블루코스트 리조트",
         roomName: "디럭스 305호",
-        img: "/img/96-1.jpg",
         maxOccupancy: 2,
         score: [1,2,1,2,1,2],
         comment: ["불만이에요","별로예요","최악이에요","아쉬워요","불만이에요","별로예요"]
@@ -887,7 +795,6 @@ export default function ResortDate(){
         id: 97,
         hotelName: "여수 베이하버 게스트하우스",
         roomName: "스텐다드 401호",
-        img: "/img/97-1.jpg",
         maxOccupancy: 3,
         score: [4,4,5,4,5,4],
         comment: ["좋았어요","만족해요","최고예요","괜찮아요","아주좋아요","좋아요"]
@@ -896,7 +803,6 @@ export default function ResortDate(){
         id: 98,
         hotelName: "여수 베이하버 게스트하우스",
         roomName: "프리미어 403호",
-        img: "/img/98-1.jpg",
         maxOccupancy: 4,
         score: [2,3,2,3,2,3],
         comment: ["별로예요","그저그래요","무난해요","그럭저럭","아쉬워요","그저그래요"]
@@ -905,7 +811,6 @@ export default function ResortDate(){
         id: 99,
         hotelName: "여수 베이하버 게스트하우스",
         roomName: "스텐다드 405호",
-        img: "/img/99-1.jpg",
         maxOccupancy: 2,
         score: [5,5,5,4,5,5],
         comment: ["완벽해요","최고예요","아주좋아요","좋았어요","만족해요","훌륭해요"]
@@ -914,7 +819,6 @@ export default function ResortDate(){
         id: 100,
         hotelName: "여수 클리프사운드 프라임 호텔",
         roomName: "디럭스 101호",
-        img: "/img/100-1.jpg",
         maxOccupancy: 3,
         score: [3,3,2,3,3,2],
         comment: ["보통이에요","무난해요","그저그랬어요","보통이에요","무난해요","그저그래요"]
@@ -923,7 +827,6 @@ export default function ResortDate(){
         id: 101,
         hotelName: "여수 클리프사운드 프라임 호텔",
         roomName: "이그제큐티브 103호",
-        img: "/img/101-1.jpg",
         maxOccupancy: 4,
         score: [4,4,4,5,4,5],
         comment: ["좋았어요","만족해요","괜찮아요","최고예요","좋아요","아주좋아요"]
@@ -932,7 +835,6 @@ export default function ResortDate(){
         id: 102,
         hotelName: "여수 클리프사운드 프라임 호텔",
         roomName: "디럭스 105호",
-        img: "/img/102-1.jpg",
         maxOccupancy: 2,
         score: [1,1,2,1,2,1],
         comment: ["최악이에요","불만이에요","별로예요","끔찍해요","불만이에요","최악이에요"]
@@ -941,7 +843,6 @@ export default function ResortDate(){
         id: 103,
         hotelName: "여수 퍼스트라인 오션뷰 콘도",
         roomName: "슈페리얼 201호",
-        img: "/img/103-1.jpg",
         maxOccupancy: 3,
         score: [5,5,5,5,4,5],
         comment: ["최고예요","완벽해요","아주좋아요","완벽해요","좋아요","최고예요"]
@@ -950,7 +851,6 @@ export default function ResortDate(){
         id: 104,
         hotelName: "여수 퍼스트라인 오션뷰 콘도",
         roomName: "골져스 203호",
-        img: "/img/104-1.jpg",
         maxOccupancy: 4,
         score: [2,1,2,1,2,1],
         comment: ["불만이에요","최악이에요","별로예요","끔찍해요","불만이에요","최악이에요"]
@@ -959,7 +859,6 @@ export default function ResortDate(){
         id: 105,
         hotelName: "여수 퍼스트라인 오션뷰 콘도",
         roomName: "슈페리얼 205호",
-        img: "/img/105-1.jpg",
         maxOccupancy: 2,
         score: [4,4,5,4,5,4],
         comment: ["좋았어요","만족해요","최고예요","좋았어요","아주좋아요","좋아요"]
@@ -968,7 +867,6 @@ export default function ResortDate(){
         id: 106,
         hotelName: "여수 포레스트캠프 글램존",
         roomName: "스텐다드 301호",
-        img: "/img/106-1.jpg",
         maxOccupancy: 3,
         score: [3,2,3,2,3,2],
         comment: ["무난해요","기대이하","보통이에요","그저그래요","그럭저럭","아쉬워요"]
@@ -977,7 +875,6 @@ export default function ResortDate(){
         id: 107,
         hotelName: "여수 포레스트캠프 글램존",
         roomName: "프리미어 303호",
-        img: "/img/107-1.jpg",
         maxOccupancy: 4,
         score: [5,4,5,5,4,5],
         comment: ["최고예요","좋았어요","최고예요","완벽해요","좋아요","아주좋아요"]
@@ -986,7 +883,6 @@ export default function ResortDate(){
         id: 108,
         hotelName: "여수 포레스트캠프 글램존",
         roomName: "스텐다드 305호",
-        img: "/img/108-1.jpg",
         maxOccupancy: 2,
         score: [1,1,2,1,2,1],
         comment: ["최악이에요","불만이에요","별로예요","끔찍해요","불만이에요","최악이에요"]
@@ -998,7 +894,6 @@ export default function ResortDate(){
         id: 109,
         hotelName: "대전 센트럴파크 시티호텔",
         roomName: "슈페리얼 101호",
-        img: "/img/109-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "조금아쉬", "보통이요", "좋았어요", "최고였음", "꽤좋음"]
@@ -1007,7 +902,6 @@ export default function ResortDate(){
         id: 110,
         hotelName: "대전 센트럴파크 시티호텔",
         roomName: "골져스 303호",
-        img: "/img/110-1.jpg",
         maxOccupancy: 4,
         score: [2,1,3,4,5,4],
         comment: ["좀별루임", "많이별로", "보통이요", "좋았어요", "아주좋음", "만족했음"]
@@ -1016,7 +910,6 @@ export default function ResortDate(){
         id: 111,
         hotelName: "대전 센트럴파크 시티호텔",
         roomName: "디럭스 505호",
-        img: "/img/111-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["괜찮아요", "조금아쉬", "전혀별로", "좋았습니다", "좋아요", "최고네요"]
@@ -1026,7 +919,6 @@ export default function ResortDate(){
         id: 112,
         hotelName: "대전 포레스트힐 프리미어 리조트",
         roomName: "이그제큐티브 202호",
-        img: "/img/112-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["안좋았음", "보통이요", "좀아쉬움", "좋았습니다", "최고였음", "꽤좋음"]
@@ -1035,7 +927,6 @@ export default function ResortDate(){
         id: 113,
         hotelName: "대전 포레스트힐 프리미어 리조트",
         roomName: "스텐다드 404호",
-        img: "/img/113-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,5,4,5],
         comment: ["조금별루", "실망했음", "보통이요", "감동적임", "좋았습니다", "최고에요"]
@@ -1044,7 +935,6 @@ export default function ResortDate(){
         id: 114,
         hotelName: "대전 포레스트힐 프리미어 리조트",
         roomName: "프리미어 103호",
-        img: "/img/114-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "아쉬웠음", "전혀별로", "좋았어요", "좋았습니다", "최고네요"]
@@ -1054,7 +944,6 @@ export default function ResortDate(){
         id: 115,
         hotelName: "대전 라운지스테이 게스트하우스",
         roomName: "슈페리얼 302호",
-        img: "/img/115-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "조금아쉬", "평범했음", "좋아요", "최고였음", "만족했음"]
@@ -1063,7 +952,6 @@ export default function ResortDate(){
         id: 116,
         hotelName: "대전 라운지스테이 게스트하우스",
         roomName: "골져스 504호",
-        img: "/img/116-1.jpg",
         maxOccupancy: 4,
         score: [2,3,1,4,5,4],
         comment: ["조금별루", "보통이요", "전혀별로", "좋았어요", "최고네요", "꽤좋음"]
@@ -1072,7 +960,6 @@ export default function ResortDate(){
         id: 117,
         hotelName: "대전 라운지스테이 게스트하우스",
         roomName: "디럭스 101호",
-        img: "/img/117-1.jpg",
         maxOccupancy: 2,
         score: [3,1,2,4,5,4],
         comment: ["보통이요", "실망했음", "좀아쉬움", "좋았어요", "최고네요", "만족했음"]
@@ -1082,7 +969,6 @@ export default function ResortDate(){
         id: 118,
         hotelName: "대전 브리즈라인 시그니처 호텔",
         roomName: "이그제큐티브 403호",
-        img: "/img/118-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,4,5],
         comment: ["안좋았음", "보통이요", "아쉬웠음", "좋았어요", "괜찮아요", "최고였음"]
@@ -1091,7 +977,6 @@ export default function ResortDate(){
         id: 119,
         hotelName: "대전 브리즈라인 시그니처 호텔",
         roomName: "스텐다드 205호",
-        img: "/img/119-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["조금별루", "많이별로", "보통이요", "좋아요", "최고였음", "만족했음"]
@@ -1100,7 +985,6 @@ export default function ResortDate(){
         id: 120,
         hotelName: "대전 브리즈라인 시그니처 호텔",
         roomName: "프리미어 303호",
-        img: "/img/120-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,5,4,5],
         comment: ["보통이요", "아쉬웠음", "전혀별로", "감동적임", "좋았어요", "최고네요"]
@@ -1110,7 +994,6 @@ export default function ResortDate(){
         id: 121,
         hotelName: "대전 스카이브릿지 오션뷰 콘도",
         roomName: "슈페리얼 402호",
-        img: "/img/121-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["좀아쉬움", "보통이요", "전혀별로", "좋았어요", "최고네요", "만족했음"]
@@ -1119,7 +1002,6 @@ export default function ResortDate(){
         id: 122,
         hotelName: "대전 스카이브릿지 오션뷰 콘도",
         roomName: "골져스 104호",
-        img: "/img/122-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,4,5,4],
         comment: ["많이별로", "아쉬웠음", "보통이요", "좋아요", "최고였음", "꽤좋음"]
@@ -1128,7 +1010,6 @@ export default function ResortDate(){
         id: 123,
         hotelName: "대전 스카이브릿지 오션뷰 콘도",
         roomName: "디럭스 505호",
-        img: "/img/123-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "조금별루", "전혀별로", "좋았어요", "괜찮아요", "최고네요"]
@@ -1138,7 +1019,6 @@ export default function ResortDate(){
         id: 124,
         hotelName: "대전 포레스트캠프 스톤글램",
         roomName: "이그제큐티브 203호",
-        img: "/img/124-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["별로였음", "보통이요", "조금아쉬", "좋았습니다", "최고였음", "꽤좋음"]
@@ -1147,7 +1027,6 @@ export default function ResortDate(){
         id: 125,
         hotelName: "대전 포레스트캠프 스톤글램",
         roomName: "스텐다드 301호",
-        img: "/img/125-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["조금별루", "실망했음", "보통이요", "좋았어요", "최고네요", "만족했음"]
@@ -1156,7 +1035,6 @@ export default function ResortDate(){
         id: 126,
         hotelName: "대전 포레스트캠프 스톤글램",
         roomName: "프리미어 505호",
-        img: "/img/126-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "아쉬웠음", "전혀별로", "좋아요", "좋았습니다", "최고였음"]
@@ -1169,7 +1047,6 @@ export default function ResortDate(){
         id: 127,
         hotelName: "그랜드 스카이힐 호텔",
         roomName: "슈페리얼 101호",
-        img: "/img/127-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "조금아쉬", "보통이요", "좋았어요", "최고였음", "좋았음"]
@@ -1178,7 +1055,6 @@ export default function ResortDate(){
         id: 128,
         hotelName: "그랜드 스카이힐 호텔",
         roomName: "골져스 303호",
-        img: "/img/128-1.jpg",
         maxOccupancy: 4,
         score: [2,1,3,4,5,4],
         comment: ["좀별루임", "많이별로", "보통이요", "좋았어요", "아주좋음", "만족함"]
@@ -1187,7 +1063,6 @@ export default function ResortDate(){
         id: 129,
         hotelName: "그랜드 스카이힐 호텔",
         roomName: "디럭스 505호",
-        img: "/img/129-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "조금아쉬", "전혀별로", "좋았습니다", "좋아요", "최고네요"]
@@ -1197,7 +1072,6 @@ export default function ResortDate(){
         id: 130,
         hotelName: "라이트하버 리조트",
         roomName: "이그제큐티브 202호",
-        img: "/img/130-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["안좋았음", "보통이요", "좀아쉬움", "좋았습니다", "최고였음", "좋았음"]
@@ -1206,7 +1080,6 @@ export default function ResortDate(){
         id: 131,
         hotelName: "라이트하버 리조트",
         roomName: "스텐다드 404호",
-        img: "/img/131-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,5,4,5],
         comment: ["좀별루임", "별로였음", "보통이요", "감동적임", "좋았습니다", "최고에요"]
@@ -1215,7 +1088,6 @@ export default function ResortDate(){
         id: 132,
         hotelName: "라이트하버 리조트",
         roomName: "프리미어 103호",
-        img: "/img/132-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["평범했음", "조금아쉬", "전혀별로", "좋아요", "좋았습니다", "최고임"]
@@ -1225,7 +1097,6 @@ export default function ResortDate(){
         id: 133,
         hotelName: "브리즈 라운드 호텔",
         roomName: "슈페리얼 302호",
-        img: "/img/133-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "살짝아쉬", "보통이요", "좋았어요", "최고였음", "꽤좋음"]
@@ -1234,7 +1105,6 @@ export default function ResortDate(){
         id: 134,
         hotelName: "브리즈 라운드 호텔",
         roomName: "골져스 504호",
-        img: "/img/134-1.jpg",
         maxOccupancy: 4,
         score: [2,3,1,4,5,4],
         comment: ["좀별루임", "보통이요", "전혀별로", "좋았어요", "아주좋음", "좋았음"]
@@ -1243,7 +1113,6 @@ export default function ResortDate(){
         id: 135,
         hotelName: "브리즈 라운드 호텔",
         roomName: "디럭스 101호",
-        img: "/img/135-1.jpg",
         maxOccupancy: 2,
         score: [3,1,2,4,5,4],
         comment: ["보통이요", "별로였음", "조금아쉬", "좋아요", "최고였음", "만족함"]
@@ -1253,7 +1122,6 @@ export default function ResortDate(){
         id: 136,
         hotelName: "힐브리즈 콘도",
         roomName: "이그제큐티브 403호",
-        img: "/img/136-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,4,5],
         comment: ["안좋았음", "보통이요", "좀별루임", "좋았어요", "좋아요", "최고였음"]
@@ -1262,7 +1130,6 @@ export default function ResortDate(){
         id: 137,
         hotelName: "힐브리즈 콘도",
         roomName: "스텐다드 205호",
-        img: "/img/137-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["조금별루", "실망했음", "보통이요", "좋았어요", "최고였음", "만족함"]
@@ -1271,7 +1138,6 @@ export default function ResortDate(){
         id: 138,
         hotelName: "힐브리즈 콘도",
         roomName: "프리미어 303호",
-        img: "/img/138-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,5,4,5],
         comment: ["보통이요", "조금아쉬", "전혀별로", "감동적임", "좋았어요", "최고임"]
@@ -1281,7 +1147,6 @@ export default function ResortDate(){
         id: 139,
         hotelName: "블루파크 호텔",
         roomName: "슈페리얼 402호",
-        img: "/img/139-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["조금별루", "보통이요", "전혀별로", "좋아요", "최고였음", "좋았음"]
@@ -1290,7 +1155,6 @@ export default function ResortDate(){
         id: 140,
         hotelName: "블루파크 호텔",
         roomName: "골져스 104호",
-        img: "/img/140-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,4,5,4],
         comment: ["많이별로", "살짝아쉬", "보통이요", "좋았어요", "최고였음", "꽤좋음"]
@@ -1299,7 +1163,6 @@ export default function ResortDate(){
         id: 141,
         hotelName: "블루파크 호텔",
         roomName: "디럭스 505호",
-        img: "/img/141-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,4,4,5],
         comment: ["평범했음", "조금별루", "전혀별로", "좋았어요", "좋아요", "최고임"]
@@ -1309,7 +1172,6 @@ export default function ResortDate(){
         id: 142,
         hotelName: "헤리티지 스테이 호텔",
         roomName: "이그제큐티브 203호",
-        img: "/img/142-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["안좋았음", "보통이요", "좀별루임", "좋았어요", "최고였음", "만족함"]
@@ -1318,7 +1180,6 @@ export default function ResortDate(){
         id: 143,
         hotelName: "헤리티지 스테이 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/143-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["조금별루", "별로였음", "보통이요", "좋아요", "최고였음", "꽤좋음"]
@@ -1327,7 +1188,6 @@ export default function ResortDate(){
         id: 144,
         hotelName: "헤리티지 스테이 호텔",
         roomName: "프리미어 505호",
-        img: "/img/144-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "조금아쉬", "전혀별로", "좋았어요", "좋아요", "최고임"]
@@ -1339,7 +1199,6 @@ export default function ResortDate(){
         id: 145,
         hotelName: "오션브리즈 리조텔",
         roomName: "슈페리얼 101호",
-        img: "/img/145-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "조금아쉬", "보통이요", "좋았어요", "최고였음", "만족함"]
@@ -1348,7 +1207,6 @@ export default function ResortDate(){
         id: 146,
         hotelName: "오션브리즈 리조텔",
         roomName: "골져스 303호",
-        img: "/img/146-1.jpg",
         maxOccupancy: 4,
         score: [2,1,3,4,5,4],
         comment: ["좀별루임", "많이별로", "보통이요", "좋아요", "최고였음", "괜찮음"]
@@ -1357,7 +1215,6 @@ export default function ResortDate(){
         id: 147,
         hotelName: "오션브리즈 리조텔",
         roomName: "디럭스 505호",
-        img: "/img/147-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["평범했음", "조금아쉬", "전혀별로", "좋았어요", "좋아요", "최고임"]
@@ -1367,7 +1224,6 @@ export default function ResortDate(){
         id: 148,
         hotelName: "제누스 힐라인 호텔",
         roomName: "이그제큐티브 202호",
-        img: "/img/148-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["안좋았음", "보통이요", "좀별루임", "좋았어요", "최고였음", "만족함"]
@@ -1376,7 +1232,6 @@ export default function ResortDate(){
         id: 149,
         hotelName: "제누스 힐라인 호텔",
         roomName: "스텐다드 404호",
-        img: "/img/149-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,5,4,5],
         comment: ["조금별루", "실망했음", "보통이요", "감동적임", "좋아요", "최고에요"]
@@ -1385,7 +1240,6 @@ export default function ResortDate(){
         id: 150,
         hotelName: "제누스 힐라인 호텔",
         roomName: "프리미어 103호",
-        img: "/img/150-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "아쉬웠음", "전혀별로", "좋아요", "좋았어요", "최고임"]
@@ -1395,7 +1249,6 @@ export default function ResortDate(){
         id: 151,
         hotelName: "씨에라 콘도 스위트",
         roomName: "슈페리얼 302호",
-        img: "/img/151-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "아쉬웠음", "보통이요", "좋았어요", "최고였음", "꽤좋음"]
@@ -1404,7 +1257,6 @@ export default function ResortDate(){
         id: 152,
         hotelName: "씨에라 콘도 스위트",
         roomName: "골져스 504호",
-        img: "/img/152-1.jpg",
         maxOccupancy: 4,
         score: [2,3,1,4,5,4],
         comment: ["좀별루임", "평범했음", "전혀별로", "좋아요", "아주좋음", "좋았음"]
@@ -1413,7 +1265,6 @@ export default function ResortDate(){
         id: 153,
         hotelName: "씨에라 콘도 스위트",
         roomName: "디럭스 101호",
-        img: "/img/153-1.jpg",
         maxOccupancy: 2,
         score: [3,1,2,4,5,4],
         comment: ["보통이요", "별로였음", "조금아쉬", "좋아요", "최고였음", "만족함"]
@@ -1423,7 +1274,6 @@ export default function ResortDate(){
         id: 154,
         hotelName: "블랑코 서머힐 호텔",
         roomName: "이그제큐티브 403호",
-        img: "/img/154-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,4,5],
         comment: ["안좋았음", "보통이요", "아쉬웠음", "좋았어요", "좋아요", "최고임"]
@@ -1432,7 +1282,6 @@ export default function ResortDate(){
         id: 155,
         hotelName: "블랑코 서머힐 호텔",
         roomName: "스텐다드 205호",
-        img: "/img/155-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["조금별루", "실망했음", "보통이요", "좋았어요", "최고였음", "괜찮음"]
@@ -1441,7 +1290,6 @@ export default function ResortDate(){
         id: 156,
         hotelName: "블랑코 서머힐 호텔",
         roomName: "프리미어 303호",
-        img: "/img/156-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,5,4,5],
         comment: ["평범했음", "조금아쉬", "전혀별로", "감동적임", "좋아요", "최고임"]
@@ -1451,7 +1299,6 @@ export default function ResortDate(){
         id: 157,
         hotelName: "에메랄드 베이 로지",
         roomName: "슈페리얼 402호",
-        img: "/img/157-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["조금별루", "보통이요", "전혀별로", "좋아요", "최고였음", "잘지냄"]
@@ -1460,7 +1307,6 @@ export default function ResortDate(){
         id: 158,
         hotelName: "에메랄드 베이 로지",
         roomName: "골져스 104호",
-        img: "/img/158-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "살짝아쉬", "보통이요", "좋았어요", "최고였음", "괜찮음"]
@@ -1469,7 +1315,6 @@ export default function ResortDate(){
         id: 159,
         hotelName: "에메랄드 베이 로지",
         roomName: "디럭스 505호",
-        img: "/img/159-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,4,4,5],
         comment: ["평범했음", "조금별루", "전혀별로", "좋았어요", "좋아요", "최고임"]
@@ -1479,7 +1324,6 @@ export default function ResortDate(){
         id: 160,
         hotelName: "서머필드 캠프 로지",
         roomName: "이그제큐티브 203호",
-        img: "/img/160-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["안좋았음", "보통이요", "좀별루임", "좋았어요", "최고였음", "좋았음"]
@@ -1488,7 +1332,6 @@ export default function ResortDate(){
         id: 161,
         hotelName: "서머필드 캠프 로지",
         roomName: "스텐다드 301호",
-        img: "/img/161-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["살짝별루", "실망했음", "보통이요", "좋아요", "최고였음", "괜찮음"]
@@ -1497,7 +1340,6 @@ export default function ResortDate(){
         id: 162,
         hotelName: "서머필드 캠프 로지",
         roomName: "프리미어 505호",
-        img: "/img/162-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "조금아쉬", "전혀별로", "좋아요", "좋았어요", "최고임"]
@@ -1510,7 +1352,6 @@ export default function ResortDate(){
         id: 163,
         hotelName: "포항 씨라인 호텔",
         roomName: "프리미어 505호",
-        img: "/img/163-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "조금아쉬", "보통이요", "좋았어요", "최고였음", "만족함"]
@@ -1519,7 +1360,6 @@ export default function ResortDate(){
         id: 164,
         hotelName: "포항 씨라인 호텔",
         roomName: "슈페리얼 101호",
-        img: "/img/164-1.jpg",
         maxOccupancy: 4,
         score: [2,1,3,4,5,4],
         comment: ["좀별루임", "많이별로", "보통이요", "좋았어요", "아주좋음", "괜찮음"]
@@ -1528,7 +1368,6 @@ export default function ResortDate(){
         id: 165,
         hotelName: "포항 씨라인 호텔",
         roomName: "골져스 303호",
-        img: "/img/165-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["평범했음", "조금아쉬", "전혀별로", "좋았어요", "좋아요", "최고임"]
@@ -1538,7 +1377,6 @@ export default function ResortDate(){
         id: 166,
         hotelName: "포트웨이브 리조트",
         roomName: "스텐다드 404호",
-        img: "/img/166-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["안좋았음", "보통이요", "좀별루임", "좋았어요", "최고였음", "만족함"]
@@ -1547,7 +1385,6 @@ export default function ResortDate(){
         id: 167,
         hotelName: "포트웨이브 리조트",
         roomName: "프리미엄룸 103호",
-        img: "/img/167-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,5,4,5],
         comment: ["조금별루", "실망했음", "보통이요", "감동적임", "좋아요", "최고임"]
@@ -1556,7 +1393,6 @@ export default function ResortDate(){
         id: 168,
         hotelName: "포트웨이브 리조트",
         roomName: "이그제큐티브 202호",
-        img: "/img/168-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "조금아쉬", "전혀별로", "좋아요", "좋았어요", "최고임"]
@@ -1566,7 +1402,6 @@ export default function ResortDate(){
         id: 169,
         hotelName: "포항 마리나 스테이",
         roomName: "프리미엄룸 101호",
-        img: "/img/169-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "조금아쉬", "보통이요", "좋았어요", "최고였음", "꽤좋음"]
@@ -1575,7 +1410,6 @@ export default function ResortDate(){
         id: 170,
         hotelName: "포항 마리나 스테이",
         roomName: "디럭스 101호",
-        img: "/img/170-1.jpg",
         maxOccupancy: 4,
         score: [2,3,1,4,5,4],
         comment: ["좀별루임", "보통이요", "전혀별로", "좋았어요", "아주좋음", "좋았음"]
@@ -1584,7 +1418,6 @@ export default function ResortDate(){
         id: 171,
         hotelName: "포항 마리나 스테이",
         roomName: "코지룸 302호",
-        img: "/img/171-1.jpg",
         maxOccupancy: 2,
         score: [3,1,2,4,5,4],
         comment: ["보통이요", "별로였음", "조금아쉬", "좋아요", "최고였음", "만족함"]
@@ -1594,7 +1427,6 @@ export default function ResortDate(){
         id: 172,
         hotelName: "오션스톤 콘도",
         roomName: "프리미엄스위트 303호",
-        img: "/img/172-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,4,5],
         comment: ["안좋았음", "보통이요", "아쉬웠음", "좋았어요", "좋아요", "최고임"]
@@ -1603,7 +1435,6 @@ export default function ResortDate(){
         id: 173,
         hotelName: "오션스톤 콘도",
         roomName: "이그제큐티브 403호",
-        img: "/img/173-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["조금별루", "실망했음", "보통이요", "좋았어요", "최고였음", "괜찮음"]
@@ -1612,7 +1443,6 @@ export default function ResortDate(){
         id: 174,
         hotelName: "오션스톤 콘도",
         roomName: "스탠다드 205호",
-        img: "/img/174-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,5,4,5],
         comment: ["평범했음", "조금아쉬", "전혀별로", "감동적임", "좋아요", "최고임"]
@@ -1622,7 +1452,6 @@ export default function ResortDate(){
         id: 175,
         hotelName: "블루웨이브 캠프",
         roomName: "골져스 504호",
-        img: "/img/175-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["조금별루", "보통이요", "전혀별로", "좋아요", "최고였음", "잘지냄"]
@@ -1631,7 +1460,6 @@ export default function ResortDate(){
         id: 176,
         hotelName: "블루웨이브 캠프",
         roomName: "프리미엄룸 505호",
-        img: "/img/176-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "살짝아쉬", "보통이요", "좋았어요", "최고였음", "괜찮음"]
@@ -1640,7 +1468,6 @@ export default function ResortDate(){
         id: 177,
         hotelName: "블루웨이브 캠프",
         roomName: "코지룸 402호",
-        img: "/img/177-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,4,4,5],
         comment: ["평범했음", "조금별루", "전혀별로", "좋았어요", "좋아요", "최고임"]
@@ -1650,7 +1477,6 @@ export default function ResortDate(){
         id: 178,
         hotelName: "포항 클리프오션 호텔",
         roomName: "스탠다드 301호",
-        img: "/img/178-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["안좋았음", "보통이요", "좀별루임", "좋았어요", "최고였음", "좋았음"]
@@ -1659,7 +1485,6 @@ export default function ResortDate(){
         id: 179,
         hotelName: "포항 클리프오션 호텔",
         roomName: "프리미엄스위트 505호",
-        img: "/img/179-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["살짝별루", "실망했음", "보통이요", "좋아요", "최고였음", "괜찮음"]
@@ -1668,7 +1493,6 @@ export default function ResortDate(){
         id: 180,
         hotelName: "포항 클리프오션 호텔",
         roomName: "이그제큐티브 203호",
-        img: "/img/180-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "조금아쉬", "전혀별로", "좋아요", "좋았어요", "최고임"]
@@ -1679,7 +1503,6 @@ export default function ResortDate(){
         id: 181,
         hotelName: "스카이 브리즈 호텔",
         roomName: "슈페리얼 201호",
-        img: "/img/181-1.jpg",
         maxOccupancy: 4,
         score: [1,2,2,3,4,5],
         comment: ["별로예요","아쉬워요","좀 그래요","보통이요","좋았어요","최고예요"]
@@ -1688,7 +1511,6 @@ export default function ResortDate(){
         id: 182,
         hotelName: "스카이 브리즈 호텔",
         roomName: "골져스 405호",
-        img: "/img/182-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,4,5],
         comment: ["안좋아요","별로예요","보통이요","좋았어요","만족해요","최고예요"]
@@ -1697,7 +1519,6 @@ export default function ResortDate(){
         id: 183,
         hotelName: "스카이 브리즈 호텔",
         roomName: "슈페리얼 102호",
-        img: "/img/183-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,5,4],
         comment: ["보통이요","별로예요","안좋아요","좋아요","최고예요","만족해요"]
@@ -1708,7 +1529,6 @@ export default function ResortDate(){
         id: 184,
         hotelName: "블루문 라이트 호텔",
         roomName: "디럭스 303호",
-        img: "/img/184-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,4,5],
         comment: ["별로예요","보통이요","안좋아요","좋아요","괜찮아요","최고예요"]
@@ -1717,7 +1537,6 @@ export default function ResortDate(){
         id: 185,
         hotelName: "블루문 라이트 호텔",
         roomName: "이그제큐티브 402호",
-        img: "/img/185-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,3,4,5],
         comment: ["안좋아요","별로예요","보통이요","보통이에요","좋아요","최고예요"]
@@ -1726,7 +1545,6 @@ export default function ResortDate(){
         id: 186,
         hotelName: "블루문 라이트 호텔",
         roomName: "디럭스 105호",
-        img: "/img/186-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,5,5],
         comment: ["보통이요","아쉬워요","안좋아요","좋아요","최고예요","너무좋음"]
@@ -1737,7 +1555,6 @@ export default function ResortDate(){
         id: 187,
         hotelName: "그랜드 루미에르 호텔",
         roomName: "스텐다드 204호",
-        img: "/img/187-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,3,4,5],
         comment: ["별로예요","안좋아요","보통이요","괜찮아요","좋아요","최고예요"]
@@ -1746,7 +1563,6 @@ export default function ResortDate(){
         id: 188,
         hotelName: "그랜드 루미에르 호텔",
         roomName: "프리미어 501호",
-        img: "/img/188-1.jpg",
         maxOccupancy: 4,
         score: [2,1,2,3,4,4],
         comment: ["아쉬워요","안좋아요","좀 그래요","보통이요","좋아요","만족해요"]
@@ -1755,7 +1571,6 @@ export default function ResortDate(){
         id: 189,
         hotelName: "그랜드 루미에르 호텔",
         roomName: "스텐다드 302호",
-        img: "/img/189-1.jpg",
         maxOccupancy: 2,
         score: [3,3,1,4,5,4],
         comment: ["보통이요","괜찮아요","안좋아요","좋아요","최고예요","만족해요"]
@@ -1766,7 +1581,6 @@ export default function ResortDate(){
         id: 190,
         hotelName: "라이트 힐즈 스위트",
         roomName: "슈페리얼 401호",
-        img: "/img/190-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,3,4,5],
         comment: ["안좋아요","별로예요","보통이요","괜찮아요","좋아요","최고예요"]
@@ -1775,7 +1589,6 @@ export default function ResortDate(){
         id: 191,
         hotelName: "라이트 힐즈 스위트",
         roomName: "골져스 103호",
-        img: "/img/191-1.jpg",
         maxOccupancy: 2,
         score: [1,2,2,4,4,5],
         comment: ["별로예요","안좋아요","조금별로","좋아요","괜찮아요","최고예요"]
@@ -1784,7 +1597,6 @@ export default function ResortDate(){
         id: 192,
         hotelName: "라이트 힐즈 스위트",
         roomName: "슈페리얼 505호",
-        img: "/img/192-1.jpg",
         maxOccupancy: 4,
         score: [3,3,1,4,5,5],
         comment: ["보통이요","괜찮아요","안좋아요","좋아요","최고예요","너무좋음"]
@@ -1795,7 +1607,6 @@ export default function ResortDate(){
         id: 193,
         hotelName: "센트럴 오닉스 호텔",
         roomName: "디럭스 201호",
-        img: "/img/193-1.jpg",
         maxOccupancy: 2,
         score: [1,3,2,4,5,4],
         comment: ["별로예요","보통이요","안좋아요","좋아요","최고예요","만족해요"]
@@ -1804,7 +1615,6 @@ export default function ResortDate(){
         id: 194,
         hotelName: "센트럴 오닉스 호텔",
         roomName: "이그제큐티브 404호",
-        img: "/img/194-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,3,4,5],
         comment: ["안좋아요","별로예요","보통이요","괜찮아요","좋아요","최고예요"]
@@ -1813,7 +1623,6 @@ export default function ResortDate(){
         id: 195,
         hotelName: "센트럴 오닉스 호텔",
         roomName: "디럭스 102호",
-        img: "/img/195-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,4,4,5],
         comment: ["보통이요","아쉬워요","안좋아요","좋아요","괜찮아요","최고예요"]
@@ -1824,7 +1633,6 @@ export default function ResortDate(){
         id: 196,
         hotelName: "프리미어노바 호텔",
         roomName: "스텐다드 305호",
-        img: "/img/196-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,4,4,5],
         comment: ["별로예요","안좋아요","보통이요","좋아요","괜찮아요","최고예요"]
@@ -1833,7 +1641,6 @@ export default function ResortDate(){
         id: 197,
         hotelName: "프리미어노바 호텔",
         roomName: "프리미어 402호",
-        img: "/img/197-1.jpg",
         maxOccupancy: 4,
         score: [2,3,1,4,5,4],
         comment: ["안좋아요","보통이요","별로예요","좋아요","최고예요","만족해요"]
@@ -1842,7 +1649,6 @@ export default function ResortDate(){
         id: 198,
         hotelName: "프리미어노바 호텔",
         roomName: "스텐다드 101호",
-        img: "/img/198-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["보통이요","아쉬워요","안좋아요","좋아요","괜찮아요","최고예요"]
@@ -1853,7 +1659,6 @@ export default function ResortDate(){
         id: 199,
         hotelName: "모던크레센트 호텔",
         roomName: "슈페리얼 503호",
-        img: "/img/199-1.jpg",
         maxOccupancy: 4,
         score: [2,1,3,3,4,5],
         comment: ["안좋아요","별로예요","보통이요","괜찮아요","좋아요","최고예요"]
@@ -1862,7 +1667,6 @@ export default function ResortDate(){
         id: 200,
         hotelName: "모던크레센트 호텔",
         roomName: "골져스 104호",
-        img: "/img/200-1.jpg",
         maxOccupancy: 2,
         score: [1,2,2,4,4,5],
         comment: ["별로예요","안좋아요","조금별로","좋아요","괜찮아요","최고예요"]
@@ -1871,7 +1675,6 @@ export default function ResortDate(){
         id: 201,
         hotelName: "모던크레센트 호텔",
         roomName: "슈페리얼 302호",
-        img: "/img/201-1.jpg",
         maxOccupancy: 3,
         score: [3,3,1,4,5,5],
         comment: ["보통이요","괜찮아요","안좋아요","좋아요","최고예요","너무좋음"]
@@ -1882,7 +1685,6 @@ export default function ResortDate(){
         id: 202,
         hotelName: "루프테라스 호텔",
         roomName: "디럭스 202호",
-        img: "/img/202-1.jpg",
         maxOccupancy: 2,
         score: [1,3,2,4,5,4],
         comment: ["별로예요","보통이요","안좋아요","좋아요","최고예요","만족해요"]
@@ -1891,7 +1693,6 @@ export default function ResortDate(){
         id: 203,
         hotelName: "루프테라스 호텔",
         roomName: "이그제큐티브 504호",
-        img: "/img/203-1.jpg",
         maxOccupancy: 4,
         score: [2,1,3,3,4,5],
         comment: ["안좋아요","별로예요","보통이요","괜찮아요","좋아요","최고예요"]
@@ -1900,7 +1701,6 @@ export default function ResortDate(){
         id: 204,
         hotelName: "루프테라스 호텔",
         roomName: "디럭스 103호",
-        img: "/img/204-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["보통이요","아쉬워요","안좋아요","좋아요","괜찮아요","최고예요"]
@@ -1911,7 +1711,6 @@ export default function ResortDate(){
         id: 205,
         hotelName: "스노우바레 호텔",
         roomName: "스텐다드 304호",
-        img: "/img/205-1.jpg",
         maxOccupancy: 4,
         score: [1,2,2,3,4,5],
         comment: ["별로예요","안좋아요","조금별로","보통이요","좋아요","최고예요"]
@@ -1920,7 +1719,6 @@ export default function ResortDate(){
         id: 206,
         hotelName: "스노우바레 호텔",
         roomName: "프리미어 102호",
-        img: "/img/206-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,3,5,4],
         comment: ["안좋아요","별로예요","보통이요","괜찮아요","최고예요","만족해요"]
@@ -1929,7 +1727,6 @@ export default function ResortDate(){
         id: 207,
         hotelName: "스노우바레 호텔",
         roomName: "스텐다드 501호",
-        img: "/img/207-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["보통이요","아쉬워요","안좋아요","좋아요","괜찮아요","최고예요"]
@@ -1940,7 +1737,6 @@ export default function ResortDate(){
         id: 208,
         hotelName: "화이트 마운틴 스위트",
         roomName: "슈페리얼 205호",
-        img: "/img/208-1.jpg",
         maxOccupancy: 3,
         score: [2,1,2,4,4,5],
         comment: ["안좋아요","별로예요","조금별로","좋아요","괜찮아요","최고예요"]
@@ -1949,7 +1745,6 @@ export default function ResortDate(){
         id: 209,
         hotelName: "화이트 마운틴 스위트",
         roomName: "골져스 503호",
-        img: "/img/209-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["별로예요","보통이요","안좋아요","좋아요","최고예요","만족해요"]
@@ -1958,7 +1753,6 @@ export default function ResortDate(){
         id: 210,
         hotelName: "화이트 마운틴 스위트",
         roomName: "슈페리얼 104호",
-        img: "/img/210-1.jpg",
         maxOccupancy: 2,
         score: [3,3,1,4,4,5],
         comment: ["보통이요","괜찮아요","안좋아요","좋아요","괜찮아요","최고예요"]
@@ -1969,7 +1763,6 @@ export default function ResortDate(){
         id: 211,
         hotelName: "하이번 크로스 호텔",
         roomName: "디럭스 302호",
-        img: "/img/211-1.jpg",
         maxOccupancy: 4,
         score: [1,2,3,3,5,4],
         comment: ["별로예요","안좋아요","보통이요","괜찮아요","최고예요","만족해요"]
@@ -1978,7 +1771,6 @@ export default function ResortDate(){
         id: 212,
         hotelName: "하이번 크로스 호텔",
         roomName: "이그제큐티브 104호",
-        img: "/img/212-1.jpg",
         maxOccupancy: 2,
         score: [2,1,2,4,4,5],
         comment: ["안좋아요","별로예요","조금별로","좋아요","괜찮아요","최고예요"]
@@ -1987,7 +1779,6 @@ export default function ResortDate(){
         id: 213,
         hotelName: "하이번 크로스 호텔",
         roomName: "디럭스 501호",
-        img: "/img/213-1.jpg",
         maxOccupancy: 3,
         score: [3,3,1,4,5,4],
         comment: ["보통이요","괜찮아요","안좋아요","좋아요","최고예요","만족해요"]
@@ -1998,7 +1789,6 @@ export default function ResortDate(){
         id: 214,
         hotelName: "딥 블리자드 호텔",
         roomName: "스텐다드 103호",
-        img: "/img/214-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,4,4,5],
         comment: ["별로예요","안좋아요","보통이요","좋아요","괜찮아요","최고예요"]
@@ -2007,7 +1797,6 @@ export default function ResortDate(){
         id: 215,
         hotelName: "딥 블리자드 호텔",
         roomName: "프리미어 304호",
-        img: "/img/215-1.jpg",
         maxOccupancy: 4,
         score: [2,1,3,3,4,5],
         comment: ["안좋아요","별로예요","보통이요","괜찮아요","좋아요","최고예요"]
@@ -2016,7 +1805,6 @@ export default function ResortDate(){
         id: 216,
         hotelName: "딥 블리자드 호텔",
         roomName: "스텐다드 505호",
-        img: "/img/216-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,5,5],
         comment: ["보통이요","아쉬워요","안좋아요","좋아요","최고예요","너무좋음"]
@@ -2027,7 +1815,6 @@ export default function ResortDate(){
         id: 217,
         hotelName: "프레시 폴라리스 호텔",
         roomName: "슈페리얼 401호",
-        img: "/img/217-1.jpg",
         maxOccupancy: 3,
         score: [1,2,2,3,4,5],
         comment: ["별로예요","안좋아요","조금별로","보통이요","좋아요","최고예요"]
@@ -2036,7 +1823,6 @@ export default function ResortDate(){
         id: 218,
         hotelName: "프레시 폴라리스 호텔",
         roomName: "골져스 202호",
-        img: "/img/218-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,3,5,4],
         comment: ["안좋아요","별로예요","보통이요","괜찮아요","최고예요","만족해요"]
@@ -2045,7 +1831,6 @@ export default function ResortDate(){
         id: 219,
         hotelName: "프레시 폴라리스 호텔",
         roomName: "슈페리얼 104호",
-        img: "/img/219-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,4,4,5],
         comment: ["보통이요","아쉬워요","안좋아요","좋아요","괜찮아요","최고예요"]
@@ -2056,7 +1841,6 @@ export default function ResortDate(){
         id: 220,
         hotelName: "스노우 브리즈 리조트",
         roomName: "디럭스 303호",
-        img: "/img/220-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,4,5],
         comment: ["별로예요","보통이요","안좋아요","좋아요","괜찮아요","최고예요"]
@@ -2065,7 +1849,6 @@ export default function ResortDate(){
         id: 221,
         hotelName: "스노우 브리즈 리조트",
         roomName: "이그제큐티브 105호",
-        img: "/img/221-1.jpg",
         maxOccupancy: 3,
         score: [2,1,2,3,4,5],
         comment: ["안좋아요","별로예요","조금별로","보통이요","좋아요","최고예요"]
@@ -2074,7 +1857,6 @@ export default function ResortDate(){
         id: 222,
         hotelName: "스노우 브리즈 리조트",
         roomName: "디럭스 501호",
-        img: "/img/222-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,5,4],
         comment: ["보통이요","아쉬워요","안좋아요","좋아요","최고예요","만족해요"]
@@ -2085,7 +1867,6 @@ export default function ResortDate(){
         id: 223,
         hotelName: "스노우 하모니 호텔",
         roomName: "스텐다드 102호",
-        img: "/img/223-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,3,4,5],
         comment: ["별로예요","안좋아요","보통이요","괜찮아요","좋아요","최고예요"]
@@ -2094,7 +1875,6 @@ export default function ResortDate(){
         id: 224,
         hotelName: "스노우 하모니 호텔",
         roomName: "프리미어 405호",
-        img: "/img/224-1.jpg",
         maxOccupancy: 4,
         score: [2,1,3,4,4,5],
         comment: ["안좋아요","별로예요","보통이요","좋아요","괜찮아요","최고예요"]
@@ -2103,7 +1883,6 @@ export default function ResortDate(){
         id: 225,
         hotelName: "스노우 하모니 호텔",
         roomName: "스텐다드 201호",
-        img: "/img/225-1.jpg",
         maxOccupancy: 3,
         score: [3,3,1,4,5,4],
         comment: ["보통이요","괜찮아요","안좋아요","좋아요","최고예요","만족해요"]
@@ -2114,7 +1893,6 @@ export default function ResortDate(){
         id: 226,
         hotelName: "라이트 애스펜 호텔",
         roomName: "슈페리얼 504호",
-        img: "/img/226-1.jpg",
         maxOccupancy: 4,
         score: [1,2,2,4,4,5],
         comment: ["별로예요","안좋아요","조금별로","좋아요","괜찮아요","최고예요"]
@@ -2123,7 +1901,6 @@ export default function ResortDate(){
         id: 227,
         hotelName: "라이트 애스펜 호텔",
         roomName: "골져스 103호",
-        img: "/img/227-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["안좋아요","별로예요","보통이요","좋아요","최고예요","만족해요"]
@@ -2132,7 +1909,6 @@ export default function ResortDate(){
         id: 228,
         hotelName: "라이트 애스펜 호텔",
         roomName: "슈페리얼 302호",
-        img: "/img/228-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["보통이요","아쉬워요","안좋아요","좋아요","괜찮아요","최고예요"]
@@ -2144,7 +1920,6 @@ export default function ResortDate(){
         id: 229,
         hotelName: "포레스트 힐스호텔",
         roomName: "슈페리얼 101호",
-        img: "/img/229-1.jpg",
         maxOccupancy: 4,
         score: [1,3,4,2,5,4],
         comment: ["별로예요","그냥그래","좋았어요","실망했음","최고였던","너무좋음"]
@@ -2153,7 +1928,6 @@ export default function ResortDate(){
         id: 230,
         hotelName: "포레스트 힐스호텔",
         roomName: "골져스 203호",
-        img: "/img/230-1.jpg",
         maxOccupancy: 3,
         score: [5,4,3,2,1,4],
         comment: ["최고였던","만족해요","보통이요","불편했음","안좋아요","좋았어요"]
@@ -2162,7 +1936,6 @@ export default function ResortDate(){
         id: 231,
         hotelName: "포레스트 힐스호텔",
         roomName: "슈페리얼 402호",
-        img: "/img/231-1.jpg",
         maxOccupancy: 2,
         score: [2,2,3,4,5,4],
         comment: ["너무심해","별로예요","그냥그래","좋았어요","최고였던","너무좋음"]
@@ -2173,7 +1946,6 @@ export default function ResortDate(){
         id: 232,
         hotelName: "오션 클라우드 리조트",
         roomName: "디럭스 105호",
-        img: "/img/232-1.jpg",
         maxOccupancy: 3,
         score: [3,4,5,2,1,3],
         comment: ["보통이요","좋았어요","최고였던","불편했음","안좋아요","그냥그래"]
@@ -2182,7 +1954,6 @@ export default function ResortDate(){
         id: 233,
         hotelName: "오션 클라우드 리조트",
         roomName: "이그제큐티브 301호",
-        img: "/img/233-1.jpg",
         maxOccupancy: 4,
         score: [4,4,2,3,1,5],
         comment: ["좋았어요","만족해요","별로예요","보통이요","너무심해","최고였던"]
@@ -2191,7 +1962,6 @@ export default function ResortDate(){
         id: 234,
         hotelName: "오션 클라우드 리조트",
         roomName: "디럭스 503호",
-        img: "/img/234-1.jpg",
         maxOccupancy: 2,
         score: [5,5,4,3,2,1],
         comment: ["최고였던","너무좋음","좋았어요","보통이요","별로예요","안좋아요"]
@@ -2202,7 +1972,6 @@ export default function ResortDate(){
         id: 235,
         hotelName: "어반 블루 스위트",
         roomName: "스텐다드 204호",
-        img: "/img/235-1.jpg",
         maxOccupancy: 2,
         score: [1,3,2,4,5,4],
         comment: ["안좋아요","보통이요","별로예요","좋았어요","너무좋음","만족해요"]
@@ -2211,7 +1980,6 @@ export default function ResortDate(){
         id: 236,
         hotelName: "어반 블루 스위트",
         roomName: "프리미어 402호",
-        img: "/img/236-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,4,5,3],
         comment: ["그냥그래","실망했음","너무심해","좋았어요","최고였던","보통이요"]
@@ -2220,7 +1988,6 @@ export default function ResortDate(){
         id: 237,
         hotelName: "어반 블루 스위트",
         roomName: "스텐다드 104호",
-        img: "/img/237-1.jpg",
         maxOccupancy: 3,
         score: [5,4,3,2,1,4],
         comment: ["최고였던","좋았어요","그냥그래","별로예요","안좋아요","만족해요"]
@@ -2231,7 +1998,6 @@ export default function ResortDate(){
         id: 238,
         hotelName: "선셋 마레 호텔",
         roomName: "슈페리얼 503호",
-        img: "/img/238-1.jpg",
         maxOccupancy: 2,
         score: [2,3,4,1,5,4],
         comment: ["별로예요","보통이요","좋았어요","너무심해","최고였던","만족해요"]
@@ -2240,7 +2006,6 @@ export default function ResortDate(){
         id: 239,
         hotelName: "선셋 마레 호텔",
         roomName: "골져스 301호",
-        img: "/img/239-1.jpg",
         maxOccupancy: 3,
         score: [4,5,3,2,1,4],
         comment: ["좋았어요","최고였던","보통이요","별로예요","안좋아요","만족해요"]
@@ -2249,7 +2014,6 @@ export default function ResortDate(){
         id: 240,
         hotelName: "선셋 마레 호텔",
         roomName: "슈페리얼 103호",
-        img: "/img/240-1.jpg",
         maxOccupancy: 4,
         score: [1,2,3,4,5,3],
         comment: ["너무심해","별로예요","보통이요","좋았어요","최고였던","그냥그래"]
@@ -2260,7 +2024,6 @@ export default function ResortDate(){
         id: 241,
         hotelName: "레드스톤 힐스 호텔",
         roomName: "디럭스 202호",
-        img: "/img/241-1.jpg",
         maxOccupancy: 3,
         score: [2,4,3,5,1,4],
         comment: ["별로예요","좋았어요","보통이요","최고였던","안좋아요","만족해요"]
@@ -2269,7 +2032,6 @@ export default function ResortDate(){
         id: 242,
         hotelName: "레드스톤 힐스 호텔",
         roomName: "이그제큐티브 402호",
-        img: "/img/242-1.jpg",
         maxOccupancy: 2,
         score: [3,2,4,5,1,3],
         comment: ["그냥그래","실망했음","좋았어요","너무좋음","안좋아요","보통이요"]
@@ -2278,7 +2040,6 @@ export default function ResortDate(){
         id: 243,
         hotelName: "레드스톤 힐스 호텔",
         roomName: "디럭스 101호",
-        img: "/img/243-1.jpg",
         maxOccupancy: 4,
         score: [5,4,3,2,1,4],
         comment: ["최고였던","만족해요","그냥그래","별로예요","너무심해","좋았어요"]
@@ -2289,7 +2050,6 @@ export default function ResortDate(){
         id: 244,
         hotelName: "하버링크 호텔",
         roomName: "스텐다드 302호",
-        img: "/img/244-1.jpg",
         maxOccupancy: 4,
         score: [3,3,4,5,1,2],
         comment: ["보통이요","그냥그래","좋았어요","최고였던","안좋아요","별로예요"]
@@ -2298,7 +2058,6 @@ export default function ResortDate(){
         id: 245,
         hotelName: "하버링크 호텔",
         roomName: "프리미어 105호",
-        img: "/img/245-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,4,5,4],
         comment: ["너무심해","안좋아요","보통이요","좋았어요","최고였던","만족해요"]
@@ -2307,7 +2066,6 @@ export default function ResortDate(){
         id: 246,
         hotelName: "하버링크 호텔",
         roomName: "스텐다드 503호",
-        img: "/img/246-1.jpg",
         maxOccupancy: 3,
         score: [5,4,3,2,1,4],
         comment: ["최고였던","좋았어요","그냥그래","별로예요","안좋아요","만족해요"]
@@ -2318,7 +2076,6 @@ export default function ResortDate(){
         id: 247,
         hotelName: "그랜드 웨이브 호텔",
         roomName: "슈페리얼 402호",
-        img: "/img/247-1.jpg",
         maxOccupancy: 2,
         score: [2,3,4,5,1,3],
         comment: ["별로예요","보통이요","좋았어요","최고였던","너무심해","그냥그래"]
@@ -2327,7 +2084,6 @@ export default function ResortDate(){
         id: 248,
         hotelName: "그랜드 웨이브 호텔",
         roomName: "골져스 204호",
-        img: "/img/248-1.jpg",
         maxOccupancy: 3,
         score: [4,2,3,5,1,4],
         comment: ["좋았어요","실망했음","보통이요","최고였던","안좋아요","만족해요"]
@@ -2336,7 +2092,6 @@ export default function ResortDate(){
         id: 249,
         hotelName: "그랜드 웨이브 호텔",
         roomName: "슈페리얼 101호",
-        img: "/img/249-1.jpg",
         maxOccupancy: 4,
         score: [5,4,3,2,1,4],
         comment: ["최고였던","좋았어요","그냥그래","별로예요","안좋아요","만족해요"]
@@ -2347,7 +2102,6 @@ export default function ResortDate(){
         id: 250,
         hotelName: "라구나브리즈 호텔",
         roomName: "디럭스 502호",
-        img: "/img/250-1.jpg",
         maxOccupancy: 2,
         score: [5,3,4,2,1,4],
         comment: ["최고였던","보통이요","좋았어요","별로예요","안좋아요","만족해요"]
@@ -2356,7 +2110,6 @@ export default function ResortDate(){
         id: 251,
         hotelName: "라구나브리즈 호텔",
         roomName: "이그제큐티브 203호",
-        img: "/img/251-1.jpg",
         maxOccupancy: 4,
         score: [4,3,2,5,1,4],
         comment: ["좋았어요","보통이요","별로예요","최고였던","너무심해","만족해요"]
@@ -2365,7 +2118,6 @@ export default function ResortDate(){
         id: 252,
         hotelName: "라구나브리즈 호텔",
         roomName: "디럭스 102호",
-        img: "/img/252-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,5,4,4],
         comment: ["실망했음","안좋아요","그냥그래","최고였던","좋았어요","만족해요"]
@@ -2376,7 +2128,6 @@ export default function ResortDate(){
         id: 253,
         hotelName: "센트럴 브리즈 호텔",
         roomName: "스텐다드 304호",
-        img: "/img/253-1.jpg",
         maxOccupancy: 3,
         score: [1,3,4,2,5,4],
         comment: ["너무심해","그냥그래","좋았어요","별로예요","최고였던","만족해요"]
@@ -2385,7 +2136,6 @@ export default function ResortDate(){
         id: 254,
         hotelName: "센트럴 브리즈 호텔",
         roomName: "프리미어 104호",
-        img: "/img/254-1.jpg",
         maxOccupancy: 4,
         score: [4,2,3,5,1,3],
         comment: ["좋았어요","별로예요","보통이요","최고였던","너무심해","그냥그래"]
@@ -2394,7 +2144,6 @@ export default function ResortDate(){
         id: 255,
         hotelName: "센트럴 브리즈 호텔",
         roomName: "스텐다드 503호",
-        img: "/img/255-1.jpg",
         maxOccupancy: 2,
         score: [5,4,2,3,1,4],
         comment: ["최고였던","만족해요","실망했음","보통이요","안좋아요","좋았어요"]
@@ -2405,7 +2154,6 @@ export default function ResortDate(){
         id: 256,
         hotelName: "에메랄드파크 리조트",
         roomName: "슈페리얼 203호",
-        img: "/img/256-1.jpg",
         maxOccupancy: 2,
         score: [2,3,4,5,1,4],
         comment: ["별로예요","보통이요","좋았어요","최고였던","안좋아요","만족해요"]
@@ -2414,7 +2162,6 @@ export default function ResortDate(){
         id: 257,
         hotelName: "에메랄드파크 리조트",
         roomName: "골져스 402호",
-        img: "/img/257-1.jpg",
         maxOccupancy: 3,
         score: [4,5,3,2,1,4],
         comment: ["좋았어요","너무좋음","그냥그래","별로예요","안좋아요","만족해요"]
@@ -2423,7 +2170,6 @@ export default function ResortDate(){
         id: 258,
         hotelName: "에메랄드파크 리조트",
         roomName: "슈페리얼 104호",
-        img: "/img/258-1.jpg",
         maxOccupancy: 4,
         score: [1,2,3,4,5,3],
         comment: ["너무심해","안좋아요","보통이요","좋았어요","최고였던","그냥그래"]
@@ -2434,7 +2180,6 @@ export default function ResortDate(){
         id: 259,
         hotelName: "노바 크라운 스위트",
         roomName: "디럭스 101호",
-        img: "/img/259-1.jpg",
         maxOccupancy: 4,
         score: [4,3,2,5,1,4],
         comment: ["좋았어요","보통이요","별로예요","최고였던","안좋아요","만족해요"]
@@ -2443,7 +2188,6 @@ export default function ResortDate(){
         id: 260,
         hotelName: "노바 크라운 스위트",
         roomName: "이그제큐티브 304호",
-        img: "/img/260-1.jpg",
         maxOccupancy: 2,
         score: [1,2,4,3,5,4],
         comment: ["너무심해","별로예요","좋았어요","보통이요","최고였던","만족해요"]
@@ -2452,7 +2196,6 @@ export default function ResortDate(){
         id: 261,
         hotelName: "노바 크라운 스위트",
         roomName: "디럭스 502호",
-        img: "/img/261-1.jpg",
         maxOccupancy: 3,
         score: [5,4,3,2,1,3],
         comment: ["최고였던","좋았어요","보통이요","별로예요","안좋아요","그냥그래"]
@@ -2463,7 +2206,6 @@ export default function ResortDate(){
         id: 262,
         hotelName: "하모니 프라임 호텔",
         roomName: "스텐다드 204호",
-        img: "/img/262-1.jpg",
         maxOccupancy: 4,
         score: [2,3,4,5,1,3],
         comment: ["별로예요","보통이요","좋았어요","최고였던","안좋아요","그냥그래"]
@@ -2472,7 +2214,6 @@ export default function ResortDate(){
         id: 263,
         hotelName: "하모니 프라임 호텔",
         roomName: "프리미어 402호",
-        img: "/img/263-1.jpg",
         maxOccupancy: 3,
         score: [3,2,4,5,1,4],
         comment: ["그냥그래","별로예요","좋았어요","최고였던","너무심해","만족해요"]
@@ -2481,7 +2222,6 @@ export default function ResortDate(){
         id: 264,
         hotelName: "하모니 프라임 호텔",
         roomName: "스텐다드 103호",
-        img: "/img/264-1.jpg",
         maxOccupancy: 2,
         score: [5,4,3,2,1,4],
         comment: ["최고였던","좋았어요","그냥그래","실망했음","안좋아요","만족해요"]
@@ -2492,7 +2232,6 @@ export default function ResortDate(){
         id: 265,
         hotelName: "브로드웨이 샤인 호텔",
         roomName: "슈페리얼 301호",
-        img: "/img/265-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["너무심해","안좋아요","보통이요","좋았어요","최고였던","만족해요"]
@@ -2501,7 +2240,6 @@ export default function ResortDate(){
         id: 266,
         hotelName: "브로드웨이 샤인 호텔",
         roomName: "골져스 105호",
-        img: "/img/266-1.jpg",
         maxOccupancy: 4,
         score: [4,4,3,2,1,5],
         comment: ["좋았어요","만족해요","보통이요","별로예요","안좋아요","최고였던"]
@@ -2510,7 +2248,6 @@ export default function ResortDate(){
         id: 267,
         hotelName: "브로드웨이 샤인 호텔",
         roomName: "슈페리얼 503호",
-        img: "/img/267-1.jpg",
         maxOccupancy: 2,
         score: [5,3,4,2,1,4],
         comment: ["최고였던","보통이요","좋았어요","별로예요","안좋아요","만족해요"]
@@ -2521,7 +2258,6 @@ export default function ResortDate(){
         id: 268,
         hotelName: "미드타운 힐즈호텔",
         roomName: "디럭스 402호",
-        img: "/img/268-1.jpg",
         maxOccupancy: 3,
         score: [4,3,2,5,1,3],
         comment: ["좋았어요","그냥그래","별로예요","최고였던","너무심해","보통이요"]
@@ -2530,7 +2266,6 @@ export default function ResortDate(){
         id: 269,
         hotelName: "미드타운 힐즈호텔",
         roomName: "이그제큐티브 203호",
-        img: "/img/269-1.jpg",
         maxOccupancy: 4,
         score: [5,4,3,2,1,4],
         comment: ["최고였던","만족해요","보통이요","별로예요","안좋아요","좋았어요"]
@@ -2539,7 +2274,6 @@ export default function ResortDate(){
         id: 270,
         hotelName: "미드타운 힐즈호텔",
         roomName: "디럭스 104호",
-        img: "/img/270-1.jpg",
         maxOccupancy: 2,
         score: [1,3,4,2,5,4],
         comment: ["안좋아요","보통이요","좋았어요","별로예요","최고였던","만족해요"]
@@ -2550,7 +2284,6 @@ export default function ResortDate(){
         id: 271,
         hotelName: "센트럴 스카이라인 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/271-1.jpg",
         maxOccupancy: 3,
         score: [3,2,4,5,1,3],
         comment: ["보통이요","별로예요","좋았어요","최고였던","너무심해","그냥그래"]
@@ -2559,7 +2292,6 @@ export default function ResortDate(){
         id: 272,
         hotelName: "센트럴 스카이라인 호텔",
         roomName: "프리미어 101호",
-        img: "/img/272-1.jpg",
         maxOccupancy: 4,
         score: [4,4,3,2,1,5],
         comment: ["좋았어요","만족해요","보통이요","별로예요","안좋아요","최고였던"]
@@ -2568,7 +2300,6 @@ export default function ResortDate(){
         id: 273,
         hotelName: "센트럴 스카이라인 호텔",
         roomName: "스텐다드 503호",
-        img: "/img/273-1.jpg",
         maxOccupancy: 2,
         score: [5,3,4,2,1,4],
         comment: ["최고였던","보통이요","좋았어요","실망했음","안좋아요","만족해요"]
@@ -2579,7 +2310,6 @@ export default function ResortDate(){
         id: 274,
         hotelName: "브루클린 웨이브 호텔",
         roomName: "슈페리얼 203호",
-        img: "/img/274-1.jpg",
         maxOccupancy: 4,
         score: [5,4,3,2,1,4],
         comment: ["최고였던","좋았어요","보통이요","별로예요","안좋아요","만족해요"]
@@ -2588,7 +2318,6 @@ export default function ResortDate(){
         id: 275,
         hotelName: "브루클린 웨이브 호텔",
         roomName: "골져스 402호",
-        img: "/img/275-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,4,5,3],
         comment: ["너무심해","안좋아요","그냥그래","좋았어요","최고였던","보통이요"]
@@ -2597,7 +2326,6 @@ export default function ResortDate(){
         id: 276,
         hotelName: "브루클린 웨이브 호텔",
         roomName: "슈페리얼 101호",
-        img: "/img/276-1.jpg",
         maxOccupancy: 3,
         score: [4,4,3,2,1,5],
         comment: ["좋았어요","만족해요","보통이요","별로예요","안좋아요","최고였던"]
@@ -2608,7 +2336,6 @@ export default function ResortDate(){
         id: 277,
         hotelName: "트로피컬 웨이브 호텔",
         roomName: "디럭스 202호",
-        img: "/img/277-1.jpg",
         maxOccupancy: 2,
         score: [2,3,4,5,1,4],
         comment: ["별로예요","보통이요","좋았어요","최고였던","안좋아요","만족해요"]
@@ -2617,7 +2344,6 @@ export default function ResortDate(){
         id: 278,
         hotelName: "트로피컬 웨이브 호텔",
         roomName: "이그제큐티브 503호",
-        img: "/img/278-1.jpg",
         maxOccupancy: 4,
         score: [3,2,4,5,1,3],
         comment: ["보통이요","별로예요","좋았어요","최고였던","너무심해","그냥그래"]
@@ -2626,7 +2352,6 @@ export default function ResortDate(){
         id: 279,
         hotelName: "트로피컬 웨이브 호텔",
         roomName: "디럭스 402호",
-        img: "/img/279-1.jpg",
         maxOccupancy: 3,
         score: [5,4,3,2,1,4],
         comment: ["최고였던","좋았어요","그냥그래","실망했음","안좋아요","만족해요"]
@@ -2637,7 +2362,6 @@ export default function ResortDate(){
         id: 280,
         hotelName: "블루샌드 스위트",
         roomName: "스텐다드 104호",
-        img: "/img/280-1.jpg",
         maxOccupancy: 3,
         score: [1,3,4,2,5,4],
         comment: ["안좋아요","보통이요","좋았어요","별로예요","최고였던","만족해요"]
@@ -2646,7 +2370,6 @@ export default function ResortDate(){
         id: 281,
         hotelName: "블루샌드 스위트",
         roomName: "프리미어 304호",
-        img: "/img/281-1.jpg",
         maxOccupancy: 2,
         score: [4,3,2,5,1,4],
         comment: ["좋았어요","보통이요","별로예요","최고였던","너무심해","만족해요"]
@@ -2655,7 +2378,6 @@ export default function ResortDate(){
         id: 282,
         hotelName: "블루샌드 스위트",
         roomName: "스텐다드 503호",
-        img: "/img/282-1.jpg",
         maxOccupancy: 4,
         score: [5,4,3,2,1,4],
         comment: ["최고였던","좋았어요","그냥그래","별로예요","안좋아요","만족해요"]
@@ -2666,7 +2388,6 @@ export default function ResortDate(){
         id: 283,
         hotelName: "아이랜더베이 리조트",
         roomName: "슈페리얼 201호",
-        img: "/img/283-1.jpg",
         maxOccupancy: 3,
         score: [2,3,4,5,1,4],
         comment: ["별로예요","보통이요","좋았어요","최고였던","안좋아요","만족해요"]
@@ -2675,7 +2396,6 @@ export default function ResortDate(){
         id: 284,
         hotelName: "아이랜더베이 리조트",
         roomName: "골져스 503호",
-        img: "/img/284-1.jpg",
         maxOccupancy: 2,
         score: [5,4,3,2,1,4],
         comment: ["최고였던","좋았어요","보통이요","별로예요","안좋아요","만족해요"]
@@ -2684,7 +2404,6 @@ export default function ResortDate(){
         id: 285,
         hotelName: "아이랜더베이 리조트",
         roomName: "슈페리얼 104호",
-        img: "/img/285-1.jpg",
         maxOccupancy: 4,
         score: [1,3,4,2,5,3],
         comment: ["너무심해","그냥그래","좋았어요","별로예요","최고였던","보통이요"]
@@ -2695,7 +2414,6 @@ export default function ResortDate(){
         id: 286,
         hotelName: "코랄리프 호텔",
         roomName: "디럭스 402호",
-        img: "/img/286-1.jpg",
         maxOccupancy: 2,
         score: [1,4,3,5,2,4],
         comment: ["너무심해","좋았어요","보통이요","최고였던","별로예요","만족해요"]
@@ -2704,7 +2422,6 @@ export default function ResortDate(){
         id: 287,
         hotelName: "코랄리프 호텔",
         roomName: "이그제큐티브 203호",
-        img: "/img/287-1.jpg",
         maxOccupancy: 4,
         score: [4,5,3,2,1,4],
         comment: ["좋았어요","너무좋음","보통이요","별로예요","안좋아요","만족해요"]
@@ -2713,7 +2430,6 @@ export default function ResortDate(){
         id: 288,
         hotelName: "코랄리프 호텔",
         roomName: "디럭스 104호",
-        img: "/img/288-1.jpg",
         maxOccupancy: 3,
         score: [3,2,4,5,1,3],
         comment: ["보통이요","별로예요","좋았어요","최고였던","안좋아요","그냥그래"]
@@ -2724,7 +2440,6 @@ export default function ResortDate(){
         id: 289,
         hotelName: "에메랄드비치 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/289-1.jpg",
         maxOccupancy: 4,
         score: [3,2,4,5,1,4],
         comment: ["보통이요","실망했음","좋았어요","최고였던","너무심해","만족해요"]
@@ -2733,7 +2448,6 @@ export default function ResortDate(){
         id: 290,
         hotelName: "에메랄드비치 호텔",
         roomName: "프리미어 101호",
-        img: "/img/290-1.jpg",
         maxOccupancy: 3,
         score: [5,4,3,2,1,3],
         comment: ["최고였던","좋았어요","그냥그래","별로예요","안좋아요","보통이요"]
@@ -2742,7 +2456,6 @@ export default function ResortDate(){
         id: 291,
         hotelName: "에메랄드비치 호텔",
         roomName: "스텐다드 503호",
-        img: "/img/291-1.jpg",
         maxOccupancy: 2,
         score: [1,3,4,2,5,4],
         comment: ["너무심해","보통이요","좋았어요","별로예요","최고였던","만족해요"]
@@ -2753,7 +2466,6 @@ export default function ResortDate(){
         id: 292,
         hotelName: "트로피컬코브 호텔",
         roomName: "슈페리얼 203호",
-        img: "/img/292-1.jpg",
         maxOccupancy: 4,
         score: [5,4,3,2,1,4],
         comment: ["최고였던","좋았어요","보통이요","별로예요","안좋아요","만족해요"]
@@ -2762,7 +2474,6 @@ export default function ResortDate(){
         id: 293,
         hotelName: "트로피컬코브 호텔",
         roomName: "골져스 402호",
-        img: "/img/293-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,4,5,3],
         comment: ["너무심해","안좋아요","그냥그래","좋았어요","최고였던","보통이요"]
@@ -2771,7 +2482,6 @@ export default function ResortDate(){
         id: 294,
         hotelName: "트로피컬코브 호텔",
         roomName: "슈페리얼 101호",
-        img: "/img/294-1.jpg",
         maxOccupancy: 3,
         score: [4,4,3,2,1,5],
         comment: ["좋았어요","만족해요","보통이요","별로예요","안좋아요","최고였던"]
@@ -2782,7 +2492,6 @@ export default function ResortDate(){
         id: 295,
         hotelName: "코코넛하버 호텔",
         roomName: "디럭스 301호",
-        img: "/img/295-1.jpg",
         maxOccupancy: 3,
         score: [5,4,3,2,1,4],
         comment: ["최고였던","좋았어요","보통이요","별로예요","안좋아요","만족해요"]
@@ -2791,7 +2500,6 @@ export default function ResortDate(){
         id: 296,
         hotelName: "코코넛하버 호텔",
         roomName: "이그제큐티브 105호",
-        img: "/img/296-1.jpg",
         maxOccupancy: 2,
         score: [4,3,2,5,1,3],
         comment: ["좋았어요","보통이요","별로예요","최고였던","안좋아요","그냥그래"]
@@ -2800,7 +2508,6 @@ export default function ResortDate(){
         id: 297,
         hotelName: "코코넛하버 호텔",
         roomName: "디럭스 503호",
-        img: "/img/297-1.jpg",
         maxOccupancy: 4,
         score: [1,3,4,2,5,4],
         comment: ["너무심해","보통이요","좋았어요","별로예요","최고였던","만족해요"]
@@ -2811,7 +2518,6 @@ export default function ResortDate(){
         id: 298,
         hotelName: "블루리프 베이스위트",
         roomName: "스텐다드 104호",
-        img: "/img/298-1.jpg",
         maxOccupancy: 3,
         score: [2,3,4,5,1,4],
         comment: ["별로예요","보통이요","좋았어요","최고였던","안좋아요","만족해요"]
@@ -2820,7 +2526,6 @@ export default function ResortDate(){
         id: 299,
         hotelName: "블루리프 베이스위트",
         roomName: "프리미어 302호",
-        img: "/img/299-1.jpg",
         maxOccupancy: 4,
         score: [4,3,2,5,1,3],
         comment: ["좋았어요","보통이요","별로예요","최고였던","안좋아요","그냥그래"]
@@ -2829,7 +2534,6 @@ export default function ResortDate(){
         id: 300,
         hotelName: "블루리프 베이스위트",
         roomName: "스텐다드 503호",
-        img: "/img/300-1.jpg",
         maxOccupancy: 2,
         score: [5,4,3,2,1,4],
         comment: ["최고였던","좋았어요","보통이요","별로예요","안좋아요","만족해요"]
@@ -2841,7 +2545,6 @@ export default function ResortDate(){
         id: 301,
         hotelName: "스카이브리즈 프라임 호텔",
         roomName: "슈페리얼 101호",
-        img: "/img/301-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로예요", "아쉬워요", "그냥그래요", "좋았어요", "너무좋음", "참좋네요"]
@@ -2850,7 +2553,6 @@ export default function ResortDate(){
         id: 302,
         hotelName: "스카이브리즈 프라임 호텔",
         roomName: "골져스 303호",
-        img: "/img/302-1.jpg",
         maxOccupancy: 4,
         score: [2,1,3,4,5,4],
         comment: ["좀별로임", "실망했음", "무난해요", "괜찮아요", "최고에요", "참좋아요"]
@@ -2859,7 +2561,6 @@ export default function ResortDate(){
         id: 303,
         hotelName: "스카이브리즈 프라임 호텔",
         roomName: "디럭스 505호",
-        img: "/img/303-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,5,4],
         comment: ["보통이에요", "조금별로", "나빴어요", "좋았어요", "아주좋음", "상당히좋"]
@@ -2869,7 +2570,6 @@ export default function ResortDate(){
         id: 304,
         hotelName: "블루웨이브 시그니처 호텔",
         roomName: "이그제큐티브 202호",
-        img: "/img/304-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["별로임", "그냥그럼", "좀별로임", "좋네요", "최고에요", "참좋음"]
@@ -2878,7 +2578,6 @@ export default function ResortDate(){
         id: 305,
         hotelName: "블루웨이브 시그니처 호텔",
         roomName: "스텐다드 404호",
-        img: "/img/305-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,5,4,5],
         comment: ["아쉬움", "실망함", "보통임", "매우좋음", "좋았어요", "최고임"]
@@ -2887,7 +2586,6 @@ export default function ResortDate(){
         id: 306,
         hotelName: "블루웨이브 시그니처 호텔",
         roomName: "프리미어 103호",
-        img: "/img/306-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["그냥그래", "나쁘네요", "별로임", "좋았음", "괜찮음", "최고에요"]
@@ -2897,7 +2595,6 @@ export default function ResortDate(){
         id: 307,
         hotelName: "하모니힐 클래식 호텔",
         roomName: "슈페리얼 302호",
-        img: "/img/307-1.jpg",
         maxOccupancy: 4,
         score: [1,2,3,4,5,4],
         comment: ["싫었음", "아쉬움", "보통임", "좋네요", "아주좋음", "참좋네요"]
@@ -2906,7 +2603,6 @@ export default function ResortDate(){
         id: 308,
         hotelName: "하모니힐 클래식 호텔",
         roomName: "골져스 504호",
-        img: "/img/308-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["좀별로", "그냥그럼", "나빴음", "괜찮음", "최고임", "좋아요"]
@@ -2915,7 +2611,6 @@ export default function ResortDate(){
         id: 309,
         hotelName: "하모니힐 클래식 호텔",
         roomName: "디럭스 101호",
-        img: "/img/309-1.jpg",
         maxOccupancy: 2,
         score: [3,1,2,4,5,4],
         comment: ["보통이에요", "별로임", "조금별로", "괜찮아요", "매우좋음", "좋아요"]
@@ -2925,7 +2620,6 @@ export default function ResortDate(){
         id: 310,
         hotelName: "루미너스 파크 호텔",
         roomName: "이그제큐티브 403호",
-        img: "/img/310-1.jpg",
         maxOccupancy: 2,
         score: [1,3,2,4,4,5],
         comment: ["나빴음", "보통임", "좀별로", "좋아요", "괜찮음", "최고임"]
@@ -2934,7 +2628,6 @@ export default function ResortDate(){
         id: 311,
         hotelName: "루미너스 파크 호텔",
         roomName: "스텐다드 205호",
-        img: "/img/311-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["별로임", "실망함", "그냥그럼", "좋았음", "최고임", "괜찮음"]
@@ -2943,7 +2636,6 @@ export default function ResortDate(){
         id: 312,
         hotelName: "루미너스 파크 호텔",
         roomName: "프리미어 303호",
-        img: "/img/312-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,5,4,5],
         comment: ["보통임", "좀별로", "나빴음", "매우좋음", "좋네요", "최고임"]
@@ -2953,7 +2645,6 @@ export default function ResortDate(){
         id: 313,
         hotelName: "레브클라우드 시그니처 호텔",
         roomName: "슈페리얼 402호",
-        img: "/img/313-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["별로임", "그냥그럼", "나빴음", "좋아요", "최고임", "괜찮음"]
@@ -2962,7 +2653,6 @@ export default function ResortDate(){
         id: 314,
         hotelName: "레브클라우드 시그니처 호텔",
         roomName: "골져스 104호",
-        img: "/img/314-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,4,4,5],
         comment: ["실망함", "아쉬움", "보통임", "좋아요", "괜찮음", "최고임"]
@@ -2971,7 +2661,6 @@ export default function ResortDate(){
         id: 315,
         hotelName: "레브클라우드 시그니처 호텔",
         roomName: "디럭스 505호",
-        img: "/img/315-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,4,5,4],
         comment: ["그냥그래", "조금별로", "나빴음", "좋아요", "아주좋음", "참좋음"]
@@ -2981,7 +2670,6 @@ export default function ResortDate(){
         id: 316,
         hotelName: "클라우드하버 프리미엄 호텔",
         roomName: "이그제큐티브 203호",
-        img: "/img/316-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["별로임", "보통임", "좀별로", "좋네요", "최고임", "괜찮음"]
@@ -2990,7 +2678,6 @@ export default function ResortDate(){
         id: 317,
         hotelName: "클라우드하버 프리미엄 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/317-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,4,5,4],
         comment: ["아쉬움", "실망함", "그냥그럼", "좋네요", "최고임", "좋아요"]
@@ -2999,7 +2686,6 @@ export default function ResortDate(){
         id: 318,
         hotelName: "클라우드하버 프리미엄 호텔",
         roomName: "프리미어 404호",
-        img: "/img/318-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["보통임", "조금별로", "나빴음", "괜찮음", "좋아요", "최고임"]
@@ -3009,7 +2695,6 @@ export default function ResortDate(){
         id: 319,
         hotelName: "에코파크 하모니 호텔",
         roomName: "슈페리얼 105호",
-        img: "/img/319-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["별로임", "보통임", "나빴음", "좋아요", "최고임", "참좋음"]
@@ -3018,7 +2703,6 @@ export default function ResortDate(){
         id: 320,
         hotelName: "에코파크 하모니 호텔",
         roomName: "골져스 502호",
-        img: "/img/320-1.jpg",
         maxOccupancy: 4,
         score: [1,2,3,4,5,4],
         comment: ["실망함", "아쉬움", "보통임", "괜찮음", "아주좋음", "좋았음"]
@@ -3027,7 +2711,6 @@ export default function ResortDate(){
         id: 321,
         hotelName: "에코파크 하모니 호텔",
         roomName: "디럭스 204호",
-        img: "/img/321-1.jpg",
         maxOccupancy: 2,
         score: [3,1,2,4,5,4],
         comment: ["무난함", "별로임", "조금별로", "좋아요", "최고임", "좋네요"]
@@ -3037,7 +2720,6 @@ export default function ResortDate(){
         id: 322,
         hotelName: "브릴리언트힐 로얄 호텔",
         roomName: "이그제큐티브 403호",
-        img: "/img/322-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["나빴음", "보통임", "조금별로", "좋아요", "최고임", "괜찮음"]
@@ -3046,7 +2728,6 @@ export default function ResortDate(){
         id: 323,
         hotelName: "브릴리언트힐 로얄 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/323-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["아쉬움", "실망함", "보통임", "괜찮음", "좋아요", "최고임"]
@@ -3055,7 +2736,6 @@ export default function ResortDate(){
         id: 324,
         hotelName: "브릴리언트힐 로얄 호텔",
         roomName: "프리미어 505호",
-        img: "/img/324-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["보통임", "조금별로", "나빴음", "좋아요", "괜찮음", "최고임"]
@@ -3068,7 +2748,6 @@ export default function ResortDate(){
         id: 325,
         hotelName: "블루문 프레스티지 호텔",
         roomName: "슈페리얼 101호",
-        img: "/img/325-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로임", "아쉬움", "그냥그래", "좋아요", "아주좋음", "참좋음"]
@@ -3077,7 +2756,6 @@ export default function ResortDate(){
         id: 326,
         hotelName: "블루문 프레스티지 호텔",
         roomName: "골져스 303호",
-        img: "/img/326-1.jpg",
         maxOccupancy: 4,
         score: [2,1,3,4,5,4],
         comment: ["좀별로", "실망함", "보통임", "좋네요", "최고임", "괜찮음"]
@@ -3086,7 +2764,6 @@ export default function ResortDate(){
         id: 327,
         hotelName: "블루문 프레스티지 호텔",
         roomName: "디럭스 505호",
-        img: "/img/327-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,5,4],
         comment: ["무난함", "조금별로", "나빴음", "좋아요", "아주좋음", "참좋음"]
@@ -3096,7 +2773,6 @@ export default function ResortDate(){
         id: 328,
         hotelName: "레브코스트 디럭스 호텔",
         roomName: "이그제큐티브 202호",
-        img: "/img/328-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["별로임", "보통임", "좀별로", "좋아요", "최고임", "괜찮음"]
@@ -3105,7 +2781,6 @@ export default function ResortDate(){
         id: 329,
         hotelName: "레브코스트 디럭스 호텔",
         roomName: "스텐다드 404호",
-        img: "/img/329-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,5,4,5],
         comment: ["아쉬움", "실망함", "그냥그럼", "매우좋음", "좋아요", "최고임"]
@@ -3114,7 +2789,6 @@ export default function ResortDate(){
         id: 330,
         hotelName: "레브코스트 디럭스 호텔",
         roomName: "프리미어 103호",
-        img: "/img/330-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["보통임", "조금별로", "나빴음", "괜찮음", "좋아요", "최고임"]
@@ -3124,7 +2798,6 @@ export default function ResortDate(){
         id: 331,
         hotelName: "오션힐 클래식 호텔",
         roomName: "슈페리얼 302호",
-        img: "/img/331-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["싫었음", "아쉬움", "보통임", "좋네요", "아주좋음", "참좋음"]
@@ -3133,7 +2806,6 @@ export default function ResortDate(){
         id: 332,
         hotelName: "오션힐 클래식 호텔",
         roomName: "골져스 504호",
-        img: "/img/332-1.jpg",
         maxOccupancy: 4,
         score: [2,3,1,4,5,4],
         comment: ["좀별로", "그냥그럼", "나빴음", "좋아요", "최고임", "괜찮음"]
@@ -3142,7 +2814,6 @@ export default function ResortDate(){
         id: 333,
         hotelName: "오션힐 클래식 호텔",
         roomName: "디럭스 101호",
-        img: "/img/333-1.jpg",
         maxOccupancy: 2,
         score: [3,1,2,4,5,4],
         comment: ["보통임", "별로임", "조금별로", "좋아요", "최고임", "참좋음"]
@@ -3152,7 +2823,6 @@ export default function ResortDate(){
         id: 334,
         hotelName: "하모니브릿지 로얄 호텔",
         roomName: "이그제큐티브 403호",
-        img: "/img/334-1.jpg",
         maxOccupancy: 2,
         score: [1,3,2,4,4,5],
         comment: ["나빴음", "보통임", "좀별로", "좋아요", "괜찮음", "최고임"]
@@ -3161,7 +2831,6 @@ export default function ResortDate(){
         id: 335,
         hotelName: "하모니브릿지 로얄 호텔",
         roomName: "스텐다드 205호",
-        img: "/img/335-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["별로임", "실망함", "그냥그럼", "좋네요", "최고임", "괜찮음"]
@@ -3170,7 +2839,6 @@ export default function ResortDate(){
         id: 336,
         hotelName: "하모니브릿지 로얄 호텔",
         roomName: "프리미어 303호",
-        img: "/img/336-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,5,4,5],
         comment: ["보통임", "좀별로", "나빴음", "매우좋음", "좋아요", "최고임"]
@@ -3180,7 +2848,6 @@ export default function ResortDate(){
         id: 337,
         hotelName: "라이트베이 모던 호텔",
         roomName: "슈페리얼 402호",
-        img: "/img/337-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["별로임", "보통임", "나빴음", "좋아요", "최고임", "괜찮음"]
@@ -3189,7 +2856,6 @@ export default function ResortDate(){
         id: 338,
         hotelName: "라이트베이 모던 호텔",
         roomName: "골져스 104호",
-        img: "/img/338-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,4,4,5],
         comment: ["실망함", "아쉬움", "보통임", "좋아요", "괜찮음", "최고임"]
@@ -3198,7 +2864,6 @@ export default function ResortDate(){
         id: 339,
         hotelName: "라이트베이 모던 호텔",
         roomName: "디럭스 505호",
-        img: "/img/339-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,4,5,4],
         comment: ["그냥그래", "조금별로", "나빴음", "좋아요", "아주좋음", "참좋음"]
@@ -3208,7 +2873,6 @@ export default function ResortDate(){
         id: 340,
         hotelName: "에메랄드스테이 시그니처 호텔",
         roomName: "이그제큐티브 203호",
-        img: "/img/340-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["별로임", "보통임", "좀별로", "좋아요", "최고임", "괜찮음"]
@@ -3217,7 +2881,6 @@ export default function ResortDate(){
         id: 341,
         hotelName: "에메랄드스테이 시그니처 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/341-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,4,5,4],
         comment: ["아쉬움", "실망함", "보통임", "좋네요", "최고임", "좋아요"]
@@ -3226,7 +2889,6 @@ export default function ResortDate(){
         id: 342,
         hotelName: "에메랄드스테이 시그니처 호텔",
         roomName: "프리미어 404호",
-        img: "/img/342-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["보통임", "조금별로", "나빴음", "괜찮음", "좋아요", "최고임"]
@@ -3236,7 +2898,6 @@ export default function ResortDate(){
         id: 343,
         hotelName: "피스포레스트 프라임 호텔",
         roomName: "슈페리얼 105호",
-        img: "/img/343-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["별로임", "보통임", "나빴음", "좋아요", "최고임", "참좋음"]
@@ -3245,7 +2906,6 @@ export default function ResortDate(){
         id: 344,
         hotelName: "피스포레스트 프라임 호텔",
         roomName: "골져스 502호",
-        img: "/img/344-1.jpg",
         maxOccupancy: 4,
         score: [1,2,3,4,5,4],
         comment: ["실망함", "아쉬움", "보통임", "괜찮음", "아주좋음", "좋았음"]
@@ -3254,7 +2914,6 @@ export default function ResortDate(){
         id: 345,
         hotelName: "피스포레스트 프라임 호텔",
         roomName: "디럭스 204호",
-        img: "/img/345-1.jpg",
         maxOccupancy: 2,
         score: [3,1,2,4,5,4],
         comment: ["무난함", "별로임", "조금별로", "좋아요", "최고임", "좋네요"]
@@ -3264,7 +2923,6 @@ export default function ResortDate(){
         id: 346,
         hotelName: "코발트시티 모던 호텔",
         roomName: "이그제큐티브 403호",
-        img: "/img/346-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["나빴음", "보통임", "조금별로", "좋아요", "최고임", "괜찮음"]
@@ -3273,7 +2931,6 @@ export default function ResortDate(){
         id: 347,
         hotelName: "코발트시티 모던 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/347-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["아쉬움", "실망함", "보통임", "괜찮음", "좋아요", "최고임"]
@@ -3282,7 +2939,6 @@ export default function ResortDate(){
         id: 348,
         hotelName: "코발트시티 모던 호텔",
         roomName: "프리미어 505호",
-        img: "/img/348-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["보통임", "조금별로", "나빴음", "좋아요", "괜찮음", "최고임"]
@@ -3295,7 +2951,6 @@ export default function ResortDate(){
         id: 349,
         hotelName: "로마 엘레강트 스위트",
         roomName: "슈페리얼 101호",
-        img: "/img/349-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "아쉬운편", "보통정도", "좋았어요", "아주좋음", "꽤좋았음"]
@@ -3304,7 +2959,6 @@ export default function ResortDate(){
         id: 350,
         hotelName: "로마 엘레강트 스위트",
         roomName: "골져스 303호",
-        img: "/img/350-1.jpg",
         maxOccupancy: 4,
         score: [2,1,3,4,5,4],
         comment: ["좀별루임", "많이실망", "보통이요", "좋은편임", "최고수준", "꽤만족함"]
@@ -3313,7 +2967,6 @@ export default function ResortDate(){
         id: 351,
         hotelName: "로마 엘레강트 스위트",
         roomName: "디럭스 505호",
-        img: "/img/351-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,5,4],
         comment: ["무난했음", "조금별루", "전혀안좋", "좋았습니다", "완전좋음", "만족했음"]
@@ -3323,7 +2976,6 @@ export default function ResortDate(){
         id: 352,
         hotelName: "로마 그랜드 팰리스",
         roomName: "이그제큐티브 202호",
-        img: "/img/352-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["정말별로", "보통이요", "좀아쉬움", "좋았어요", "최고였음", "만족했음"]
@@ -3332,7 +2984,6 @@ export default function ResortDate(){
         id: 353,
         hotelName: "로마 그랜드 팰리스",
         roomName: "스텐다드 404호",
-        img: "/img/353-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,5,4,5],
         comment: ["좀아쉬움", "별로였음", "평범했음", "감동적임", "좋았어요", "최고네요"]
@@ -3341,7 +2992,6 @@ export default function ResortDate(){
         id: 354,
         hotelName: "로마 그랜드 팰리스",
         roomName: "프리미어 103호",
-        img: "/img/354-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["괜찮았음", "아쉬운편", "전혀별로", "좋은편임", "꽤좋았음", "최고였음"]
@@ -3351,7 +3001,6 @@ export default function ResortDate(){
         id: 355,
         hotelName: "호텔 로마 클래시코",
         roomName: "슈페리얼 302호",
-        img: "/img/355-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "조금아쉬", "보통정도", "좋았어요", "아주좋음", "괜찮았음"]
@@ -3360,7 +3009,6 @@ export default function ResortDate(){
         id: 356,
         hotelName: "호텔 로마 클래시코",
         roomName: "골져스 504호",
-        img: "/img/356-1.jpg",
         maxOccupancy: 4,
         score: [2,3,1,4,5,4],
         comment: ["좀부족함", "평범했음", "실망했음", "좋았어요", "최고였음", "만족했음"]
@@ -3369,7 +3017,6 @@ export default function ResortDate(){
         id: 357,
         hotelName: "호텔 로마 클래시코",
         roomName: "디럭스 101호",
-        img: "/img/357-1.jpg",
         maxOccupancy: 2,
         score: [3,1,2,4,5,4],
         comment: ["보통이요", "별로였음", "좀별루임", "좋은편임", "아주좋음", "꽤좋았음"]
@@ -3379,7 +3026,6 @@ export default function ResortDate(){
         id: 358,
         hotelName: "로마 럭셔리 베이 호텔",
         roomName: "이그제큐티브 403호",
-        img: "/img/358-1.jpg",
         maxOccupancy: 2,
         score: [1,3,2,4,4,5],
         comment: ["안좋았음", "그냥보통", "아쉬웠음", "좋아요", "좋았습니다", "최고네요"]
@@ -3388,7 +3034,6 @@ export default function ResortDate(){
         id: 359,
         hotelName: "로마 럭셔리 베이 호텔",
         roomName: "스텐다드 205호",
-        img: "/img/359-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["좀별루임", "많이별로", "보통정도", "좋은방임", "최고였음", "만족했음"]
@@ -3397,7 +3042,6 @@ export default function ResortDate(){
         id: 360,
         hotelName: "로마 럭셔리 베이 호텔",
         roomName: "프리미어 303호",
-        img: "/img/360-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,5,4,5],
         comment: ["괜찮았음", "부족했음", "전혀별로", "감동적임", "좋았습니다", "최고네요"]
@@ -3407,7 +3051,6 @@ export default function ResortDate(){
         id: 361,
         hotelName: "로마 비스타 가든 호텔",
         roomName: "슈페리얼 402호",
-        img: "/img/361-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["좀별루임", "보통이요", "많이별로", "좋은편임", "최고수준", "꽤좋았음"]
@@ -3416,7 +3059,6 @@ export default function ResortDate(){
         id: 362,
         hotelName: "로마 비스타 가든 호텔",
         roomName: "골져스 104호",
-        img: "/img/362-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,4,4,5],
         comment: ["실망했음", "조금아쉬", "보통이에요", "좋았습니다", "괜찮았음", "최고였음"]
@@ -3425,7 +3067,6 @@ export default function ResortDate(){
         id: 363,
         hotelName: "로마 비스타 가든 호텔",
         roomName: "디럭스 505호",
-        img: "/img/363-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,4,5,4],
         comment: ["보통이요", "조금별루", "전혀좋지", "좋았습니다", "아주좋음", "만족했음"]
@@ -3435,7 +3076,6 @@ export default function ResortDate(){
         id: 364,
         hotelName: "로마 블루 스카이 호텔",
         roomName: "이그제큐티브 203호",
-        img: "/img/364-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["별로였음", "보통이요", "좀아쉬움", "좋은편임", "아주좋음", "꽤좋았음"]
@@ -3444,7 +3084,6 @@ export default function ResortDate(){
         id: 365,
         hotelName: "로마 블루 스카이 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/365-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,4,5,4],
         comment: ["조금아쉬", "실망했음", "보통정도", "좋았어요", "최고였음", "만족했음"]
@@ -3453,7 +3092,6 @@ export default function ResortDate(){
         id: 366,
         hotelName: "로마 블루 스카이 호텔",
         roomName: "프리미어 404호",
-        img: "/img/366-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["괜찮았음", "조금별루", "전혀별로", "좋아요", "괜찮아요", "최고였음"]
@@ -3463,7 +3101,6 @@ export default function ResortDate(){
         id: 367,
         hotelName: "로마 임페리얼 스테이",
         roomName: "슈페리얼 105호",
-        img: "/img/367-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["좀별루임", "보통이요", "기대이하", "좋았어요", "아주좋음", "만족했음"]
@@ -3472,7 +3109,6 @@ export default function ResortDate(){
         id: 368,
         hotelName: "로마 임페리얼 스테이",
         roomName: "골져스 502호",
-        img: "/img/368-1.jpg",
         maxOccupancy: 4,
         score: [1,2,3,4,5,4],
         comment: ["전혀안좋", "아쉬운편", "보통정도", "좋은숙박", "최고였음", "꽤좋았음"]
@@ -3481,7 +3117,6 @@ export default function ResortDate(){
         id: 369,
         hotelName: "로마 임페리얼 스테이",
         roomName: "디럭스 204호",
-        img: "/img/369-1.jpg",
         maxOccupancy: 2,
         score: [3,1,2,4,5,4],
         comment: ["보통이요", "실망했음", "좀아쉬움", "좋았습니다", "아주좋음", "만족함"]
@@ -3491,7 +3126,6 @@ export default function ResortDate(){
         id: 370,
         hotelName: "로마 모던 라이트 호텔",
         roomName: "이그제큐티브 403호",
-        img: "/img/370-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["많이별로", "보통이요", "조금별루", "좋은편임", "최고였음", "꽤좋았음"]
@@ -3500,7 +3134,6 @@ export default function ResortDate(){
         id: 371,
         hotelName: "로마 모던 라이트 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/371-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["조금아쉬", "별로였음", "보통정도", "좋았어요", "최고네요", "만족했음"]
@@ -3509,7 +3142,6 @@ export default function ResortDate(){
         id: 372,
         hotelName: "로마 모던 라이트 호텔",
         roomName: "프리미어 505호",
-        img: "/img/372-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "좀부족함", "전혀별로", "좋았어요", "괜찮아요", "최고였음"]
@@ -3522,7 +3154,6 @@ export default function ResortDate(){
         id: 373,
         hotelName: "베네치아 카날 뷰 호텔",
         roomName: "슈페리얼 101호",
-        img: "/img/373-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "조금아쉬", "보통이요", "좋았어요", "최고네요", "꽤좋았음"]
@@ -3531,7 +3162,6 @@ export default function ResortDate(){
         id: 374,
         hotelName: "베네치아 카날 뷰 호텔",
         roomName: "골져스 303호",
-        img: "/img/374-1.jpg",
         maxOccupancy: 4,
         score: [2,1,3,4,5,4],
         comment: ["좀별루임", "많이별로", "보통정도", "좋았습니다", "아주좋음", "만족했음"]
@@ -3540,7 +3170,6 @@ export default function ResortDate(){
         id: 375,
         hotelName: "베네치아 카날 뷰 호텔",
         roomName: "디럭스 505호",
-        img: "/img/375-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["괜찮았음", "조금별루", "전혀별로", "좋았어요", "좋았습니다", "최고였음"]
@@ -3550,7 +3179,6 @@ export default function ResortDate(){
         id: 376,
         hotelName: "베네치아 라구나 팰리스",
         roomName: "이그제큐티브 202호",
-        img: "/img/376-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["안좋았음", "보통이요", "좀아쉬움", "좋았어요", "최고였음", "만족했음"]
@@ -3559,7 +3187,6 @@ export default function ResortDate(){
         id: 377,
         hotelName: "베네치아 라구나 팰리스",
         roomName: "스텐다드 404호",
-        img: "/img/377-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,5,4,5],
         comment: ["조금별루", "실망했음", "평범했음", "감동적임", "괜찮아요", "최고수준"]
@@ -3568,7 +3195,6 @@ export default function ResortDate(){
         id: 378,
         hotelName: "베네치아 라구나 팰리스",
         roomName: "프리미어 103호",
-        img: "/img/378-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "아쉬운편", "전혀별로", "좋았어요", "좋았습니다", "최고였음"]
@@ -3578,7 +3204,6 @@ export default function ResortDate(){
         id: 379,
         hotelName: "베네치아 하버 스카이 호텔",
         roomName: "슈페리얼 302호",
-        img: "/img/379-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "조금아쉬", "보통이요", "좋았습니다", "아주좋음", "만족했음"]
@@ -3587,7 +3212,6 @@ export default function ResortDate(){
         id: 380,
         hotelName: "베네치아 하버 스카이 호텔",
         roomName: "골져스 504호",
-        img: "/img/380-1.jpg",
         maxOccupancy: 4,
         score: [2,3,1,4,5,4],
         comment: ["좀부족함", "보통이요", "실망했음", "좋았어요", "최고였음", "꽤좋음"]
@@ -3596,7 +3220,6 @@ export default function ResortDate(){
         id: 381,
         hotelName: "베네치아 하버 스카이 호텔",
         roomName: "디럭스 101호",
-        img: "/img/381-1.jpg",
         maxOccupancy: 2,
         score: [3,1,2,4,5,4],
         comment: ["보통이요", "전혀별로", "조금별루", "좋아요", "아주좋음", "만족했음"]
@@ -3606,7 +3229,6 @@ export default function ResortDate(){
         id: 382,
         hotelName: "베네치아 워터라인 스위트",
         roomName: "이그제큐티브 403호",
-        img: "/img/382-1.jpg",
         maxOccupancy: 2,
         score: [1,3,2,4,4,5],
         comment: ["별로였음", "보통이요", "아쉬웠음", "좋았어요", "좋았습니다", "최고네요"]
@@ -3615,7 +3237,6 @@ export default function ResortDate(){
         id: 383,
         hotelName: "베네치아 워터라인 스위트",
         roomName: "스텐다드 205호",
-        img: "/img/383-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["좀별루임", "실망했음", "평범했음", "좋은편임", "최고수준", " 만족했음"]
@@ -3624,7 +3245,6 @@ export default function ResortDate(){
         id: 384,
         hotelName: "베네치아 워터라인 스위트",
         roomName: "프리미어 303호",
-        img: "/img/384-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,5,4,5],
         comment: ["보통이요", "부족했음", "전혀별로", "감동적임", "좋았어요", "최고네요"]
@@ -3634,7 +3254,6 @@ export default function ResortDate(){
         id: 385,
         hotelName: "베네치아 씨 브리즈 호텔",
         roomName: "슈페리얼 402호",
-        img: "/img/385-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["조금별루", "보통이요", "실망했음", "좋았어요", "최고였음", "꽤좋음"]
@@ -3643,7 +3262,6 @@ export default function ResortDate(){
         id: 386,
         hotelName: "베네치아 씨 브리즈 호텔",
         roomName: "골져스 104호",
-        img: "/img/386-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,4,5,4],
         comment: ["많이별로", "아쉬운편", "보통이요", "좋아요", "최고였음", "만족했음"]
@@ -3652,7 +3270,6 @@ export default function ResortDate(){
         id: 387,
         hotelName: "베네치아 씨 브리즈 호텔",
         roomName: "디럭스 505호",
-        img: "/img/387-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "조금별루", "전혀별로", "좋았어요", "괜찮아요", "최고네요"]
@@ -3662,7 +3279,6 @@ export default function ResortDate(){
         id: 388,
         hotelName: "베네치아 골드 카날 호텔",
         roomName: "이그제큐티브 203호",
-        img: "/img/388-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["안좋았음", "보통이요", "조금아쉬", "좋았어요", "최고였음", "꽤좋음"]
@@ -3671,7 +3287,6 @@ export default function ResortDate(){
         id: 389,
         hotelName: "베네치아 골드 카날 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/389-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,4,5,4],
         comment: ["조금별루", "실망했음", "보통이요", "좋은편임", "최고였음", "만족했음"]
@@ -3680,7 +3295,6 @@ export default function ResortDate(){
         id: 390,
         hotelName: "베네치아 골드 카날 호텔",
         roomName: "프리미어 404호",
-        img: "/img/390-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "조금별루", "전혀별로", "좋아요", "좋았습니다", "최고였음"]
@@ -3690,7 +3304,6 @@ export default function ResortDate(){
         id: 391,
         hotelName: "베네치아 클래식 하버 호텔",
         roomName: "슈페리얼 105호",
-        img: "/img/391-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["아쉬웠음", "보통이요", "별로였음", "좋았어요", "최고였음", "만족했음"]
@@ -3699,7 +3312,6 @@ export default function ResortDate(){
         id: 392,
         hotelName: "베네치아 클래식 하버 호텔",
         roomName: "골져스 502호",
-        img: "/img/392-1.jpg",
         maxOccupancy: 4,
         score: [1,2,3,4,5,4],
         comment: ["전혀안좋", "아쉬운편", "보통이요", "좋은편임", "최고네요", "꽤좋음"]
@@ -3708,7 +3320,6 @@ export default function ResortDate(){
         id: 393,
         hotelName: "베네치아 클래식 하버 호텔",
         roomName: "디럭스 204호",
-        img: "/img/393-1.jpg",
         maxOccupancy: 2,
         score: [3,1,2,4,5,4],
         comment: ["보통이요", "실망했음", "조금별루", "좋아요", "아주좋음", "만족했음"]
@@ -3718,7 +3329,6 @@ export default function ResortDate(){
         id: 394,
         hotelName: "베네치아 라군 선셋 호텔",
         roomName: "이그제큐티브 403호",
-        img: "/img/394-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["많이별로", "보통이요", "아쉬웠음", "좋았어요", "최고였음", "꽤좋음"]
@@ -3727,7 +3337,6 @@ export default function ResortDate(){
         id: 395,
         hotelName: "베네치아 라군 선셋 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/395-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["조금별루", "실망했음", "보통이요", "좋았어요", "최고였음", "만족했음"]
@@ -3736,7 +3345,6 @@ export default function ResortDate(){
         id: 396,
         hotelName: "베네치아 라군 선셋 호텔",
         roomName: "프리미어 505호",
-        img: "/img/396-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "좀부족함", "전혀별로", "좋았어요", "좋았습니다", "최고였음"]
@@ -3749,7 +3357,6 @@ export default function ResortDate(){
         id: 397,
         hotelName: "파리 에펠 뷰 호텔",
         roomName: "슈페리얼 101호",
-        img: "/img/397-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["별로였음", "조금아쉬", "보통이요", "좋았어요", "최고네요", "꽤좋았음"]
@@ -3758,7 +3365,6 @@ export default function ResortDate(){
         id: 398,
         hotelName: "파리 에펠 뷰 호텔",
         roomName: "골져스 303호",
-        img: "/img/398-1.jpg",
         maxOccupancy: 4,
         score: [2,1,3,4,5,4],
         comment: ["좀별루임", "많이별로", "보통정도", "좋았습니다", "아주좋음", "만족했음"]
@@ -3767,7 +3373,6 @@ export default function ResortDate(){
         id: 399,
         hotelName: "파리 에펠 뷰 호텔",
         roomName: "디럭스 505호",
-        img: "/img/399-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["괜찮았음", "조금별루", "전혀별로", "좋았어요", "좋았습니다", "최고였음"]
@@ -3777,7 +3382,6 @@ export default function ResortDate(){
         id: 400,
         hotelName: "파리 루브르 센터 호텔",
         roomName: "이그제큐티브 202호",
-        img: "/img/400-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["안좋았음", "보통이요", "아쉬웠음", "좋았어요", "최고였음", "만족했음"]
@@ -3786,7 +3390,6 @@ export default function ResortDate(){
         id: 401,
         hotelName: "파리 루브르 센터 호텔",
         roomName: "스텐다드 404호",
-        img: "/img/401-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,5,4,5],
         comment: ["조금별루", "실망했음", "보통이요", "감동적임", "좋았습니다", "최고네요"]
@@ -3795,7 +3398,6 @@ export default function ResortDate(){
         id: 402,
         hotelName: "파리 루브르 센터 호텔",
         roomName: "프리미어 103호",
-        img: "/img/402-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "아쉬웠음", "전혀별로", "좋아요", "좋았습니다", "최고였음"]
@@ -3805,7 +3407,6 @@ export default function ResortDate(){
         id: 403,
         hotelName: "파리 샹젤리제 프리미어 호텔",
         roomName: "슈페리얼 302호",
-        img: "/img/403-1.jpg",
         maxOccupancy: 3,
         score: [1,2,3,4,5,4],
         comment: ["많이별로", "조금아쉬", "보통이요", "좋았어요", "최고네요", "만족했음"]
@@ -3814,7 +3415,6 @@ export default function ResortDate(){
         id: 404,
         hotelName: "파리 샹젤리제 프리미어 호텔",
         roomName: "골져스 504호",
-        img: "/img/404-1.jpg",
         maxOccupancy: 4,
         score: [2,3,1,4,5,4],
         comment: ["좀부족함", "보통이요", "전혀별로", "좋았습니다", "최고였음", "꽤좋음"]
@@ -3823,7 +3423,6 @@ export default function ResortDate(){
         id: 405,
         hotelName: "파리 샹젤리제 프리미어 호텔",
         roomName: "디럭스 101호",
-        img: "/img/405-1.jpg",
         maxOccupancy: 2,
         score: [3,1,2,4,5,4],
         comment: ["보통이요", "실망했음", "아쉬웠음", "좋았어요", "최고네요", "만족했음"]
@@ -3833,7 +3432,6 @@ export default function ResortDate(){
         id: 406,
         hotelName: "파리 몽마르트 트래블 호텔",
         roomName: "이그제큐티브 403호",
-        img: "/img/406-1.jpg",
         maxOccupancy: 2,
         score: [1,3,2,4,4,5],
         comment: ["안좋았음", "보통이요", "아쉬웠음", "좋았어요", "꽤좋음", "최고였음"]
@@ -3842,7 +3440,6 @@ export default function ResortDate(){
         id: 407,
         hotelName: "파리 몽마르트 트래블 호텔",
         roomName: "스텐다드 205호",
-        img: "/img/407-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["조금별루", "많이별로", "평범했음", "좋은편임", "최고네요", "만족했음"]
@@ -3851,7 +3448,6 @@ export default function ResortDate(){
         id: 408,
         hotelName: "파리 몽마르트 트래블 호텔",
         roomName: "프리미어 303호",
-        img: "/img/408-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,5,4,5],
         comment: ["보통이요", "아쉬웠음", "전혀별로", "감동적임", "좋았어요", "최고네요"]
@@ -3861,7 +3457,6 @@ export default function ResortDate(){
         id: 409,
         hotelName: "파리 노트르담 리버 뷰 호텔",
         roomName: "슈페리얼 402호",
-        img: "/img/409-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["조금아쉬", "보통이요", "전혀별로", "좋았어요", "최고네요", "만족했음"]
@@ -3870,7 +3465,6 @@ export default function ResortDate(){
         id: 410,
         hotelName: "파리 노트르담 리버 뷰 호텔",
         roomName: "골져스 104호",
-        img: "/img/410-1.jpg",
         maxOccupancy: 2,
         score: [1,2,3,4,5,4],
         comment: ["많이별로", "아쉬웠음", "보통이요", "좋았어요", "최고였음", "꽤좋음"]
@@ -3879,7 +3473,6 @@ export default function ResortDate(){
         id: 411,
         hotelName: "파리 노트르담 리버 뷰 호텔",
         roomName: "디럭스 505호",
-        img: "/img/411-1.jpg",
         maxOccupancy: 4,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "조금별루", "전혀별로", "좋았어요", "괜찮아요", "최고네요"]
@@ -3889,7 +3482,6 @@ export default function ResortDate(){
         id: 412,
         hotelName: "파리 센강 프레스티지 호텔",
         roomName: "이그제큐티브 203호",
-        img: "/img/412-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["별로였음", "보통이요", "아쉬웠음", "좋았습니다", "최고였음", "꽤좋음"]
@@ -3898,7 +3490,6 @@ export default function ResortDate(){
         id: 413,
         hotelName: "파리 센강 프레스티지 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/413-1.jpg",
         maxOccupancy: 2,
         score: [2,1,3,4,5,4],
         comment: ["조금별루", "실망했음", "보통이요", "좋았어요", "최고네요", "만족했음"]
@@ -3907,7 +3498,6 @@ export default function ResortDate(){
         id: 414,
         hotelName: "파리 센강 프레스티지 호텔",
         roomName: "프리미어 404호",
-        img: "/img/414-1.jpg",
         maxOccupancy: 3,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "아쉬웠음", "전혀별로", "좋아요", "좋았습니다", "최고였음"]
@@ -3917,7 +3507,6 @@ export default function ResortDate(){
         id: 415,
         hotelName: "파리 라데팡스 스테이 호텔",
         roomName: "슈페리얼 105호",
-        img: "/img/415-1.jpg",
         maxOccupancy: 3,
         score: [2,3,1,4,5,4],
         comment: ["조금아쉬", "보통이요", "전혀별로", "좋았어요", "최고네요", "만족했음"]
@@ -3926,7 +3515,6 @@ export default function ResortDate(){
         id: 416,
         hotelName: "파리 라데팡스 스테이 호텔",
         roomName: "골져스 502호",
-        img: "/img/416-1.jpg",
         maxOccupancy: 4,
         score: [1,2,3,4,5,4],
         comment: ["많이별로", "아쉬웠음", "보통이요", "좋았어요", "최고네요", "꽤좋음"]
@@ -3935,7 +3523,6 @@ export default function ResortDate(){
         id: 417,
         hotelName: "파리 라데팡스 스테이 호텔",
         roomName: "디럭스 204호",
-        img: "/img/417-1.jpg",
         maxOccupancy: 2,
         score: [3,1,2,4,5,4],
         comment: ["보통이요", "실망했음", "아쉬웠음", "좋아요", "최고네요", "만족했음"]
@@ -3945,7 +3532,6 @@ export default function ResortDate(){
         id: 418,
         hotelName: "파리 오페라 하우스 클래식 호텔",
         roomName: "이그제큐티브 403호",
-        img: "/img/418-1.jpg",
         maxOccupancy: 4,
         score: [1,3,2,4,5,4],
         comment: ["별로였음", "보통이요", "조금아쉬", "좋았습니다", "최고네요", "꽤좋음"]
@@ -3954,7 +3540,6 @@ export default function ResortDate(){
         id: 419,
         hotelName: "파리 오페라 하우스 클래식 호텔",
         roomName: "스텐다드 301호",
-        img: "/img/419-1.jpg",
         maxOccupancy: 3,
         score: [2,1,3,4,5,4],
         comment: ["좀별루임", "실망했음", "보통이요", "좋았어요", "최고네요", "만족했음"]
@@ -3963,7 +3548,6 @@ export default function ResortDate(){
         id: 420,
         hotelName: "파리 오페라 하우스 클래식 호텔",
         roomName: "프리미어 505호",
-        img: "/img/420-1.jpg",
         maxOccupancy: 2,
         score: [3,2,1,4,4,5],
         comment: ["보통이요", "조금별루", "전혀별로", "좋아요", "좋았습니다", "최고였음"]
@@ -3986,7 +3570,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","드라이기","샤워실","TV","전기주전자"],
         otherService: ["카드결제","조식제공","무료주차"],
         score: 4.5,
-        scoreCount: 12320
+        scoreCount: 12320,
+        discount: 1
         },
 
         {
@@ -4004,7 +3589,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","냉장고","샤워실","TV"],
         otherService: ["카드결제","스프링클러","짐보관가능"],
         score: 3.5,
-        scoreCount: 6811
+        scoreCount: 6811,
+        discount: 0
         },
 
         {
@@ -4022,7 +3608,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","욕조","전기주전자","TV","냉장고"],
         otherService: ["조식제공","무료주차","카드결제"],
         score: 4.5,
-        scoreCount: 14952
+        scoreCount: 14952,
+        discount: 1
         },
 
         {
@@ -4040,7 +3627,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","냉장고"],
         otherService: ["카드결제","짐보관가능","스프링클러"],
         score: 3.0,
-        scoreCount: 4020
+        scoreCount: 4020,
+        discount: 1
         },
 
         {
@@ -4058,7 +3646,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","전기주전자","TV","냉장고"],
         otherService: ["무료주차","카드결제","조식제공"],
         score: 4.0,
-        scoreCount: 8733
+        scoreCount: 8733,
+        discount: 0
         },
 
         {
@@ -4076,7 +3665,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","드라이기","샤워실","냉장고","TV"],
         otherService: ["카드결제","스프링클러","무료주차"],
         score: 3.5,
-        scoreCount: 6911
+        scoreCount: 6911,
+        discount: 1
         },
 
         /* 한국 - 부산 */
@@ -4096,7 +3686,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","냉장고","TV","전기주전자"],
         otherService: ["카드결제","조식제공","무료주차"],
         score: 4.0,
-        scoreCount: 8221
+        scoreCount: 8221,
+        discount: 0
         },
 
         {
@@ -4114,7 +3705,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","욕조","샤워실","드라이기","TV"],
         otherService: ["카드결제","짐보관가능","조식제공"],
         score: 4.5,
-        scoreCount: 14300
+        scoreCount: 14300,
+        discount: 1
         },
 
         {
@@ -4132,7 +3724,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","냉장고","TV"],
         otherService: ["스프링클러","카드결제","짐보관가능"],
         score: 3.0,
-        scoreCount: 3890
+        scoreCount: 3890,
+        discount: 0
         },
 
         {
@@ -4150,7 +3743,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","드라이기","샤워실","TV","전기주전자"],
         otherService: ["무료주차","카드결제","스프링클러"],
         score: 3.5,
-        scoreCount: 6143
+        scoreCount: 6143,
+        discount: 1
         },
 
         {
@@ -4168,7 +3762,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","전기주전자","샤워실","냉장고","TV"],
         otherService: ["조식제공","무료주차","카드결제"],
         score: 4.0,
-        scoreCount: 9122
+        scoreCount: 9122,
+        discount: 1
         },
 
         {
@@ -4186,7 +3781,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","개인콘센트"],
         otherService: ["캠프파이어","카드결제","스프링클러"],
         score: 3.0,
-        scoreCount: 3770
+        scoreCount: 3770,
+        discount: 0
         },
 
         /* 한국 - 강릉 */
@@ -4206,7 +3802,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","냉장고","전기주전자"],
         otherService: ["카드결제","무료주차","조식제공"],
         score: 4.0,
-        scoreCount: 9101
+        scoreCount: 9101,
+        discount: 1
         },
 
         {
@@ -4224,7 +3821,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","냉장고"],
         otherService: ["짐보관가능","카드결제","스프링클러"],
         score: 3.0,
-        scoreCount: 4210
+        scoreCount: 4210,
+        discount: 0
         },
 
         {
@@ -4242,7 +3840,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","욕조","샤워실","TV","냉장고"],
         otherService: ["카드결제","무료주차","조식제공"],
         score: 4.5,
-        scoreCount: 13532
+        scoreCount: 13532,
+        discount: 0
         },
 
         {
@@ -4260,7 +3859,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","드라이기","샤워실","TV","전기주전자"],
         otherService: ["카드결제","스프링클러","무료주차"],
         score: 3.5,
-        scoreCount: 6120
+        scoreCount: 6120,
+        discount: 1
         },
 
         {
@@ -4278,7 +3878,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","전기주전자","TV","냉장고","샤워실"],
         otherService: ["카드결제","짐보관가능","조식제공"],
         score: 4.5,
-        scoreCount: 14321
+        scoreCount: 14321,
+        discount: 1
         },
 
         {
@@ -4296,7 +3897,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","개인콘센트"],
         otherService: ["캠프파이어","카드결제","스프링클러"],
         score: 3.0,
-        scoreCount: 4022
+        scoreCount: 4022,
+        discount: 0
         },
 
         /* 한국 - 속초 */
@@ -4315,7 +3917,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","전기주전자","TV","냉장고"],
         otherService: ["카드결제","무료주차","조식제공"],
         score: 4.0,
-        scoreCount: 8243
+        scoreCount: 8243,
+        discount: 1
         },
 
         {
@@ -4333,7 +3936,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","욕조","샤워실","드라이기","TV"],
         otherService: ["무료주차","카드결제","조식제공"],
         score: 4.5,
-        scoreCount: 13920
+        scoreCount: 13920,
+        discount: 1
         },
 
         {
@@ -4351,7 +3955,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","냉장고","TV"],
         otherService: ["카드결제","짐보관가능","스프링클러"],
         score: 3.0,
-        scoreCount: 3920
+        scoreCount: 3920,
+        discount: 0
         },
 
         {
@@ -4369,7 +3974,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","전기주전자","드라이기"],
         otherService: ["무료주차","카드결제","스프링클러"],
         score: 3.5,
-        scoreCount: 6022
+        scoreCount: 6022,
+        discount: 1
         },
 
         {
@@ -4387,7 +3993,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","냉장고","TV","전기주전자"],
         otherService: ["카드결제","짐보관가능","조식제공"],
         score: 4.5,
-        scoreCount: 14821
+        scoreCount: 14821,
+        discount: 1
         },
 
         {
@@ -4405,7 +4012,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","개인콘센트"],
         otherService: ["캠프파이어","카드결제","스프링클러"],
         score: 3.0,
-        scoreCount: 3801
+        scoreCount: 3801,
+        discount: 0
         },
 
         /* 한국 - 경주 */
@@ -4425,7 +4033,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","전기주전자","TV","냉장고"],
         otherService: ["카드결제","무료주차","조식제공"],
         score: 4.0,
-        scoreCount: 9011
+        scoreCount: 9011,
+        discount: 0
         },
 
         {
@@ -4443,7 +4052,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","욕조","샤워실","드라이기","TV"],
         otherService: ["무료주차","조식제공","카드결제"],
         score: 4.5,
-        scoreCount: 14012
+        scoreCount: 14012,
+        discount: 1
         },
 
         {
@@ -4461,7 +4071,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","냉장고","TV"],
         otherService: ["카드결제","짐보관가능","스프링클러"],
         score: 3.0,
-        scoreCount: 3711
+        scoreCount: 3711,
+        discount: 0
         },
 
         {
@@ -4479,7 +4090,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","드라이기","TV","전기주전자"],
         otherService: ["무료주차","카드결제","스프링클러"],
         score: 3.5,
-        scoreCount: 5903
+        scoreCount: 5903,
+        discount: 1
         },
 
         {
@@ -4497,7 +4109,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","냉장고","전기주전자"],
         otherService: ["카드결제","조식제공","짐보관가능"],
         score: 4.0,
-        scoreCount: 11021
+        scoreCount: 11021,
+        discount: 0
         },
 
         {
@@ -4515,7 +4128,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","개인콘센트"],
         otherService: ["캠프파이어","카드결제","스프링클러"],
         score: 3.0,
-        scoreCount: 4102
+        scoreCount: 4102,
+        discount: 1
         },
 
         /* 한국 - 여수 */
@@ -4535,7 +4149,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","전기주전자","냉장고"],
         otherService: ["카드결제","무료주차","조식제공"],
         score: 4.0,
-        scoreCount: 9321
+        scoreCount: 9321,
+        discount: 0
         },
 
         {
@@ -4553,7 +4168,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","욕조","샤워실","드라이기","TV"],
         otherService: ["무료주차","카드결제","조식제공"],
         score: 4.5,
-        scoreCount: 14410
+        scoreCount: 14410,
+        discount: 1
         },
 
         {
@@ -4571,7 +4187,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","냉장고","TV"],
         otherService: ["카드결제","짐보관가능","스프링클러"],
         score: 3.0,
-        scoreCount: 3611
+        scoreCount: 3611,
+        discount: 1
         },
 
         {
@@ -4589,7 +4206,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","드라이기","TV","냉장고"],
         otherService: ["무료주차","카드결제","스프링클러"],
         score: 3.5,
-        scoreCount: 5832
+        scoreCount: 5832,
+        discount: 1
         },
 
         {
@@ -4607,7 +4225,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","전기주전자","냉장고"],
         otherService: ["짐보관가능","카드결제","조식제공"],
         score: 4.0,
-        scoreCount: 11230
+        scoreCount: 11230,
+        discount: 1
         },
 
         {
@@ -4625,7 +4244,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","개인콘센트"],
         otherService: ["캠프파이어","카드결제","스프링클러"],
         score: 3.0,
-        scoreCount: 3987
+        scoreCount: 3987,
+        discount: 0
         },
 
         /* 한국 - 대전 */
@@ -4645,7 +4265,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","전기주전자","TV","냉장고","샤워실"],
         otherService: ["카드결제","무료주차","조식제공"],
         score: 4.0,
-        scoreCount: 9210
+        scoreCount: 9210,
+        discount: 1
         },
 
         {
@@ -4663,7 +4284,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","욕조","샤워실","TV","드라이기"],
         otherService: ["무료주차","카드결제","조식제공"],
         score: 4.5,
-        scoreCount: 14222
+        scoreCount: 14222,
+        discount: 1
         },
 
         {
@@ -4681,7 +4303,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","냉장고"],
         otherService: ["스프링클러","카드결제","짐보관가능"],
         score: 3.0,
-        scoreCount: 3521
+        scoreCount: 3521,
+        discount: 1
         },
 
         {
@@ -4699,7 +4322,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","TV","드라이기","샤워실","전기주전자"],
         otherService: ["무료주차","카드결제","스프링클러"],
         score: 3.5,
-        scoreCount: 5744
+        scoreCount: 5744,
+        discount: 0
         },
 
         {
@@ -4717,7 +4341,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","TV","샤워실","냉장고","전기주전자"],
         otherService: ["카드결제","조식제공","짐보관가능"],
         score: 4.0,
-        scoreCount: 11190
+        scoreCount: 11190,
+        discount: 1
         },
 
         {
@@ -4735,7 +4360,8 @@ export default function ResortDate(){
         roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","개인콘센트"],
         otherService: ["캠프파이어","카드결제","스프링클러"],
         score: 3.0,
-        scoreCount: 3650
+        scoreCount: 3650,
+        discount: 0
         },
 
         /* 한국 -광주  */
@@ -4754,7 +4380,8 @@ export default function ResortDate(){
         publicService: ["피트니스","레스토랑","편의점","라운지","엘리베이터","비즈니스센터"],
         otherService: ["카드결제","무료주차","조식제공"],
         score: 4.0,
-        scoreCount: 2471
+        scoreCount: 2471,
+        discount: 1
         },
         {
         id: 44,
@@ -4771,7 +4398,8 @@ export default function ResortDate(){
         publicService: ["레스토랑","사우나","편의점","바","라운지","엘리베이터"],
         otherService: ["스프링클러","카드결제","짐보관가능"],
         score: 3.5,
-        scoreCount: 5832
+        scoreCount: 5832,
+        discount: 1
         },
         {
         id: 45,
@@ -4788,7 +4416,8 @@ export default function ResortDate(){
         publicService: ["편의점","바","엘리베이터","비즈니스센터","건조기","바베큐"],
         otherService: ["카드결제","조식제공","무료주차"],
         score: 3.0,
-        scoreCount: 1140
+        scoreCount: 1140,
+        discount: 1
         },
         {
         id: 46,
@@ -4805,7 +4434,8 @@ export default function ResortDate(){
         publicService: ["레스토랑","사우나","편의점","라운지","엘리베이터","건조기"],
         otherService: ["스프링클러","카드결제","무료주차"],
         score: 4.5,
-        scoreCount: 8344
+        scoreCount: 8344,
+        discount: 0
         },
         {
         id: 47,
@@ -4822,7 +4452,8 @@ export default function ResortDate(){
         publicService: ["피트니스","레스토랑","실내수영장","라운지","엘리베이터","바"],
         otherService: ["카드결제","조식제공","짐보관가능"],
         score: 4.5,
-        scoreCount: 9040
+        scoreCount: 9040,
+        discount: 1
         },
         {
         id: 48,
@@ -4839,7 +4470,8 @@ export default function ResortDate(){
         publicService: ["편의점","라운지","엘리베이터","건조기","바베큐","비즈니스센터"],
         otherService: ["카드결제","무료주차","개인사물함"],
         score: 2.5,
-        scoreCount: 1988
+        scoreCount: 1988,
+        discount: 1
         },
 
         /* 한국-제주 */
@@ -4858,7 +4490,8 @@ export default function ResortDate(){
         publicService: ["실내수영장","야외수영장","레스토랑","피트니스","라운지","엘리베이터"],
         otherService: ["카드결제","조식제공","무료주차"],
         score: 4.5,
-        scoreCount: 12550
+        scoreCount: 12550,
+        discount: 0
         },
         {
         id: 50,
@@ -4875,7 +4508,8 @@ export default function ResortDate(){
         publicService: ["레스토랑","사우나","야외수영장","엘리베이터","라운지","바"],
         otherService: ["카드결제","스프링클러","짐보관가능"],
         score: 4.0,
-        scoreCount: 7894
+        scoreCount: 7894,
+        discount: 1
         },
         {
         id: 51,
@@ -4892,7 +4526,8 @@ export default function ResortDate(){
         publicService: ["편의점","엘리베이터","바베큐","건조기","라운지","사우나"],
         otherService: ["무료주차","카드결제","캠프파이어"],
         score: 3.5,
-        scoreCount: 3251
+        scoreCount: 3251,
+        discount: 0
         },
         {
         id: 52,
@@ -4909,7 +4544,8 @@ export default function ResortDate(){
         publicService: ["피트니스","레스토랑","실내수영장","엘리베이터","바","라운지"],
         otherService: ["카드결제","조식제공","무료주차"],
         score: 4.5,
-        scoreCount: 14770
+        scoreCount: 14770,
+        discount: 1
         },
         {
         id: 53,
@@ -4926,7 +4562,8 @@ export default function ResortDate(){
         publicService: ["편의점","라운지","엘리베이터","비즈니스센터","건조기","바베큐"],
         otherService: ["카드결제","개인사물함","조식제공"],
         score: 2.5,
-        scoreCount: 1750
+        scoreCount: 1750,
+        discount: 0
         },
         {
         id: 54,
@@ -4943,7 +4580,8 @@ export default function ResortDate(){
         publicService: ["바베큐","편의점","건조기","탈수기","라운지","사우나"],
         otherService: ["캠프파이어","카드결제","무료주차"],
         score: 1.5,
-        scoreCount: 1210
+        scoreCount: 1210,
+        discount: 1
         },
 
         /* 한국-포항 */
@@ -4962,7 +4600,8 @@ export default function ResortDate(){
         publicService: ["레스토랑","편의점","엘리베이터","라운지","바","비즈니스센터"],
         otherService: ["카드결제","무료주차","짐보관가능"],
         score: 3.5,
-        scoreCount: 3321
+        scoreCount: 3321,
+        discount: 1
         },
         {
         id: 56,
@@ -4979,7 +4618,8 @@ export default function ResortDate(){
         publicService: ["피트니스","실내수영장","야외수영장","레스토랑","라운지","엘리베이터"],
         otherService: ["카드결제","조식제공","무료주차"],
         score: 4.5,
-        scoreCount: 14980
+        scoreCount: 14980,
+        discount: 1
         },
         {
         id: 57,
@@ -4996,7 +4636,8 @@ export default function ResortDate(){
         publicService: ["편의점","라운지","바베큐","건조기","사우나","엘리베이터"],
         otherService: ["카드결제","개인사물함","무료주차"],
         score: 3.0,
-        scoreCount: 2984
+        scoreCount: 2984,
+        discount: 0
         },
         {
         id: 58,
@@ -5013,7 +4654,8 @@ export default function ResortDate(){
         publicService: ["레스토랑","편의점","엘리베이터","야외수영장","바","라운지"],
         otherService: ["카드결제","조식제공","무료주차"],
         score: 3.5,
-        scoreCount: 5900
+        scoreCount: 5900,
+        discount: 0
         },
         {
         id: 59,
@@ -5030,7 +4672,8 @@ export default function ResortDate(){
         publicService: ["바베큐","편의점","탈수기","건조기","라운지","사우나"],
         otherService: ["캠프파이어","무료주차","카드결제"],
         score: 1.5,
-        scoreCount: 1601
+        scoreCount: 1601,
+        discount: 1
         },
         {
         id: 60,
@@ -5047,7 +4690,8 @@ export default function ResortDate(){
         publicService: ["피트니스","레스토랑","실내수영장","라운지","엘리베이터","바"],
         otherService: ["조식제공","카드결제","무료주차"],
         score: 4.0,
-        scoreCount: 8744
+        scoreCount: 8744,
+        discount: 0
         },
         /* 일본 - 도쿄 */ 
         {
@@ -5065,7 +4709,8 @@ export default function ResortDate(){
             publicService: ["레스토랑","라운지","편의점","엘리베이터","사우나","비즈니스센터","바"],
             otherService: ["조식제공","무료주차","카드결제","짐보관가능"],
             score: 4.5,
-            scoreCount: 1344
+            scoreCount: 1344,
+            discount: 1
         },
         {
             id: 62,
@@ -5082,7 +4727,8 @@ export default function ResortDate(){
             publicService: ["피트니스","레스토랑","사우나","라운지","엘리베이터","야외수영장"],
             otherService: ["스프링클러","카드결제","조식제공","반려견동반"],
             score: 3.5,
-            scoreCount: 1022
+            scoreCount: 1022,
+            discount: 0
         },
         {
             id: 63,
@@ -5099,7 +4745,8 @@ export default function ResortDate(){
             publicService: ["레스토랑","편의점","엘리베이터","바","비즈니스센터","건조기"],
             otherService: ["무료주차","카드결제","짐보관가능","개인사물함"],
             score: 4.0,
-            scoreCount: 5377
+            scoreCount: 5377,
+            discount: 1
         },
         {
             id: 64,
@@ -5116,7 +4763,8 @@ export default function ResortDate(){
             publicService: ["피트니스","엘리베이터","라운지","편의점","바","사우나"],
             otherService: ["스프링클러","카드결제","짐보관가능"],
             score: 2.5,
-            scoreCount: 2044
+            scoreCount: 2044,
+            discount: 0
         },
         {
             id: 65,
@@ -5133,7 +4781,8 @@ export default function ResortDate(){
             publicService: ["바베큐","편의점","라운지","건조기","탈수기","야외수영장","엘리베이터"],
             otherService: ["캠프파이어","조식제공","무료주차"],
             score: 4.0,
-            scoreCount: 9921
+            scoreCount: 9921,
+            discount: 1
         },
         {
             id: 66,
@@ -5150,7 +4799,8 @@ export default function ResortDate(){
             publicService: ["피트니스","레스토랑","엘리베이터","비즈니스센터","편의점","라운지"],
             otherService: ["무료주차","카드결제","스프링클러","짐보관가능"],
             score: 5.0,
-            scoreCount: 14888
+            scoreCount: 14888,
+            discount: 1
         },
         {
             id: 67,
@@ -5167,7 +4817,8 @@ export default function ResortDate(){
             publicService: ["사우나","엘리베이터","라운지","바","편의점","건조기"],
             otherService: ["조식제공","카드결제","무료주차"],
             score: 3.0,
-            scoreCount: 3140
+            scoreCount: 3140,
+            discount: 1
         },
         {
             id: 68,
@@ -5184,7 +4835,8 @@ export default function ResortDate(){
             publicService: ["레스토랑","사우나","엘리베이터","편의점","야외수영장","라운지"],
             otherService: ["카드결제","무료주차","짐보관가능"],
             score: 4.5,
-            scoreCount: 6433
+            scoreCount: 6433,
+            discount: 1
         },
 
         /* 일본 - 삿포로 */
@@ -5204,7 +4856,8 @@ export default function ResortDate(){
             publicService: ["피트니스","사우나","편의점","라운지","엘리베이터","비즈니스센터"],
             otherService: ["조식제공","무료주차","카드결제"],
             score: 3.5,
-            scoreCount: 2055
+            scoreCount: 2055,
+            discount: 0
         },
         {
             id: 70,
@@ -5221,7 +4874,8 @@ export default function ResortDate(){
             publicService: ["레스토랑","사우나","라운지","엘리베이터","건조기","편의점"],
             otherService: ["무료주차","짐보관가능","스프링클러"],
             score: 4.0,
-            scoreCount: 11300
+            scoreCount: 11300,
+            discount: 1
         },
         {
             id: 71,
@@ -5238,7 +4892,8 @@ export default function ResortDate(){
             publicService: ["바베큐","편의점","사우나","라운지","탈수기","건조기"],
             otherService: ["캠프파이어","무료주차","카드결제"],
             score: 2.5,
-            scoreCount: 1999
+            scoreCount: 1999,
+            discount: 1
         },
         {
             id: 72,
@@ -5255,7 +4910,8 @@ export default function ResortDate(){
             publicService: ["피트니스","레스토랑","사우나","엘리베이터","라운지","편의점"],
             otherService: ["조식제공","카드결제","무료주차"],
             score: 5.0,
-            scoreCount: 14777
+            scoreCount: 14777,
+            discount: 0
         },
         {
             id: 73,
@@ -5272,7 +4928,8 @@ export default function ResortDate(){
             publicService: ["레스토랑","라운지","피트니스","편의점","비즈니스센터","엘리베이터"],
             otherService: ["카드결제","짐보관가능","무료주차"],
             score: 3.0,
-            scoreCount: 3321
+            scoreCount: 3321,
+            discount: 1
         },
         {
             id: 74,
@@ -5289,7 +4946,8 @@ export default function ResortDate(){
             publicService: ["야외수영장","편의점","바","엘리베이터","라운지","비즈니스센터"],
             otherService: ["카드결제","조식제공","스프링클러"],
             score: 4.5,
-            scoreCount: 5022
+            scoreCount: 5022,
+            discount: 1
         },
         {
             id: 75,
@@ -5306,7 +4964,8 @@ export default function ResortDate(){
             publicService: ["엘리베이터","편의점","건조기","라운지","사우나","바베큐"],
             otherService: ["짐보관가능","카드결제","무료주차"],
             score: 1.5,
-            scoreCount: 7811
+            scoreCount: 7811,
+            discount: 0
         },
         {
             id: 76,
@@ -5323,7 +4982,8 @@ export default function ResortDate(){
             publicService: ["라운지","엘리베이터","사우나","편의점","비즈니스센터","바"],
             otherService: ["무료주차","조식제공","카드결제"],
             score: 4.0,
-            scoreCount: 6900
+            scoreCount: 6900,
+            discount: 1
         },
         
         /* 미국 - 로스앤젤레스 */
@@ -5342,7 +5002,8 @@ export default function ResortDate(){
             publicService: ["레스토랑","피트니스","사우나","라운지","편의점","엘리베이터"],
             otherService: ["무료주차","카드결제","조식제공"],
             score: 4.5,
-            scoreCount: 10222
+            scoreCount: 10222,
+            discount: 1
         },
         {
             id: 78,
@@ -5359,7 +5020,8 @@ export default function ResortDate(){
             publicService: ["야외수영장","라운지","레스토랑","바","엘리베이터","편의점"],
             otherService: ["카드결제","조식제공","짐보관가능"],
             score: 5.0,
-            scoreCount: 14110
+            scoreCount: 14110,
+            discount: 1
         },
         {
             id: 79,
@@ -5376,7 +5038,8 @@ export default function ResortDate(){
             publicService: ["편의점","라운지","피트니스","엘리베이터","바","건조기"],
             otherService: ["스프링클러","무료주차","카드결제"],
             score: 2.5,
-            scoreCount: 3444
+            scoreCount: 3444,
+            discount: 0
         },
         {
             id: 80,
@@ -5393,7 +5056,8 @@ export default function ResortDate(){
             publicService: ["피트니스","사우나","편의점","라운지","엘리베이터","비즈니스센터"],
             otherService: ["무료주차","조식제공","짐보관가능"],
             score: 4.0,
-            scoreCount: 8801
+            scoreCount: 8801,
+            discount: 1
         },
         {
             id: 81,
@@ -5410,7 +5074,8 @@ export default function ResortDate(){
             publicService: ["바베큐","편의점","탈수기","건조기","라운지","사우나"],
             otherService: ["캠프파이어","무료주차","카드결제"],
             score: 1.5,
-            scoreCount: 2333
+            scoreCount: 2333,
+            discount: 1
         },
         {
             id: 82,
@@ -5427,7 +5092,8 @@ export default function ResortDate(){
             publicService: ["레스토랑","라운지","편의점","엘리베이터","비즈니스센터","바"],
             otherService: ["카드결제","조식제공","무료주차"],
             score: 4.5,
-            scoreCount: 6544
+            scoreCount: 6544,
+            discount: 0
         },
         {
             id: 83,
@@ -5444,7 +5110,8 @@ export default function ResortDate(){
             publicService: ["피트니스","사우나","라운지","바","레스토랑","엘리베이터"],
             otherService: ["짐보관가능","무료주차","카드결제"],
             score: 5.0,
-            scoreCount: 13990
+            scoreCount: 13990,
+            discount: 1
         },
         {
             id: 84,
@@ -5461,7 +5128,8 @@ export default function ResortDate(){
             publicService: ["편의점","라운지","피트니스","사우나","건조기","엘리베이터"],
             otherService: ["조식제공","카드결제","무료주차"],
             score: 3.5,
-            scoreCount: 4421
+            scoreCount: 4421,
+            discount: 1
         },
 
         /* 미국 - 뉴욕 */
@@ -5481,7 +5149,8 @@ export default function ResortDate(){
             publicService: ["레스토랑","비즈니스센터","엘리베이터","라운지","편의점","사우나"],
             otherService: ["카드결제","무료주차","짐보관가능"],
             score: 5.0,
-            scoreCount: 15000
+            scoreCount: 15000,
+            discount: 0
         },
         {
             id: 86,
@@ -5498,7 +5167,8 @@ export default function ResortDate(){
             publicService: ["라운지","레스토랑","야외수영장","편의점","비즈니스센터","바"],
             otherService: ["카드결제","조식제공","무료주차"],
             score: 4.0,
-            scoreCount: 9333
+            scoreCount: 9333,
+            discount: 1
         },
         {
             id: 87,
@@ -5515,7 +5185,8 @@ export default function ResortDate(){
             publicService: ["피트니스","편의점","라운지","사우나","엘리베이터","건조기"],
             otherService: ["카드결제","무료주차","짐보관가능"],
             score: 2.5,
-            scoreCount: 3003
+            scoreCount: 3003,
+            discount: 1
         },
         {
             id: 88,
@@ -5532,7 +5203,8 @@ export default function ResortDate(){
             publicService: ["레스토랑","라운지","사우나","엘리베이터","편의점","비즈니스센터"],
             otherService: ["카드결제","짐보관가능","조식제공"],
             score: 4.5,
-            scoreCount: 11010
+            scoreCount: 11010,
+            discount: 1
         },
         {
             id: 89,
@@ -5549,7 +5221,8 @@ export default function ResortDate(){
             publicService: ["바베큐","건조기","편의점","라운지","사우나","탈수기"],
             otherService: ["캠프파이어","무료주차","카드결제"],
             score: 1.5,
-            scoreCount: 2800
+            scoreCount: 2800,
+            discount: 1
         },
         {
             id: 90,
@@ -5566,7 +5239,8 @@ export default function ResortDate(){
             publicService: ["피트니스","라운지","레스토랑","편의점","사우나","엘리베이터"],
             otherService: ["무료주차","조식제공","카드결제"],
             score: 4.0,
-            scoreCount: 6200
+            scoreCount: 6200,
+            discount: 0
         },
         {
             id: 91,
@@ -5583,7 +5257,8 @@ export default function ResortDate(){
             publicService: ["레스토랑","라운지","피트니스","편의점","건조기","사우나"],
             otherService: ["무료주차","카드결제","짐보관가능"],
             score: 3.5,
-            scoreCount: 5511
+            scoreCount: 5511,
+            discount: 1
         },
         {
             id: 92,
@@ -5600,7 +5275,8 @@ export default function ResortDate(){
             publicService: ["편의점","라운지","피트니스","사우나","엘리베이터","바"],
             otherService: ["무료주차","카드결제","조식제공"],
             score: 2.5,
-            scoreCount: 3100
+            scoreCount: 3100,
+            discount: 1
         },
 
         /* 미국 - 괌 */
@@ -5620,7 +5296,8 @@ export default function ResortDate(){
             publicService: ["야외수영장","라운지","레스토랑","편의점","바","엘리베이터"],
             otherService: ["조식제공","카드결제","무료주차"],
             score: 4.0,
-            scoreCount: 9011
+            scoreCount: 9011,
+            discount: 1
         },
         {
             id: 94,
@@ -5637,7 +5314,8 @@ export default function ResortDate(){
             publicService: ["라운지","피트니스","사우나","편의점","엘리베이터","바"],
             otherService: ["무료주차","짐보관가능","카드결제"],
             score: 3.5,
-            scoreCount: 4022
+            scoreCount: 4022,
+            discount: 1
         },
         {
             id: 95,
@@ -5654,7 +5332,8 @@ export default function ResortDate(){
             publicService: ["야외수영장","레스토랑","라운지","사우나","비즈니스센터","편의점"],
             otherService: ["무료주차","조식제공","카드결제"],
             score: 5.0,
-            scoreCount: 13400
+            scoreCount: 13400,
+            discount: 1
         },
         {
             id: 96,
@@ -5671,7 +5350,8 @@ export default function ResortDate(){
             publicService: ["편의점","라운지","탈수기","건조기","사우나","바베큐"],
             otherService: ["무료주차","카드결제","캠프파이어"],
             score: 1.5,
-            scoreCount: 2222
+            scoreCount: 2222,
+            discount: 1
         },
         {
             id: 97,
@@ -5688,7 +5368,8 @@ export default function ResortDate(){
             publicService: ["라운지","레스토랑","피트니스","사우나","엘리베이터","편의점"],
             otherService: ["무료주차","조식제공","카드결제"],
             score: 4.0,
-            scoreCount: 5500
+            scoreCount: 5500,
+            discount: 1
         },
         {
             id: 98,
@@ -5705,7 +5386,8 @@ export default function ResortDate(){
             publicService: ["바베큐","라운지","편의점","탈수기","사우나","건조기"],
             otherService: ["무료주차","카드결제","캠프파이어"],
             score: 2.0,
-            scoreCount: 3101
+            scoreCount: 3101,
+            discount: 1
         },
         {
             id: 99,
@@ -5722,7 +5404,8 @@ export default function ResortDate(){
             publicService: ["레스토랑","라운지","엘리베이터","사우나","편의점","비즈니스센터"],
             otherService: ["무료주차","카드결제","조식제공"],
             score: 4.0,
-            scoreCount: 7700
+            scoreCount: 7700,
+            discount: 0
         },
         {
             id: 100,
@@ -5739,7 +5422,8 @@ export default function ResortDate(){
             publicService: ["라운지","편의점","사우나","엘리베이터","바","건조기"],
             otherService: ["카드결제","무료주차","짐보관가능"],
             score: 2.5,
-            scoreCount: 4322
+            scoreCount: 4322,
+            discount: 1
         },
         /* 중국 - 장가계 */
 
@@ -5758,7 +5442,8 @@ export default function ResortDate(){
             publicService: ["피트니스","레스토랑","사우나","실내수영장","편의점","라운지","엘리베이터"],
             otherService: ["카드결제","무료주차","조식제공","짐보관가능"],
             score: 4.0,
-            scoreCount: 8293
+            scoreCount: 8293,
+            discount: 1
         },
         {
             id: 102,
@@ -5775,7 +5460,8 @@ export default function ResortDate(){
             publicService: ["레스토랑","실내수영장","야외수영장","편의점","비즈니스센터","바"],
             otherService: ["무료주차","카드결제","스프링클러"],
             score: 3.5,
-            scoreCount: 11294
+            scoreCount: 11294,
+            discount: 1
         },
         {
             id: 103,
@@ -5792,7 +5478,8 @@ export default function ResortDate(){
             publicService: ["피트니스","편의점","엘리베이터","바베큐","바","라운지"],
             otherService: ["조식제공","카드결제","짐보관가능"],
             score: 4.5,
-            scoreCount: 14521
+            scoreCount: 14521,
+            discount: 1
         },
         {
             id: 104,
@@ -5809,7 +5496,8 @@ export default function ResortDate(){
             publicService: ["사우나","실내수영장","야외수영장","편의점","비즈니스센터","라운지"],
             otherService: ["카드결제","무료주차","조식제공","반려견동반"],
             score: 4.5,
-            scoreCount: 12012
+            scoreCount: 12012,
+            discount: 0
         },
         {
             id: 105,
@@ -5826,7 +5514,8 @@ export default function ResortDate(){
             publicService: ["야외수영장","편의점","바베큐","바","라운지","건조기"],
             otherService: ["캠프파이어","조식제공","카드결제"],
             score: 3.0,
-            scoreCount: 1003
+            scoreCount: 1003,
+            discount: 1
         },
         {
             id: 106,
@@ -5843,7 +5532,8 @@ export default function ResortDate(){
             publicService: ["피트니스","사우나","실내수영장","편의점","비즈니스센터","라운지","엘리베이터"],
             otherService: ["무료주차","카드결제","조식제공"],
             score: 4.5,
-            scoreCount: 14933
+            scoreCount: 14933,
+            discount: 1
         },
         {
             id: 107,
@@ -5860,7 +5550,8 @@ export default function ResortDate(){
             publicService: ["편의점","바베큐","야외수영장","바","라운지","엘리베이터"],
             otherService: ["카드결제","짐보관가능","조식제공"],
             score: 2.5,
-            scoreCount: 5732
+            scoreCount: 5732,
+            discount: 1
         },
         {
             id: 108,
@@ -5877,7 +5568,8 @@ export default function ResortDate(){
             publicService: ["피트니스","실내수영장","사우나","편의점","바","라운지"],
             otherService: ["무료주차","카드결제","조식제공","스프링클러"],
             score: 4.0,
-            scoreCount: 13822
+            scoreCount: 13822,
+            discount: 0
         },
 
         /* 중국 - 상하이 */
@@ -5898,7 +5590,8 @@ export default function ResortDate(){
             publicService: ["피트니스","레스토랑","사우나","비즈니스센터","편의점","엘리베이터"],
             otherService: ["카드결제","무료주차","조식제공"],
             score: 4.0,
-            scoreCount: 12233
+            scoreCount: 12233,
+            discount: 1
         },
         {
             id: 110,
@@ -5915,7 +5608,8 @@ export default function ResortDate(){
             publicService: ["레스토랑","편의점","바","라운지","건조기","엘리베이터"],
             otherService: ["카드결제","짐보관가능","조식제공"],
             score: 3.5,
-            scoreCount: 10321
+            scoreCount: 10321,
+            discount: 1
         },
         {
             id: 111,
@@ -5932,7 +5626,8 @@ export default function ResortDate(){
             publicService: ["피트니스","편의점","라운지","사우나","바베큐","엘리베이터"],
             otherService: ["조식제공","카드결제","스프링클러"],
             score: 3.0,
-            scoreCount: 7322
+            scoreCount: 7322,
+            discount: 1
         },
         {
             id: 112,
@@ -5949,7 +5644,8 @@ export default function ResortDate(){
             publicService: ["실내수영장","사우나","레스토랑","라운지","비즈니스센터","편의점"],
             otherService: ["무료주차","카드결제","조식제공"],
             score: 4.5,
-            scoreCount: 14019
+            scoreCount: 14019,
+            discount: 1
         },
         {
             id: 113,
@@ -5966,7 +5662,8 @@ export default function ResortDate(){
             publicService: ["야외수영장","바","라운지","편의점","바베큐","건조기"],
             otherService: ["카드결제","짐보관가능","캠프파이어"],
             score: 2.5,
-            scoreCount: 5543
+            scoreCount: 5543,
+            discount: 1
         },
         {
             id: 114,
@@ -5983,7 +5680,8 @@ export default function ResortDate(){
             publicService: ["피트니스","레스토랑","사우나","편의점","라운지","엘리베이터"],
             otherService: ["무료주차","카드결제","조식제공"],
             score: 4.0,
-            scoreCount: 13322
+            scoreCount: 13322,
+            discount: 1
         },
         {
             id: 115,
@@ -6000,7 +5698,8 @@ export default function ResortDate(){
             publicService: ["실내수영장","사우나","비즈니스센터","레스토랑","편의점","엘리베이터"],
             otherService: ["무료주차","조식제공","카드결제"],
             score: 4.5,
-            scoreCount: 14722
+            scoreCount: 14722,
+            discount: 0
         },
         {
             id: 116,
@@ -6017,7 +5716,8 @@ export default function ResortDate(){
             publicService: ["라운지","편의점","사우나","바","바베큐","엘리베이터"],
             otherService: ["카드결제","조식제공","무료주차"],
             score: 3.5,
-            scoreCount: 9088
+            scoreCount: 9088,
+            discount: 1
         },
 
 
@@ -6040,7 +5740,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","욕실용품","에어컨","드라이기","샤워실","TV","냉장고"],
             otherService: ["카드결제","조식제공","무료주차"],
             score: 4.5,
-            scoreCount: 13240
+            scoreCount: 13240,
+            discount: 1
         },
         {
             id: 118,
@@ -6057,7 +5758,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","에어컨","드라이기","TV","욕조","전기주전자","샤워실"],
             otherService: ["카드결제","짐보관가능","조식제공"],
             score: 4.0,
-            scoreCount: 9720
+            scoreCount: 9720,
+            discount: 1
         },
         {
             id: 119,
@@ -6074,7 +5776,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","욕실용품","에어컨","드라이기","TV","금연"],
             otherService: ["카드결제","스프링클러","조식제공"],
             score: 3.5,
-            scoreCount: 4210
+            scoreCount: 4210,
+            discount: 0
         },
         {
             id: 120,
@@ -6091,7 +5794,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","욕실용품","에어컨","드라이기","욕조","TV","전기주전자"],
             otherService: ["카드결제","무료주차","짐보관가능"],
             score: 4.5,
-            scoreCount: 15880
+            scoreCount: 15880,
+            discount: 1
         },
         {
             id: 121,
@@ -6108,7 +5812,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","샤워실","에어컨","드라이기","TV","전기주전자","금연"],
             otherService: ["카드결제","무료주차","조식제공"],
             score: 4.0,
-            scoreCount: 11200
+            scoreCount: 11200,
+            discount: 1
         },
         {
             id: 122,
@@ -6125,7 +5830,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","냉장고","드라이기"],
             otherService: ["카드결제","스프링클러","짐보관가능"],
             score: 3.0,
-            scoreCount: 6840
+            scoreCount: 6840,
+            discount: 0
         },
         {
             id: 123,
@@ -6142,7 +5848,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","욕조","에어컨","드라이기","TV","샤워실","금연"],
             otherService: ["카드결제","무료주차","조식제공"],
             score: 4.5,
-            scoreCount: 14300
+            scoreCount: 14300,
+            discount: 1
         },
         {
             id: 124,
@@ -6159,7 +5866,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","드라이기","전기주전자"],
             otherService: ["카드결제","짐보관가능","무료주차"],
             score: 4.0,
-            scoreCount: 10950
+            scoreCount: 10950,
+            discount: 1
         },
 
         /* 이탈리아 - 베네치아 */
@@ -6178,7 +5886,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","욕실용품","에어컨","드라이기","TV","욕조","냉장고"],
             otherService: ["카드결제","유료조식","짐보관가능"],
             score: 4.5,
-            scoreCount: 13820
+            scoreCount: 13820,
+            discount: 0
         },
         {
             id: 126,
@@ -6195,7 +5904,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","욕실용품","에어컨","드라이기","샤워실","TV","전기주전자"],
             otherService: ["카드결제","무료주차","조식제공"],
             score: 4.0,
-            scoreCount: 11400
+            scoreCount: 11400,
+            discount: 1
         },
         {
             id: 127,
@@ -6212,7 +5922,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","샤워실","에어컨","드라이기","TV","냉장고","금연"],
             otherService: ["카드결제","짐보관가능","스프링클러"],
             score: 3.5,
-            scoreCount: 6820
+            scoreCount: 6820,
+            discount: 1
         },
         {
             id: 128,
@@ -6229,7 +5940,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","욕실용품","에어컨","드라이기","욕조","TV","개인콘센트"],
             otherService: ["카드결제","조식제공","무료주차"],
             score: 4.5,
-            scoreCount: 15210
+            scoreCount: 15210,
+            discount: 1
         },
         {
             id: 129,
@@ -6246,7 +5958,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","욕실용품","에어컨","샤워실","TV","드라이기"],
             otherService: ["카드결제","스프링클러","조식제공"],
             score: 3.0,
-            scoreCount: 5020
+            scoreCount: 5020,
+            discount: 1
         },
         {
             id: 130,
@@ -6263,7 +5976,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","욕실용품","에어컨","드라이기","전기주전자","TV","냉장고"],
             otherService: ["카드결제","짐보관가능","무료주차"],
             score: 4.0,
-            scoreCount: 10300
+            scoreCount: 10300,
+            discount: 1
         },
         {
             id: 131,
@@ -6280,7 +5994,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","샤워실","에어컨","드라이기","TV","전기주전자","금연"],
             otherService: ["카드결제","무료주차","조식제공"],
             score: 4.0,
-            scoreCount: 9480
+            scoreCount: 9480,
+            discount: 0
         },
         {
             id: 132,
@@ -6297,7 +6012,8 @@ export default function ResortDate(){
             roomservice: ["무선인터넷","욕조","에어컨","샤워실","TV","드라이기","전기주전자"],
             otherService: ["카드결제","조식제공","짐보관가능"],
             score: 4.5,
-            scoreCount: 15600
+            scoreCount: 15600,
+            discount: 1
         },
         
 
@@ -6318,7 +6034,10 @@ export default function ResortDate(){
             quality: 4,
             publicService: ["레스토랑","피트니스","바","라운지","엘리베이터","비즈니스센터","편의점"],
             roomservice: ["무선인터넷","욕실용품","샤워실","드라이기","전기주전자","TV","냉장고"],
-            otherService: ["카드결제","조식제공","무료주차","짐보관가능"]
+            otherService: ["카드결제","조식제공","무료주차","짐보관가능"],
+            score: 4.5,
+            scoreCount: 12500,
+            discount: 1
         },
         {
             id: 134,
@@ -6333,7 +6052,10 @@ export default function ResortDate(){
             quality: 4,
             publicService: ["엘리베이터","편의점","레스토랑","피트니스","바","비즈니스센터","사우나"],
             roomservice: ["무선인터넷","샤워실","에어컨","욕조","금연","냉장고","개인콘센트"],
-            otherService: ["카드결제","조식제공","스프링클러"]
+            otherService: ["카드결제","조식제공","스프링클러"],
+            score: 4,
+            scoreCount: 8500,
+            discount: 0
         },
         {
             id: 135,
@@ -6348,7 +6070,10 @@ export default function ResortDate(){
             quality: 5,
             publicService: ["사우나","피트니스","레스토랑","바","비즈니스센터","실내수영장"],
             roomservice: ["무선인터넷","샤워실","욕실용품","드라이기","에어컨","개인콘센트","욕조","TV"],
-            otherService: ["조식제공","무료주차","스프링클러","카드결제"]
+            otherService: ["조식제공","무료주차","스프링클러","카드결제"],
+            score: 5,
+            scoreCount: 14500,
+            discount: 1
         },
         {
             id: 136,
@@ -6363,7 +6088,10 @@ export default function ResortDate(){
             quality: 3,
             publicService: ["라운지","엘리베이터","편의점","건조기","레스토랑","사우나"],
             roomservice: ["무선인터넷","샤워실","금연","냉장고","TV","욕실용품","에어컨"],
-            otherService: ["개인사물함","카드결제","스프링클러"]
+            otherService: ["개인사물함","카드결제","스프링클러"],
+            score: 3,
+            scoreCount: 3500,
+            discount: 0
         },
         {
             id: 137,
@@ -6378,7 +6106,10 @@ export default function ResortDate(){
             quality: 4,
             publicService: ["실내수영장","레스토랑","라운지","편의점","비즈니스센터","사우나","탈수기"],
             roomservice: ["무선인터넷","욕실용품","샤워실","전기주전자","에어컨","TV"],
-            otherService: ["조식제공","무료주차","카드결제"]
+            otherService: ["조식제공","무료주차","카드결제"],
+            score: 4,
+            scoreCount: 5600,
+            discount: 0
         },
         {
             id: 138,
@@ -6393,7 +6124,10 @@ export default function ResortDate(){
             quality: 5,
             publicService: ["레스토랑","바","실내수영장","피트니스","사우나","라운지"],
             roomservice: ["무선인터넷","욕조","TV","냉장고","개인콘센트","욕실용품","드라이기"],
-            otherService: ["카드결제","무료주차","스프링클러","짐보관가능"]
+            otherService: ["카드결제","무료주차","스프링클러","짐보관가능"],
+            score: 4.5,
+            scoreCount: 7900,
+            discount: 1
         },
         {
             id: 139,
@@ -6408,7 +6142,10 @@ export default function ResortDate(){
             quality: 4,
             publicService: ["엘리베이터","피트니스","레스토랑","바","편의점","건조기"],
             roomservice: ["무선인터넷","샤워실","냉장고","전기주전자","금연","TV"],
-            otherService: ["조식제공","카드결제","스프링클러"]
+            otherService: ["조식제공","카드결제","스프링클러"],
+            score: 4,
+            scoreCount: 7750,
+            discount: 0
         },
         {
             id: 140,
@@ -6423,9 +6160,16 @@ export default function ResortDate(){
             quality: 4,
             publicService: ["레스토랑","라운지","비즈니스센터","편의점","바베큐","피트니스"],
             roomservice: ["무선인터넷","샤워실","냉장고","전기주전자","욕실용품","드라이기","개인콘센트"],
-            otherService: ["무료주차","카드결제","조식제공"]
+            otherService: ["무료주차","카드결제","조식제공"],
+            score: 4.5,
+            scoreCount: 9935,
+            discount: 1
         }
     ];
 
-    
+    return(
+        <ResortDateContext.Provider value={{RoomData, HotelData}}>
+            {children}
+        </ResortDateContext.Provider>
+    );
 }
