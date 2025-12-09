@@ -1,4 +1,5 @@
 import { useState,useEffect } from "react";
+import { useContext } from "react";
 import '../Page/Room.css'
 
 export default function Room(){
@@ -8,7 +9,8 @@ export default function Room(){
     const filter_otherService = [{id:27,name:'스프링클러'},{id:28,name:'반려견동반'},{id:29,name:'카드결제'},{id:30,name:'짐보관가능'},{id:31,name:'개인사물함'},{id:32,name:'픽업서비스'},{id:33,name:'캠프파이어'},{id:34,name:'무료주차'},{id:35,name:'조식제공'}]
     /* 필터 된 목록 */
     const [myFilter,setMyfilter] = useState([])
-    //
+    // 가져오는 호텔, 개실 데이터
+    const {HotelData,RoomData} = useContext(ResortDateContext);
     //
     //
     /* 필터의 항목 클릭시 적용 함수 */

@@ -18,6 +18,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Main />} />
           <Route path='/detail/:id' element={<Detail />}/>
+          <Route path='/room' element={<Room />}/>
         </Routes>
       </ResortDate>
     </BrowserRouter>
