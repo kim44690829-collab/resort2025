@@ -1,6 +1,7 @@
 import { useState,useEffect } from "react";
 import { useContext } from "react";
 import '../Page/Room.css'
+import { ResortDateContext } from '../Api/ResortDate';
 
 export default function Room(){
     /* 필터 목록 */
@@ -9,30 +10,58 @@ export default function Room(){
     const filter_otherService = [{id:27,name:'스프링클러'},{id:28,name:'반려견동반'},{id:29,name:'카드결제'},{id:30,name:'짐보관가능'},{id:31,name:'개인사물함'},{id:32,name:'픽업서비스'},{id:33,name:'캠프파이어'},{id:34,name:'무료주차'},{id:35,name:'조식제공'}]
     /* 필터 된 목록 */
     const [myFilter,setMyfilter] = useState([])
+    // 필터 된 호텔 항목
+    const [myhotel,setmyhotel] = useState([])
+
     // 가져오는 호텔, 개실 데이터
     const {HotelData,RoomData} = useContext(ResortDateContext);
     //
     //
+    useEffect(()=>{
+        console.log(myFilter,'현재 마이필터')
+        console.log(myhotel,'현재 마이호텔')
+        const myFilterCopy = [...myFilter]
+
+        const selectfilter01 = myFilterCopy.filter((f)=>f.id>0 && f.id <14) // publicService 항목 구분
+        const selectfilter02 = myFilterCopy.filter((f)=>f.id>13 && f.id <27) // roomservice 항목 구분
+        const selectfilter03 = myFilterCopy.filter((f)=>f.id>26 && f.id <=35) // otherService 항목 구분
+
+        const filterHotel = HotelData.filter((data)=>{ // 각 항목별로 만족하는것 필터링
+            const f1 = selectfilter02.every((filter)=>data.roomservice.includes(filter.name)); 
+            const f2 = selectfilter01.every((filter)=>data.publicService.includes(filter.name)); 
+            const f3 = selectfilter03.every((filter)=>data.otherService.includes(filter.name)); 
+            return f1&&f2&&f3
+        })
+       
+        //console.log(filterHotel)
+        
+        setmyhotel(filterHotel)
+    },[myFilter])
     /* 필터의 항목 클릭시 적용 함수 */
     const filterHandeler=(item)=>{
         const myFilterCopy = [...myFilter]
-        console.log(myFilterCopy.findIndex((myFilterCopy)=>myFilterCopy.id === item.id))
+        //console.log(myFilterCopy.findIndex((myFilterCopy)=>myFilterCopy.id === item.id))
         if(myFilterCopy.findIndex((myFilterCopy)=>myFilterCopy.id === item.id) === -1){// 중복 확인용
             myFilterCopy.push(item)
             setMyfilter(myFilterCopy)
         }
-        console.log(myFilter)
+        
+        console.log(HotelData[0].roomservice)
+        //const filterHotel = HotelData.filter((data)=>myFilterCopy.every((filter)=>data.roomservice.includes(filter.name)))
+        //console.log(filterHotel)
+        //setmyhotel(filterHotel)
+        console.log(myFilter,'추가 직후 마이필터')
     }
+
+
     /* 필터 해제 함수 */
     const removeFilter =(item)=>{
-        //console.log(item)
-        //console.log(item.id)
         const myFilterCopy = [...myFilter]
         const dleFilter = myFilterCopy.filter((myFilterCopy)=>myFilterCopy.id !== item.id) // filter을 이용한 삭제
-        //console.log(dleFilter)
         setMyfilter(dleFilter)
-        
+        console.log(myFilter,'삭제 직후 마이필터')
     }
+
     return(
         <>  
             {/* 상품 메뉴영역 */}
@@ -64,6 +93,9 @@ export default function Room(){
                             ))}
                         </div>
                     </div>
+                    <div className="center_filter">
+
+                    </div>
                     <div className="right_filter">
                         <div className="map"><span>map</span></div>
                     </div>
@@ -79,7 +111,25 @@ export default function Room(){
                     </ul>
                 </div>
                 {/* 방정보 영역 */}
-                <div className="room_menu"></div>
+                <div className="room_menu">
+                    <ul className="room_product">
+                        {myhotel.length !== 0?myhotel.map((item)=>(
+                            <li key={item.id} className="room_list">
+                                <div className="img_box">{item.img[0]}</div>
+                                <div className="room_info">
+                                    <h2 className="menu_title">{item.hotelName}</h2>
+                                    <p>{item.publicService}</p>
+                                    <p>{item.roomservice}</p>
+                                    <p>{item.otherService}</p>
+                                    <p>{item.city}</p>
+                                    <p>{item.score}점</p>
+                                    <p>{item.price}원</p>
+                                    <button type="button" className="menu_wishbtn">❤</button>
+                                </div>
+                            </li>
+                        )): <h2>검색된 상품이 없습니다.</h2>}
+                    </ul>
+                </div>
             </div>
         </>
     )

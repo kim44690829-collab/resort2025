@@ -17,7 +17,7 @@
     border: 1px solid red;
     padding: 10px;
     box-sizing: border-box;
-    width: 800px;
+    width: 600px;
 }
 .Room_section .filter_menu .left_filter .filter01{
     border-bottom: 1px solid #aaa;
@@ -47,6 +47,12 @@
     background-color:rgb(206, 166, 118) ;
     color: #fff;
     cursor: pointer;
+}
+.Room_section .filter_menu .center_filter{
+    border: 1px solid red;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 400px;
 }
 .Room_section .filter_menu .right_filter{
     border: 1px solid green;
@@ -81,5 +87,52 @@
 /* 상품 정렬 영역 끝 */
 
 /* 상품 정보 영역 시작--------------------------------------------------- */
-.Room_section .room_menu{}
+.Room_section .room_menu{
+    background-color: aquamarine;
+}
+.Room_section .room_menu .room_product{
+    
+}
+.Room_section .room_menu .room_product .room_list{
+    display: flex;
+    height: 240px;
+    border: 1px solid saddlebrown;
+    padding: 10px;
+    
+}
+.Room_section .room_menu .room_product .room_list .img_box{
+    width: 300px;
+    height: 200px;
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    padding-top: 80px;
+    margin-right: 20px;
+}
+.Room_section .room_menu .room_product .room_list .room_info{
+    background-color: #fff;
+    width: 600px;
+    height: 200px;
+    border-radius: 10px;
+    position: relative;
+    padding: 15px;
+}
+.Room_section .room_menu .room_product .room_list .room_info .menu_wishbtn{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: #aaa;
+    font-size: 20px;
+    line-height: 45px;
+}
+.Room_section .room_menu .room_product .room_list .room_info .menu_wishbtn:hover{
+    
+    cursor: pointer;
+    color: red;
+    background-color: #ccc;
+}
 /* 상품 정보 영역 끝 */
