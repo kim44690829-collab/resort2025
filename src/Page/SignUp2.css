@@ -2,7 +2,7 @@
     width: 1200px;
     margin: 10px auto;
 }
-.signup2_container h1{
+.signup2_container .signup2_title{
     text-align: center;
     font-size: 30px;
     margin: 50px 0 50px 0;
@@ -16,9 +16,16 @@
 .signup2_container .tel_form > label{
     margin-bottom: 10px;
 }
-.signup2_container .tel_form #usertel{
-    margin-bottom: 30px;
-    padding: 15px;
+.signup2_container .tel_form .userPhone{
+    width: 360px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.signup2_container .tel_form .userPhone > input[type='text']{
+    width: 113px;
+    padding: 15px 10px 15px 35px;
+    border: none;
     border-radius: 10px;
 }
 .signup2_container .tel_form #smsCode{

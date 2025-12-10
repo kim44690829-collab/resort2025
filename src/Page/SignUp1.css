@@ -2,7 +2,7 @@
     width: 1200px;
     margin: 10px auto;
 }
-.signup_container h1{
+.signup_container .signup_title{
     text-align: center;
     font-size: 20px;
     margin: 50px 0 50px 0;
