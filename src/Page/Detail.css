@@ -1,14 +1,6 @@
-/* #root{
-    padding: 0;
-    margin: 0;
-    font-family: sans-serif;
-    margin: 0 auto;
-}
-ul,li{
-    list-style: none;
-    padding: 0;
-    margin: 0;
-} */
+*{
+    outline: 0;
+} 
 .detail-wrap{
     width: 1200px;
     margin: 50px auto 0;
@@ -68,9 +60,15 @@ ul,li{
 .detail-wrap .detail-title .title-left{
     float: left;
 }
-.detail-wrap .detail-title .title-left p{
+.detail-wrap .detail-title .title-left .hotelType{
     font-size: 15px;
     color: #707070;
+}
+.detail-wrap .detail-title .title-left .hotelCity{
+    color: #000;
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 7px;
 }
 .detail-wrap .detail-title .title-left h1{
     font-size: 26px;
@@ -120,10 +118,11 @@ ul,li{
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    margin-left: 5px;
     cursor: pointer;
 }
 .detail-wrap .detail-title .title-right .btns button i{
     font-size: 21px;
-    color: #848484;
+    color: #6b6b6b;
     text-align: center;
 }
