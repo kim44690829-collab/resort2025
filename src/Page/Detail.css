@@ -126,3 +126,84 @@
     color: #6b6b6b;
     text-align: center;
 }
+
+.detail-wrap .detail-content{
+    overflow: hidden;
+}
+.detail-wrap .detail-content .detail-left,
+.detail-wrap .detail-content .detail-right{
+    float: left;
+}
+.detail-wrap .detail-content .detail-left{
+    width: 70%;
+}
+.detail-wrap .detail-content .detail-right{
+    width: 30%;
+}
+
+.detail-wrap .detail-content .detail-left .service{
+    margin-top: 30px;
+}
+.detail-wrap .detail-content .detail-left .service .service-title{
+    font-size: 18px;
+    font-weight: 700;
+}
+.detail-wrap .detail-content .detail-left .service .service-icon{
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    background: #f5f7fa;
+    padding: 25px 30px 15px;
+    margin-top: 18px;
+}
+.detail-wrap .detail-content .detail-left .service .service-icon .icon{   
+    padding: 0 15px;
+    border: 1px solid #e7e7e7;
+    border-radius: 30px;
+    margin-right: 7px;
+    margin-bottom: 9px;
+    background-color: #fff;
+    font-size: 13px;
+    line-height: 38px;
+}
+.detail-wrap .detail-content .detail-left .service .service-icon .icon i{
+    color: #42799b;
+}
+.detail-wrap .detail-content .detail-left .service .service-icon .icon i span{
+    font-size: 14px;
+    color: #3d3d3d;
+}
+
+.detail-wrap .detail-content .detail-left .room-select{
+    margin-top: 30px;
+}
+.detail-wrap .detail-content .detail-left .room-select .room-title{
+    font-size: 18px;
+    font-weight: 700;
+}
+.detail-wrap .detail-content .detail-left .room-select ul li{
+    overflow: hidden;
+    border-radius: 10px;
+    background: #f5f7fa;
+    padding: 25px 30px 15px;
+    margin-top: 18px;
+}
+.detail-wrap .detail-content .detail-left .room-select ul li .room-left,
+.detail-wrap .detail-content .detail-left .room-select ul li .room-right{
+    float: left;
+}
+.detail-wrap .detail-content .detail-left .room-select ul li .room-left{
+    overflow: hidden;
+    width: 225px;
+    height: 225px;
+    position: relative;
+    border-radius: 15px;
+    margin-right: 23px;
+}
+.detail-wrap .detail-content .detail-left .room-select ul li .room-left img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+}
