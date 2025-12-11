@@ -12,6 +12,9 @@ export default function Room(){
     const [myFilter,setMyfilter] = useState([])
     // 필터 된 호텔 항목
     const [myhotel,setmyhotel] = useState([])
+    //가격 필터의 값
+    const [minPrice,setMinPrice] = useState(0)
+    const [maxPrice,setMaxPrice] = useState(200000)
 
     // 가져오는 호텔, 개실 데이터
     const {HotelData,RoomData} = useContext(ResortDateContext);
@@ -29,13 +32,14 @@ export default function Room(){
         const filterHotel = HotelData.filter((data)=>{ // 각 항목별로 만족하는것 필터링
             const f1 = selectfilter02.every((filter)=>data.roomservice.includes(filter.name)); 
             const f2 = selectfilter01.every((filter)=>data.publicService.includes(filter.name)); 
-            const f3 = selectfilter03.every((filter)=>data.otherService.includes(filter.name)); 
+            const f3 = selectfilter03.every((filter)=>data.otherService.includes(filter.name));
             return f1&&f2&&f3
         })
        
         //console.log(filterHotel)
+        const priceHotel = filterHotel.filter((data)=>data.price>minPrice && data.price<=maxPrice)
         
-        setmyhotel(filterHotel)
+        setmyhotel(priceHotel)
     },[myFilter])
     /* 필터의 항목 클릭시 적용 함수 */
     const filterHandeler=(item)=>{
@@ -94,7 +98,25 @@ export default function Room(){
                         </div>
                     </div>
                     <div className="center_filter">
-
+                            <div className="price_filter">
+                                <div className="price_slide">
+                                    <div className="price_inner" style={{left:`${minPrice/200000*100}%`,right:`${100-(maxPrice/200000)*100}%`}}></div>
+                                    <input type="range" min='0' max='200000' value={minPrice} onChange={(e)=>setMinPrice(Number(e.target.value))} className="slide_input" step={10000}/>
+                                    <input type="range" min='0' max='200000' value={maxPrice} onChange={(e)=>setMaxPrice(Number(e.target.value))} className="slide_input" step={10000}/>
+                                </div>
+                                
+                                <div className="minprice">
+                                    <p className="price_txt">최소금액</p>
+                                    <input className="price_input" type="text" value={minPrice} placeholder="최소금액" onChange={(e)=>setMinPrice(e.target.value)}/>
+                                </div>
+                                <div className="maxprice">
+                                    <p className="price_txt">최대금액</p>
+                                    <input className="price_input" type="text" value={maxPrice} placeholder="최대금액" onChange={(e)=>setMaxPrice(e.target.value)}/>
+                                </div>
+                            </div>
+                            <div className="reset">
+                                <button type="button" onClick={()=>{setMyfilter([]),setMaxPrice(200000),setMinPrice(0)}} className="reset_btn">🔄<span className="resettxt">필터 초기화</span></button>
+                            </div>
                     </div>
                     <div className="right_filter">
                         <div className="map"><span>map</span></div>
@@ -115,12 +137,9 @@ export default function Room(){
                     <ul className="room_product">
                         {myhotel.length !== 0?myhotel.map((item)=>(
                             <li key={item.id} className="room_list">
-                                <div className="img_box">{item.img[0]}</div>
+                                <div className="img_box"><img src={item.img[0]} alt={`${item.img[0]}이미지`} className="hotelimg"/></div>
                                 <div className="room_info">
                                     <h2 className="menu_title">{item.hotelName}</h2>
-                                    <p>{item.publicService}</p>
-                                    <p>{item.roomservice}</p>
-                                    <p>{item.otherService}</p>
                                     <p>{item.city}</p>
                                     <p>{item.score}점</p>
                                     <p>{item.price}원</p>

@@ -1,20 +1,18 @@
 /* 상품 영역 전체 */
 .Room_section{
     width: 1200px;
-    border: 1px solid black;
-    margin: 0 auto;
+    margin: 100px auto 0;
     box-sizing: border-box;
+    border-top: 2px solid #333;
 }
 /* 상품 필터 영역 시작----------------------------------------------------*/
 .Room_section .filter_menu{
-    background-color: #ccc;
     width: 100%;
-    height: 300px;
+    height: 350px;
     display: flex;
     box-sizing: border-box;
 }
 .Room_section .filter_menu .left_filter{
-    border: 1px solid red;
     padding: 10px;
     box-sizing: border-box;
     width: 600px;
@@ -22,6 +20,7 @@
 .Room_section .filter_menu .left_filter .filter01{
     border-bottom: 1px solid #aaa;
     box-sizing: border-box;
+    padding-bottom: 10px;
 }
 .Room_section .filter_menu .left_filter .filter01 .filter_tag{
     padding: 5px;
@@ -44,33 +43,116 @@
     border-radius: 20px;
     border: 1px solid #fff;
     font-size: 12px;
-    background-color:rgb(206, 166, 118) ;
-    color: #fff;
+    background-color:#7ED6E4 ;
+    color: #333;
     cursor: pointer;
+    font-weight: 600;
 }
+.Room_section .filter_menu .left_filter .under_filter .fil_btn:hover{
+    background-color:rgb(96, 142, 192) ;
+}
+/* 필터 중앙 부분 */
+
 .Room_section .filter_menu .center_filter{
-    border: 1px solid red;
     padding: 10px;
     box-sizing: border-box;
     width: 400px;
+    border-right: 2px solid #333;
+    position: relative;
+    text-align: center;
 }
+.Room_section .filter_menu .center_filter .reset{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+.Room_section .filter_menu .center_filter .reset .reset_btn{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: #aaa;
+}
+.Room_section .filter_menu .center_filter .reset .reset_btn:hover .resettxt{
+    color: #333;
+    font-weight: 600;
+    text-decoration: underline;
+}
+.Room_section .filter_menu .center_filter .price_slide{
+    position: relative;
+    height: 4px;
+    width: 300px;
+    border-radius: 10px;
+    background-color: #dddddd;
+    margin: 20px 0;
+}
+.Room_section .filter_menu .center_filter .price_slide .slide_input{
+    position: absolute;
+    top: -8px;
+    left: 0;
+    width: 100%;
+    -webkit-appearance: none;
+    background: none;
+    pointer-events: none;
+}
+.Room_section .filter_menu .center_filter .price_slide .slide_input::-webkit-slider-thumb{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: #7ED6E4;
+    -webkit-appearance: none;
+    pointer-events: auto;
+}
+.Room_section .filter_menu .center_filter .price_slide .price_inner{
+    position: absolute;
+    left: 30%;
+    right: 20%;
+    height: 4px;
+    border-radius: 10px;
+    background-color: #7ED6E4;
+}
+.Room_section .filter_menu .center_filter .minprice,
+.Room_section .filter_menu .center_filter .maxprice{
+    border: 1px solid #333;
+    border-radius: 10px;
+    text-align: left;
+    width: 250px;
+    overflow: hidden;
+    margin: 10px auto 0;
+}
+.Room_section .filter_menu .center_filter .price_txt{
+    color: #aaa;
+    font-size: 14px;
+    padding: 5px;
+}
+.Room_section .filter_menu .center_filter .price_input{
+    border: none;
+    padding: 5px;
+    font-weight: 600;
+    
+}
+
+/* 필터 오른쪽 부분 */
 .Room_section .filter_menu .right_filter{
-    border: 1px solid green;
     width: 400px;
     box-sizing: border-box;
+    padding: 10px;
 }
 .Room_section .filter_menu .right_filter .map{
     width: 100%;
     height: 200px;
-    background-color: aquamarine;
+    background-color: #7ED6E4;
+    border-radius: 10px;
 }
 
 /* 상품 필터 영역 끝 */
 
 /* 상품 정렬 영역 시작--------------------------------------------------- */
 .Room_section .arr_menu{
-    height: 30px;
-    background-color: #aaa;
+    height: 40px;
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+    margin-bottom: 5px;
+    background-color: #e8c7a9;
 }
 .Room_section .arr_menu .arr_group{
     display: flex;
@@ -78,17 +160,19 @@
 }
 .Room_section .arr_menu .arr_group .arr_list{
     margin-left: 10px;
-    padding-top: 5px;
+    padding-top: 10px;
+    color: #aaa;
 }
 .Room_section .arr_menu .arr_group .arr_list:hover{
-    color: #1212cc;
+    color: black;
     cursor: pointer;
+    font-weight: 600;
 }
 /* 상품 정렬 영역 끝 */
 
 /* 상품 정보 영역 시작--------------------------------------------------- */
 .Room_section .room_menu{
-    background-color: aquamarine;
+    
 }
 .Room_section .room_menu .room_product{
     
@@ -96,9 +180,8 @@
 .Room_section .room_menu .room_product .room_list{
     display: flex;
     height: 240px;
-    border: 1px solid saddlebrown;
     padding: 10px;
-    
+    border-bottom: 1px solid #ccc;
 }
 .Room_section .room_menu .room_product .room_list .img_box{
     width: 300px;
@@ -106,8 +189,13 @@
     background-color: #fff;
     border-radius: 10px;
     text-align: center;
-    padding-top: 80px;
     margin-right: 20px;
+    border: 1px solid #999;
+    overflow: hidden;
+}
+.Room_section .room_menu .room_product .room_list .img_box .hotelimg{
+    width: 100%;
+    height: 100%;
 }
 .Room_section .room_menu .room_product .room_list .room_info{
     background-color: #fff;
