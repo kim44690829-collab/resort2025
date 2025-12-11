@@ -1,0 +1,114 @@
+.main_container{
+    
+}
+.main_container .mainImgBenner{
+    width: 1980px;
+    height: 500px;
+    margin: 0 auto;
+    border: 1px solid red;
+    position: relative;
+}
+.main_container .mainImgBenner .hotelSearch{
+    width: 1200px;
+    position: absolute;
+    bottom: -100px;
+    left: 350px;
+    border: 1px solid blue;
+}
+.main_container .mainImgBenner .hotelSearch .hotelSearchBtn{
+    width: 500px;
+    height: 50px;
+    margin-top: 50px;
+    border: none;
+    background-color: rgb(83, 83, 209);
+    color: #fff;
+    border-radius: 10px;
+}
+.main_container .mainImgBenner .hotelSearch .globalBtn{
+    margin-left: 30px;
+}
+.main_container .mainImgBenner .hotelSearch .hotelInput{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    position: relative;
+}
+.main_container .mainImgBenner .hotelSearch .hotelInput #citySearch{
+    width: 500px;
+}
+.main_container .mainImgBenner .hotelSearch .hotelInput .Search_Btn{
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(83, 83, 209);
+    color: #fff;
+}
+.main_container .mainImgBenner .hotelSearch .hotelInput .searchIcon{
+    position: absolute;
+    top: 8px;
+    left: 5px;
+}
+.main_container .hotel_type{
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    margin-top: 200px;
+    justify-content: space-between;
+    gap: 10px;
+}
+.main_container .hotel_type .accomCat{
+    width: 240px;
+    height: 240px;
+    border: 1px solid green;
+    position: relative;
+    overflow: hidden;
+}
+.main_container .hotel_type .accomCat .HotelImg,
+.main_container .hotel_type .accomCat .ResortImg,
+.main_container .hotel_type .accomCat .CondoImg,
+.main_container .hotel_type .accomCat .GuestHouseImg,
+.main_container .hotel_type .accomCat .CampingImg{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+/*  */
+.main_container .popularAccom{
+    margin-top: 70px;
+}
+.main_container .popularAccom .popularAccomTitle{
+    width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+.main_container .popularAccom .popularAccomSub1 .popularAccomSub2{
+    display: flex;
+    width: 1200px;
+    margin: 0 auto;
+    gap: 10px;
+    overflow: hidden;
+}
+.main_container .popularAccom .popularAccomSub1 .popularAccomSub2 .popularAccomMainImg{
+    width: 232px;
+    height: 240px;
+}
+/*  */
+.main_container .spotsAndStays .spotsAndStaysTitle{
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 70px;
+    margin-bottom: 30px;
+}
+.main_container .spotsAndStays .spotsAndStaysAll{
+    display: flex;
+    width: 1200px;
+    margin: 0 auto;
+    gap: 10px;
+    overflow: hidden;
+}
+.main_container .spotsAndStays .spotsAndStaysAll .spotsAndStaysImg{
+    width: 390px;
+    height: 500px;
+}
+
