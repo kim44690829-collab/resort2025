@@ -6,6 +6,8 @@ import { ResortDateContext } from '../Api/ResortDate';
 export default function Main(){    
     const {RoomData, HotelData} = useContext(ResortDateContext);
 
+    const hotelRating = [...HotelData].sort((a,b) => b.score - a.score);
+
     return(
         <div className='main_container'>
             {/* <Link to='/detail/1'>ID: 1링크</Link><br /><br />
@@ -13,7 +15,7 @@ export default function Main(){
             <Link to='/detail/3'>ID: 3링크</Link><br /><br />
             <Link to='/detail/4'>ID: 4링크</Link> */}
             <div className='mainImgBenner'>
-                <div>여기는 이미지 배너</div>
+                <div className='mainBanner'>여기는 이미지 배너</div>
                 <div className='hotelSearch'>
                     <h1>여행을 고민중이라면?!</h1>
                     <button type='button' className='koreaBtn hotelSearchBtn'>국내</button>
@@ -64,11 +66,13 @@ export default function Main(){
                             <li key={item.id}>
                                 <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
                                 <p>{item.type}</p>
-                                <p>{item.hotelName}</p>
-                                <span>{item.score}</span>
-                                <span>{item.scoreCount}</span>
+                                <p className='popularAccom_name'>{item.hotelName}</p>
+                                <div className='popularAccom_review'>
+                                    <span className='popularAccom_score'>★{item.score}</span>
+                                    <span className='popularAccom_count'>{item.scoreCount.toLocaleString()}명 참여</span>
+                                </div>
                                 <p>쿠폰적용시</p>
-                                <p>{item.price}</p>
+                                <p>{item.price.toLocaleString()}</p>
                             </li>
                         ))}
                     </ul>
@@ -97,11 +101,24 @@ export default function Main(){
             </div>
             {/*  */}
             <div className='staySortByRating'>
-                <p>평점순(수정할예정)</p>
-                <div>
-                    {/* 랭킹순으로 필터해서 map */}
+                <p className='staySortByRating_title'>평점순(수정할예정)</p>
+                <div className='hotelRating_desc'>
+                    <ul className='hotelRating_each'>
+                        {hotelRating.slice(0,10).map((item) => (
+                            <li key={item.id} className='hotelRating_each_sub'>
+                                <img src='/img/1-1.jpg' alt={item.hotelName} className='hotelRatingImg' />
+                                {/* <span className='hotelRatingScore'>평점 : {item.score}</span> */}
+                                <div className='hotelRating_each_sub2'>
+                                    <span style={{display:'inline-block', marginBottom:'10px'}}>{item.country} / {item.city}</span> <br/>
+                                    <span style={{display:'inline-block', marginBottom:'10px'}}>{item.hotelName}</span> <br/>
+                                    <span>{item.price.toLocaleString()}~</span>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
+            <div className='eventBanner'>여기는 이벤트 배너</div>
         </div>
     )
 }

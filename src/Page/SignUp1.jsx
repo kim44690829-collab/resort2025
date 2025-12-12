@@ -15,6 +15,8 @@ export default function SignUp1(){
         agreeMarketingNotifications : false,
         agreeLocationService : false,
     })
+    // 마우스 변경
+    const [mouseCursur, setMouseCursur] = useState(false);
 
     // 전체 동의 체크시 하위 동의 전부 체크
     const allAgreeHandeler = () => {
@@ -46,8 +48,10 @@ export default function SignUp1(){
     useEffect(() => {
         if(checkedItems.agreeTermsOfService === true && checkedItems.confirmAgeOver14 === true && checkedItems.agreePrivacyPolicy === true){
             setIsDisabledAgree(false)
+            setMouseCursur(true)
         }else{
             setIsDisabledAgree(true)
+            setMouseCursur(false)
         }
     },[checkedItems])
 
@@ -105,7 +109,7 @@ export default function SignUp1(){
                     <button type="button">보기</button>
                 </div>
                 <Link to='/SignUp2'>
-                    <button type="submit" className='agreeBtn' disabled={isDisabledAgree} >다음</button>
+                    <button type="submit" className='agreeBtn' disabled={isDisabledAgree} style={{cursor: mouseCursur ? 'pointer' : 'not-allowed'}}  >다음</button>
                 </Link>
             </form>
         </div>

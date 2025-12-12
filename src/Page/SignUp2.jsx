@@ -14,12 +14,17 @@ export default function SignUp2(){
     // 휴대폰 번호 상태저장 변수
     const [userNumFront, setUserNumFront] = useState('');
     const [userNumBack, setUserNumBack] = useState('');
+    // 마우스 변경
+    const [mouseCursur1, setMouseCursur1] = useState(false);
+    const [mouseCursur2, setMouseCursur2] = useState(false);
 
     useEffect(() => {
         if(userNumFront.length === 4 && userNumBack.length === 4){
             setPhoneNum(false)
+            setMouseCursur2(true)
         }else{
             setPhoneNum(true)
+            setMouseCursur2(false)
         }
     },[userNumFront, userNumBack])
     
@@ -36,8 +41,10 @@ export default function SignUp2(){
         
         if(value === '1111' || value === '2222' || value === '3333' || value === '5555' || value === '6666'){
             setIsDisabled(false)
+            setMouseCursur1(true)
         }else{
             setIsDisabled(true)
+            setMouseCursur1(false)
         }
     }
 
@@ -64,10 +71,10 @@ export default function SignUp2(){
                 
                 {phoneVerificationCode ?
                 <Link to='/signup3'>
-                    <button type='button' className='telBtn' disabled={isDisabled}>확인</button>
+                    <button type='button' className='telBtn' disabled={isDisabled} style={{cursor: mouseCursur1 ? 'pointer' : 'not-allowed'}}>확인</button>
                 </Link>
                 : 
-                <button type='submit' className='telBtn' onClick={telBtnHandeler} disabled={phoneNum}>인증번호 전송</button>}
+                <button type='submit' className='telBtn' onClick={telBtnHandeler} disabled={phoneNum} style={{cursor: mouseCursur2 ? 'pointer' : 'not-allowed'}} >인증번호 전송</button>}
             </form>
         </div>
     )

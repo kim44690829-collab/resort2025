@@ -12,22 +12,26 @@ import SignUp3 from './Page/SignUp3'
 import Room from './Page/Room'
 import Main from './Page/Main'
 import Detail from './Page/Detail'
+import Footer from './Common/Footer'
+import Guest from './Page/Guest'
 
 function App() {
 
   return (
     <BrowserRouter>
       <ResortDate>
-      <Header />
-        <Routes>
-          <Route path='/login' element={<Login />}/>
-          <Route path='/signup1' element={<SignUp1 />}/>
-          <Route path='/signup2' element={<SignUp2 />}/>
-          <Route path='/signup3' element={<SignUp3 />}/>
-          <Route path='/' element={<Main />} />
-          <Route path='/room' element={<Room />} />
-          <Route path='/detail/:id' element={<Detail />}/>  
-        </Routes>
+        <Header />
+          <Routes>
+            <Route path='/login' element={<Login />}/>
+            <Route path='/signup1' element={<SignUp1 />}/>
+            <Route path='/signup2' element={<SignUp2 />}/>
+            <Route path='/signup3' element={<SignUp3 />}/>
+            <Route path='/' element={<Main />} />
+            <Route path='/room' element={<Room />} />
+            <Route path='/detail/:id' element={<Detail />}/>  
+            <Route path='/guest' element={<Guest />}/>  
+          </Routes>
+        <Footer />
       </ResortDate>  
     </BrowserRouter>
   )

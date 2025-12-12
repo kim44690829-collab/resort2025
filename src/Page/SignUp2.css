@@ -1,6 +1,8 @@
 .signup2_container{
     width: 1200px;
     margin: 10px auto;
+    margin-bottom: 200px;
+    margin-top: 200px;
 }
 .signup2_container .signup2_title{
     text-align: center;
@@ -38,5 +40,4 @@
     padding: 15px;
     border-radius: 10px;
     width: 360px;
-    cursor: pointer;
 }

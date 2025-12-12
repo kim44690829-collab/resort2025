@@ -1,7 +1,8 @@
 .Login_container{
     width: 1200px;
     margin: 10px auto;
-
+    margin-bottom: 200px;
+    margin-top: 200px;
 }
 .Login_container .Login_title{
     text-align: center;

@@ -10,6 +10,8 @@ export default function SignUp3(){
     const [BirthMonth, setBirthMonth] = useState('');
     const [BirthDate, setBirthDate] = useState('');
     const [userId, setUserId] = useState('');
+    // 마우스 변경
+    const [mouseCursur, setMouseCursur] = useState(false);
 
 
     // 회원가입 폼에서 조건을 만족하지 못했을때 확인버튼 비활성화
@@ -32,8 +34,10 @@ export default function SignUp3(){
             ( 1 <= BirthDate && BirthDate <= 31) &&
             userId.length >= 2){
                 setIsDisabledSignup(false)
+                setMouseCursur(true)
             }else{
                 setIsDisabledSignup(true)
+                setMouseCursur(false)
             }
     }, [userMail, userPw, userPwConfirm, BirthYear, BirthMonth, BirthDate, userId])
 
@@ -73,7 +77,7 @@ export default function SignUp3(){
                     <label htmlFor="userid">닉네임<span style={{color:'red'}}>*</span></label>
                     <input type="text" id='userid' name='userid' value={userId} onChange={(e) => setUserId(e.target.value)} placeholder='2글자 이상 적어주세요' />
                 </div>
-                <button type='button' className='signupBtn' onClick={modalHandeler} disabled={isDisabledSignup}>확인</button>
+                <button type='button' className='signupBtn' onClick={modalHandeler} disabled={isDisabledSignup} style={{cursor: mouseCursur ? 'pointer' : 'not-allowed'}}  >확인</button>
             </form>
             {signupModalOpen && 
             <>
