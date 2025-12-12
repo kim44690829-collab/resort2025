@@ -21,6 +21,7 @@ export default function Detail(){
     //객실당 평균별점 이미지
     const[starRoom, setStarRoom] = useState([]);
 
+
     useEffect(()=>{
         //해당호텔 별점 가져오기
         const score = Hotel.score;
@@ -47,20 +48,43 @@ export default function Detail(){
         }
 
         //객실당 평점 구하기
-        const scoreSum = [];
-        const scoreAvg = [];
         
+        //객실당 평점합계
+        const scoreSum = [];        
+
         for(let i=0; i<Room.length; i++){
-            for(let j=0; j<Room.score.length; j++){
-                scoreSum[i] = Room[i].score[j];
+            
+            scoreSum[i] = 0;
+            
+            for(let j=0; j<Room[i].score.length; j++){
+                scoreSum[i] += Room[i].score[j];
             }
         }
 
-        scoreAvg = Math.round(scoreSum / room.score.length);
+        //객실당 평점평균
+        const scoreAvg = [];
+        const roomStar = [];
+
+        for(let i=0; i<scoreSum.length; i++){
+            scoreAvg[i] = 0;
+            scoreAvg[i] = Math.round(scoreSum[i] / Room[i].score.length);   
+
+            const starTotal = 5;
+            roomStar[i] = [];
+            
+            for(let k=0; k < scoreAvg[i]; k++){
+                roomStar[i].push(['/img/star-one.png']);
+            }
+
+            for(let l=0; l < starTotal - scoreAvg[i]; l++){
+                roomStar[i].push(['/img/star-zero.png']);
+            }
+        }
+
+        setStarRoom(roomStar);
 
     },[id]);
-
-    
+  
 
     
     const [wish, setWish] = useState([]);
@@ -199,11 +223,38 @@ export default function Detail(){
                                         <h2>{item.roomName}</h2>
                                         <div className="room-intro">
                                             <div className="intro-left">
-                                                {item.score.map((star,index)=>(
-                                                    
+                                                {starRoom[index] && starRoom[index].map((star, ind) => (
+                                                    <img src={star} alt="roomScore" key={ind} />
                                                 ))}
                                             </div>
-                                            <div className="intro-right"></div>
+                                            <div className="intro-right">
+                                                <button type='button'>상세정보 &gt;</button>
+                                            </div>
+                                        </div>
+                                        <div className="room-info">
+                                            <p><i className="fa-solid fa-ban"></i> <span className='bold'>무료 취소불가</span></p>
+                                            <p><i className="fa-regular fa-clock"></i> 체크인 <span className='bold'>15:00</span> ~ 체크아웃 <span className='bold'>11:00</span></p>
+                                            <p><i className="fa-solid fa-user-group"></i> 최대 투숙객 수 : <span className='bold'>{item.maxOccupancy}명</span></p>
+                                            <p><i className="fa-solid fa-tag"></i> <span className='bold'>할인혜택:</span>
+                                                <span className='bold' style={{color:'#f94239'}}>
+                                                    {Hotel.discount === 1 ? 
+                                                        ' 10%할인 이벤트 중'
+                                                    :
+                                                        ' 회원가입시 10,000원 할인쿠폰 제공'
+                                                    }
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div className="room-pay">
+                                            {Hotel.discount === 1 ? 
+                                        //     <span className='red'>10% 할인</span> <span className='origin-price'>{Hotel.price.toLocaleString()}원</span></p>
+                                        // <p className='final-price'>{(Hotel.price - (Hotel.price*0.1)).toLocaleString()}원<span>/1박</span>
+                                                <span>{Hotel.price + index * 12000}원</span>
+                                            :
+                                                <span>{Hotel.price + index * 12000}원</span>
+                                            }
+                                            <button type='button'><i class="fa-solid fa-basket-shopping"></i></button>
+                                            <button type='button'>예약하기</button>
                                         </div>
                                     </div>
                                 </li>
@@ -213,7 +264,7 @@ export default function Detail(){
                     <div className="d" style={{height:'500px'}}></div>
                 </div>
                 <div className="detail-right">
-
+                            
                 </div>
             </div>
         </section>

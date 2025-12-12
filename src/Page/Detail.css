@@ -185,7 +185,7 @@
     overflow: hidden;
     border-radius: 10px;
     background: #f5f7fa;
-    padding: 25px 30px 15px;
+    padding: 25px;
     margin-top: 18px;
 }
 .detail-wrap .detail-content .detail-left .room-select ul li .room-left,
@@ -206,4 +206,51 @@
     top: 50%;
     transform: translate(-50%, -50%);
     height: 100%;
+}
+.detail-wrap .detail-content .detail-left .room-select ul li .room-right{
+    width: 540px;
+}
+.detail-wrap .detail-content .detail-left .room-select ul li .room-right h2{
+    font-size: 20px;
+    font-weight: 600;
+}
+.detail-wrap .detail-content .detail-left .room-select ul li .room-right .room-intro{
+    margin-top: 7px;
+    overflow: hidden;
+}
+.room-select ul li .room-right .room-intro .intro-left{
+    float: left;
+}
+.room-select ul li .room-right .room-intro .intro-right{
+    float: right;
+}
+.room-select ul li .room-right .room-intro .intro-left img{
+    margin-right: 1px;
+    width: 15px;
+}
+.room-select ul li .room-right .room-intro .intro-right button{
+    background-color: transparent;
+    border: 0;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    color: #42799b;
+}
+.room-select ul li .room-right .room-info{
+    background-color: #fff;
+    padding: 20px 25px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+.room-select ul li .room-right .room-info p{
+    font-size: 14px;
+    line-height: 25px;
+}
+.room-select ul li .room-right .room-info p i{
+    color: #42799b;
+    font-size: 14px;
+}
+.room-select ul li .room-right .room-info p .bold{
+    font-weight: 600;
+    font-size: 14px;
 }
