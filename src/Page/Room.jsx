@@ -14,15 +14,20 @@ export default function Room(){
     const [myhotel,setmyhotel] = useState([])
     //가격 필터의 값
     const [minPrice,setMinPrice] = useState(0)
-    const [maxPrice,setMaxPrice] = useState(200000)
+    const [maxPrice,setMaxPrice] = useState(300000)
+    // 정렬 번호
+    const [hotelSort,setHotelSort] = useState(1)
+    // 종아요 버튼
+    const [likeBtn,setLikeBtn] =useState(true)
+
 
     // 가져오는 호텔, 개실 데이터
     const {HotelData,RoomData} = useContext(ResortDateContext);
     //
     //
     useEffect(()=>{
-        console.log(myFilter,'현재 마이필터')
-        console.log(myhotel,'현재 마이호텔')
+        //console.log(myFilter,'현재 마이필터')
+        //console.log(myhotel,'현재 마이호텔')
         const myFilterCopy = [...myFilter]
 
         const selectfilter01 = myFilterCopy.filter((f)=>f.id>0 && f.id <14) // publicService 항목 구분
@@ -35,12 +40,76 @@ export default function Room(){
             const f3 = selectfilter03.every((filter)=>data.otherService.includes(filter.name));
             return f1&&f2&&f3
         })
-       
-        //console.log(filterHotel)
-        const priceHotel = filterHotel.filter((data)=>data.price>minPrice && data.price<=maxPrice)
+        const pricefilter = filterHotel.filter((f)=>f.price > minPrice && f.price<=maxPrice)
+        //console.log(pricefilter,'가격필터까지')
+
+        if(hotelSort===1){
+            pricefilter.sort((a,b) => a.id - b.id)
+        }else if(hotelSort===2){
+            pricefilter.sort((a,b) => b.score - a.score)
+        }else if(hotelSort===3){
+            pricefilter.sort((a,b) => a.score - b.score)
+        }else if(hotelSort===4){
+            pricefilter.sort((a,b) => b.price - a.price)
+        }else{
+            pricefilter.sort((a,b) => a.price - b.price)
+        }
+
+        // 가격 최솟값 최대값 조정 함수
+      /*    const rangeHandler01 =(e)=>{
+            
+            if(maxPrice-minPrice<10000){
+                setMinPrice(maxPrice-10000)
+                setMaxPrice(minPrice+10000)
+                console.log(maxPrice,'최대가격1')
+                console.log(minPrice,'최소가격1')
+            }else{
+                setMinPrice(Number(e.target.value))
+                console.log(maxPrice,'최대가격2')
+                console.log(minPrice,'최소가격2')
+            }
+        } 
         
-        setmyhotel(priceHotel)
-    },[myFilter])
+        rangeHandler01(e);
+        const rangeHandler02 =(e)=>{
+            
+            if(maxPrice-minPrice<10000){
+                setMinPrice(maxPrice-10000)
+                setMaxPrice(minPrice+10000)
+                console.log(maxPrice,'최대가격3')
+                console.log(minPrice,'최소가격3')
+            }else{
+                setMaxPrice(Number(e.target.value))
+                console.log(maxPrice,'최대가격4')
+                console.log(minPrice,'최소가격4')
+            }
+        }
+        
+         */
+
+    setmyhotel(pricefilter)
+        
+
+    },[myFilter,minPrice,maxPrice,hotelSort])
+
+
+
+    
+
+    // 최소가격이 변동될때
+   /*  useEffect(()=>{
+        const myhotelCopy = [...HotelData]
+        const minfilter = myhotelCopy.filter((f)=>f.price>minPrice)
+        setmyhotel(minfilter)
+    },[minPrice])
+    // 최대가격이 변동될때
+    useEffect(()=>{
+        const myhotelCopy = [...HotelData]
+        const maxfilter = myhotelCopy.filter((f)=>f.price<=maxPrice)
+        setmyhotel(maxfilter)
+    },[maxPrice]) */
+
+
     /* 필터의 항목 클릭시 적용 함수 */
     const filterHandeler=(item)=>{
         const myFilterCopy = [...myFilter]
@@ -64,6 +133,40 @@ export default function Room(){
         const dleFilter = myFilterCopy.filter((myFilterCopy)=>myFilterCopy.id !== item.id) // filter을 이용한 삭제
         setMyfilter(dleFilter)
         console.log(myFilter,'삭제 직후 마이필터')
+    }
+
+    //정렬 함수
+    const sortHandeler =(num)=>{
+        if(num===1){
+            setHotelSort(1)
+        }else if(num===2){
+            setHotelSort(2)
+        }else if(num===3){
+            setHotelSort(3)
+        }else if(num===4){
+            setHotelSort(4)
+        }else{
+            setHotelSort(5)
+        }
+    }
+    // 가격 최솟값 최대값 조정 함수
+    const rangeHandler01 =(e)=>{
+        
+        if(maxPrice-minPrice<10000){
+            setMinPrice(maxPrice-10000)
+            setMaxPrice(minPrice+10000)
+        }else{
+            setMinPrice(Number(e.target.value))
+        }
+    }
+    const rangeHandler02 =(e)=>{
+        
+        if(maxPrice-minPrice<10000){
+            setMinPrice(maxPrice-10000)
+            setMaxPrice(minPrice+10000)
+        }else{
+            setMaxPrice(Number(e.target.value))
+        }
     }
 
     return(
@@ -100,22 +203,22 @@ export default function Room(){
                     <div className="center_filter">
                             <div className="price_filter">
                                 <div className="price_slide">
-                                    <div className="price_inner" style={{left:`${minPrice/200000*100}%`,right:`${100-(maxPrice/200000)*100}%`}}></div>
-                                    <input type="range" min='0' max='200000' value={minPrice} onChange={(e)=>setMinPrice(Number(e.target.value))} className="slide_input" step={10000}/>
-                                    <input type="range" min='0' max='200000' value={maxPrice} onChange={(e)=>setMaxPrice(Number(e.target.value))} className="slide_input" step={10000}/>
+                                    <div className="price_inner" style={{left:`${minPrice/300000*100}%`,right:`${100-(maxPrice/300000)*100}%`}}></div>
+                                    <input type="range" min='0' max='300000' value={minPrice} onChange={(e)=>rangeHandler01(e)} className="slide_input" step={10000}/>
+                                    <input type="range" min='0' max='300000' value={maxPrice} onChange={(e)=>rangeHandler02(e)} className="slide_input" step={10000}/>
                                 </div>
                                 
                                 <div className="minprice">
                                     <p className="price_txt">최소금액</p>
-                                    <input className="price_input" type="text" value={minPrice} placeholder="최소금액" onChange={(e)=>setMinPrice(e.target.value)}/>
+                                    <input className="price_input" type="text" value={`${minPrice}원`} placeholder="최소금액" onChange={(e)=>setMinPrice(e.target.value)}/>
                                 </div>
                                 <div className="maxprice">
                                     <p className="price_txt">최대금액</p>
-                                    <input className="price_input" type="text" value={maxPrice} placeholder="최대금액" onChange={(e)=>setMaxPrice(e.target.value)}/>
+                                    <input className="price_input" type="text" value={`${maxPrice}원`} placeholder="최대금액" onChange={(e)=>setMaxPrice(e.target.value)}/>
                                 </div>
                             </div>
                             <div className="reset">
-                                <button type="button" onClick={()=>{setMyfilter([]),setMaxPrice(200000),setMinPrice(0)}} className="reset_btn">🔄<span className="resettxt">필터 초기화</span></button>
+                                <button type="button" onClick={()=>{setMyfilter([]),setMaxPrice(300000),setMinPrice(0)}} className="reset_btn">🔄<span className="resettxt">필터 초기화</span></button>
                             </div>
                     </div>
                     <div className="right_filter">
@@ -125,11 +228,11 @@ export default function Room(){
                 {/* 중단 정렬 영역 */}
                 <div className="arr_menu">
                     <ul className="arr_group">
-                        <li className="arr_list">추천수</li>
-                        <li className="arr_list">높은평점순</li>
-                        <li className="arr_list">낮은평점순</li>
-                        <li className="arr_list">높은가격순</li>
-                        <li className="arr_list">낮은가격순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(1)} style={{color:hotelSort===1?'black':'#aaa'}}>추천수</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(2)} style={{color:hotelSort===2?'black':'#aaa'}}>높은평점순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(3)} style={{color:hotelSort===3?'black':'#aaa'}}>낮은평점순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(4)} style={{color:hotelSort===4?'black':'#aaa'}}>높은가격순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(5)} style={{color:hotelSort===5?'black':'#aaa'}}>낮은가격순</li>
                     </ul>
                 </div>
                 {/* 방정보 영역 */}
@@ -140,10 +243,20 @@ export default function Room(){
                                 <div className="img_box"><img src={item.img[0]} alt={`${item.img[0]}이미지`} className="hotelimg"/></div>
                                 <div className="room_info">
                                     <h2 className="menu_title">{item.hotelName}</h2>
-                                    <p>{item.city}</p>
-                                    <p>{item.score}점</p>
-                                    <p>{item.price}원</p>
-                                    <button type="button" className="menu_wishbtn">❤</button>
+                                    <p className="menu_city">{item.city}</p>
+                                    <p className="menu_score">{item.score}점</p>
+                                    <p className="menu_discount">
+                                        {item.discount===1?
+                                        <span className="disC">
+                                            <span className="s_box">10%할인</span>
+                                            <span className="p_box">{item.price.toLocaleString()}원</span>
+                                        </span>
+                                        :
+                                        <span className="coupon">회원가입시 10,000원 할인 쿠폰지급</span>
+                                        }
+                                    </p>
+                                    <p className="menu_price">{item.discount===1?(item.price*0.9).toLocaleString():item.price.toLocaleString()}원</p>
+                                    <button type="button" className="menu_wishbtn" onClick={()=>setLikeBtn(!likeBtn)}>{likeBtn?'❤':'💖'}</button>
                                 </div>
                             </li>
                         )): <h2>검색된 상품이 없습니다.</h2>}

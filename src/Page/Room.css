@@ -115,9 +115,9 @@
     border: 1px solid #333;
     border-radius: 10px;
     text-align: left;
-    width: 250px;
+    width: 300px;
     overflow: hidden;
-    margin: 10px auto 0;
+    margin: 20px 0 0;
 }
 .Room_section .filter_menu .center_filter .price_txt{
     color: #aaa;
@@ -179,13 +179,15 @@
 }
 .Room_section .room_menu .room_product .room_list{
     display: flex;
+    justify-content: space-between;
     height: 240px;
     padding: 10px;
     border-bottom: 1px solid #ccc;
+    gap: 10px;
 }
 .Room_section .room_menu .room_product .room_list .img_box{
-    width: 300px;
-    height: 200px;
+    width: 350px;
+    height: 220px;
     background-color: #fff;
     border-radius: 10px;
     text-align: center;
@@ -199,11 +201,61 @@
 }
 .Room_section .room_menu .room_product .room_list .room_info{
     background-color: #fff;
-    width: 600px;
+    width: 800px;
     height: 200px;
     border-radius: 10px;
     position: relative;
     padding: 15px;
+}
+.Room_section .room_menu .room_product .room_list .room_info .menu_title{
+    font-weight: 600;
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+.Room_section .room_menu .room_product .room_list .room_info .menu_city{
+    color: #666;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.Room_section .room_menu .room_product .room_list .room_info .menu_score{
+    background-color: #42799b;
+    width: 60px;
+    text-align: center;
+    padding: 10px 3px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 18px;
+    color: #fff;
+}
+.Room_section .room_menu .room_product .room_list .room_info .menu_discount{
+    text-align: right;
+    font-size: 18px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+.Room_section .room_menu .room_product .room_list .room_info .menu_discount .disC{
+    
+}
+.Room_section .room_menu .room_product .room_list .room_info .menu_discount .disC .s_box{
+    color: #f22f2f;
+    text-decoration: none;
+    background-color: #fcd8d8;
+    border-radius: 5px;
+    padding: 0 3px;
+    margin-right: 5px;
+    font-weight: 500;
+}
+.Room_section .room_menu .room_product .room_list .room_info .menu_discount .disC .p_box{
+    color: #999;
+    text-decoration: line-through;
+}
+.Room_section .room_menu .room_product .room_list .room_info .menu_discount .coupon{
+    text-decoration: none;
+}
+.Room_section .room_menu .room_product .room_list .room_info .menu_price{
+    text-align: right;
+    font-size: 32px;
+    font-weight: 600;
 }
 .Room_section .room_menu .room_product .room_list .room_info .menu_wishbtn{
     position: absolute;
