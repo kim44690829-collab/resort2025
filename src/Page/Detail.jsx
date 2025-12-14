@@ -1,17 +1,23 @@
 import './Detail.css';
-import { useContext,useState,useEffect } from 'react';
+import { useContext,useState,useEffect,useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import cookie from 'js-cookie';
 import { ResortDateContext } from '../Api/ResortDate';
+import LeafletMap from '../Api/LeafletMap';
 
 
 export default function Detail(){  
+    const {id} = useParams();
     //호텔,객실 데이터  
     const {HotelData,RoomData} = useContext(ResortDateContext);
     //아이디값 비교
-    const {id} = useParams();
     const Hotel = HotelData.find((item)=>item.id === Number(id));
+    //예외처리
+    if(!Hotel) return <p>잠시만 기다려주세요...</p>
+    //호텔이름 비교
     const Room = RoomData.filter((item)=>item.hotelName === Hotel.hotelName);
+    //예외처리
+    if(!Room) return <p>잠시만 기다려주세요...</p>
     
     console.log(Hotel);
     console.log(Room);
@@ -132,11 +138,30 @@ export default function Detail(){
     const shareClick = () =>{
         navigator.clipboard.writeText(`${window.location.origin}/detail/${id}`);
         alert("링크가 복사되었습니다!");
-    }
+    }   
+    //공유하기 버튼
+    const addressCopy = () =>{
+        navigator.clipboard.writeText(`${Hotel.city === 'Sokcho'?'대한민국, 강원도 속초시':Hotel.city === 'Gyeongju'?'대한민국, 경상북도 경주시':Hotel.city === 'Busan'?'대한민국, 부산시':Hotel.city === 'Gangneung'?'대한민국, 강원도 강릉시':Hotel.city === 'Yeosu'?'대한민국, 전라남도 여수시':Hotel.city === 'Daejeon'?'대한민국, 대전시':Hotel.city === 'Gwangju'?'대한민국, 광주시':Hotel.city === 'Jeju'?'대한민국, 제주도':Hotel.city === 'Pohang'?'대한민국, 경상북도 포항시':Hotel.city === 'Seoul'?'대한민국, 서울시':Hotel.city === 'Tokyo'?'일본, 도쿄':Hotel.city === 'Sapporo'?'일본, 훗카이도 삿포로':Hotel.city === 'LosAngeles'?'미국, 캘리포니아 로스앤젤레스':Hotel.city === 'NewYork'?'미국, 뉴욕':Hotel.city === 'Guam'?'미국, 괌':Hotel.city === 'Zhangjiajie'?'중국, 후난성 장가계':Hotel.city === 'Shanghai'?'중국, 상하이':Hotel.city === 'Rome'?'이탈리아, 로마':Hotel.city === 'Venice'?'이탈리아, 베네치아':Hotel.city === 'Paris'?'프랑스, 파리':null} ${Hotel.hotelName}`);
+        alert("주소가 복사되었습니다!");
+    }  
 
+    //스크롤 내리면 오른쪽 부분 따라 내려오기
+    const triggerRef = useRef(null);
+    const [isFixed, setIsFixed] = useState(false);
 
-    //예외처리
-    if(!Hotel) return <p>잠시만 기다려주세요...</p>
+    useEffect(() => {
+        const handleScroll = () => {
+                if (!triggerRef.current) return;
+
+                //getBoundingClientRect().top => top으로 부터 얼마나 떨어졌는지 측정
+                const top = triggerRef.current.getBoundingClientRect().top;
+                setIsFixed(top <= 0);
+            };
+            window.addEventListener("scroll", handleScroll);
+            return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+                            
 
     return(
         <section className="detail-wrap">
@@ -148,7 +173,7 @@ export default function Detail(){
                 ))}                
            </ul>
            <div className="detail-content">
-                <div className="detail-left">
+                <div className="detail-left" ref={triggerRef}>
                     <div className="detail-title">
                             <div className="title-left">
                                 <p className='hotelType'>{Hotel.type==='Hotel'?'호텔':Hotel.type==='Resort'?'리조트':Hotel.type==='GuestHouse'?'게스트하우스/비앤비':Hotel.type==='Condo'?'콘도':'캠핑장'}</p>
@@ -167,7 +192,7 @@ export default function Detail(){
                                 ):(
                                     <>
                                         <p className='discount'><span className='red'>회원가입시 10,000원 할인쿠폰</span></p>
-                                        <p className='final-price'>{(Hotel.price - (Hotel.price*0.1)).toLocaleString()}원<span>/1박</span></p>
+                                        <p className='final-price'>{(Hotel.price).toLocaleString()}원<span>/1박</span></p>
                                     </>
                                 )}
                                 <div className="btns">
@@ -235,36 +260,70 @@ export default function Detail(){
                                             <p><i className="fa-solid fa-ban"></i> <span className='bold'>무료 취소불가</span></p>
                                             <p><i className="fa-regular fa-clock"></i> 체크인 <span className='bold'>15:00</span> ~ 체크아웃 <span className='bold'>11:00</span></p>
                                             <p><i className="fa-solid fa-user-group"></i> 최대 투숙객 수 : <span className='bold'>{item.maxOccupancy}명</span></p>
-                                            <p><i className="fa-solid fa-tag"></i> <span className='bold'>할인혜택:</span>
-                                                <span className='bold' style={{color:'#f94239'}}>
+                                            <p><i className="fa-solid fa-tag"></i> <span className='bold'>할인혜택 :</span>
+                                                <span className='red'>
                                                     {Hotel.discount === 1 ? 
-                                                        ' 10%할인 이벤트 중'
+                                                        '10%할인 이벤트 중'
                                                     :
-                                                        ' 회원가입시 10,000원 할인쿠폰 제공'
+                                                        '회원가입시 10,000원 할인쿠폰'
                                                     }
                                                 </span>
                                             </p>
-                                        </div>
-                                        <div className="room-pay">
-                                            {Hotel.discount === 1 ? 
-                                        //     <span className='red'>10% 할인</span> <span className='origin-price'>{Hotel.price.toLocaleString()}원</span></p>
-                                        // <p className='final-price'>{(Hotel.price - (Hotel.price*0.1)).toLocaleString()}원<span>/1박</span>
-                                                <span>{Hotel.price + index * 12000}원</span>
-                                            :
-                                                <span>{Hotel.price + index * 12000}원</span>
-                                            }
-                                            <button type='button'><i class="fa-solid fa-basket-shopping"></i></button>
-                                            <button type='button'>예약하기</button>
+                                            <div className="room-pay">
+                                                {Hotel.discount === 1 ? 
+                                                    <>
+                                                        <span className='origin-price'>{(Hotel.price + index * 12000).toLocaleString()}원</span>
+                                                        <span className='final-price'>{((Hotel.price + index * 12000) - ((Hotel.price + index * 12000)*0.1)).toLocaleString()}원<span>/1박</span></span>
+                                                    </>                                                    
+                                                :                                                    
+                                                    <>
+                                                        <span className='final-price'>{(Hotel.price + index * 12000).toLocaleString()}원<span>/1박</span></span>
+                                                    </>
+                                                }
+                                                <button type='button' className='cart'><i className="fa-solid fa-basket-shopping"></i></button>
+                                                <button type='button' className='pay'>예약하기</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </li>
                             ))}
                         </ul>
                     </div>
+                    <div className="hotel-map">
+                        <p className='map-title'>위치안내</p>
+                        <LeafletMap city={Hotel.city} hotelName={Hotel.hotelName} style={{width:'100%',height:'400px',border: '1px solid #e7e7e7',borderRadius:'10px'}}/>
+                        <p className='map-address'>
+                            <i className="fa-solid fa-location-dot"></i>&nbsp;
+                            {Hotel.city === 'Sokcho'?'대한민국, 강원도 속초시':Hotel.city === 'Gyeongju'?'대한민국, 경상북도 경주시':Hotel.city === 'Busan'?'대한민국, 부산시':Hotel.city === 'Gangneung'?'대한민국, 강원도 강릉시':Hotel.city === 'Yeosu'?'대한민국, 전라남도 여수시':Hotel.city === 'Daejeon'?'대한민국, 대전시':Hotel.city === 'Gwangju'?'대한민국, 광주시':Hotel.city === 'Jeju'?'대한민국, 제주도':Hotel.city === 'Pohang'?'대한민국, 경상북도 포항시':Hotel.city === 'Seoul'?'대한민국, 서울시':Hotel.city === 'Tokyo'?'일본, 도쿄':Hotel.city === 'Sapporo'?'일본, 훗카이도 삿포로':Hotel.city === 'LosAngeles'?'미국, 캘리포니아 로스앤젤레스':Hotel.city === 'NewYork'?'미국, 뉴욕':Hotel.city === 'Guam'?'미국, 괌':Hotel.city === 'Zhangjiajie'?'중국, 후난성 장가계':Hotel.city === 'Shanghai'?'중국, 상하이':Hotel.city === 'Rome'?'이탈리아, 로마':Hotel.city === 'Venice'?'이탈리아, 베네치아':Hotel.city === 'Paris'?'프랑스, 파리':null}
+                            &nbsp;{Hotel.hotelName}
+                            <button type='button' onClick={addressCopy}>주소복사</button>
+                        </p>
+                    </div>
                     <div className="d" style={{height:'500px'}}></div>
                 </div>
-                <div className="detail-right">
-                            
+                <div className={`detail-right ${isFixed ? 'fixed' : null}`}>
+                    <div className="hotel-day">
+                        <p className='day-wrap'>
+                            <span className='day-tit'>예약일</span>
+                            <span className='day-txt'>2025.12.16(화)</span>
+                        </p>
+                        <p className='day-wrap'>
+                            <span className='day-tit'>종료일</span>
+                            <span className='day-txt'>2025.12.17(수)</span>
+                        </p>
+                        <button type='button'>예약일 변경</button>
+                    </div>
+                    <div className="hotel-headcount">
+                        <p className='head-tit'>예약인원 선택</p>
+                        <div className="head-select">
+                            <span className='head-txt'>인원</span>
+                            <div className="btns">
+                                <button type='button'>-</button>
+                                <span>0</span>
+                                <button type='button'>+</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
