@@ -2,6 +2,7 @@ import { useState,useEffect } from "react";
 import { useContext } from "react";
 import '../Page/Room.css'
 import { ResortDateContext } from '../Api/ResortDate';
+import Calendar from "./Calendar";
 
 export default function Room(){
     /* 필터 목록 */
@@ -171,6 +172,7 @@ export default function Room(){
 
     return(
         <>  
+            <Calendar/>
             {/* 상품 메뉴영역 */}
             <div className="Room_section">
                 {/* 상단 필터 영역 */}
@@ -252,7 +254,7 @@ export default function Room(){
                                             <span className="p_box">{item.price.toLocaleString()}원</span>
                                         </span>
                                         :
-                                        <span className="coupon">회원가입시 10,000원 할인 쿠폰지급</span>
+                                        <span className="coupon">회원가입시 10,000원 할인쿠폰</span>
                                         }
                                     </p>
                                     <p className="menu_price">{item.discount===1?(item.price*0.9).toLocaleString():item.price.toLocaleString()}원</p>

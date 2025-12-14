@@ -97,10 +97,11 @@
 .Room_section .filter_menu .center_filter .price_slide .slide_input::-webkit-slider-thumb{
     height: 20px;
     width: 20px;
-    border-radius: 50%;
+    border-radius: 50%; 
     background-color: #7ED6E4;
     -webkit-appearance: none;
     pointer-events: auto;
+    cursor: pointer;
 }
 .Room_section .filter_menu .center_filter .price_slide .price_inner{
     position: absolute;
@@ -243,7 +244,8 @@
     border-radius: 5px;
     padding: 0 3px;
     margin-right: 5px;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 12px;
 }
 .Room_section .room_menu .room_product .room_list .room_info .menu_discount .disC .p_box{
     color: #999;
@@ -251,6 +253,12 @@
 }
 .Room_section .room_menu .room_product .room_list .room_info .menu_discount .coupon{
     text-decoration: none;
+    font-size: 12px;
+    background-color: #fcd8d8;
+    color: #f22f2f;
+    padding: 0 3px;
+    font-weight: 600;
+    border-radius: 5px;
 }
 .Room_section .room_menu .room_product .room_list .room_info .menu_price{
     text-align: right;
