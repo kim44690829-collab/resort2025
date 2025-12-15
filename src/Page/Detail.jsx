@@ -18,7 +18,7 @@ export default function Detail(){
 
     //별점이미지
     const[starImg, setStarImg] = useState([]);
-
+    //
     useEffect(()=>{
         //해당호텔 별점 가져오기
         const score = Hotel.score;
