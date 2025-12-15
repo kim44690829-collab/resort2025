@@ -33,8 +33,10 @@ export default function Guest(){
     return(
         <div className="Guest_container">
             <h2 className='Guest_title'>비회원 예약조회</h2>
+            {/* 비회원 form */}
             <form>
                 <div className='Guest_form'>
+                    {/* 예약번호 */}
                     <label htmlFor="guestId">
                         예약번호<span style={{color:'red'}}>*</span>
                     </label>
@@ -47,6 +49,7 @@ export default function Guest(){
                     />
                     <p className='guestIdInfo'>이메일, 알림톡, 또는 문자로 전송된 예약 번호를 입력해주세요.</p>
 
+                    {/* 휴대폰 번호 */}
                     <label>
                         휴대폰 번호<span style={{color:'red'}}>*</span>
                     </label>
@@ -55,9 +58,18 @@ export default function Guest(){
                         <input type='text' id='guesttelFront' name='guesttel' placeholder='1234' value={guestNumFront} onChange={(e) => setGuestNumFront(e.target.value)} /><span>-</span>
                         <input type='text' id='guesttelBack' name='guesttel' placeholder='5678' value={guestNumBack} onChange={(e) => setGuestNumBack(e.target.value)} />
                     </div>
-                    <button type="submit" className='guestBtn' disabled={isDisabledGuest} style={{cursor:mouseCursor? 'pointer' : 'not-allowed'}} >인증번호 전송</button>
+                    {/* 인증번호 */}
+                    <button type="submit" 
+                    className='guestBtn' 
+                    disabled={isDisabledGuest} 
+                    style={{
+                        cursor:mouseCursor? 'pointer' : 'not-allowed',
+                        backgroundColor:mouseCursor? '#42799b' : '#e7e7e7ff',
+                        color:mouseCursor? '#fff': '#a5a5a5ff'
+                    }} >인증번호 전송</button>
                 </div>
             </form>
+            {/* 회원이라면 로그인 */}
             <div className='LoginGo'>
                 <Link to='/login'>
                     <button type="button" className='userLogin'>회원 예약조회</button>

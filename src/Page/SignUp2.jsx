@@ -15,16 +15,17 @@ export default function SignUp2(){
     const [userNumFront, setUserNumFront] = useState('');
     const [userNumBack, setUserNumBack] = useState('');
     // 마우스 변경
-    const [mouseCursur1, setMouseCursur1] = useState(false);
-    const [mouseCursur2, setMouseCursur2] = useState(false);
+    const [mouseCursor1, setMouseCursor1] = useState(false);
+    const [mouseCursor2, setMouseCursor2] = useState(false);
 
+    // 버튼을 활성화 하기 위한 조건
     useEffect(() => {
         if(userNumFront.length === 4 && userNumBack.length === 4){
             setPhoneNum(false)
-            setMouseCursur2(true)
+            setMouseCursor2(true)
         }else{
             setPhoneNum(true)
-            setMouseCursur2(false)
+            setMouseCursor2(false)
         }
     },[userNumFront, userNumBack])
     
@@ -41,10 +42,10 @@ export default function SignUp2(){
         
         if(value === '1111' || value === '2222' || value === '3333' || value === '5555' || value === '6666'){
             setIsDisabled(false)
-            setMouseCursur1(true)
+            setMouseCursor1(true)
         }else{
             setIsDisabled(true)
-            setMouseCursur1(false)
+            setMouseCursor1(false)
         }
     }
 
@@ -53,6 +54,7 @@ export default function SignUp2(){
     return(
         <div className='signup2_container'>
             <h1 className='signup2_title'>휴대폰 인증 </h1>
+            {/* 휴대폰 번호 form */}
             <form className='tel_form'>
                 <label>
                     휴대폰 번호<span style={{color:'red'}}>*</span></label>
@@ -61,20 +63,38 @@ export default function SignUp2(){
                     <input type='text' id='usertelFront' name='usertel' placeholder='1234' value={userNumFront} onChange={(e) => setUserNumFront(e.target.value)} /><span>-</span>
                     <input type='text' id='usertelBack' name='usertel' placeholder='5678' value={userNumBack} onChange={(e) => setUserNumBack(e.target.value)} />
                 </div>
+                {/* 휴대폰 번호를 입력하면 나타나는 인증번호 코드 */}
                 {phoneVerificationCode &&
-                    <>
-                        <label htmlFor="smsCode">
-                            인증번호<span style={{color:'red'}}>*</span></label>
-                        <input type='text' id='smsCode' name='smsCode' placeholder='인증번호 4자리' value={VerificationCode} onChange={VerificationCodeHandeler} />
-                    </>
+                <>
+                    <label htmlFor="smsCode">
+                        인증번호<span style={{color:'red'}}>*</span></label>
+                    <input type='text' id='smsCode' name='smsCode' placeholder='인증번호 4자리' value={VerificationCode} onChange={VerificationCodeHandeler} />
+                </>
                 }
-                
+                {/* 휴대폰번호, 인증번호 등의 버튼 */}
                 {phoneVerificationCode ?
                 <Link to='/signup3'>
-                    <button type='button' className='telBtn' disabled={isDisabled} style={{cursor: mouseCursur1 ? 'pointer' : 'not-allowed'}}>확인</button>
+                    <button type='button' 
+                    className='telBtn' 
+                    disabled={isDisabled} 
+                    style={{
+                        cursor: mouseCursor1 ? 'pointer' : 'not-allowed',
+                        backgroundColor: mouseCursor1 ? '#42799b' : '#e7e7e7ff',
+                        color: mouseCursor1 ? '#fff' : '#a5a5a5ff',
+                        border:'none'
+                        }}>확인</button>
                 </Link>
                 : 
-                <button type='submit' className='telBtn' onClick={telBtnHandeler} disabled={phoneNum} style={{cursor: mouseCursur2 ? 'pointer' : 'not-allowed'}} >인증번호 전송</button>}
+                <button type='submit' 
+                className='telBtn' 
+                onClick={telBtnHandeler} 
+                disabled={phoneNum} 
+                style={{
+                    cursor: mouseCursor2 ? 'pointer' : 'not-allowed',
+                    backgroundColor: mouseCursor2 ? '#42799b' : '#e7e7e7ff',
+                    color: mouseCursor2 ? '#fff' : '#a5a5a5ff',
+                    border:'none'
+                    }} >인증번호 전송</button>}
             </form>
         </div>
     )

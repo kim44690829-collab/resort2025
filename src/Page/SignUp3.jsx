@@ -3,12 +3,18 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function SignUp3(){
+    // 회원가입 form에 들어가는 상태변수
+    // 이메일
     const [userMail, setUserMail] = useState('');
+    // 비밀번호
     const [userPw, setUserPw] = useState('');
+    // 비밀번호 확인
     const [userPwConfirm, setUserPwConfirm] = useState('');
+    // 생일
     const [BirthYear, setBirthYear] = useState('');
     const [BirthMonth, setBirthMonth] = useState('');
     const [BirthDate, setBirthDate] = useState('');
+    // 닉네임
     const [userId, setUserId] = useState('');
     // 마우스 변경
     const [mouseCursur, setMouseCursur] = useState(false);
@@ -19,10 +25,12 @@ export default function SignUp3(){
     // 회원가입 폼의 모든 작성이 종료된 후 확인버튼 클릭시 모달
     const [signupModalOpen, setSignupModalOpen] = useState(false);
 
+    // 회원가입 종료 후 모달 핸들러
     const modalHandeler = () => {
         setSignupModalOpen(!signupModalOpen);
     }
 
+    // 회원가입 시 버튼 활성화 조건
     useEffect(() => {
         if(
             userMail.includes('@') && 
@@ -45,19 +53,24 @@ export default function SignUp3(){
         <div className='signup3_container'>
             <h1 className='signup3_title'>필수 정보 입력</h1>
             <h2 className='signup3_info'>가입을 위해 필수 정보를 입력해주세요</h2>
+            {/* 회원가입 form */}
             <form className='signupForm'>
+                {/* 이메일 */}
                 <div className='signup1'>
                     <label htmlFor="userEmail">이메일<span style={{color:'red'}}>*</span></label>
                     <input type="email" id='userEmail' name='userEmail' placeholder='abc@naver.com' value={userMail} onChange={(e) => setUserMail(e.target.value)}/>
                 </div>
+                {/* 비밀번호 */}
                 <div className='signup1'>
                     <label htmlFor="userpw">비밀번호<span style={{color:'red'}}>*</span></label>
                     <input type="password" id='userpw' name='userpw' placeholder='최소 8자 이상' value={userPw} onChange={(e) => setUserPw(e.target.value)} />
                 </div>
+                {/* 비밀번호 확인 */}
                 <div className='signup1'>
                     <label htmlFor="pwConfirm">비밀번호 확인<span style={{color:'red'}}>*</span></label>
                     <input type="password" id='pwConfirm' name='pwConfirm' placeholder='위 비밀번호와 동일하게 입력해주세요' value={userPwConfirm} onChange={(e) => setUserPwConfirm(e.target.value)} />
                 </div>
+                {/* 생년월일 */}
                 <div className='signup2'>
                     <label>생년월일<span style={{color:'red'}}>*</span></label><br/>
                     <div className='signup2_sub'>
@@ -66,6 +79,7 @@ export default function SignUp3(){
                         <input type="text" id='birth_date' name='birth' placeholder='DD' value={BirthDate} onChange={(e) => setBirthDate(e.target.value)} />
                     </div>
                 </div>
+                {/* 성별 */}
                 <div className='signup3'>
                     <p className='signup3_gender'>성별<span style={{color:'red'}}>*</span></p>
                     <input type="radio" id='man' name='gender' defaultChecked />
@@ -73,12 +87,24 @@ export default function SignUp3(){
                     <input type="radio" id='woman' name='gender' />
                     <label htmlFor='woman'>여자</label>
                 </div>
+                {/* 닉네임 */}
                 <div className='signup4'>
                     <label htmlFor="userid">닉네임<span style={{color:'red'}}>*</span></label>
                     <input type="text" id='userid' name='userid' value={userId} onChange={(e) => setUserId(e.target.value)} placeholder='2글자 이상 적어주세요' />
                 </div>
-                <button type='button' className='signupBtn' onClick={modalHandeler} disabled={isDisabledSignup} style={{cursor: mouseCursur ? 'pointer' : 'not-allowed'}}  >확인</button>
+                {/* 버튼 */}
+                <button type='button' 
+                className='signupBtn' 
+                onClick={modalHandeler} 
+                disabled={isDisabledSignup} 
+                style={{
+                    cursor: mouseCursur ? 'pointer' : 'not-allowed',
+                    backgroundColor: mouseCursur ? '#42799b' : '#e7e7e7ff',
+                    color: mouseCursur ? '#fff' : '#a5a5a5ff',
+                    border:'none'
+                    }}  >확인</button>
             </form>
+            {/* 회원가입 종료 후 모달 */}
             {signupModalOpen && 
             <>
                 <div className='overlay'></div>
@@ -87,7 +113,10 @@ export default function SignUp3(){
                     <h1>회원가입이 완료되었습니다!</h1>
                     <p className='p1'>EcoStay로 오신걸 환영합니다!</p>
                     <Link to='/'>
-                        <button type='button' onClick={modalHandeler} className='signupModalBtn'>홈으로</button>
+                        <button type='button' 
+                        onClick={modalHandeler} 
+                        style={{color:'#fff', backgroundColor:'#42799b', border:'none', cursor:'pointer'}}
+                        className='signupModalBtn'>홈으로</button>
                     </Link>
                 </div> 
             </>

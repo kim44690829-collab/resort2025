@@ -1,3 +1,4 @@
+/* 전체 css */
 .Guest_container{
     width: 1200px;
     margin: 10px auto;
@@ -9,16 +10,19 @@
     margin: 100px 0 30px 0;
     font-size: 30px;
 }
+/* 비회원 form */
 .Guest_container .Guest_form{
     display: flex;
     flex-direction: column;
     width: 500px;
     margin: 0 auto;
 }
+/* label, input css */
 .Guest_container .Guest_form label,
 .Guest_container .Guest_form input{
     margin-bottom: 10px;
 }
+/* 예약번호 css */
 .Guest_container .Guest_form #guestId{
     padding: 15px 10px 15px 10px;
     border-radius: 10px;
@@ -29,20 +33,24 @@
 .Guest_container .Guest_form .guestIdInfo{
     margin-bottom: 50px;
 }
+/* 핸드폰 번호 css */
 .Guest_container .Guest_form .guestPhone{
     width: 500px;
-    border: 2px solid black;
+    border: none;
     border-radius: 10px;
     margin-bottom: 10px;
     background-color: #e0e0e0;
 }
+/* 핸드폰 번호 input css */
 .Guest_container .Guest_form .guestPhone > input[type='text']{
     width: 160px;
     padding: 20px 10px 10px 60px;
     border: none;
     border-radius: 10px;
+    outline: none;
     background-color: #e0e0e0;
 }
+/* 확인 버튼 */
 .Guest_container .Guest_form .guestBtn{
     padding: 15px 10px 15px 10px;
     border-radius: 10px;
@@ -50,6 +58,7 @@
     margin-top: 20px;
     border: none;
 }
+/* 회원이라면 로그인으로 가는 링크 */
 .Guest_container .LoginGo{
     text-align: center;
     margin-top: 30px;

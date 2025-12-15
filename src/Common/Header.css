@@ -10,6 +10,9 @@
     padding-left: 30px;
 }
 /* Header 우측 버튼 css */
+.Header_right{
+    display: flex;
+}
 .Header_container .Header_right  .mainLogo{
     margin-right: 5px;
     padding: 10px;

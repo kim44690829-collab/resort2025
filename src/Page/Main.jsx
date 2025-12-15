@@ -25,7 +25,9 @@ export default function Main(){
                         <i className="fa-solid fa-magnifying-glass searchIcon"></i>
                         <div>달력</div>
                         <div>인원</div>
-                        <button type='button' className='Search_Btn'>검색</button>
+                        <Link to='/room'>
+                            <button type='button' className='Search_Btn'>검색</button>
+                        </Link>
                     </form>
                 </div>
             </div>
