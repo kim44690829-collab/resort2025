@@ -2,6 +2,7 @@ import '../Page/Main.css';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ResortDateContext } from '../Api/ResortDate';
+import 'leaflet/dist/leaflet.css';
 
 export default function Main(){    
     const {RoomData, HotelData} = useContext(ResortDateContext);
