@@ -24,10 +24,14 @@ export default function Detail(){
 
     //호텔별점 이미지
     const[starImg, setStarImg] = useState([]);
+<<<<<<< HEAD
     //객실당 평균별점 이미지
     const[starRoom, setStarRoom] = useState([]);
 
 
+=======
+    //
+>>>>>>> main
     useEffect(()=>{
         //해당호텔 별점 가져오기
         const score = Hotel.score;
