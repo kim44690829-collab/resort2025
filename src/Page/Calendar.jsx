@@ -16,6 +16,9 @@ export default function Calendar(){
         Array.from(Array(6),() => new Array(7).fill(''))
     ) //달력에 들어가는 배열
 
+    //선택한 날짜
+    const [selectDate,setSelectDate] = useState({})
+
     useEffect(()=>{
         //console.log(selectMonth)
         const years = selectMonth.getFullYear() // 선택 연도
@@ -53,7 +56,7 @@ export default function Calendar(){
         console.log(newArr)
         setCalArr(newArr)
 
-    },[])
+    },[selectMonth])
     useEffect(()=>{
         //console.log(selectMonth)
         const years = nextMonth.getFullYear() // 선택 연도
@@ -91,7 +94,7 @@ export default function Calendar(){
         console.log(newArr)
         setCalArr02(newArr)
 
-    },[])
+    },[selectMonth])
     const next =()=>{
         setSelectMonth(new Date(selectMonth.getFullYear(),selectMonth.getMonth() + 1,1))
     }
@@ -99,6 +102,13 @@ export default function Calendar(){
         setSelectMonth(new Date(selectMonth.getFullYear(),selectMonth.getMonth() - 1,1))
     }
     const leftcal =(items)=>{
+        const selectDateCopy = [...selectDate]
+        if(selectDateCopy.length<2){
+            selectDateCopy.push(items)
+        }
+        console.log(selectDateCopy)
+        selectDateCopy.sort((a,b)=> a-b)
+        setSelectDate(selectDateCopy)
         console.log(`${selectMonth.getFullYear()}-${selectMonth.getMonth()+1}-${items}`)
     }
     const right = (items)=>{
@@ -106,11 +116,11 @@ export default function Calendar(){
     }
     return(
         <>
-            <div style={{width:'600px',height:'200px',backgroundColor:'yellowgreen',margin:'0 auto'}}>
+            <div style={{width:'600px',height:'200px',backgroundColor:'yellowgreen',margin:'0 auto'}} className="calendar">
                 <div className="calendar_manu">
-                    <h2>{selectMonth.getFullYear()}년 {selectMonth.getMonth()+1}월</h2>
-                    <table className="week">
-                        <thead>
+                    <h2 className="cal_title">{selectMonth.getFullYear()}년 {selectMonth.getMonth()+1}월</h2>
+                    <table className="week" border={1}>
+                        <thead className="table_head">
                             <tr>
                                 <th>일</th>
                                 <th>월</th>
@@ -121,11 +131,11 @@ export default function Calendar(){
                                 <th>토</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="table_body">
                             {calArr.map((item,index) => (
                                     <tr key={index}>
                                         {item.map((items,index) => (
-                                            <td key={index} onClick={()=>leftcal(items)}>{items}</td>
+                                            <td key={index} onClick={()=>leftcal(items)} style={{color:item[0]===items?'red':'black'}}>{items}</td>
                                         ))}
                                     </tr>
                                 ))}
@@ -133,9 +143,9 @@ export default function Calendar(){
                     </table>
                 </div>
                 <div className="calendar_manu">
-                    <h2>{nextMonth.getFullYear()}년 {nextMonth.getMonth()+1}월</h2>
-                    <table className="week">
-                        <thead>
+                    <h2 className="cal_title">{nextMonth.getFullYear()}년 {nextMonth.getMonth()+1}월</h2>
+                    <table className="week" border={1}>
+                        <thead className="table_head">
                             <tr>
                                 <th>일</th>
                                 <th>월</th>
@@ -146,11 +156,11 @@ export default function Calendar(){
                                 <th>토</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="table_body">
                             {calArr02.map((item,index) => (
                                     <tr key={index}>
                                         {item.map((items,index) => (
-                                            <td key={index} onClick={()=>right(items)}>{items}</td>
+                                            <td key={index} onClick={()=>right(items)} style={{color:item[0]===items?'red':'black'}}>{items}</td>
                                         ))}
                                     </tr>
                                 ))}
@@ -160,7 +170,7 @@ export default function Calendar(){
                     <button type="button" onClick={next}>다음달</button>
                     
                 </div>
-                
+                <p>{selectDate[0]}부터~{selectDate[1]}까지</p>
             </div>
         </>
     )

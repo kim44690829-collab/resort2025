@@ -1,0 +1,18 @@
+.calendar{
+    display: flex;
+    justify-content: space-around;
+}
+.calendar .calendar_manu{}
+.calendar .calendar_manu .cal_title{}
+.calendar .calendar_manu .week{
+    background-color: #fff;
+    width: 250px;
+    text-align: center;
+}
+.calendar .calendar_manu .week .table_body tr td{
+    height: 25px;
+}
+.calendar .calendar_manu .week .table_body tr td:hover{
+    background-color: #7ED6E4;
+    cursor: pointer;
+}

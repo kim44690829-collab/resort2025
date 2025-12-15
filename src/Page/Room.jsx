@@ -3,6 +3,7 @@ import { useContext } from "react";
 import '../Page/Room.css'
 import { ResortDateContext } from '../Api/ResortDate';
 import Calendar from "./Calendar";
+import { Link } from "react-router-dom";
 
 export default function Room(){
     /* 필터 목록 */
@@ -241,6 +242,7 @@ export default function Room(){
                 <div className="room_menu">
                     <ul className="room_product">
                         {myhotel.length !== 0?myhotel.map((item)=>(
+                            <Link to={`/detail/${item.id}`}>
                             <li key={item.id} className="room_list">
                                 <div className="img_box"><img src={item.img[0]} alt={`${item.img[0]}이미지`} className="hotelimg"/></div>
                                 <div className="room_info">
@@ -261,6 +263,7 @@ export default function Room(){
                                     <button type="button" className="menu_wishbtn" onClick={()=>setLikeBtn(!likeBtn)}>{likeBtn?'❤':'💖'}</button>
                                 </div>
                             </li>
+                            </Link>
                         )): <h2>검색된 상품이 없습니다.</h2>}
                     </ul>
                 </div>
