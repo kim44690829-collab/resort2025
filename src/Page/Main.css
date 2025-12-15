@@ -11,6 +11,7 @@
     bottom: -100px;
     left: 350px;
     border: 1px solid blue;
+    z-index: 100;
 }
 .main_container .mainImgBenner .hotelSearch .hotelSearchBtn{
     width: 500px;
@@ -32,6 +33,67 @@
 }
 .main_container .mainImgBenner .hotelSearch .hotelInput #citySearch{
     width: 500px;
+    height: 45px;
+    padding: 15px 10px 10px 10px;
+    padding-left: 40px;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    background-color: #f0f0f0;
+}
+/* .main_container .mainImgBenner .hotelSearch .hotelInput #citySearch:focus + ul.rankBox{
+    height: 430px;
+} */
+.main_container .mainImgBenner .hotelSearch .hotelInput #citySearch:hover{
+    background-color: #cecece;
+}
+.main_container .mainImgBenner .hotelSearch .hotelInput #citySearch:hover::placeholder{
+    color: #505050;
+}
+.rankName{
+    display: inline-block;
+    width: 420px;
+}
+/* 검색창 클릭시 나오는 지역 css */
+.main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .countryInRank,
+.main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankName{
+    cursor: pointer;
+}
+/* .rankBoxRelat{
+    position: relative;
+} */
+/* 검색창 ul */
+.main_container .mainImgBenner .hotelSearch .hotelInput .rankBox{
+    width: 500px;
+    height: 430px;
+    margin: 10px 0 10px 0;
+    position: absolute;
+    background-color: #fff;
+    z-index: 20;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    top: 35px;
+    left: 0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.main_container .mainImgBenner .hotelSearch:focus-within .rankBox{
+    /* height: 430px; */
+}
+/* 검색창 li */
+.main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankBoxLi{
+    padding: 10px;
+}
+.inputInfo{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0 10px 0;
+}
+/* 검색창 순위 */
+.main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankBoxLi .countryInRank{
+    padding-right: 30px;
+    width: 50px;
+    display: inline-block;
 }
 .main_container .mainImgBenner .hotelSearch .hotelInput .Search_Btn{
     width: 100px;
@@ -43,8 +105,8 @@
 }
 .main_container .mainImgBenner .hotelSearch .hotelInput .searchIcon{
     position: absolute;
-    top: 8px;
-    left: 5px;
+    top: 16px;
+    left: 10px;
 }
 .main_container .hotel_type{
     width: 1200px;
@@ -89,7 +151,9 @@
 .main_container .popularAccom .popularAccomSub1 .popularAccomSub2 .popularAccomMainImg{
     width: 232px;
     height: 240px;
+    border-radius: 10px;
 }
+
 .main_container .popularAccom .popularAccomSub1 .popularAccomSub2 .popularAccom_name{
     margin-bottom: 10px;
 }
