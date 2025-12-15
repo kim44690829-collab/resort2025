@@ -299,7 +299,62 @@ export default function Detail(){
                             <button type='button' onClick={addressCopy}>주소복사</button>
                         </p>
                     </div>
-                    <div className="d" style={{height:'500px'}}></div>
+                    <div className="hotel-score">
+                        <p className="score-title">이용자 평점</p>
+                        <div className="score-wrap">
+                            <div className="score-left">
+                                <p className='tit'>이용자 평균 평점</p>
+                                <p className='star'>
+                                    {starImg.map((star,index)=>(
+                                        <img src={star} alt="score" key={index} />
+                                    ))}
+                                </p>
+                                <p className='score'>{Hotel.score}<span>/5</span></p>
+                            </div>
+                            <div className="score-middle">
+                                <p className='tit'>전체 평점 수</p>
+                                <p className='icon'><i className="fa-solid fa-user-group"></i></p>
+                                <p className='count'>{(Hotel.scoreCount).toLocaleString()}</p>
+                            </div>
+                            <div className="score-right">
+                                <p className='tit'>평점 비율</p>
+                                <div className="graph">
+                                    <div className="bar-wrap">
+                                        <span>5점</span>
+                                        <div className="bar-width">
+                                            <div className="bar"></div>
+                                        </div>
+                                    </div>
+                                    <div className="bar-wrap">
+                                        <span>4점</span>
+                                        <div className="bar-width">
+                                            <div className="bar"></div>
+                                        </div>
+                                    </div>
+                                    <div className="bar-wrap">
+                                        <span>3점</span>
+                                        <div className="bar-width">
+                                            <div className="bar"></div>
+                                        </div>
+                                    </div>
+                                    <div className="bar-wrap">
+                                        <span>2점</span>
+                                        <div className="bar-width">
+                                            <div className="bar"></div>
+                                        </div>
+                                    </div>
+                                    <div className="bar-wrap">
+                                        <span>1점</span>
+                                        <div className="bar-width">
+                                            <div className="bar"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style={{height:'500px'}}></div>
                 </div>
                 <div className={`detail-right ${isFixed ? 'fixed' : null}`}>
                     <div className="hotel-day">

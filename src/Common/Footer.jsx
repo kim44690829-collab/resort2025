@@ -38,10 +38,10 @@ export default function Footer(){
                     </div>
                     <div className="footer_sns">
                         <button type="button" className='youtube_btn'>
-                            <i class="fa-brands fa-youtube"></i>
+                            <i className="fa-brands fa-youtube"></i>
                         </button>
                         <button type="button" className='instar_btn'>
-                            <i class="bi bi-instagram"></i>
+                            <i className="bi bi-instagram"></i>
                         </button>
                     </div>
                 </div>
