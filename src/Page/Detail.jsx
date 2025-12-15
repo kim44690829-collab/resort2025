@@ -21,7 +21,7 @@ export default function Detail(){
     
     console.log(Hotel);
     console.log(Room);
-
+    //
     //호텔별점 이미지
     const[starImg, setStarImg] = useState([]);
     //객실당 평균별점 이미지
