@@ -59,6 +59,7 @@ export default function Main(){
                     <span className='CampingImg'>캠핑</span>
                 </div>
             </div>
+            {/* ㄴㄴ */}
             {/*  */}
             <div className='popularAccom'>
                 <p className='popularAccomTitle'>인기 스테이 PICK!</p>
