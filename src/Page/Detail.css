@@ -172,6 +172,7 @@ button{
 }
 .detail-wrap .detail-content .detail-left .service .service-icon .icon i{
     color: #42799b;
+    display: inline;
 }
 .detail-wrap .detail-content .detail-left .service .service-icon .icon i span{
     font-size: 14px;

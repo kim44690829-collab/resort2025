@@ -94,7 +94,17 @@ export default function Room(){
 
     },[myFilter,minPrice,maxPrice,hotelSort])
 
+    useEffect(()=>{
+        if(minPrice<0){
+            setMinPrice(0)
+            setMaxPrice(10000)
+        }
 
+        if(maxPrice>300000){
+            setMaxPrice(300000)
+            setMinPrice(290000)
+        }
+    },[minPrice,maxPrice])
 
     
 
