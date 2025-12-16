@@ -18,6 +18,7 @@ export default function Calendar(){
 
     //선택한 날짜
     const [selectDate,setSelectDate] = useState([])
+    const [selectday,setSelectday] = useState([])
 
     useEffect(()=>{
         //console.log(selectMonth)
@@ -132,8 +133,9 @@ export default function Calendar(){
         } */
         
     }
+    
     //왼쪽달력
-    const leftcal =(items)=>{
+    const leftcal =(items,item,years)=>{
         const selectDateCopy = [...selectDate]
         if(selectDateCopy.length<2){
             selectDateCopy.push(`${selectMonth.getFullYear()}-${selectMonth.getMonth()+1}-${items}`)
@@ -141,28 +143,52 @@ export default function Calendar(){
             console.log(selectDateCopy)
             selectDateCopy.splice(0,2)
         }
-        console.log(selectDateCopy)
+       // console.log(selectDateCopy)
         selectDateCopy.sort((a,b)=> a-b)
-        console.log(selectDateCopy.sort())
+       // console.log(selectDateCopy.sort())
         setSelectDate(selectDateCopy.sort())
-        console.log(`${selectMonth.getFullYear()}-${selectMonth.getMonth()+1}-${items}`,'비교')
-        console.log(selectDate[0],'비교')
-       
+        
+        const selectdayCopy = [...selectday]
+        if(selectdayCopy.length<2){
+            selectdayCopy.push(`${years}-${item}-${items}`)
+        }else(
+            selectdayCopy.splice(0,2)
+        )
+        console.log(selectdayCopy)
+        
+        
+        setSelectday(selectdayCopy.sort())
+        console.log(selectdayCopy.sort())
     }
     //오른쪽 달력
-    const right = (items)=>{
+    const right = (items,item,years)=>{
         const selectDateCopy = [...selectDate]
         if(selectDateCopy.length<2){
             selectDateCopy.push(`${nextMonth.getFullYear()}-${nextMonth.getMonth()+1}-${items}`)
         }else{
-            console.log(selectDateCopy)
             selectDateCopy.splice(0,2)
         }
-        console.log(selectDateCopy)
         selectDateCopy.sort((a,b)=> a-b)
-        console.log(selectDateCopy)
         setSelectDate(selectDateCopy.sort())
-        console.log(`${nextMonth.getFullYear()}-${nextMonth.getMonth()+1}-${items}`)
+
+        const selectdayCopy = [...selectday]
+        if(selectdayCopy.length<2){
+            if(item<10 && items<10){
+                selectdayCopy.push(`${years}-0${item}-0${items}`)
+            }else if(item<10 && items >=10){
+                selectdayCopy.push(`${years}-0${item}-${items}`)
+            }else if(item>=10 && items <10){
+                selectdayCopy.push(`${years}-${item}-0${items}`)
+            }else{
+                selectdayCopy.push(`${years}-${item}-${items}`)
+            }
+        }else(
+            selectdayCopy.splice(0,2)
+        )
+        console.log(selectdayCopy)
+        setSelectday(selectdayCopy.sort())
+        console.log(`${selectMonth.getFullYear()}-${nextMonth.getMonth()+1<10?''+nextMonth.getMonth()+1:nextMonth.getMonth()+1}-${items<10?''+items:items}`)
+        
     }
     return(
         <>
@@ -185,12 +211,19 @@ export default function Calendar(){
                             {calArr.map((item,index) => (
                                     <tr key={index}>
                                         {item.map((items,index) => (
-                                            <td key={index} onClick={()=>leftcal(items)} 
-                                            className={items>=selectMonth.getDate() && items !== '' ?'active':''}
+                                            <td key={index} onClick={()=>leftcal(items,selectMonth.getMonth()+1,selectMonth.getFullYear())} 
+                                            className={
+                                                selectMonth.getDate()>items?''
+                                                :
+                                                `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?''+selectMonth.getMonth()+1:selectMonth.getMonth()+1}-${items<10?''+items:items}`===selectday[0] || `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?''+selectMonth.getMonth()+1:selectMonth.getMonth()+1}-${items<10?''+items:items}`===selectday[1]?'choose'
+                                                :
+                                                `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?''+selectMonth.getMonth()+1:selectMonth.getMonth()+1}-${items<10?''+items:items}`>selectday[0] && `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?''+selectMonth.getMonth()+1:selectMonth.getMonth()+1}-${items<10?''+items:items}`<selectday[1]?'area'
+                                                :'active'
+                                            }
                                             style={{
-                                                color:items<selectMonth.getDate()?'green':item[0]===items?'red':'black',
+                                                color:items<selectMonth.getDate()?'gray':item[0]===items?'red':'black',
                                                 cursor:items<selectMonth.getDate()?'default':'pointer',
-                                                backgroundColor:`${selectMonth.getFullYear()}-${selectMonth.getMonth()}-${items}`===selectDate[0]?'blue':''
+                                               
                                             }}>{items}</td>
                                         ))}
                                     </tr>
@@ -216,7 +249,17 @@ export default function Calendar(){
                             {calArr02.map((item,index) => (
                                     <tr key={index}>
                                         {item.map((items,index) => (
-                                            <td key={index} onClick={()=>{right(items)}} style={{color:item[0]===items?'red':'black'}} className={items!==''? "active":''}>{items}</td>
+                                            <td key={index} onClick={()=>{right(items,nextMonth.getMonth()+1,nextMonth.getFullYear())}} style={{color:item[0]===items?'red':'black'}} 
+                                            className={
+                                                items===''?''
+                                                :
+                                                `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?''+nextMonth.getMonth()+1:nextMonth.getMonth()+1}-${items<10?''+items:items}`===selectday[0] || `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?''+nextMonth.getMonth()+1:nextMonth.getMonth()+1}-${items<10?''+items:items}`===selectday[1]?'choose'
+                                                :
+                                                `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?''+nextMonth.getMonth()+1:nextMonth.getMonth()+1}-${items<10?''+items:items}`>selectday[0] && `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?''+nextMonth.getMonth()+1:nextMonth.getMonth()+1}-${items<10?''+items:items}`<selectday[1]?'area'
+                                                :
+                                                'active'}>
+                                                {items}
+                                            </td>
                                         ))}
                                     </tr>
                                 ))}

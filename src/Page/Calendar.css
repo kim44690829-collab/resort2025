@@ -21,3 +21,10 @@
     background-color: #7ED6E4;
     cursor: pointer;
 }
+.calendar .calendar_manu .week .table_body tr .choose{
+    background-color: #f4c7a1;    
+}
+.calendar .calendar_manu .week .table_body tr .area{
+    background-color: #8e9fe3;
+    
+}
