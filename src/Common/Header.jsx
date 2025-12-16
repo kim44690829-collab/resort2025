@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import '../Common/Header.css';
 
 export default function Header(){
+    const [menuModal, setMenuModal] = useState(false)
     return(
         <div className="Header_container">
             {/* 누르면 메인 페이지로 이동하는 로고 */}
@@ -10,7 +12,7 @@ export default function Header(){
             </Link>
             <ul className="Header_right">
                 {/* 비회원 예약조회 */}
-                <li>
+                <li className="menu_list">
                     <Link to='/guest'>
                         <button type="button" className="HeaderBtn">
                             비회원 예약조회
@@ -18,7 +20,7 @@ export default function Header(){
                     </Link>
                 </li>
                 {/* 로그인 */}
-                <li>
+                <li className="menu_list">
                     <Link to='/login'>
                         <button type="button" className="HeaderBtn">
                             로그인
@@ -26,29 +28,38 @@ export default function Header(){
                     </Link>
                 </li>
                 {/* 회원가입 */}
-                <li>
+                <li className="menu_list">
                     <Link to='/signup1'>
                         <button type="button" className="HeaderBtn">
                             회원가입
                         </button>
                     </Link>
                 </li>
-                <li>
-                    <button type="button" className="HeaderBtn">메뉴</button>
-                    {/* <ul>
-                        <li>
-                            <Link to='/login'>
-                                <button type="button" className="HeaderBtn">
-                                    로그인
-                                </button>
-                            </Link>
-                        </li>
-                        <li>
-                            <button type="button">국내숙소</button>
-                        </li>
-                    </ul> */}
+                <li className="menu_list">
+                    {/* 메뉴 */}
+                    <button type="button" className="HeaderBtn" onClick={() => setMenuModal(!menuModal)} >
+                        <i className="fa-solid fa-bars"></i>
+                    </button>
                 </li>
             </ul>
+            {menuModal && 
+                <>
+                    <ul className="menus">
+                        <li className="menus_sub">
+                            <button type="button" className="domestic-hotels">국내숙소</button>
+                        </li>
+                        <li className="menus_sub">
+                            <button type="button" className="wishList_menu">찜목록</button>
+                        </li>
+                        <li className="menus_sub">
+                            <button type="button" className="international-hotels">해외숙소</button>
+                        </li>
+                        <li className="menus_sub">
+                            <button type="button" className="support-center">고객센터</button>
+                        </li>
+                    </ul>
+                </>
+            }
         </div>
     )
 }

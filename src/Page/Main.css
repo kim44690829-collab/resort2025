@@ -1,8 +1,8 @@
 .main_container .mainImgBenner{
     width: 1920px;
-    height: 500px;
+    height: 600px;
     margin: 0 auto;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     position: relative;
 }
 .main_container .mainImgBenner .hotelSearch{
@@ -50,7 +50,7 @@
 .main_container .mainImgBenner .hotelSearch .hotelInput #citySearch:hover::placeholder{
     color: #505050;
 }
-.rankName{
+.main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankName{
     display: inline-block;
     width: 420px;
 }
@@ -83,7 +83,7 @@
 .main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankBoxLi{
     padding: 10px;
 }
-.inputInfo{
+.main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankBoxLi .inputInfo{
     display: inline-block;
     font-size: 20px;
     font-weight: bold;
@@ -119,9 +119,11 @@
 .main_container .hotel_type .accomCat{
     width: 240px;
     height: 240px;
-    border: 1px solid green;
+    /* border: 1px solid green; */
     position: relative;
     overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
 }
 .main_container .hotel_type .accomCat .HotelImg,
 .main_container .hotel_type .accomCat .ResortImg,
@@ -132,6 +134,20 @@
     bottom: 10px;
     right: 10px;
 }
+.guestSum .minus_btn,
+.guestSum .plus_btn{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border: none;
+}
+.guests{
+    display: inline-block;
+    width: 50px;
+    padding: 10px;
+    text-align: center;
+}
 /*  */
 .main_container .popularAccom{
     margin-top: 70px;
@@ -140,6 +156,30 @@
     width: 1200px;
     margin: 0 auto;
     margin-bottom: 30px;
+}
+.main_container .popularAccom .popularAccomSub1{
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+}
+.leftBtn1{
+    position: absolute;
+    top: -120px;
+    left: -50px;
+    width: 50px;
+    height: 500px;
+    background-color: transparent;
+    border: none;
+}
+.rightBtn1{
+    position: absolute;
+    top: -120px;
+    right: -50px;
+    width: 50px;
+    height: 500px;
+    border: none;
+    background-color: transparent;
 }
 .main_container .popularAccom .popularAccomSub1 .popularAccomSub2{
     display: flex;
@@ -169,7 +209,7 @@
     margin-left: 10px;
     color: rgb(68, 68, 68);
 }
-/*  */
+/* 관광명소  */
 .main_container .spotsAndStays .spotsAndStaysTitle{
     width: 1200px;
     margin: 0 auto;
@@ -177,11 +217,38 @@
     margin-bottom: 30px;
 }
 .main_container .spotsAndStays .spotsAndStaysAll{
-    display: flex;
     width: 1200px;
     margin: 0 auto;
-    gap: 10px;
+    display: flex;
+    position: relative;
+}
+.citySpots{
+    display: flex;
     overflow: hidden;
+    /* width: 1200px; */
+    /* margin: 0 auto; */
+    gap: 10px;
+}
+.citySpotImg{
+    border-radius: 10px;
+}
+.leftBtn2{
+    position: absolute;
+    top: 0;
+    left: -50px;
+    width: 50px;
+    height: 500px;
+    background-color: transparent;
+    border: none;
+}
+.rightBtn2{
+    position: absolute;
+    top: 0;
+    right: -50px;
+    width: 50px;
+    height: 500px;
+    border: none;
+    background-color: transparent;
 }
 .main_container .spotsAndStays .spotsAndStaysAll .spotsAndStaysImg{
     width: 390px;
@@ -193,6 +260,11 @@
     margin: 0 auto;
     margin-top: 70px;
     margin-bottom: 30px;
+}
+.staySortByRating .hotelRating_desc{
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
 }
 .staySortByRating .hotelRating_desc .hotelRating_each{
     display: flex;
@@ -207,6 +279,7 @@
 .staySortByRating .hotelRating_desc .hotelRating_each .hotelRatingImg{
     width: 390px;
     height: 500px;
+    border-radius: 10px;
 }
 .staySortByRating .hotelRating_desc .hotelRating_each_sub2{
     border: 1px solid red;
@@ -220,8 +293,28 @@
     padding-top: 15px;
 }
 .main_container .eventBanner{
-    width: 1980px;
+    width: 1920px;
     height: 400px;
     margin: 100px auto;
     border: 1px solid red;
+}
+/* 관광명소 모달 */
+.main_container .overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 998;
+}
+.spotsModal{
+    position: absolute;
+    top: 200%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 500px;
+    background-color: #fff;
+    z-index: 999;
 }

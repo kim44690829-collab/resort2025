@@ -3,11 +3,14 @@
     width: 1920px;
     height: 80px;
     display: flex;
-    margin: 20px auto;
     justify-content: space-between;
     align-items: center;
     padding-right: 30px;
     padding-left: 30px;
+    position: absolute;
+    background-color: transparent;
+    z-index: 700;
+    top: 0;
 }
 /* Header 우측 버튼 css */
 .Header_right{
@@ -24,4 +27,40 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    background-color: transparent;
+    font-weight: 600;
+
+}
+/* 메뉴 클릭 시 모달 */
+.menus{
+    position: absolute;
+    top: 80px;
+    right: 0;
+    width: 200px;
+    /* height: 100vh; */
+    z-index: 900;
+    background-color: rgba(255, 255, 255, 0.295);
+}
+.menus_sub{
+    margin: 0 auto;
+    padding: 10px 0 10px 0;
+}
+.menus_sub > button,
+.menus_sub .menuLoginBtn{
+    width: 200px;
+    padding: 10px;
+    border: none;
+}
+/* 국내 숙소 */
+.domestic-hotels,
+.wishList_menu,
+.international-hotels,
+.support-center{
+    background-color: rgba(255, 255, 255, 0);
+}
+.domestic-hotels:hover,
+.wishList_menu:hover,
+.international-hotels:hover,
+.support-center:hover{
+    text-decoration: underline;
 }
