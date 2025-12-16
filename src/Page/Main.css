@@ -186,6 +186,10 @@
     width: 1200px;
     margin: 0 auto;
     gap: 10px;
+}
+.slideBox{
+    width: 2419px;
+    margin: 0 auto;
     overflow: hidden;
 }
 .main_container .popularAccom .popularAccomSub1 .popularAccomSub2 .popularAccomMainImg{

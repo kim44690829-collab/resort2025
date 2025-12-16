@@ -28,6 +28,17 @@ export default function Main(){
     const [guestCount, setGuestCount] = useState(1)
     // 관광지 클릭시 모달
     const [spotModalOpen, setSpotModalOpen] = useState(false);
+    // 슬라이드 상태저장 변수
+    const [slideMove, setSlideMove] = useState(0)
+
+    // 슬라이드 함수
+    const leftSlide = () => {
+        if(slideMove > -2419){
+            setSlideMove(slideMove - 232)
+            console.log(slideMove);
+        }
+        
+    }
 
     // 관광명소 map돌리기 위한 오브젝트 배열
     const popularSpot = [
@@ -102,14 +113,19 @@ export default function Main(){
 
     return(
         <div className='main_container' onClick={closeUl}>
+            {/* 베너 박스 */}
             <div className='mainImgBenner'>
+                {/* 메인 베너 이미지 */}
                 <div className='mainBanner'>
                     <img src='../public/img/10-1.jpg' style={{width:'1920px', height:'600px'}} />
                 </div>
+                {/* 국내, 해외 숙박 검색 */}
                 <div className='hotelSearch'>
                     <h1>여행을 고민중이라면?!</h1>
+                    {/* 국내, 해외 change 버튼 */}
                     <button type='button' className='koreaBtn hotelSearchBtn'>국내</button>
                     <button type='button' className='globalBtn hotelSearchBtn'>해외</button>
+                    {/* input form */}
                     <form className='hotelInput'>
                         <div className='hotelModal'>
                             <input type='text' id='citySearch' name='citySearch' 
@@ -118,6 +134,7 @@ export default function Main(){
                             onClick={() => setIsInput(true)}
                             placeholder='여행지나 숙소를 검색해주세요'
                             />
+                            {/* input 클릭시 나오는 순위 */}
                             {isInput &&
                             <>
                                 <ul className='rankBox'>
@@ -139,7 +156,9 @@ export default function Main(){
                         </div>
                         <i className="fa-solid fa-magnifying-glass searchIcon"></i>
                         <div>달력</div>
+                        {/* 인원 */}
                         <div className='guestSum'>
+                            {/* 버튼 */}
                             <button type='button' 
                             onClick={minusBtn} 
                             className='minus_btn' 
@@ -162,6 +181,7 @@ export default function Main(){
                                 <i className="fa-solid fa-plus"></i>
                             </button>
                         </div>
+                        {/* 검색 */} 
                         <Link to='/room'>
                             <button type='button' className='Search_Btn'>검색</button>
                         </Link>
@@ -191,28 +211,34 @@ export default function Main(){
                     <span className='CampingImg'>캠핑</span>
                 </div>
             </div>
-            {/*  */}
+            {/* 인기 호텔 모음 */}
             <div className='popularAccom'>
                 <p className='popularAccomTitle'>인기 스테이 PICK!</p>
                 <div className='popularAccomSub1'>
-                    <button type='button' className='leftBtn1'>
+                    {/* 왼쪽 슬라이드 버튼 */}
+                    <button type='button' className='leftBtn1' onClick={leftSlide}>  {/* -----------------------아래 버튼------------------------------- */}
                         <i className="bi bi-arrow-left-circle" style={{fontSize:'30px', color:''}}></i>
                     </button>
-                    <ul className='popularAccomSub2'>
+                    {/* 호텔 map */}
+                    <ul className='popularAccomSub2' style={{marginLeft:`${slideMove}px`}} >
+                        <div className='slideBox'>
                         {HotelData.slice(0,10).map((item) => (
-                            <li key={item.id} style={{cursor:'pointer'}}>
-                                <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' />
-                                <p>{item.type}</p>
-                                <p className='popularAccom_name'>{item.hotelName}</p>
-                                <div className='popularAccom_review'>
-                                    <span className='popularAccom_score'>★{item.score}</span>
-                                    <span className='popularAccom_count'>{item.scoreCount.toLocaleString()}명 참여</span>
-                                </div>
-                                <p>쿠폰적용시</p>
-                                <p>{item.price.toLocaleString()}</p>
-                            </li>
+                            
+                                <li key={item.id} style={{cursor:'pointer'}}>
+                                    <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' />
+                                    <p>{item.type}</p>
+                                    <p className='popularAccom_name'>{item.hotelName}</p>
+                                    <div className='popularAccom_review'>
+                                        <span className='popularAccom_score'>★{item.score}</span>
+                                        <span className='popularAccom_count'>{item.scoreCount.toLocaleString()}명 참여</span>
+                                    </div>
+                                    <p>쿠폰적용시</p>
+                                    <p>{item.price.toLocaleString()}</p>
+                                </li>
                         ))}
+                        </div>
                     </ul>
+                    {/* 오른쪽 슬라이드 버튼 */}
                     <button type='button' className='rightBtn1'>
                         <i className="bi bi-arrow-right-circle" style={{fontSize:'30px'}}></i>
                     </button>
@@ -222,6 +248,7 @@ export default function Main(){
             <div className='spotsAndStays'>
                 <p className='spotsAndStaysTitle'>관광명소 - 근처 숙소(수정할예정)</p>
                 <div className='spotsAndStaysAll'>
+                    {/* 왼쪽 슬라이드 버튼 */}
                     <button type='button' className='leftBtn2'>
                         <i className="bi bi-arrow-left-circle" style={{fontSize:'30px', color:''}}></i>
                     </button>
@@ -248,6 +275,7 @@ export default function Main(){
                     <div className='spots6'>
                         <img src='/img/1-1.jpg' className='spotsImg5 spotsAndStaysImg' onClick={() => setSpotModalOpen(1)}/>
                     </div> */}
+                    {/* 오른쪽 슬라이드 버튼 */}
                     <button type='button' className='rightBtn2'>
                         <i className="bi bi-arrow-right-circle" style={{fontSize:'30px'}}></i>
                     </button>
