@@ -24,6 +24,8 @@ export default function Detail(){
     //
     //호텔별점 이미지
     const[starImg, setStarImg] = useState([]);
+    //객실당 별점 이미지
+    const[scoreRoom, setScoreRoom] = useState([]);
     //객실당 평균별점 이미지
     const[starRoom, setStarRoom] = useState([]);
 
@@ -52,6 +54,30 @@ export default function Detail(){
             star.push('/img/star-zero.png');
             setStarImg(star);
         }
+
+        //객실당 별점
+        const scoreRoom2 = [];
+
+        for(let i=0; i<Room.length; i++){
+            scoreRoom2[i] = [];
+
+            for(let j=0; j<Room[i].score.length; j++){
+                if(Room[i].score[j] === 5){
+                    scoreRoom2[i].push('/img/score-5.png');
+                }else if(Room[i].score[j] === 4){
+                    scoreRoom2[i].push('/img/score-4.png');
+                }else if(Room[i].score[j] === 3){
+                    scoreRoom2[i].push('/img/score-3.png');
+                }else if(Room[i].score[j] === 2){
+                    scoreRoom2[i].push('/img/score-2.png');
+                }else{
+                    scoreRoom2[i].push('/img/score-1.png');
+                }
+            }
+        }
+
+        setScoreRoom(scoreRoom2);
+
 
         //객실당 평점 구하기
         
@@ -91,7 +117,7 @@ export default function Detail(){
 
     },[id]);
   
-
+console.log(scoreRoom);
     
     const [wish, setWish] = useState([]);
 
@@ -161,6 +187,20 @@ export default function Detail(){
             return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    //객실 평점별 갯수저장
+    const starCount = {star1:0,star2:0,star3:0,star4:0,star5:0};    
+
+    for(let i=0; i<Room.length; i++){
+        for(let j=0; j<Room[i].score.length; j++){
+            Room[i].score[j] === 1 ? starCount.star1++ : Room[i].score[j] === 2 ? starCount.star2++ : Room[i].score[j] === 3 ? starCount.star3++ :Room[i].score[j] === 4 ? starCount.star4++ : starCount.star5++
+        }
+    }
+
+    //평점 총 갯수저장
+    const starCountTotal = starCount.star1+starCount.star2+starCount.star3+starCount.star4+starCount.star5;
+
+    //console.log(starCount);
+    //console.log(starCountTotal);
                             
 
     return(
@@ -322,33 +362,60 @@ export default function Detail(){
                                     <div className="bar-wrap">
                                         <span>5점</span>
                                         <div className="bar-width">
-                                            <div className="bar"></div>
+                                            <div className="bar"  style={{width: `${(starCount.star5/starCountTotal)*100}%`}}></div>
                                         </div>
+                                        <span>{Math.round((starCount.star5/starCountTotal)*100)}%</span>
                                     </div>
                                     <div className="bar-wrap">
                                         <span>4점</span>
                                         <div className="bar-width">
-                                            <div className="bar"></div>
+                                            <div className="bar" style={{width: `${starCount.star4/starCountTotal*100}%`}}></div>
                                         </div>
+                                        <span>{Math.round((starCount.star4/starCountTotal)*100)}%</span>
                                     </div>
                                     <div className="bar-wrap">
                                         <span>3점</span>
                                         <div className="bar-width">
-                                            <div className="bar"></div>
+                                            <div className="bar" style={{width: `${starCount.star3/starCountTotal*100}%`}}></div>
                                         </div>
+                                        <span>{Math.round((starCount.star3/starCountTotal)*100)}%</span>
                                     </div>
                                     <div className="bar-wrap">
                                         <span>2점</span>
                                         <div className="bar-width">
-                                            <div className="bar"></div>
+                                            <div className="bar" style={{width: `${starCount.star2/starCountTotal*100}%`}}></div>
                                         </div>
+                                        <span>{Math.round((starCount.star2/starCountTotal)*100)}%</span>
                                     </div>
                                     <div className="bar-wrap">
                                         <span>1점</span>
                                         <div className="bar-width">
-                                            <div className="bar"></div>
+                                            <div className="bar" style={{width: `${starCount.star1/starCountTotal*100}%`}}></div>
                                         </div>
+                                        <span>{Math.round((starCount.star1/starCountTotal)*100)}%</span>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="score-bottom">
+                            <div className="bottom-left">
+                                <p>이용자 평가</p>
+                                <p>한줄리뷰</p>
+                                <p>※ 실제 이용객분들께서 남겨주신 한줄평입니다.</p>
+                            </div>
+                            <div className="bottom-right">
+                                <div className="review-wrap">
+                                    {Room.map((item,index)=>(
+                                        <p key={index}>
+                                            {item.score.map((review,ind)=>(
+                                                <span key={ind}>
+                                                    {/* <img src={scoreRoom[index][ind]} alt="score" /> */}
+                                                    {review}
+                                                    {item.comment[ind]}
+                                                </span>
+                                            ))}
+                                        </p>
+                                    ))}
                                 </div>
                             </div>
                         </div>

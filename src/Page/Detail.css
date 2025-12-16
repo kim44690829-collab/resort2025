@@ -358,9 +358,10 @@ button{
 }
 .detail-wrap .detail-content .detail-left .hotel-score .score-wrap{
     display: flex;
-    border-radius: 10px;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
     background: #f5f7fa;
-    padding: 30px 30px;
+    padding: 30px 0px;
 }
 .hotel-score .score-wrap .score-left,
 .hotel-score .score-wrap .score-middle,
@@ -408,12 +409,14 @@ button{
     font-weight: 500;
 }
 .hotel-score .score-wrap .score-right .graph{
-
+    text-align: left;
+    width: fit-content;
+    margin: 0 auto;
 }
 .hotel-score .score-wrap .score-right .graph .bar-wrap{
     display: flex;
     margin: 5px 0;
-    justify-content: center;
+    justify-content: left;
 }
 .hotel-score .score-wrap .score-right .graph .bar-wrap span{
     font-size: 14px;
@@ -422,15 +425,25 @@ button{
 .hotel-score .score-wrap .score-right .graph .bar-wrap .bar-width{
     height: 16px;
     background-color: #e5e5e5;
-    width: 170px;
+    width: 120px;
     border-radius: 3px;
     margin-left: 5px;
+    margin-right: 5px;
 }
 .hotel-score .score-wrap .score-right .graph .bar-wrap .bar-width .bar{
-    width: 80%;
     height: 100%;
     background-color: #42799b;
     border-radius: 3px;
+}
+
+
+.detail-wrap .detail-content .detail-left .hotel-score .score-bottom{
+    display: flex;
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+    border: 1px solid #e7e7e7;
+    border-top: 0;
+    padding: 30px 0px;
 }
 
 
