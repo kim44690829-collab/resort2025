@@ -1,5 +1,5 @@
 import '../Page/Main.css';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ResortDateContext } from '../Api/ResortDate';
 import 'leaflet/dist/leaflet.css';
@@ -29,34 +29,118 @@ export default function Main(){
     // 관광지 클릭시 모달
     const [spotModalOpen, setSpotModalOpen] = useState(false);
     // 슬라이드 상태저장 변수
-    const [slideMove, setSlideMove] = useState(0)
+    // 인기 호텔 슬라이드
+    const [slideMove1, setSlideMove1] = useState(0)
+    // 관광명소 슬라이드
+    const [slideMove2, setSlideMove2] = useState(0)
+    // 평점 슬라이드
+    const [slideMove3, setSlideMove3] = useState(0)
+    // 평점순의 라벨을 넣기위해 빈 배열 생성
+    const [isLabel, setIsLabel] = useState([]);
 
-    // 슬라이드 함수
-    const leftSlide = () => {
-        if(slideMove > -2419){
-            setSlideMove(slideMove - 232)
-            console.log(slideMove);
-        }
-        
-    }
+    // 호텔 유형별로 접근하기 위한 사진 map돌리기 위한 오브젝트 배열
+    const hotelType = [
+        {id:1, image:'/mainImg/a-1.jpg', typeName: '호텔'},
+        {id:2, image:'/mainImg/a-2.jpg', typeName: '리조트'},
+        {id:3, image:'/mainImg/a-3.jpg', typeName: '콘도'},
+        {id:4, image:'/mainImg/a-4.jpg', typeName: '게스트 하우스'},
+        {id:5, image:'/mainImg/a-5.jpg', typeName: '캠핑'},
+    ];
 
     // 관광명소 map돌리기 위한 오브젝트 배열
     const popularSpot = [
         {id:1, image:'/mainImg/b-1.jpg', cityName: '서울'},
-        {id:2, image:'/mainImg/c-1.jpg', cityName: '서울'},
-        {id:3, image:'/mainImg/d-1.jpg', cityName: '서울'},
-        {id:4, image:'/mainImg/e-1.jpg', cityName: '서울'},
-        {id:5, image:'/mainImg/f-1.jpg', cityName: '서울'},
-        {id:6, image:'/mainImg/g-1.jpg', cityName: '서울'},
+        {id:2, image:'/mainImg/c-1.jpg', cityName: '제주도'},
+        {id:3, image:'/mainImg/d-1.jpg', cityName: '부산'},
+        {id:4, image:'/mainImg/e-1.jpg', cityName: '삿포로'},
+        {id:5, image:'/mainImg/f-1.jpg', cityName: '뉴욕'},
+        {id:6, image:'/mainImg/g-1.jpg', cityName: '파리'},
     ];
 
-    // 슬라이드 로직 마우스오버 상태변수
-    const [slideOn,setSlideOn] = useState(false);
 
-    // 인원 버튼 비활성화 상태변수 -> 처음에 활성화 상태 / 조건에따라 비활성화
-    // const [isGuest, setIsGuest] = useState(false)
     // 호텔 평점순으로 재배열
     const hotelRating = [...HotelData].sort((a,b) => b.score - a.score);
+    // const aaa = hotelRating.slice(0,10);
+    // console.log('호텔레이팅')
+    // console.log(aaa)
+    // const hotlRateingcopy = [...HotelData]
+    // const hotelRating10 = hotlRateingcopy.slice(0,10);
+    // console.log('이거 슬라이드 된거 맞아?')
+    // console.log(hotelRating10)
+
+    // const labelCopy = [...isLabel]
+    // labelCopy.push({...hotelRating10, labelImg:'/label.png'})
+    // setIsLabel(labelCopy)
+    // console.log(isLabel)
+    // const hotelRatingCopy = {...hotelRating10, labelImg:'/label.png'}
+
+    
+
+    // const labelCopy = [
+    //     hotelRating10.map(() => (
+    //         {...hotelRating10, labelImg:'/label.png'}
+    //     ))
+    // ]
+    // console.log(labelCopy)
+
+    // 버튼을 클릭한 횟수를 저장하는 상태변수
+    const [btnCount1, setBtnCount1] = useState(0);
+    const [btnCount2, setBtnCount2] = useState(0);
+    const [btnCount3, setBtnCount3] = useState(0);
+
+    // 왼쪽, 오른쪽을 클릭했을때 조건을 만족하면 버튼을 없애는 함수
+    const handleRightClick = (num) => {
+        if(btnCount1 < 5 && num === 1){
+            setBtnCount1(prev => prev + 1)
+        }else if(btnCount2 < 3 && num === 2){
+            setBtnCount2(prev => prev + 1)
+        }else if(btnCount3 < 7 && num === 3){
+            setBtnCount3(prev => prev + 1)
+        }
+    }
+
+    const handleLeftClick = (num) => {
+        if(btnCount1 > 0 && num === 1){
+            setBtnCount1(prev => prev - 1)
+        }else if(btnCount2 > 0 && num === 2){
+            setBtnCount2(prev => prev - 1)
+        }else if(btnCount3 > 0 && num === 3){
+            setBtnCount3(prev => prev - 1)
+        }
+    }
+    console.log(btnCount3)
+
+
+    // 슬라이드 함수
+    const leftSlide = (num) => {
+        if(slideMove1 < 0 && num === 1){
+            setSlideMove1(slideMove1 + 241)
+            // console.log(slideMove1);
+        }else if(slideMove2 < 0 && num === 2){
+            setSlideMove2(slideMove2 + 400)
+        }else if(slideMove3 < 0 && num === 3){
+            setSlideMove3(slideMove3 + 400)
+        }else{
+            null
+        }
+    }
+    const rightSlide = (num) => {
+        if(slideMove1 > -1200 && num === 1){
+            setSlideMove1(slideMove1 - 241)
+            // setSlideOnLeft1(true)
+            // console.log(slideMove1);
+        }else if(slideMove2 > -1200 && num === 2){
+            setSlideMove2(slideMove2 - 400)
+            // setSlideOnLeft2(true)
+        }else if(slideMove3 > -4000 && num === 3){
+            setSlideMove3(slideMove3 - 400)
+            // setSlideOnLeft3(true)
+        }else{
+            null
+        }
+    }
+
+    
 
     // num에 해당하는 번호를 누르면 그에 해당하는 지역이 input에 들어가는 함수
     const inputHandeler = (num) => {
@@ -87,17 +171,12 @@ export default function Main(){
         if(guestCount > 1){
             const minus = guestCount - 1
             setGuestCount(minus)
-            
-        }else if(guestCount < 1){
-            
         }
     }
     const plusBtn = () => {
         if(guestCount < 4){
             const plus = guestCount + 1
             setGuestCount(plus)
-        }else{
-            
         }
     }
 
@@ -189,43 +268,43 @@ export default function Main(){
                 </div>
             </div>
             {/* 호텔 유형에 따라 나눔 */}
-            <div className='hotel_type'>
-                <div className='accomCat Category1'>
-                    <img src='../public/mainImg/a-1.jpg' style={{width:'232px', height:'240px'}} />
-                    <span className='HotelImg'>호텔</span>
-                </div>
-                <div className='accomCat Category2'>
-                    <img src='../public/mainImg/a-2.jpg' style={{width:'232px', height:'240px'}} />
-                    <span className='ResortImg'>리조트</span>
-                </div>
-                <div className='accomCat Category3'>
-                    <img src='../public/mainImg/a-3.jpg' style={{width:'232px', height:'240px'}} />
-                    <span className='CondoImg'>콘도</span>
-                </div>
-                <div className='accomCat Category4'>
-                    <img src='../public/mainImg/a-4.jpg' style={{width:'232px', height:'240px'}} />
-                    <span className='GuestHouseImg'>게스트 하우스</span>
-                </div>
-                <div className='accomCat Category5'>
-                    <img src='../public/mainImg/a-5.jpg' style={{width:'232px', height:'240px'}} />
-                    <span className='CampingImg'>캠핑</span>
-                </div>
-            </div>
+            <ul className='hotel_type'>
+                {hotelType.map((item) => (
+                    <li key={item.id} className='accomCat'>
+                        <img src={item.image} style={{width:'231px', height:'240px', borderRadius:'10px'}} />
+                        <span className='HotelImg'>{item.typeName}</span>    
+                    </li>
+                ))}
+            </ul>
             {/* 인기 호텔 모음 */}
             <div className='popularAccom'>
                 <p className='popularAccomTitle'>인기 스테이 PICK!</p>
                 <div className='popularAccomSub1'>
                     {/* 왼쪽 슬라이드 버튼 */}
-                    <button type='button' className='leftBtn1' onClick={leftSlide}>  {/* -----------------------아래 버튼------------------------------- */}
-                        <i className="bi bi-arrow-left-circle" style={{fontSize:'30px', color:''}}></i>
-                    </button>
+                    {btnCount1 > 0 &&
+                        <button type='button' className='leftBtn1' onClick={() => {leftSlide(1); handleLeftClick(1);}}> 
+                            <i className="bi bi-arrow-left-circle" style={{fontSize:'30px'}}></i>
+                        </button>
+                    }
                     {/* 호텔 map */}
-                    <ul className='popularAccomSub2' style={{marginLeft:`${slideMove}px`}} >
-                        <div className='slideBox'>
-                        {HotelData.slice(0,10).map((item) => (
-                            
+                    <div className='slideBox'>
+                        <ul className='popularAccomSub2' style={{marginLeft:`${slideMove1}px`}} >
+                            {HotelData.slice(0,4).map((item) => (
+                                    <li key={item.id} style={{cursor:'pointer'}}>
+                                        <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' />
+                                        <p>{item.type}</p>
+                                        <p className='popularAccom_name'>{item.hotelName}</p>
+                                        <div className='popularAccom_review'>
+                                            <span className='popularAccom_score'>★{item.score}</span>
+                                            <span className='popularAccom_count'>{item.scoreCount.toLocaleString()}명 참여</span>
+                                        </div>
+                                        <p>쿠폰적용시</p>
+                                        <p>{item.price.toLocaleString()}</p>
+                                    </li>
+                            ))}
+                            {HotelData.slice(61,64).map((item) => (
                                 <li key={item.id} style={{cursor:'pointer'}}>
-                                    <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' />
+                                    <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
                                     <p>{item.type}</p>
                                     <p className='popularAccom_name'>{item.hotelName}</p>
                                     <div className='popularAccom_review'>
@@ -235,13 +314,28 @@ export default function Main(){
                                     <p>쿠폰적용시</p>
                                     <p>{item.price.toLocaleString()}</p>
                                 </li>
-                        ))}
-                        </div>
-                    </ul>
+                            ))}
+                            {HotelData.slice(100,103).map((item) => (
+                                <li key={item.id} style={{cursor:'pointer'}}>
+                                    <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
+                                    <p>{item.type}</p>
+                                    <p className='popularAccom_name'>{item.hotelName}</p>
+                                    <div className='popularAccom_review'>
+                                        <span className='popularAccom_score'>★{item.score}</span>
+                                        <span className='popularAccom_count'>{item.scoreCount.toLocaleString()}명 참여</span>
+                                    </div>
+                                    <p>쿠폰적용시</p>
+                                    <p>{item.price.toLocaleString()}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                     {/* 오른쪽 슬라이드 버튼 */}
-                    <button type='button' className='rightBtn1'>
-                        <i className="bi bi-arrow-right-circle" style={{fontSize:'30px'}}></i>
-                    </button>
+                    {btnCount1 < 5 && 
+                        <button type='button' className='rightBtn1' onClick={() => {rightSlide(1); handleRightClick(1);}}>
+                            <i className="bi bi-arrow-right-circle" style={{fontSize:'30px'}}></i>
+                        </button>
+                    }
                 </div>
             </div>
             {/* 관광명소 - 근처 숙소 */}
@@ -249,61 +343,69 @@ export default function Main(){
                 <p className='spotsAndStaysTitle'>관광명소 - 근처 숙소(수정할예정)</p>
                 <div className='spotsAndStaysAll'>
                     {/* 왼쪽 슬라이드 버튼 */}
-                    <button type='button' className='leftBtn2'>
-                        <i className="bi bi-arrow-left-circle" style={{fontSize:'30px', color:''}}></i>
-                    </button>
-                    <ul className='citySpots'>
-                        {/* <img src='/img/1-1.jpg' className='spotsImg1 spotsAndStaysImg' onClick={() => setSpotModalOpen(1)}/> */}
-                        {popularSpot.map((item) => (
-                            <li key={item.id} style={{cursor:'pointer'}} onClick={() => setSpotModalOpen(true)}>
-                                <img src={item.image} style={{width:'390px', height:'500px'}} className='citySpotImg' />
-                            </li>
-                        ))}
-                    </ul>
-                    {/* <div className='spots2'>
-                        <img src='/img/1-1.jpg' className='spotsImg2 spotsAndStaysImg' onClick={() => setSpotModalOpen(1)}/>
+                    {btnCount2 > 0 &&
+                        <button type='button' className='leftBtn2' onClick={() => {leftSlide(2); handleLeftClick(2)}}>
+                            <i className="bi bi-arrow-left-circle" style={{fontSize:'30px', color:''}}></i>
+                        </button>
+                    }
+                    
+                    <div className='citySpotsBox'>
+                        <ul className='citySpots' style={{marginLeft:`${slideMove2}px`}}>
+                            {/* <img src='/img/1-1.jpg' className='spotsImg1 spotsAndStaysImg' onClick={() => setSpotModalOpen(1)}/> */}
+                            {popularSpot.map((item) => (
+                                <li key={item.id} style={{cursor:'pointer'}} onClick={() => setSpotModalOpen(true)}>
+                                    <img src={item.image} style={{width:'390px', height:'500px'}} className='citySpotImg' />
+                                    <div>
+                                        {/* <img src={}/> */}
+                                        <span>{item.cityName}</span>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
-                    <div className='spots3'>
-                        <img src='/img/1-1.jpg' className='spotsImg3 spotsAndStaysImg' onClick={() => setSpotModalOpen(1)}/>
-                    </div>
-                    <div className='spots4'>
-                        <img src='/img/1-1.jpg' className='spotsImg4 spotsAndStaysImg' onClick={() => setSpotModalOpen(1)}/>
-                    </div>
-                    <div className='spots5'>
-                        <img src='/img/1-1.jpg' className='spotsImg5 spotsAndStaysImg' onClick={() => setSpotModalOpen(1)}/>
-                    </div>
-                    <div className='spots6'>
-                        <img src='/img/1-1.jpg' className='spotsImg5 spotsAndStaysImg' onClick={() => setSpotModalOpen(1)}/>
-                    </div> */}
                     {/* 오른쪽 슬라이드 버튼 */}
-                    <button type='button' className='rightBtn2'>
-                        <i className="bi bi-arrow-right-circle" style={{fontSize:'30px'}}></i>
-                    </button>
+                    {btnCount2 < 3 &&
+                        <button type='button' className='rightBtn2' onClick={() => {rightSlide(2); handleRightClick(2);}}>
+                            <i className="bi bi-arrow-right-circle" style={{fontSize:'30px'}}></i>
+                        </button>
+                    }
                 </div>
             </div>
             {/* 평점순 */}
             <div className='staySortByRating'>
                 <p className='staySortByRating_title'>평점순(수정할예정)</p>
                 <div className='hotelRating_desc'>
-                    <button type='button' className='leftBtn2'>
-                        <i className="bi bi-arrow-left-circle" style={{fontSize:'30px', color:''}}></i>
-                    </button>
-                    <ul className='hotelRating_each'>
-                        {hotelRating.slice(0,10).map((item) => (
-                            <li key={item.id} className='hotelRating_each_sub' style={{cursor:'pointer'}}>
-                                <img src='/img/1-1.jpg' alt={item.hotelName} className='hotelRatingImg' />
-                                {/* <span className='hotelRatingScore'>평점 : {item.score}</span> */}
-                                <div className='hotelRating_each_sub2'>
-                                    <span style={{display:'inline-block', marginBottom:'10px'}}>{item.country} / {item.city}</span> <br/>
-                                    <span style={{display:'inline-block', marginBottom:'10px'}}>{item.hotelName}</span> <br/>
-                                    <span>{item.price.toLocaleString()}~</span>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                    <button type='button' className='rightBtn2'>
-                        <i className="bi bi-arrow-right-circle" style={{fontSize:'30px'}}></i>
-                    </button>
+                    {btnCount3 > 0 && 
+                        <button type='button' className='leftBtn3' onClick={() => {leftSlide(3);  handleLeftClick(3);}}>
+                            <i className="bi bi-arrow-left-circle" style={{fontSize:'30px', color:''}}></i>
+                        </button>
+                    }
+                    <div className='hotelRatingBox'>
+                        <ul className='hotelRating_each' style={{marginLeft:`${slideMove3}px`}}>
+                            {hotelRating.slice(0,10).map((item) => (
+                                <li key={item.id} className='hotelRating_each_sub' style={{cursor:'pointer'}}>
+                                    <div className='ratingItemWrapper'>
+                                        <img src='/img/1-1.jpg' alt={item.hotelName} className='hotelRatingImg' />
+                                        <div className='ratingLabel'>
+                                            <img src='/label.png' alt='imgLabel' className='labelImg'/>
+                                            <span className='hotelRatingScore'>평점 : {item.score}</span>
+                                        </div>
+                                    </div>
+                                    <div className='hotelRating_each_sub2'>
+                                        <span style={{display:'inline-block', marginBottom:'10px'}}>{item.country} / {item.city}</span> <br/>
+                                        <span style={{display:'inline-block', marginBottom:'10px'}}>{item.hotelName}</span> <br/>
+                                        <span>{item.price.toLocaleString()}~</span>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    {btnCount3 < 7 && 
+                        <button type='button' className='rightBtn3' onClick={() => {rightSlide(3); handleRightClick(3);}}>
+                            <i className="bi bi-arrow-right-circle" style={{fontSize:'30px'}}></i>
+                        </button>
+                    }
+                    
                 </div>
             </div>
             <div className='eventBanner'>

@@ -76,9 +76,9 @@
     border-radius: 3px;
     overflow: hidden;
 }
-.main_container .mainImgBenner .hotelSearch:focus-within .rankBox{
-    /* height: 430px; */
-}
+/* .main_container .mainImgBenner .hotelSearch:focus-within .rankBox{
+    height: 430px;
+} */
 /* 검색창 li */
 .main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankBoxLi{
     padding: 10px;
@@ -117,12 +117,7 @@
     gap: 10px;
 }
 .main_container .hotel_type .accomCat{
-    width: 240px;
-    height: 240px;
-    /* border: 1px solid green; */
     position: relative;
-    overflow: hidden;
-    border-radius: 10px;
     cursor: pointer;
 }
 .main_container .hotel_type .accomCat .HotelImg,
@@ -163,7 +158,7 @@
     margin: 0 auto;
     display: flex;
 }
-.leftBtn1{
+.main_container .popularAccom .popularAccomSub1 .leftBtn1{
     position: absolute;
     top: -120px;
     left: -50px;
@@ -172,7 +167,7 @@
     background-color: transparent;
     border: none;
 }
-.rightBtn1{
+.main_container .popularAccom .popularAccomSub1 .rightBtn1{
     position: absolute;
     top: -120px;
     right: -50px;
@@ -181,23 +176,23 @@
     border: none;
     background-color: transparent;
 }
-.main_container .popularAccom .popularAccomSub1 .popularAccomSub2{
-    display: flex;
-    width: 1200px;
-    margin: 0 auto;
-    gap: 10px;
-}
-.slideBox{
-    width: 2419px;
-    margin: 0 auto;
+/* 인기호텔 슬라이드를 위한 div */
+.main_container .popularAccom .popularAccomSub1 .slideBox{
     overflow: hidden;
+    width: 1200px;
 }
+/* 인기호텔 슬라이드 ul */
+.main_container .popularAccom .popularAccomSub1 .slideBox .popularAccomSub2{
+    display: flex;
+    gap: 10px;
+    transition: 0.3s;
+}
+/* 인기호텔 슬라이드 li 구성요소 css */
 .main_container .popularAccom .popularAccomSub1 .popularAccomSub2 .popularAccomMainImg{
-    width: 232px;
+    width: 231px;
     height: 240px;
     border-radius: 10px;
 }
-
 .main_container .popularAccom .popularAccomSub1 .popularAccomSub2 .popularAccom_name{
     margin-bottom: 10px;
 }
@@ -226,17 +221,19 @@
     display: flex;
     position: relative;
 }
-.citySpots{
-    display: flex;
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox{
     overflow: hidden;
-    /* width: 1200px; */
-    /* margin: 0 auto; */
-    gap: 10px;
+    width: 1200px;
 }
-.citySpotImg{
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots{
+    display: flex;
+    gap: 10px;
+    transition: 0.3s;
+}
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .citySpotImg{
     border-radius: 10px;
 }
-.leftBtn2{
+.main_container .spotsAndStays .spotsAndStaysAll .leftBtn2{
     position: absolute;
     top: 0;
     left: -50px;
@@ -245,7 +242,7 @@
     background-color: transparent;
     border: none;
 }
-.rightBtn2{
+.main_container .spotsAndStays .spotsAndStaysAll .rightBtn2{
     position: absolute;
     top: 0;
     right: -50px;
@@ -258,7 +255,7 @@
     width: 390px;
     height: 500px;
 }
-/*  */
+/* 평점순 */
 .staySortByRating .staySortByRating_title{
     width: 1200px;
     margin: 0 auto;
@@ -270,14 +267,39 @@
     margin: 0 auto;
     position: relative;
 }
+.staySortByRating .hotelRating_desc .leftBtn3{
+    position: absolute;
+    top: 0;
+    left: -50px;
+    width: 50px;
+    height: 500px;
+    background-color: transparent;
+    border: none;
+}
+.staySortByRating .hotelRating_desc .rightBtn3{
+    position: absolute;
+    top: 0;
+    right: -50px;
+    width: 50px;
+    height: 500px;
+    border: none;
+    background-color: transparent;
+}
+.staySortByRating .hotelRating_desc .hotelRatingBox{
+    overflow: hidden;
+    padding-top: 32px;
+    width: 1200px;
+}
 .staySortByRating .hotelRating_desc .hotelRating_each{
     display: flex;
-    width: 1200px;
     margin: 0 auto;
     gap: 10px;
-    overflow: hidden;
+    transition: 0.3s;
 }
 .staySortByRating .hotelRating_desc .hotelRating_each .hotelRating_each_sub{
+    position: relative;
+}
+.ratingItemWrapper{
     position: relative;
 }
 .staySortByRating .hotelRating_desc .hotelRating_each .hotelRatingImg{
@@ -285,6 +307,24 @@
     height: 500px;
     border-radius: 10px;
 }
+.staySortByRating .hotelRating_desc .hotelRating_each .hotelRating_each_sub .ratingLabel{
+    /* position: relative; */
+    position: absolute;
+    top: -14px;
+    left: 12px;
+    z-index: 10;
+    /* background: rgba(255, 0, 0, 0.4); */
+}
+.labelImg{
+    width: 100px;
+    height: 100px;
+}
+.hotelRatingScore{
+    position: absolute;
+    top: 35px;
+    left: 24px;
+}
+
 .staySortByRating .hotelRating_desc .hotelRating_each_sub2{
     border: 1px solid red;
     position: absolute;
