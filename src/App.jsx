@@ -14,6 +14,7 @@ import Main from './Page/Main'
 import Detail from './Page/Detail'
 import Footer from './Common/Footer'
 import Guest from './Page/Guest'
+import Calendar from './Page/Calendar'
 
 function App() {
 

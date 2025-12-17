@@ -4,8 +4,13 @@ import '../Page/Room.css'
 import { ResortDateContext } from '../Api/ResortDate';
 import Calendar from "./Calendar";
 import { Link } from "react-router-dom";
+import LeafletMap from '../Api/LeafletMap';
 
 export default function Room(){
+    // 가져오는 호텔, 개실 데이터
+    const {HotelData,RoomData} = useContext(ResortDateContext);
+    //const {selectDate,setSelectDate,setSelectday} = useContext(calendarAuth)
+    /* console.log(selectDate) */
     /* 필터 목록 */
     const filter_publicService = [{id:1,name:'피트니스'},{id:2,name:'레스토랑'},{id:3,name:'사우나'},{id:4,name:'실내수영장'},{id:5,name:'야외수영장'},{id:6,name:'편의점'},{id:7,name:'바'},{id:8,name:'라운지'},{id:9,name:'엘리베이터'},{id:10,name:'비즈니스센터'},{id:11,name:'건조기'},{id:12,name:'탈수기'},{id:13,name:'바베큐'}]
     const filter_roomservice = [{id:14,name:'무선인터넷'},{id:15,name:'욕실용품'},{id:16,name:'에어컨'},{id:17,name:'드라이기'},{id:18,name:'샤워실'},{id:19,name:'냉장고'},{id:20,name:'TV'},{id:21,name:'객실내취사'},{id:22,name:'욕조'},{id:23,name:'금연'},{id:24,name:'전기주전자'},{id:25,name:'실내수영장'},{id:26,name:'개인콘센트'}]
@@ -21,10 +26,19 @@ export default function Room(){
     const [hotelSort,setHotelSort] = useState(1)
     // 종아요 버튼
     const [likeBtn,setLikeBtn] =useState(true)
+    // 선택한 날짜를 담을 변수
+    const [DayData,setDayData] = useState([])
 
+    //날짜에 따른 목록 필터
+    useEffect(()=>{
+        
 
-    // 가져오는 호텔, 개실 데이터
-    const {HotelData,RoomData} = useContext(ResortDateContext);
+        const dateFilter = HotelData.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
+        setmyhotel(dateFilter)
+    },[DayData])
+
+    
+    
     //
     //
     useEffect(()=>{
@@ -180,10 +194,12 @@ export default function Room(){
             setMaxPrice(Number(e.target.value))
         }
     }
+    
+    
 
     return(
         <>  
-            <Calendar/>
+            <Calendar setDayData={setDayData}/>
             {/* 상품 메뉴영역 */}
             <div className="Room_section">
                 {/* 상단 필터 영역 */}
@@ -235,17 +251,20 @@ export default function Room(){
                             </div>
                     </div>
                     <div className="right_filter">
-                        <div className="map"><span>map</span></div>
+                        <div className="map">
+                            <LeafletMap city={'seoul'} hotelName={'가가가'} style={{width:'100%',height:'200px',border: '1px solid #e7e7e7',borderRadius:'10px'}}/>    
+                        </div>
                     </div>
                 </div>
                 {/* 중단 정렬 영역 */}
                 <div className="arr_menu">
+                    <span className="arr_total">{myhotel.length}개</span>
                     <ul className="arr_group">
-                        <li className="arr_list" onClick={()=>sortHandeler(1)} style={{color:hotelSort===1?'black':'#aaa'}}>추천수</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(2)} style={{color:hotelSort===2?'black':'#aaa'}}>높은평점순</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(3)} style={{color:hotelSort===3?'black':'#aaa'}}>낮은평점순</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(4)} style={{color:hotelSort===4?'black':'#aaa'}}>높은가격순</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(5)} style={{color:hotelSort===5?'black':'#aaa'}}>낮은가격순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(1)} style={{color:hotelSort===1?'black':'#aaa',fontWeight:hotelSort===1?600:'default'}}>추천수</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(2)} style={{color:hotelSort===2?'black':'#aaa',fontWeight:hotelSort===2?600:'default'}}>높은평점순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(3)} style={{color:hotelSort===3?'black':'#aaa',fontWeight:hotelSort===3?600:'default'}}>낮은평점순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(4)} style={{color:hotelSort===4?'black':'#aaa',fontWeight:hotelSort===4?600:'default'}}>높은가격순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(5)} style={{color:hotelSort===5?'black':'#aaa',fontWeight:hotelSort===5?600:'default'}}>낮은가격순</li>
                     </ul>
                 </div>
                 {/* 방정보 영역 */}

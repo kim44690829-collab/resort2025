@@ -4,7 +4,7 @@ import '../Page/calendar.css'
 import { ResortDateContext } from '../Api/ResortDate';
 import { data } from "react-router-dom";
 
-export default function Calendar(){
+export default function Calendar({setDayData}){
     // 선택한 달
     const [selectMonth,setSelectMonth] = useState(new Date()) //선택한 달력
     const [calArr,setCalArr] = useState(
@@ -17,8 +17,14 @@ export default function Calendar(){
     ) //달력에 들어가는 배열
 
     //선택한 날짜
-    const [selectDate,setSelectDate] = useState([])
+    const [selectDate,setSelectDate] = useState([]) // 달력에서 선택한 날짜
     const [selectday,setSelectday] = useState([])
+    
+    useEffect(()=>{
+        setDayData(selectday)
+        
+    },[selectday])
+
 
     useEffect(()=>{
         //console.log(selectMonth)
@@ -96,15 +102,16 @@ export default function Calendar(){
     },[selectMonth])
     //다음달 버튼
     const next =()=>{
-        const thisyears = new Date().getFullYear()
+        const thisyears = new Date().getFullYear() // 달력에 일자를 구하기위한 변수
         const thisdate = new Date().getDate()
         const thismonth = new Date().getMonth()
-        if(selectMonth.getMonth()+1 === (thismonth)%12 && selectMonth.getFullYear()<=thisyears+1){
+
+        if(selectMonth.getMonth()+1 === (thismonth)%12 && selectMonth.getFullYear()<=thisyears+1){ // 이번달 일때 달력에 오늘 일자가 들어간다
             setSelectMonth(new Date(selectMonth.getFullYear(),selectMonth.getMonth() + 1,thisdate))
             console.log(selectMonth.getMonth()+1,'확인용1')
             console.log((thismonth)%12,'확인용1')
         }else{
-            setSelectMonth(new Date(selectMonth.getFullYear(),selectMonth.getMonth() + 1,1))
+            setSelectMonth(new Date(selectMonth.getFullYear(),selectMonth.getMonth() + 1,1)) // 이번달이 아닐때 달력에 오늘이 아닌 달이 들어간다
             console.log(selectMonth.getMonth()+1,'확인용2')
             console.log((thismonth)%12,'확인용2')
         }
@@ -115,8 +122,10 @@ export default function Calendar(){
         const thisyears = new Date().getFullYear()
         const thisdate = new Date().getDate()
         const thismonth = new Date().getMonth()
+
         console.log(selectMonth.getFullYear())
         console.log(thisyears)
+
         if(selectMonth.getMonth()>=thismonth){
             setSelectMonth(new Date())
             console.log(thismonth)
@@ -150,7 +159,16 @@ export default function Calendar(){
         
         const selectdayCopy = [...selectday]
         if(selectdayCopy.length<2){
-            selectdayCopy.push(`${years}-${item}-${items}`)
+            //selectdayCopy.push(`${years}-${item}-${items}`)
+            if(item<10 && items<10){
+                selectdayCopy.push(`${years}-0${item}-0${items}`)
+            }else if(item<10 && items >=10){
+                selectdayCopy.push(`${years}-0${item}-${items}`)
+            }else if(item>=10 && items <10){
+                selectdayCopy.push(`${years}-${item}-0${items}`)
+            }else{
+                selectdayCopy.push(`${years}-${item}-${items}`)
+            }
         }else(
             selectdayCopy.splice(0,2)
         )
@@ -159,6 +177,7 @@ export default function Calendar(){
         
         setSelectday(selectdayCopy.sort())
         console.log(selectdayCopy.sort())
+        console.log(`${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?`0${selectMonth.getMonth()+1}`:selectMonth.getMonth()+1}-${items<10?'0'+items:items}`)
     }
     //오른쪽 달력
     const right = (items,item,years)=>{
@@ -187,7 +206,7 @@ export default function Calendar(){
         )
         console.log(selectdayCopy)
         setSelectday(selectdayCopy.sort())
-        console.log(`${selectMonth.getFullYear()}-${nextMonth.getMonth()+1<10?''+nextMonth.getMonth()+1:nextMonth.getMonth()+1}-${items<10?''+items:items}`)
+        console.log(`${selectMonth.getFullYear()}-${nextMonth.getMonth()+1<10?`0${nextMonth.getMonth()+1}`:nextMonth.getMonth()+1}-${items<10?'0'+items:items}`)
         
     }
     return(
@@ -215,9 +234,9 @@ export default function Calendar(){
                                             className={
                                                 selectMonth.getDate()>items?''
                                                 :
-                                                `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?''+selectMonth.getMonth()+1:selectMonth.getMonth()+1}-${items<10?''+items:items}`===selectday[0] || `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?''+selectMonth.getMonth()+1:selectMonth.getMonth()+1}-${items<10?''+items:items}`===selectday[1]?'choose'
+                                                `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?`0${selectMonth.getMonth()+1}`:selectMonth.getMonth()+1}-${items<10?'0'+items:items}`===selectday[0] || `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?`0${selectMonth.getMonth()+1}`:selectMonth.getMonth()+1}-${items<10?'0'+items:items}`===selectday[1]?'choose'
                                                 :
-                                                `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?''+selectMonth.getMonth()+1:selectMonth.getMonth()+1}-${items<10?''+items:items}`>selectday[0] && `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?''+selectMonth.getMonth()+1:selectMonth.getMonth()+1}-${items<10?''+items:items}`<selectday[1]?'area'
+                                                `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?`0${selectMonth.getMonth()+1}`:selectMonth.getMonth()+1}-${items<10?'0'+items:items}`>selectday[0] && `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?`0${selectMonth.getMonth()+1}`:selectMonth.getMonth()+1}-${items<10?'0'+items:items}`<selectday[1]?'area'
                                                 :'active'
                                             }
                                             style={{
@@ -253,9 +272,9 @@ export default function Calendar(){
                                             className={
                                                 items===''?''
                                                 :
-                                                `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?''+nextMonth.getMonth()+1:nextMonth.getMonth()+1}-${items<10?''+items:items}`===selectday[0] || `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?''+nextMonth.getMonth()+1:nextMonth.getMonth()+1}-${items<10?''+items:items}`===selectday[1]?'choose'
+                                                `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?`0${nextMonth.getMonth()+1}`:nextMonth.getMonth()+1}-${items<10?'0'+items:items}`===selectday[0] || `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?`0${nextMonth.getMonth()+1}`:nextMonth.getMonth()+1}-${items<10?'0'+items:items}`===selectday[1]?'choose'
                                                 :
-                                                `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?''+nextMonth.getMonth()+1:nextMonth.getMonth()+1}-${items<10?''+items:items}`>selectday[0] && `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?''+nextMonth.getMonth()+1:nextMonth.getMonth()+1}-${items<10?''+items:items}`<selectday[1]?'area'
+                                                `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?`0${nextMonth.getMonth()+1}`:nextMonth.getMonth()+1}-${items<10?'0'+items:items}`>selectday[0] && `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?`0${nextMonth.getMonth()+1}`:nextMonth.getMonth()+1}-${items<10?'0'+items:items}`<selectday[1]?'area'
                                                 :
                                                 'active'}>
                                                 {items}
@@ -271,6 +290,7 @@ export default function Calendar(){
                 </div>
                 <p>{selectDate[0]}부터~{selectDate[1]}까지</p>
             </div>
+            
         </>
     )
 }
