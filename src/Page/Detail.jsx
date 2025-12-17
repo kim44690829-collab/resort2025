@@ -24,10 +24,12 @@ export default function Detail(){
     //
     //호텔별점 이미지
     const[starImg, setStarImg] = useState([]);
+    //객실당 스마일 이미지
+    const[smileRoom, setSmileRoom] = useState([]);
     //객실당 별점 이미지
-    const[scoreRoom, setScoreRoom] = useState([]);
-    //객실당 평균별점 이미지
     const[starRoom, setStarRoom] = useState([]);
+    //객실당 평균별점 이미지
+    const[avgRoom, setAvgRoom] = useState([]);
 
 
     useEffect(()=>{
@@ -55,28 +57,41 @@ export default function Detail(){
             setStarImg(star);
         }
 
-        //객실당 별점
-        const scoreRoom2 = [];
+        //객실당 스마일 이미지
+        const smileRoom2 = [];
+        //객실당 별 이미지
+        const starRoom2 = [];
 
         for(let i=0; i<Room.length; i++){
-            scoreRoom2[i] = [];
+            smileRoom2[i] = [];
+
+            starRoom2[i] = [];
 
             for(let j=0; j<Room[i].score.length; j++){
-                if(Room[i].score[j] === 5){
-                    scoreRoom2[i].push('/img/score-5.png');
-                }else if(Room[i].score[j] === 4){
-                    scoreRoom2[i].push('/img/score-4.png');
-                }else if(Room[i].score[j] === 3){
-                    scoreRoom2[i].push('/img/score-3.png');
-                }else if(Room[i].score[j] === 2){
-                    scoreRoom2[i].push('/img/score-2.png');
-                }else{
-                    scoreRoom2[i].push('/img/score-1.png');
+
+                starRoom2[i][j] = [];
+
+                //별점 5점까지 스마일 저장
+                for(let k=1; k<=5; k++){
+                    if(Room[i].score[j] === k){
+                        smileRoom2[i].push(`/img/score-${k}.png`);    
+                    }
                 }
+                //별점 저장(1개)
+                for(let k=0; k<Room[i].score[j]; k++){
+                    starRoom2[i][j].push('/img/star-one.png');
+                    setStarRoom(starRoom2);
+                }
+                //별점 저장(0개)
+                for(let k=0; k< 5-Room[i].score[j]; k++){
+                    starRoom2[i][j].push('/img/star-zero.png');
+                    setStarRoom(starRoom2);
+                }
+
             }
         }
-
-        setScoreRoom(scoreRoom2);
+        console.log(starRoom2);
+        setSmileRoom(smileRoom2);
 
 
         //객실당 평점 구하기
@@ -113,11 +128,11 @@ export default function Detail(){
             }
         }
 
-        setStarRoom(roomStar);
+        setAvgRoom(roomStar);
 
     },[id]);
   
-console.log(scoreRoom);
+console.log(starRoom);
     
     const [wish, setWish] = useState([]);
 
@@ -288,7 +303,7 @@ console.log(scoreRoom);
                                         <h2>{item.roomName}</h2>
                                         <div className="room-intro">
                                             <div className="intro-left">
-                                                {starRoom[index] && starRoom[index].map((star, ind) => (
+                                                {avgRoom[index] && avgRoom[index].map((star, ind) => (
                                                     <img src={star} alt="roomScore" key={ind} />
                                                 ))}
                                             </div>
@@ -406,15 +421,29 @@ console.log(scoreRoom);
                             <div className="bottom-right">
                                 <div className="review-wrap">
                                     {Room.map((item,index)=>(
-                                        <p key={index}>
-                                            {item.score.map((review,ind)=>(
-                                                <span key={ind}>
-                                                    {/* <img src={scoreRoom[index][ind]} alt="score" /> */}
-                                                    {review}
-                                                    {item.comment[ind]}
-                                                </span>
-                                            ))}
-                                        </p>
+                                        <div className='room-div' key={index}>
+                                            <div className="hotel-img-wrap">
+                                                <img src={`/img/${Hotel.id}-${index+2}.jpg`} alt={Hotel.hotelName} className='hotel-img'/>
+                                            </div>
+
+                                            <div className="review-wrap">
+                                                {item.score.map((review,ind)=>(
+                                                    //여기서는 객실별 후기 3개씩만 보여지게
+                                                    ind <= 2 ?
+                                                        <p key={ind}>
+                                                            <span className='room'>{item.roomName}</span>
+                                                            {starRoom[index] && starRoom[index][ind] && starRoom[index][ind].map((star,i)=>(
+                                                                <img src={star} alt="star" key={i} className='star' />
+                                                            ))}
+                                                            <span className='review'>{review}</span>
+                                                            {smileRoom[index] && smileRoom[index][ind] && <img src={smileRoom[index][ind]} alt="score" className='score' />}
+                                                            <span className='comment'>{item.comment[ind]}</span>
+                                                        </p>
+                                                    :
+                                                        null
+                                                ))}
+                                            </div>
+                                        </div>
                                     ))}
                                 </div>
                             </div>

@@ -435,8 +435,6 @@ button{
     background-color: #42799b;
     border-radius: 3px;
 }
-
-
 .detail-wrap .detail-content .detail-left .hotel-score .score-bottom{
     display: flex;
     border-bottom-left-radius:10px;
@@ -445,7 +443,58 @@ button{
     border-top: 0;
     padding: 30px 0px;
 }
+.detail-wrap .detail-content .detail-left .hotel-score .score-bottom .bottom-left{
 
+}
+.detail-wrap .detail-content .detail-left .hotel-score .score-bottom .bottom-right{
+
+}
+.bottom-right .review-wrap .room-div .hotel-img-wrap{
+    width: 88px;
+    height: 88px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 5px;
+    margin-right: 15px;
+    margin-top: 3.5px;
+}
+.bottom-right .review-wrap .room-div .hotel-img-wrap .hotel-img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+}
+.bottom-right .review-wrap .room-div{
+    display: flex;
+}
+.bottom-right .review-wrap .room-div .review-wrap p{
+    margin-bottom: 8px;
+}
+.bottom-right .review-wrap .room-div .review-wrap .room{
+
+}
+.bottom-right .review-wrap .room-div .review-wrap .star{
+    width: 15px;
+    vertical-align: text-top;
+    margin-right: 1px;
+}
+.bottom-right .review-wrap .room-div .review-wrap .review{
+
+}
+.bottom-right .review-wrap .room-div .review-wrap .score{
+    width: 25px;
+}
+.bottom-right .review-wrap .room-div .review-wrap .comment{
+
+}
+.bottom-right .review-wrap .room-div .review-wrap span{
+    vertical-align: super;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    /* padding-right: 10px; */
+}
 
 
 
