@@ -40,7 +40,6 @@ export default function Main(){
     // 관광명소 마스크
     const [citySpotmask, setCitySpotMask] = useState(null)
 
-
     // 호텔 유형별로 접근하기 위한 사진 map돌리기 위한 오브젝트 배열
     const hotelType = [
         {id:1, image:'/mainImg/a-1.jpg', typeName: '호텔'},
@@ -59,9 +58,6 @@ export default function Main(){
         {id:5, image:'/mainImg/f-1.jpg', cityName: '뉴욕', cityInfo:'세계적인 문화·예술·엔터테인먼트를 경험할 수 있습니다!'},
         {id:6, image:'/mainImg/g-1.jpg', cityName: '파리', cityInfo:'한 도시에 역사적인 건축물과 예술적 분위기를 한번에!'},
     ];
-
-
-
 
     // 호텔 평점순으로 재배열
     const hotelRating = [...HotelData].sort((a,b) => b.score - a.score);
@@ -95,7 +91,6 @@ export default function Main(){
             null
         }
     }
-    console.log(btnCount3)
 
 
     // 슬라이드 함수
@@ -387,20 +382,21 @@ export default function Main(){
                     <div className='citySpotsBox'>
                         <ul className='citySpots' style={{marginLeft:`${slideMove2}px`}}>
                             {popularSpot.map((item) => (
-                                <li key={item.id} style={{cursor:'pointer'}} onClick={() => setSpotModalOpen(item.id)} className='SpotsWrap' >
+                                <li key={item.id} style={{cursor:'pointer'}} className='SpotsWrap' >
                                     <img src={item.image} style={{width:'390px', height:'500px'}} className='citySpotImg' onMouseOver={() => setCitySpotMask(item.id)}/>
+                                    {/* 마스크 */}
                                     {citySpotmask === item.id && 
-                                    < div className='SpotsMask'  onMouseLeave={() => setCitySpotMask(null)}>
+                                    < div className='SpotsMask'  onMouseLeave={() => setCitySpotMask(null)} onClick={() => setSpotModalOpen(item.id)}>
                                         <p className='maskCity'>{item.cityName}</p>
                                         <p className='maskCityInfo'>{item.cityInfo}</p>
                                     </div>}
                                     {/* 관광명소 클릭 후 모달 */}
                                     {spotModalOpen === item.id && 
-                                    <div className='overlay' onClick={() => setSpotModalOpen(null)}>
+                                    <div className='overlay' onClick={()=>{setSpotModalOpen(null)}}>
                                             <div className='spotsModal'>
                                             <img src={item.image} alt={item.cityName} className='modalImg'/>
-                                            <button type='button' onClick={() => setSpotModalOpen(null)}>닫기</button>
-                                        </div> 
+                                            {/* <button type='button' style={{zIndex:'999'}} onClick={()=>{setSpotModalOpen(null)}}>닫기</button> */}
+                                        </div>
                                     </div>
                                     }
                                 </li>
