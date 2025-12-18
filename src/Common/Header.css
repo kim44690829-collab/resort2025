@@ -1,6 +1,7 @@
 /* Header 전체 css */
 .Header_container{
-    width: 1920px;
+    /* width: 1920px; */
+    width: 100%;
     height: 80px;
     display: flex;
     justify-content: space-between;
