@@ -1,6 +1,6 @@
 import './Detail.css';
 import { useContext,useState,useEffect,useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import cookie from 'js-cookie';
 import { ResortDateContext } from '../Api/ResortDate';
 import LeafletMap from '../Api/LeafletMap';
@@ -216,6 +216,9 @@ console.log(starRoom);
 
     //console.log(starCount);
     //console.log(starCountTotal);
+
+    //더보기 버튼
+    const [more, setMore] = useState(false);
                             
 
     return(
@@ -308,7 +311,7 @@ console.log(starRoom);
                                                 ))}
                                             </div>
                                             <div className="intro-right">
-                                                <button type='button'>상세정보 &gt;</button>
+                                                <button type='button'>상세정보 <i className="fa-solid fa-angle-right"></i></button>
                                             </div>
                                         </div>
                                         <div className="room-info">
@@ -379,44 +382,44 @@ console.log(starRoom);
                                         <div className="bar-width">
                                             <div className="bar"  style={{width: `${(starCount.star5/starCountTotal)*100}%`}}></div>
                                         </div>
-                                        <span>{Math.round((starCount.star5/starCountTotal)*100)}%</span>
+                                        <span className="percent">{Math.round((starCount.star5/starCountTotal)*100)}%</span>
                                     </div>
                                     <div className="bar-wrap">
                                         <span>4점</span>
                                         <div className="bar-width">
                                             <div className="bar" style={{width: `${starCount.star4/starCountTotal*100}%`}}></div>
                                         </div>
-                                        <span>{Math.round((starCount.star4/starCountTotal)*100)}%</span>
+                                        <span className="percent">{Math.round((starCount.star4/starCountTotal)*100)}%</span>
                                     </div>
                                     <div className="bar-wrap">
                                         <span>3점</span>
                                         <div className="bar-width">
                                             <div className="bar" style={{width: `${starCount.star3/starCountTotal*100}%`}}></div>
                                         </div>
-                                        <span>{Math.round((starCount.star3/starCountTotal)*100)}%</span>
+                                        <span className="percent">{Math.round((starCount.star3/starCountTotal)*100)}%</span>
                                     </div>
                                     <div className="bar-wrap">
                                         <span>2점</span>
                                         <div className="bar-width">
                                             <div className="bar" style={{width: `${starCount.star2/starCountTotal*100}%`}}></div>
                                         </div>
-                                        <span>{Math.round((starCount.star2/starCountTotal)*100)}%</span>
+                                        <span className="percent">{Math.round((starCount.star2/starCountTotal)*100)}%</span>
                                     </div>
                                     <div className="bar-wrap">
                                         <span>1점</span>
                                         <div className="bar-width">
                                             <div className="bar" style={{width: `${starCount.star1/starCountTotal*100}%`}}></div>
                                         </div>
-                                        <span>{Math.round((starCount.star1/starCountTotal)*100)}%</span>
+                                        <span className="percent">{Math.round((starCount.star1/starCountTotal)*100)}%</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="score-bottom">
                             <div className="bottom-left">
-                                <p>이용자 평가</p>
-                                <p>한줄리뷰</p>
-                                <p>※ 실제 이용객분들께서 남겨주신 한줄평입니다.</p>
+                                <p className='score-tit'>이용자 평가</p>
+                                <p className='score-review'>한줄리뷰</p>
+                                <p className='score-txt'>※ 실제 이용객분들께서 남겨주신 한줄평입니다.</p>
                             </div>
                             <div className="bottom-right">
                                 <div className="review-wrap">
@@ -426,7 +429,7 @@ console.log(starRoom);
                                                 <img src={`/img/${Hotel.id}-${index+2}.jpg`} alt={Hotel.hotelName} className='hotel-img'/>
                                             </div>
 
-                                            <div className="review-wrap">
+                                            <div className="review-txt-wrap">
                                                 {item.score.map((review,ind)=>(
                                                     //여기서는 객실별 후기 3개씩만 보여지게
                                                     ind <= 2 ?
@@ -435,13 +438,21 @@ console.log(starRoom);
                                                             {starRoom[index] && starRoom[index][ind] && starRoom[index][ind].map((star,i)=>(
                                                                 <img src={star} alt="star" key={i} className='star' />
                                                             ))}
-                                                            <span className='review'>{review}</span>
-                                                            {smileRoom[index] && smileRoom[index][ind] && <img src={smileRoom[index][ind]} alt="score" className='score' />}
-                                                            <span className='comment'>{item.comment[ind]}</span>
+                                                            <span className='review'>{review}점</span>
+                                                            <i className='comment-wrap'>
+                                                                {smileRoom[index] && smileRoom[index][ind] && <img src={smileRoom[index][ind]} alt="score" className='score' />}
+                                                                <span className='comment'>{item.comment[ind]}</span>
+                                                            </i>
                                                         </p>
                                                     :
                                                         null
                                                 ))}
+                                            </div>
+                                            <div className="more">
+                                                <p className='more-txt'>더보기</p>
+                                                <button type='button'>
+                                                    <i className="fa-solid fa-angle-right"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     ))}
@@ -449,8 +460,86 @@ console.log(starRoom);
                             </div>
                         </div>
                     </div>
+                    <div className="hotel-info" >
+                        <div className="info-wrap" style={{height: more === false ? '500px' : '100%'}}>
+                            <h4 className='info-tit'>숙소 이용 정보</h4>
 
-                    <div style={{height:'500px'}}></div>
+                            <div className="info-part2">
+                                <p className='info-subtit'>
+                                    <i className="fa-solid fa-leaf"></i>
+                                    &nbsp;일회용품 줄이기 함께 실천해요
+                                </p>
+                                <ul>
+                                    <li>자원재활용법에 따라 2024년 3월 29일부터 일부 숙소에서는 일회용 어메니티가 무료로 제공되지 않아요.</li>
+                                    <li>일회용 어메니티 별도 구매는 프론트에 문의해주세요.</li>
+                                </ul>
+                            </div>
+                            <div className="info-part">
+                                <p className='info-subtit'>기본정보</p>
+                                <ul>
+                                    <li>체크인 : 15:00 / 체크아웃 : 11:00</li>
+                                    <li>22시 이후 체크인 시 호텔 프론트 문의</li>
+                                </ul>
+                            </div>
+                            <div className="info-part">
+                                <p className='info-subtit'>인원 추가 정보</p>
+                                <ul>
+                                    <li>기준인원 외 투숙시 추가 비용 발생</li>
+                                    <li>영유아 인원수 포함 / 최대인원 초과 불가</li>
+                                    <li>인원추가로 인한 비용은 현장결제</li>
+                                </ul>
+                            </div>
+                            <div className="info-part">
+                                <p className='info-subtit'>취사 시설</p>
+                                <ul>
+                                    <li>객실 내 취사가능한 객실 외 모든 객실에서는 취사가 불가합니다.  </li>
+                                    <li>객실 내 육류 , 튀김류, 생선류 조리 금지</li>                                
+                                </ul>
+                            </div>
+                            <div className="info-part">
+                                <p className='info-subtit'>반려견 이용 정책</p>
+                                <ul>
+                                    <li>반려견 동반 객실을 제외한 모든 객실은 반려견 동반 입실이 불가합니다.</li>
+                                    <li>반려견 동반 투숙 시 반려견의 몸무게 6kg 미만의 소형견만 입실 가능합니다.</li>
+                                    <li>1마리 이상의 반려견 추가 시 추가 비용이 발생합니다.(호텔 프론트에 문의)</li>
+                                    <li>엘레베이터 탑승 시 반려견을 안고 탑승하여 주시기 바랍니다.</li>
+                                    <li>객실 내ᆞ외부에 동반 반려견을 절대 혼자 두어서는 안되며, 보호자의 부주의로 인한 사고 및 동반 반려견 분실에 대해서 호텔은 책임을 지지 않습니다.</li>
+                                    <li>다른 반려견 또는 사람에게 심한 짖음과 공격성을 보이는 반려견은 환불없이 퇴실 조치가 취해질 수 있습니다.</li>
+                                    <li>동반 반려견이 다른 고객과 반려견에게 피해를 주거나 사고가 발생한 경우 당사자 간의 해결을 원칙으로 하고, 호텔에 책임을 물을 수 없습니다.</li>
+                                    <li>호텔에 반려견이 투숙하는 것과 관련하여 발생한 실제 손실, 요구, 피해, 책임, 경비 및 비용(대리인/변호사 수수료 및 소송 비용 포함)에 대하여 “호텔 주체”를 위해 변상함에 동의하는 것으로 간주합니다.</li>
+                                </ul>
+                            </div>
+                            <div className="info-part">
+                                <p className='info-subtit'>취소 및 환불 규정</p>
+                                <ul>
+                                    <li>체크인일 기준 5일 전 : 100% 환불</li>
+                                    <li>체크인일 기준 4일 전 : 70% 환불</li>
+                                    <li>체크인일 기준 3일 전 : 50% 환불</li>
+                                    <li>체크인일 기준 2일 전 : 30% 환불</li>
+                                    <li>체크인일 기준 1일 전~당일 및 No-show : 환불 불가</li>
+                                    <li>취소, 환불 시 수수료가 발생할 수 있습니다.</li>
+                                </ul>
+                            </div>
+                            <div className="info-part">
+                                <p className='info-subtit'>확인사항 및 기타</p>
+                                <ul>
+                                    <li>위의 정보는 호텔의 사정에 따라 변경될 수 있습니다.</li>
+                                    <li>미성년자는 보호자 동반 없이 이용이 불가합니다.</li>
+                                    <li>이미지는 실제와 상이할 수 있습니다.</li>
+                                    <li>체크인 시 배정 상품 또는 베드 타입이 미기재된 상품은 특정 객실과 베드 타입을 보장하지 않습니다.</li>
+                                    <li>객실가는 세금, 봉사료가 포함된 금액입니다.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        {more === false ? (
+                            <>
+                                <div className="white"></div>
+                                <button type='button' onClick={()=>setMore(true)}>더보기</button>
+                            </>
+                        ):(
+                            null
+                        )}                    
+                    </div>
                 </div>
                 <div className={`detail-right ${isFixed ? 'fixed' : null}`}>
                     <div className="hotel-day">
@@ -469,12 +558,44 @@ console.log(starRoom);
                         <div className="head-select">
                             <span className='head-txt'>인원</span>
                             <div className="btns">
-                                <button type='button'>-</button>
-                                <span>0</span>
-                                <button type='button'>+</button>
+                                <button type='button'><i className="fa-solid fa-minus"></i></button>
+                                <span>1</span>
+                                <button type='button'><i className="fa-solid fa-plus"></i></button>
                             </div>
                         </div>
                     </div>
+                    <div className="hotel-select">
+                        <p className='select-tit'>예약 전 참고사항</p>
+                        <p className='select-txt'>· 좌측 <span className='bold'> '객실선택'</span>란에서 <span className='bold'>객실종류 확인 및 예약</span>이 가능합니다.</p>
+                        <p className='select-txt'>· 객실종류별 <span className='bold'>최대 투숙객 수</span>를 참고하셔서 인원변경 해주시기 바랍니다.</p>
+                        <p className='select-txt'>· <span className='bold red'>회원가입시 10,000원 할인쿠폰</span>이 지급됩니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div className="recommend">
+                <h2>같은 지역의 다른 호텔추천</h2>
+                <div className="recommend-slider">
+                    <ul>
+                        {(HotelData.filter((item)=>item.city === Hotel.city)).map((hotel,index)=>(
+                            hotel.id === id ? null : (
+                                <li key={index}>
+                                    <Link to={`/detail/${hotel.id}`}>
+                                        <div className="hotel-img-wrap">
+                                            <img src={`/img/${hotel.id}-1.jpg`} alt={hotel.hotelName} className='hotel-img'/>
+                                        </div>
+                                        <div className="hotel-txt">
+                                            <h3>{hotel.hotelName}</h3>
+                                            <div className="intro-left">
+                                                {avgRoom[index] && avgRoom[index].map((star, ind) => (
+                                                    <img src={star} alt="roomScore" key={ind} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </li>
+                            )
+                        ))}
+                    </ul>
                 </div>
             </div>
         </section>
