@@ -1,0 +1,9 @@
+.paysection{
+    border: 1px solid red;
+    margin: 0 auto;
+    width: 1200px;
+}
+.paysection .pay_title{
+    font-weight: 600;
+    font-size: 26px;
+}

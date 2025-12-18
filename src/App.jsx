@@ -14,7 +14,7 @@ import Main from './Page/Main'
 import Detail from './Page/Detail'
 import Footer from './Common/Footer'
 import Guest from './Page/Guest'
-import Calendar from './Page/Calendar'
+import Pay from './Page/Pay'
 
 function App() {
 
@@ -31,6 +31,7 @@ function App() {
             <Route path='/room' element={<Room />} />
             <Route path='/detail/:id' element={<Detail />}/>  
             <Route path='/guest' element={<Guest />}/>  
+            <Route path='/pay' element={<Pay />}/>  
           </Routes>
         <Footer />
       </ResortDate>  

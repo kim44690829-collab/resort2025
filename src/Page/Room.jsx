@@ -58,15 +58,15 @@ export default function Room(){
         //console.log(pricefilter,'가격필터까지')
         const dateFilter = pricefilter.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
         if(hotelSort===1){
-            pricefilter.sort((a,b) => a.id - b.id)
+            dateFilter.sort((a,b) => a.id - b.id)
         }else if(hotelSort===2){
-            pricefilter.sort((a,b) => b.score - a.score)
+            dateFilter.sort((a,b) => b.score - a.score)
         }else if(hotelSort===3){
-            pricefilter.sort((a,b) => a.score - b.score)
+            dateFilter.sort((a,b) => a.score - b.score)
         }else if(hotelSort===4){
-            pricefilter.sort((a,b) => b.price - a.price)
+            dateFilter.sort((a,b) => b.price - a.price)
         }else{
-            pricefilter.sort((a,b) => a.price - b.price)
+            dateFilter.sort((a,b) => a.price - b.price)
         }
 
         // 가격 최솟값 최대값 조정 함수
@@ -237,15 +237,17 @@ export default function Room(){
                                 
                                 <div className="minprice">
                                     <p className="price_txt">최소금액</p>
-                                    <input className="price_input" type="text" value={`${minPrice}원`} placeholder="최소금액" onChange={(e)=>setMinPrice(e.target.value)}/>
+                                    <input className="price_input" type="text" value={`${minPrice.toLocaleString()}`} placeholder="최소금액" onChange={(e)=>setMinPrice(e.target.value)}/>
+                                    <span>원</span>
                                 </div>
                                 <div className="maxprice">
                                     <p className="price_txt">최대금액</p>
-                                    <input className="price_input" type="text" value={`${maxPrice}원`} placeholder="최대금액" onChange={(e)=>setMaxPrice(e.target.value)}/>
+                                    <input className="price_input" type="text" value={`${maxPrice.toLocaleString()}`} placeholder="최대금액" onChange={(e)=>setMaxPrice(e.target.value)}/>
+                                    <span>원</span>
                                 </div>
                             </div>
                             <div className="reset">
-                                <button type="button" onClick={()=>{setMyfilter([]),setMaxPrice(300000),setMinPrice(0)}} className="reset_btn">🔄<span className="resettxt">필터 초기화</span></button>
+                                <button type="button" onClick={()=>{setMyfilter([]),setMaxPrice(300000),setMinPrice(0)}} className="reset_btn"><i class="fa-solid fa-arrow-rotate-right"></i><span className="resettxt"> 필터 초기화</span></button>
                             </div>
                     </div>
                     <div className="right_filter">
@@ -258,20 +260,22 @@ export default function Room(){
                 <div className="arr_menu">
                     <span className="arr_total">총 {myhotel.length}개</span>
                     <ul className="arr_group">
-                        <li className="arr_list" onClick={()=>sortHandeler(1)} style={{color:hotelSort===1?'white':'#aaa',fontWeight:hotelSort===1?600:'default'}}>추천수</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(2)} style={{color:hotelSort===2?'white':'#aaa',fontWeight:hotelSort===2?600:'default'}}>높은평점순</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(3)} style={{color:hotelSort===3?'white':'#aaa',fontWeight:hotelSort===3?600:'default'}}>낮은평점순</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(4)} style={{color:hotelSort===4?'white':'#aaa',fontWeight:hotelSort===4?600:'default'}}>높은가격순</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(5)} style={{color:hotelSort===5?'white':'#aaa',fontWeight:hotelSort===5?600:'default'}}>낮은가격순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(1)} style={{color:hotelSort===1?'white':'#ccc',fontWeight:hotelSort===1?600:400}}>추천수</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(2)} style={{color:hotelSort===2?'white':'#ccc',fontWeight:hotelSort===2?600:400}}>높은평점순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(3)} style={{color:hotelSort===3?'white':'#ccc',fontWeight:hotelSort===3?600:400}}>낮은평점순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(4)} style={{color:hotelSort===4?'white':'#ccc',fontWeight:hotelSort===4?600:400}}>높은가격순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(5)} style={{color:hotelSort===5?'white':'#ccc',fontWeight:hotelSort===5?600:400}}>낮은가격순</li>
                     </ul>
                 </div>
                 {/* 방정보 영역 */}
                 <div className="room_menu">
                     <ul className="room_product">
                         {myhotel.length !== 0?myhotel.map((item)=>(
-                            <Link to={`/detail/${item.id}`}>
+                            
                             <li key={item.id} className="room_list">
+                                
                                 <div className="img_box"><img src={item.img[0]} alt={`${item.img[0]}이미지`} className="hotelimg"/></div>
+                                <Link to={`/detail/${item.id}`}>
                                 <div className="room_info">
                                     <h2 className="menu_title">{item.hotelName}</h2>
                                     <p className="menu_city">{item.city}</p>
@@ -287,10 +291,12 @@ export default function Room(){
                                         }
                                     </p>
                                     <p className="menu_price">{item.discount===1?(item.price*0.9).toLocaleString():item.price.toLocaleString()}원</p>
-                                    <button type="button" className="menu_wishbtn" onClick={()=>setLikeBtn(!likeBtn)}>{likeBtn?'❤':'💖'}</button>
+                                    
                                 </div>
+                                </Link>
+                                <button type="button" className="menu_wishbtn" onClick={()=>setLikeBtn(!likeBtn)}>{likeBtn?'❤':'💖'}</button>
                             </li>
-                            </Link>
+                            
                         )): <h2>검색된 상품이 없습니다.</h2>}
                     </ul>
                 </div>

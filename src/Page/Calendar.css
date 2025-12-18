@@ -38,11 +38,11 @@
     width: 250px;
     text-align: center;
 }
-.calendar .calendar_manu .week .table_head tr th{
+.calendar .calendar_manu .week .table_head tr .table_num{
     text-align: center;
     padding-bottom: 10px;
 }
-.calendar .calendar_manu .week .table_body tr td{
+.calendar .calendar_manu .week .table_body tr .table_num{
     height: 35px;
     width: 35px;
     line-height: 35px;

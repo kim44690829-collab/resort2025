@@ -245,8 +245,7 @@ export default function Calendar({setDayData}){
                                                     `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?`0${selectMonth.getMonth()+1}`:selectMonth.getMonth()+1}-${items<10?'0'+items:items}`===selectday[1] && selectday.length===2?'bf'
                                                     :
                                                     ''
-                                                }
-                                                `}
+                                                } table_num`}
                                             style={{
                                                 color:items<selectMonth.getDate()?'gray':item[0]===items?'red':'black',
                                                 cursor:items<selectMonth.getDate()?'default':'pointer',
@@ -289,7 +288,7 @@ export default function Calendar({setDayData}){
                                                     :
                                                     `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?`0${nextMonth.getMonth()+1}`:nextMonth.getMonth()+1}-${items<10?'0'+items:items}`===selectday[1] && selectday.length===2?'bf'
                                                     :''
-                                                }`}>
+                                                } table_num` }>
                                                 <span className="cal_num">{items}</span>
                                             </td>
                                         ))}
