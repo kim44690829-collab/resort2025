@@ -31,10 +31,8 @@ export default function Room(){
 
     //날짜에 따른 목록 필터
     useEffect(()=>{
-        
-
         const dateFilter = HotelData.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
-        setmyhotel(dateFilter)
+       
     },[DayData])
 
     
@@ -58,7 +56,7 @@ export default function Room(){
         })
         const pricefilter = filterHotel.filter((f)=>f.price > minPrice && f.price<=maxPrice)
         //console.log(pricefilter,'가격필터까지')
-
+        const dateFilter = pricefilter.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
         if(hotelSort===1){
             pricefilter.sort((a,b) => a.id - b.id)
         }else if(hotelSort===2){
@@ -103,10 +101,10 @@ export default function Room(){
         
          */
 
-    setmyhotel(pricefilter)
+    setmyhotel(dateFilter)
         
 
-    },[myFilter,minPrice,maxPrice,hotelSort])
+    },[myFilter,minPrice,maxPrice,hotelSort,DayData])
 
     useEffect(()=>{
         if(minPrice<0){
@@ -258,13 +256,13 @@ export default function Room(){
                 </div>
                 {/* 중단 정렬 영역 */}
                 <div className="arr_menu">
-                    <span className="arr_total">{myhotel.length}개</span>
+                    <span className="arr_total">총 {myhotel.length}개</span>
                     <ul className="arr_group">
-                        <li className="arr_list" onClick={()=>sortHandeler(1)} style={{color:hotelSort===1?'black':'#aaa',fontWeight:hotelSort===1?600:'default'}}>추천수</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(2)} style={{color:hotelSort===2?'black':'#aaa',fontWeight:hotelSort===2?600:'default'}}>높은평점순</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(3)} style={{color:hotelSort===3?'black':'#aaa',fontWeight:hotelSort===3?600:'default'}}>낮은평점순</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(4)} style={{color:hotelSort===4?'black':'#aaa',fontWeight:hotelSort===4?600:'default'}}>높은가격순</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(5)} style={{color:hotelSort===5?'black':'#aaa',fontWeight:hotelSort===5?600:'default'}}>낮은가격순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(1)} style={{color:hotelSort===1?'white':'#aaa',fontWeight:hotelSort===1?600:'default'}}>추천수</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(2)} style={{color:hotelSort===2?'white':'#aaa',fontWeight:hotelSort===2?600:'default'}}>높은평점순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(3)} style={{color:hotelSort===3?'white':'#aaa',fontWeight:hotelSort===3?600:'default'}}>낮은평점순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(4)} style={{color:hotelSort===4?'white':'#aaa',fontWeight:hotelSort===4?600:'default'}}>높은가격순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(5)} style={{color:hotelSort===5?'white':'#aaa',fontWeight:hotelSort===5?600:'default'}}>낮은가격순</li>
                     </ul>
                 </div>
                 {/* 방정보 영역 */}

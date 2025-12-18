@@ -209,12 +209,14 @@ export default function Calendar({setDayData}){
         console.log(`${selectMonth.getFullYear()}-${nextMonth.getMonth()+1<10?`0${nextMonth.getMonth()+1}`:nextMonth.getMonth()+1}-${items<10?'0'+items:items}`)
         
     }
+
+
     return(
         <>
-            <div style={{width:'600px',height:'200px',backgroundColor:'yellowgreen',margin:'0 auto'}} className="calendar">
+            <div className="calendar">
                 <div className="calendar_manu">
                     <h2 className="cal_title">{selectMonth.getFullYear()}년 {selectMonth.getMonth()+1}월</h2>
-                    <table className="week" border={1}>
+                    <table className="week">
                         <thead className="table_head">
                             <tr>
                                 <th style={{color:'red'}}>일</th>
@@ -232,18 +234,24 @@ export default function Calendar({setDayData}){
                                         {item.map((items,index) => (
                                             <td key={index} onClick={()=>leftcal(items,selectMonth.getMonth()+1,selectMonth.getFullYear())} 
                                             className={
-                                                selectMonth.getDate()>items?''
+                                                `${selectMonth.getDate()>items?''
                                                 :
                                                 `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?`0${selectMonth.getMonth()+1}`:selectMonth.getMonth()+1}-${items<10?'0'+items:items}`===selectday[0] || `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?`0${selectMonth.getMonth()+1}`:selectMonth.getMonth()+1}-${items<10?'0'+items:items}`===selectday[1]?'choose'
                                                 :
                                                 `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?`0${selectMonth.getMonth()+1}`:selectMonth.getMonth()+1}-${items<10?'0'+items:items}`>selectday[0] && `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?`0${selectMonth.getMonth()+1}`:selectMonth.getMonth()+1}-${items<10?'0'+items:items}`<selectday[1]?'area'
-                                                :'active'
-                                            }
+                                                :'active'} ${
+                                                    `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?`0${selectMonth.getMonth()+1}`:selectMonth.getMonth()+1}-${items<10?'0'+items:items}`===selectday[0] && selectday.length===2?'af'
+                                                    :
+                                                    `${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?`0${selectMonth.getMonth()+1}`:selectMonth.getMonth()+1}-${items<10?'0'+items:items}`===selectday[1] && selectday.length===2?'bf'
+                                                    :
+                                                    ''
+                                                }
+                                                `}
                                             style={{
                                                 color:items<selectMonth.getDate()?'gray':item[0]===items?'red':'black',
                                                 cursor:items<selectMonth.getDate()?'default':'pointer',
                                                
-                                            }}>{items}</td>
+                                            }}><span className="cal_num">{items}</span></td>
                                         ))}
                                     </tr>
                                 ))}
@@ -252,7 +260,7 @@ export default function Calendar({setDayData}){
                 </div>
                 <div className="calendar_manu">
                     <h2 className="cal_title">{nextMonth.getFullYear()}년 {nextMonth.getMonth()+1}월</h2>
-                    <table className="week" border={1}>
+                    <table className="week">
                         <thead className="table_head">
                             <tr>
                                 <th style={{color:'red'}}>일</th>
@@ -270,25 +278,34 @@ export default function Calendar({setDayData}){
                                         {item.map((items,index) => (
                                             <td key={index} onClick={()=>{right(items,nextMonth.getMonth()+1,nextMonth.getFullYear())}} style={{color:item[0]===items?'red':'black'}} 
                                             className={
-                                                items===''?''
+                                                `${items===''?''
                                                 :
                                                 `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?`0${nextMonth.getMonth()+1}`:nextMonth.getMonth()+1}-${items<10?'0'+items:items}`===selectday[0] || `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?`0${nextMonth.getMonth()+1}`:nextMonth.getMonth()+1}-${items<10?'0'+items:items}`===selectday[1]?'choose'
                                                 :
                                                 `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?`0${nextMonth.getMonth()+1}`:nextMonth.getMonth()+1}-${items<10?'0'+items:items}`>selectday[0] && `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?`0${nextMonth.getMonth()+1}`:nextMonth.getMonth()+1}-${items<10?'0'+items:items}`<selectday[1]?'area'
                                                 :
-                                                'active'}>
-                                                {items}
+                                                'active'} ${
+                                                    `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?`0${nextMonth.getMonth()+1}`:nextMonth.getMonth()+1}-${items<10?'0'+items:items}`===selectday[0] && selectday.length===2?'af'
+                                                    :
+                                                    `${nextMonth.getFullYear()}-${nextMonth.getMonth()+1<10?`0${nextMonth.getMonth()+1}`:nextMonth.getMonth()+1}-${items<10?'0'+items:items}`===selectday[1] && selectday.length===2?'bf'
+                                                    :''
+                                                }`}>
+                                                <span className="cal_num">{items}</span>
                                             </td>
                                         ))}
                                     </tr>
                                 ))}
                         </tbody>
                     </table>
-                    <button type="button" onClick={back}>이전달</button>
-                    <button type="button" onClick={next}>다음달</button>
+                    
                     
                 </div>
-                <p>{selectDate[0]}부터~{selectDate[1]}까지</p>
+                <button type="button" onClick={back} className="prvBtn calBtn"><i class="fa-solid fa-angle-left"></i></button>
+                <button type="button" onClick={next}className="nextBtn calBtn"><i class="fa-solid fa-angle-right"></i></button>
+                <div className="line"></div>
+                <div className="choose_day">
+                    <p>{selectDate.length===2?`${selectDate[0]} 부터 - ${selectDate[1]} 까지`:'일정을 선택해 주세요'}</p>
+                </div>
             </div>
             
         </>

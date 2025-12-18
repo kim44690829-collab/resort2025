@@ -1,10 +1,37 @@
 .calendar{
     display: flex;
     justify-content: space-around;
+    width: 640px;
+    height: 400px;
+    margin: 0 auto;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    position: relative;
+    flex-wrap: wrap;
 }
-.calendar .calendar_manu{}
+.calendar .calBtn{
+    position: absolute;
+    top: 30px;
+    border: none;
+    background-color: transparent;
+    color: #42799b;
+
+}
+.calendar .prvBtn{
+    left: 20px;
+}
+.calendar .nextBtn{
+    right: 20px;
+}
+.calendar .calendar_manu{
+    height: 300px;
+}
 .calendar .calendar_manu .cal_title{
     text-align: center;
+    margin: 20px;
+    font-weight: 600;
 }
 .calendar .calendar_manu .week{
     background-color: #fff;
@@ -13,18 +40,64 @@
 }
 .calendar .calendar_manu .week .table_head tr th{
     text-align: center;
+    padding-bottom: 10px;
 }
 .calendar .calendar_manu .week .table_body tr td{
-    height: 25px;
+    height: 35px;
+    width: 35px;
+    line-height: 35px;
+    box-sizing: border-box;
 }
-.calendar .calendar_manu .week .table_body tr .active:hover{
+.calendar .calendar_manu .week .table_body tr .active:hover .cal_num{
     background-color: #7ED6E4;
     cursor: pointer;
 }
-.calendar .calendar_manu .week .table_body tr .choose{
-    background-color: #f4c7a1;    
+.calendar .calendar_manu .week .table_body tr .choose .cal_num{
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-color: #42799b;
+    border-radius: 50%;
+    color: #fff;
+    line-height: 35px;
 }
+.calendar .calendar_manu .week .table_body tr .choose{
+    position: relative;
+}
+.calendar .calendar_manu .week .table_body tr .bf::before{
+    content: '';
+    background-color: #7ED6E450;
+    height: 35px;
+    width: 17px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+.calendar .calendar_manu .week .table_body tr .choose .cal_num{
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+}
+.calendar .calendar_manu .week .table_body tr .af::after{
+    content: '';
+    background-color: #7ED6E450;
+    height: 35px;
+    width: 17px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 0;
+
+}
+
 .calendar .calendar_manu .week .table_body tr .area{
-    background-color: #8e9fe3;
-    
+    background-color: #7ed6e450;
+
+}
+.calendar .line{
+    width: 550px;
+    height: 2px;
+    background-color: gray;
 }
