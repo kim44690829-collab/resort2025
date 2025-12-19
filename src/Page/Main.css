@@ -556,3 +556,54 @@
     margin: 50px;
     border-radius: 10px;
 }
+.spotsModal_hotel{
+    position: absolute;
+    top: 53px;
+    right: 10px;
+    height: 400px;
+    overflow: hidden;
+}
+.Modal_hotel_Ul{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.Modal_hotel_Li{
+    display: flex;
+    padding: 15px;
+    background-color: #f5f7fa;
+    border-radius: 10px;
+}
+.Modal_hotel_Img{
+    width: 182px;
+    height: 145px;
+    border-radius: 10px;
+}
+.Modal_hotelText{
+    /* margin-left: 30px; */
+    background-color: #fff;
+    padding-left: 30px;
+    width: 390px;
+    border-radius: 10px;
+}
+.Modal_hotelText1{
+    color: #888;
+    margin: 10px 0 5px 0;
+}
+.Modal_hotelText2{
+    font-size: 22px;
+    margin-bottom: 65px;
+}
+.Modal_hotelText3{
+    font-size: 20px;
+    margin-right: 10px;
+    text-align: right;
+}
+.spotModal_Xbtn{
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}

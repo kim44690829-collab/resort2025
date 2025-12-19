@@ -30,6 +30,7 @@ export default function Main(){
     const [guestCount, setGuestCount] = useState(1)
     // 관광지 클릭시 모달
     const [spotModalOpen, setSpotModalOpen] = useState(null);
+    const [spotModalOpen2, setSpotModalOpen2] = useState(0);
     // 슬라이드 상태저장 변수
     // 인기 호텔 슬라이드
     const [slideMove1, setSlideMove1] = useState(0)
@@ -46,6 +47,7 @@ export default function Main(){
     // const [openC, setOpenC] = useState(1)
     // 선택한 날짜를 담을 변수
     // const [DayData,setDayData] = useState([])
+    const [aaa, setAaa] = useState([])
 
     // 호텔 유형별로 접근하기 위한 사진 map돌리기 위한 오브젝트 배열
     const hotelType = [
@@ -67,10 +69,28 @@ export default function Main(){
     ];
 
     // 관광명소 호텔 map
-    const hotel_modal = HotelData.filter((item) => item.city === '서울')
-    console.log('rkskekfksk')
-    console.log(hotel_modal)
-    
+    // console.log(popularSpot[spotModalOpen].id);
+    // const Arrindex = popularSpot[spotModalOpen].id
+    // const check = 0;
+    // for(let i=0; i<popularSpot.length; i++){
+
+    // }
+
+    useEffect(() => {
+        const hotel_modal = HotelData.filter((item) => 
+            (item.city === 'Seoul' ? '서울' : 
+            item.city === 'Jeju' ? '제주도' : 
+            item.city === 'Busan' ? '부산' : 
+            item.city === 'Sapporo' ? '삿포로' : 
+            item.city === 'NewYork' ? '뉴욕' : 
+            item.city === 'Paris' ? '파리' : 
+            null )=== popularSpot[spotModalOpen2].cityName)
+        setAaa(hotel_modal)
+        // console.log('rkskekfksk')
+        // console.log('모달', spotModalOpen)
+        console.log('aaa', aaa)
+       
+    }, [spotModalOpen])
 
     // 호텔 평점순으로 재배열
     const hotelRating = [...HotelData].sort((a,b) => b.score - a.score);
@@ -416,27 +436,36 @@ export default function Main(){
                                     <img src={item.image} style={{width:'390px', height:'500px'}} className='citySpotImg' onMouseOver={() => setCitySpotMask(item.id)}/>
                                     {/* 마스크 */}
                                     {citySpotmask === item.id && 
-                                    < div className='SpotsMask'  onMouseLeave={() => setCitySpotMask(null)} onClick={() => setSpotModalOpen(item.id)}>
+                                    < div className='SpotsMask'  onMouseLeave={() => setCitySpotMask(null)} onClick={() => {setSpotModalOpen(item.id); setSpotModalOpen2(item.id - 1)}}>
                                         <p className='maskCity'>{item.cityName}</p>
                                         <p className='maskCityInfo'>{item.cityInfo}</p>
                                     </div>}
                                     {/* 관광명소 클릭 후 모달 */}
                                     {spotModalOpen === item.id && 
-                                    <div className='overlay' onClick={()=>{setSpotModalOpen(null)}}>
-                                            <div className='spotsModal'>
-                                                <div className='spotsModal_in'>
-                                                    <img src={item.image} alt={item.cityName} className='modalImg'/>
-                                                </div>
-                                                <div className='spotsModal_hotel'>
-                                                    <ul>
-                                                        {HotelData.map((item) => (
-                                                           <li key={item.id}>
-                                                                <img src = {item.img[0]} />
-                                                           </li> 
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            <button type='button' style={{zIndex:'999'}} onClick={()=>{setSpotModalOpen(null)}}>닫기</button>
+                                    <div className='overlay' onClick={()=>{setSpotModalOpen(null); setSpotModalOpen(0);}}>
+                                        <div className='spotsModal'>
+                                            <div className='spotsModal_in'>
+                                                <img src={item.image} alt={item.cityName} className='modalImg'/>
+                                            </div>
+                                            <div className='spotsModal_hotel'>
+                                                <ul className='Modal_hotel_Ul'>
+                                                    {aaa.map((item) => (
+                                                        <li key={item.id} className='Modal_hotel_Li'>
+                                                            <div>
+                                                                <img src = '/img/1-1.jpg' alt={item.hotelName} className='Modal_hotel_Img' />
+                                                            </div>
+                                                            <div className='Modal_hotelText'>
+                                                                <p className='Modal_hotelText1'>{item.type}</p>
+                                                                <p className='Modal_hotelText2'>{item.hotelName}</p>
+                                                                <p className='Modal_hotelText3'>{item.price.toLocaleString()}원</p>
+                                                            </div>
+                                                        </li> 
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                            <button type='button' onClick={()=>{setSpotModalOpen(null)}} className='spotModal_Xbtn'>
+                                                <i class="fa-solid fa-x"></i>
+                                            </button>
                                         </div>
                                     </div>
                                     }
