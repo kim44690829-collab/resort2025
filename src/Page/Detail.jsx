@@ -13,16 +13,16 @@ export default function Detail(){
     //아이디값 비교
     const Hotel = HotelData.find((item)=>item.id === Number(id));
     //예외처리
-    if(!Hotel) return <p>잠시만 기다려주세요...</p>
+    if(!Hotel) return <p>호텔 정보가 없습니다.</p>
     //호텔이름 비교
     const Room = RoomData.filter((item)=>item.hotelName === Hotel.hotelName);
     //예외처리
-    if(!Room) return <p>잠시만 기다려주세요...</p>
+    if (Room.length === 0) return <p>객실 정보가 없습니다.</p>;
     
     //추천호텔 데이터
     const RecommHotel = HotelData.filter((item)=>item.city === Hotel.city && item.id !== Number(id));
     //예외처리
-    if(!RecommHotel) return <p>잠시만 기다려주세요...</p>
+    if(RecommHotel.length === 0) return null;
 
     console.log(Hotel);
     console.log(Room);
@@ -138,18 +138,35 @@ export default function Detail(){
         setAvgRoom(roomStar);
 
         //추천호텔 별점
-        // const recommStar = [];
+        const recommStar = [];
+        const recommStarImg = [];
 
-        // for(let i=0; i<RecommHotel.length; i++){
-        //     recommStar.push(RecommHotel[i].score);
-        // }
-        // console.log(recommStar);
-        // for(let j=0; j<recommStar.length; j++){
+        for(let i=0; i<RecommHotel.length; i++){
+            recommStar.push(RecommHotel[i].score);
 
-        // }
+            recommStarImg[i] = [];
+                        
+            //별점 정수
+            const starInt = Math.floor(recommStar[i]);
+            //별점 소수
+            const starFloat = Math.floor(recommStar[i]*10)/10 - starInt;
+            //별점 빈칸
+            const starZero = Math.floor(5 - starInt - starFloat);
+            
+            for(let k=0; k<starInt; k++){
+                recommStarImg[i].push('/img/star-one.png');                  
+            }
+            if(starFloat>0){
+                recommStarImg[i].push('/img/star-half.png');                    
+            }
+            for(let j=0; j<starZero; j++){
+                recommStarImg[i].push('/img/star-zero.png');                    
+            }
+        }
+        setRecommStar(recommStarImg);
+        //console.log(recommStar);     
         
-
-    },[id]);
+    },[]);
   
 console.log(starRoom);
 console.log(recommStar);
@@ -369,7 +386,7 @@ console.log(recommStar);
                     </div>
                     <div className="hotel-map">
                         <p className='map-title'>위치안내</p>
-                        <LeafletMap city={Hotel.city} hotelName={Hotel.hotelName} style={{width:'100%',height:'400px',border: '1px solid #e7e7e7',borderRadius:'10px'}}/>
+                        <LeafletMap city={Hotel.city} hotelName={Hotel.hotelName} style={{width:'100%',height:'400px',border: '1px solid #e7e7e7',borderRadius:'10px'}} key={Hotel.id}/>
                         <p className='map-address'>
                             <i className="fa-solid fa-location-dot"></i>&nbsp;
                             {Hotel.city === 'Sokcho'?'대한민국, 강원도 속초시':Hotel.city === 'Gyeongju'?'대한민국, 경상북도 경주시':Hotel.city === 'Busan'?'대한민국, 부산시':Hotel.city === 'Gangneung'?'대한민국, 강원도 강릉시':Hotel.city === 'Yeosu'?'대한민국, 전라남도 여수시':Hotel.city === 'Daejeon'?'대한민국, 대전시':Hotel.city === 'Gwangju'?'대한민국, 광주시':Hotel.city === 'Jeju'?'대한민국, 제주도':Hotel.city === 'Pohang'?'대한민국, 경상북도 포항시':Hotel.city === 'Seoul'?'대한민국, 서울시':Hotel.city === 'Tokyo'?'일본, 도쿄':Hotel.city === 'Sapporo'?'일본, 훗카이도 삿포로':Hotel.city === 'LosAngeles'?'미국, 캘리포니아 로스앤젤레스':Hotel.city === 'NewYork'?'미국, 뉴욕':Hotel.city === 'Guam'?'미국, 괌':Hotel.city === 'Zhangjiajie'?'중국, 후난성 장가계':Hotel.city === 'Shanghai'?'중국, 상하이':Hotel.city === 'Rome'?'이탈리아, 로마':Hotel.city === 'Venice'?'이탈리아, 베네치아':Hotel.city === 'Paris'?'프랑스, 파리':null}
@@ -596,24 +613,22 @@ console.log(recommStar);
                 <h2>같은 지역의 다른 호텔추천</h2>
                 <div className="recommend-slider">
                     <ul>
-                        {(HotelData.filter((item)=>item.city === Hotel.city)).map((hotel,index)=>(
-                            hotel.id === Number(id) ? null : (
-                                <li key={index}>
-                                    <Link to={`/detail/${hotel.id}`}>
-                                        <div className="hotel-img-wrap">
-                                            <img src={`/img/${hotel.id}-1.jpg`} alt={hotel.hotelName} className='hotel-img'/>
+                        {RecommHotel.map((hotel,index)=>(
+                            <li key={index}>
+                                <a href={`/detail/${hotel.id}`}>
+                                    <div className="hotel-img-wrap">
+                                        <img src={`/img/${hotel.id}-1.jpg`} alt={hotel.hotelName} className='hotel-img'/>
+                                    </div>
+                                    <div className="hotel-txt">
+                                        <h3>{hotel.hotelName}</h3>
+                                        <div className="intro-left">
+                                            {recommStar && recommStar[index] && recommStar[index].map((star,ind)=>(
+                                                <img src={star} alt="score" key={ind} />
+                                            ))}
                                         </div>
-                                        <div className="hotel-txt">
-                                            <h3>{hotel.hotelName}</h3>
-                                            <div className="intro-left">
-                                                {starImg.map((star,index)=>(
-                                                    <img src={star} alt="score" key={index} />
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </li>
-                            )
+                                    </div>
+                                </a>
+                            </li>
                         ))}
                     </ul>
                 </div>

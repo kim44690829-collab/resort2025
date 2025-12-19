@@ -13,11 +13,11 @@ export default function Footer(){
                     </p>
                     <div>
                         <h1>
-                            <i class="fa-solid fa-phone"></i>
+                            <i className="fa-solid fa-phone"></i>
                             1999-9999
                         </h1>
                         <button type='button'>
-                            <i class="fa-solid fa-comment"></i>
+                            <i className="fa-solid fa-comment"></i>
                             채팅상담
                         </button>
                     </div>
@@ -25,7 +25,7 @@ export default function Footer(){
                 <div>
                     <p>공지사항</p>
                     <p>
-                        <i class="fa-solid fa-plus"></i>
+                        <i className="fa-solid fa-plus"></i>
                     </p>
                 </div>
             </div> */}
