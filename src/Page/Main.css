@@ -21,11 +21,12 @@
 }
 .main_container .mainImgBenner .searchTitle{
     position: absolute;
-    top: -70px;
-    left: 0;
+    top: 430px;
+    left: 348px;
     font-size: 30px;
     font-weight: 700;
     color: #fff;
+    z-index: 1000;
 }
 .main_container .mainImgBenner .hotelSearch .hotelSearchBtn{
     width: 100px;
@@ -46,7 +47,7 @@
     /* border-top: 1px solid black; */
 }
 .main_container .mainImgBenner .hotelSearch .hotelInput #citySearch{
-    width: 500px;
+    width: 400px;
     height: 45px;
     padding: 15px 10px 10px 10px;
     padding-left: 40px;
@@ -124,6 +125,30 @@
     top: 16px;
     left: 10px;
 }
+/* 인원 */
+.guests{
+    display: inline-block;
+    width: 50px;
+    padding: 10px;
+    text-align: center;
+}
+/* 달력 버튼 */
+.calenertBtn{
+    width: 300px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(228, 228, 228);
+}
+.fa-calendar{
+    margin-right: 10px;
+}
+.CalendarModal{
+    position: absolute;
+    top: 60px;
+    left: 462px;
+    
+}
+/* 호텔 타입별 선택 */
 .main_container .hotel_type{
     width: 1200px;
     margin: 0 auto;
@@ -153,13 +178,7 @@
     padding: 10px;
     border: none;
 }
-.guests{
-    display: inline-block;
-    width: 50px;
-    padding: 10px;
-    text-align: center;
-}
-/*  */
+/* 인기순 호텔 */
 .main_container .popularAccom{
     margin-top: 70px;
 }

@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import { useState, useEffect } from "react";
 
 export const ResortDateContext = createContext();
 
@@ -3558,7 +3559,7 @@ export default function ResortDate({children}){
         {
         id: 1,
         country: "Korea",
-        city: "Seoul",
+        city: "서울",
         startDate: "2026-03-05",
         endDate: "2026-03-09",
         hotelName: "서울 스카이베이 프라임 호텔",
@@ -3577,7 +3578,7 @@ export default function ResortDate({children}){
         {
         id: 2,
         country: "Korea",
-        city: "Seoul",
+        city: "서울",
         startDate: "2026-03-18",
         endDate: "2026-03-22",
         hotelName: "서울 라이트하버 호텔",
@@ -3596,7 +3597,7 @@ export default function ResortDate({children}){
         {
         id: 3,
         country: "Korea",
-        city: "Seoul",
+        city: "서울",
         startDate: "2026-04-10",
         endDate: "2026-04-14",
         hotelName: "서울 헤리티지 스타 라운지",
@@ -3615,7 +3616,7 @@ export default function ResortDate({children}){
         {
         id: 4,
         country: "Korea",
-        city: "Seoul",
+        city: "서울",
         startDate: "2026-04-22",
         endDate: "2026-04-26",
         hotelName: "서울 프레미어 모던 스테이",
@@ -3634,7 +3635,7 @@ export default function ResortDate({children}){
         {
         id: 5,
         country: "Korea",
-        city: "Seoul",
+        city: "서울",
         startDate: "2026-05-03",
         endDate: "2026-05-07",
         hotelName: "서울 오션루프 스위트",
@@ -3653,7 +3654,7 @@ export default function ResortDate({children}){
         {
         id: 6,
         country: "Korea",
-        city: "Seoul",
+        city: "서울",
         startDate: "2026-05-28",
         endDate: "2026-06-01",
         hotelName: "서울 리버사이드 프라임 호텔",
@@ -3674,7 +3675,7 @@ export default function ResortDate({children}){
         {
         id: 7,
         country: "Korea",
-        city: "Busan",
+        city: "부산",
         startDate: "2026-03-06",
         endDate: "2026-03-10",
         hotelName: "부산 오션클라우드 호텔",
@@ -3693,7 +3694,7 @@ export default function ResortDate({children}){
         {
         id: 8,
         country: "Korea",
-        city: "Busan",
+        city: "부산",
         startDate: "2026-03-22",
         endDate: "2026-03-26",
         hotelName: "부산 마리나 스위트",
@@ -3712,7 +3713,7 @@ export default function ResortDate({children}){
         {
         id: 9,
         country: "Korea",
-        city: "Busan",
+        city: "부산",
         startDate: "2026-04-04",
         endDate: "2026-04-08",
         hotelName: "부산 블루웨이브 호텔",
@@ -3731,7 +3732,7 @@ export default function ResortDate({children}){
         {
         id: 10,
         country: "Korea",
-        city: "Busan",
+        city: "부산",
         startDate: "2026-04-18",
         endDate: "2026-04-22",
         hotelName: "부산 센트럴힐 호텔",
@@ -3750,7 +3751,7 @@ export default function ResortDate({children}){
         {
         id: 11,
         country: "Korea",
-        city: "Busan",
+        city: "부산",
         startDate: "2026-05-02",
         endDate: "2026-05-06",
         hotelName: "부산 더레인 하버 스테이",
@@ -3769,7 +3770,7 @@ export default function ResortDate({children}){
         {
         id: 12,
         country: "Korea",
-        city: "Busan",
+        city: "부산",
         startDate: "2026-05-27",
         endDate: "2026-05-31",
         hotelName: "부산 글로우 포레스트 호텔",
@@ -3790,7 +3791,7 @@ export default function ResortDate({children}){
         {
         id: 13,
         country: "Korea",
-        city: "Gangneung",
+        city: "강릉",
         startDate: "2026-03-03",
         endDate: "2026-03-07",
         hotelName: "강릉 코랄베이 오션 호텔",
@@ -3809,7 +3810,7 @@ export default function ResortDate({children}){
         {
         id: 14,
         country: "Korea",
-        city: "Gangneung",
+        city: "강릉",
         startDate: "2026-03-19",
         endDate: "2026-03-23",
         hotelName: "강릉 마운틴힐 프라임 스테이",
@@ -3828,7 +3829,7 @@ export default function ResortDate({children}){
         {
         id: 15,
         country: "Korea",
-        city: "Gangneung",
+        city: "강릉",
         startDate: "2026-04-02",
         endDate: "2026-04-06",
         hotelName: "강릉 블루하버 씨앤스테이",
@@ -3847,7 +3848,7 @@ export default function ResortDate({children}){
         {
         id: 16,
         country: "Korea",
-        city: "Gangneung",
+        city: "강릉",
         startDate: "2026-04-21",
         endDate: "2026-04-25",
         hotelName: "강릉 에코브리즈 호텔",
@@ -3866,7 +3867,7 @@ export default function ResortDate({children}){
         {
         id: 17,
         country: "Korea",
-        city: "Gangneung",
+        city: "강릉",
         startDate: "2026-05-05",
         endDate: "2026-05-09",
         hotelName: "강릉 소울베이 더스위트",
@@ -3885,7 +3886,7 @@ export default function ResortDate({children}){
         {
         id: 18,
         country: "Korea",
-        city: "Gangneung",
+        city: "강릉",
         startDate: "2026-05-28",
         endDate: "2026-06-01",
         hotelName: "강릉 씨사이드 리프 호텔",
@@ -3905,7 +3906,7 @@ export default function ResortDate({children}){
         {
         id: 19,
         country: "Korea",
-        city: "Sokcho",
+        city: "속초",
         startDate: "2026-03-04",
         endDate: "2026-03-08",
         hotelName: "속초 오션브리즈 시티호텔",
@@ -3924,7 +3925,7 @@ export default function ResortDate({children}){
         {
         id: 20,
         country: "Korea",
-        city: "Sokcho",
+        city: "속초",
         startDate: "2026-03-21",
         endDate: "2026-03-25",
         hotelName: "속초 힐크레스트 베이뷰 리조트",
@@ -3943,7 +3944,7 @@ export default function ResortDate({children}){
         {
         id: 21,
         country: "Korea",
-        city: "Sokcho",
+        city: "속초",
         startDate: "2026-04-06",
         endDate: "2026-04-10",
         hotelName: "속초 블루문 스테이",
@@ -3962,7 +3963,7 @@ export default function ResortDate({children}){
         {
         id: 22,
         country: "Korea",
-        city: "Sokcho",
+        city: "속초",
         startDate: "2026-04-23",
         endDate: "2026-04-27",
         hotelName: "속초 씨포레스트 마운틴뷰 호텔",
@@ -3981,7 +3982,7 @@ export default function ResortDate({children}){
         {
         id: 23,
         country: "Korea",
-        city: "Sokcho",
+        city: "속초",
         startDate: "2026-05-08",
         endDate: "2026-05-12",
         hotelName: "속초 클라우드베이 스위트",
@@ -4000,7 +4001,7 @@ export default function ResortDate({children}){
         {
         id: 24,
         country: "Korea",
-        city: "Sokcho",
+        city: "속초",
         startDate: "2026-05-26",
         endDate: "2026-05-30",
         hotelName: "속초 레이크브리즈 캠프로그",
@@ -4021,7 +4022,7 @@ export default function ResortDate({children}){
         {
         id: 25,
         country: "Korea",
-        city: "Gyeongju",
+        city: "경주",
         startDate: "2026-03-02",
         endDate: "2026-03-06",
         hotelName: "경주 로열가든 힐스 호텔",
@@ -4040,7 +4041,7 @@ export default function ResortDate({children}){
         {
         id: 26,
         country: "Korea",
-        city: "Gyeongju",
+        city: "경주",
         startDate: "2026-03-15",
         endDate: "2026-03-19",
         hotelName: "경주 크라운레이크 리조트",
@@ -4059,7 +4060,7 @@ export default function ResortDate({children}){
         {
         id: 27,
         country: "Korea",
-        city: "Gyeongju",
+        city: "경주",
         startDate: "2026-04-01",
         endDate: "2026-04-05",
         hotelName: "경주 하모니 스테이션 게스트하우스",
@@ -4078,7 +4079,7 @@ export default function ResortDate({children}){
         {
         id: 28,
         country: "Korea",
-        city: "Gyeongju",
+        city: "경주",
         startDate: "2026-04-18",
         endDate: "2026-04-22",
         hotelName: "경주 네이처힐 프리미어 호텔",
@@ -4097,7 +4098,7 @@ export default function ResortDate({children}){
         {
         id: 29,
         country: "Korea",
-        city: "Gyeongju",
+        city: "경주",
         startDate: "2026-05-07",
         endDate: "2026-05-11",
         hotelName: "경주 스카이라인 파노라마 콘도",
@@ -4116,7 +4117,7 @@ export default function ResortDate({children}){
         {
         id: 30,
         country: "Korea",
-        city: "Gyeongju",
+        city: "경주",
         startDate: "2026-05-25",
         endDate: "2026-05-29",
         hotelName: "경주 포레스트캠프 휴글로우",
@@ -4137,7 +4138,7 @@ export default function ResortDate({children}){
         {
         id: 31,
         country: "Korea",
-        city: "Yeosu",
+        city: "여수",
         startDate: "2026-03-03",
         endDate: "2026-03-07",
         hotelName: "여수 오션프레임 스테이",
@@ -4156,7 +4157,7 @@ export default function ResortDate({children}){
         {
         id: 32,
         country: "Korea",
-        city: "Yeosu",
+        city: "여수",
         startDate: "2026-03-17",
         endDate: "2026-03-21",
         hotelName: "여수 블루코스트 리조트",
@@ -4175,7 +4176,7 @@ export default function ResortDate({children}){
         {
         id: 33,
         country: "Korea",
-        city: "Yeosu",
+        city: "여수",
         startDate: "2026-04-04",
         endDate: "2026-04-08",
         hotelName: "여수 베이하버 게스트하우스",
@@ -4194,7 +4195,7 @@ export default function ResortDate({children}){
         {
         id: 34,
         country: "Korea",
-        city: "Yeosu",
+        city: "여수",
         startDate: "2026-04-19",
         endDate: "2026-04-23",
         hotelName: "여수 클리프사운드 프라임 호텔",
@@ -4213,7 +4214,7 @@ export default function ResortDate({children}){
         {
         id: 35,
         country: "Korea",
-        city: "Yeosu",
+        city: "여수",
         startDate: "2026-05-09",
         endDate: "2026-05-13",
         hotelName: "여수 퍼스트라인 오션뷰 콘도",
@@ -4232,7 +4233,7 @@ export default function ResortDate({children}){
         {
         id: 36,
         country: "Korea",
-        city: "Yeosu",
+        city: "여수",
         startDate: "2026-05-27",
         endDate: "2026-05-31",
         hotelName: "여수 포레스트캠프 글램존",
@@ -4253,7 +4254,7 @@ export default function ResortDate({children}){
         {
         id: 37,
         country: "Korea",
-        city: "Daejeon",
+        city: "대전",
         startDate: "2026-03-05",
         endDate: "2026-03-09",
         hotelName: "대전 센트럴파크 시티호텔",
@@ -4272,7 +4273,7 @@ export default function ResortDate({children}){
         {
         id: 38,
         country: "Korea",
-        city: "Daejeon",
+        city: "대전",
         startDate: "2026-03-18",
         endDate: "2026-03-22",
         hotelName: "대전 포레스트힐 프리미어 리조트",
@@ -4291,7 +4292,7 @@ export default function ResortDate({children}){
         {
         id: 39,
         country: "Korea",
-        city: "Daejeon",
+        city: "대전",
         startDate: "2026-04-03",
         endDate: "2026-04-07",
         hotelName: "대전 라운지스테이 게스트하우스",
@@ -4310,7 +4311,7 @@ export default function ResortDate({children}){
         {
         id: 40,
         country: "Korea",
-        city: "Daejeon",
+        city: "대전",
         startDate: "2026-04-21",
         endDate: "2026-04-25",
         hotelName: "대전 브리즈라인 시그니처 호텔",
@@ -4329,7 +4330,7 @@ export default function ResortDate({children}){
         {
         id: 41,
         country: "Korea",
-        city: "Daejeon",
+        city: "대전",
         startDate: "2026-05-10",
         endDate: "2026-05-14",
         hotelName: "대전 스카이브릿지 오션뷰 콘도",
@@ -4348,7 +4349,7 @@ export default function ResortDate({children}){
         {
         id: 42,
         country: "Korea",
-        city: "Daejeon",
+        city: "대전",
         startDate: "2026-05-28",
         endDate: "2026-06-01",
         hotelName: "대전 포레스트캠프 스톤글램",
@@ -4368,7 +4369,7 @@ export default function ResortDate({children}){
         {
         id: 43,
         country: "Korea",
-        city: "Gwangju",
+        city: "광주",
         startDate: "2026-03-07",
         endDate: "2026-03-11",
         hotelName: "그랜드 스카이힐 호텔",
@@ -4386,7 +4387,7 @@ export default function ResortDate({children}){
         {
         id: 44,
         country: "Korea",
-        city: "Gwangju",
+        city: "광주",
         startDate: "2026-03-19",
         endDate: "2026-03-23",
         hotelName: "라이트하버 리조트",
@@ -4404,7 +4405,7 @@ export default function ResortDate({children}){
         {
         id: 45,
         country: "Korea",
-        city: "Gwangju",
+        city: "광주",
         startDate: "2026-04-02",
         endDate: "2026-04-06",
         hotelName: "브리즈 라운드 호텔",
@@ -4422,7 +4423,7 @@ export default function ResortDate({children}){
         {
         id: 46,
         country: "Korea",
-        city: "Gwangju",
+        city: "광주",
         startDate: "2026-04-17",
         endDate: "2026-04-21",
         hotelName: "힐브리즈 콘도",
@@ -4440,7 +4441,7 @@ export default function ResortDate({children}){
         {
         id: 47,
         country: "Korea",
-        city: "Gwangju",
+        city: "광주",
         startDate: "2026-05-03",
         endDate: "2026-05-07",
         hotelName: "블루파크 호텔",
@@ -4458,7 +4459,7 @@ export default function ResortDate({children}){
         {
         id: 48,
         country: "Korea",
-        city: "Gwangju",
+        city: "광주",
         startDate: "2026-05-22",
         endDate: "2026-05-26",
         hotelName: "헤리티지 스테이 호텔",
@@ -4478,7 +4479,7 @@ export default function ResortDate({children}){
         {
         id: 49,
         country: "Korea",
-        city: "Jeju",
+        city: "제주",
         startDate: "2026-03-03",
         endDate: "2026-03-07",
         hotelName: "오션브리즈 리조텔",
@@ -4496,7 +4497,7 @@ export default function ResortDate({children}){
         {
         id: 50,
         country: "Korea",
-        city: "Jeju",
+        city: "제주",
         startDate: "2026-03-28",
         endDate: "2026-04-01",
         hotelName: "제누스 힐라인 호텔",
@@ -4514,7 +4515,7 @@ export default function ResortDate({children}){
         {
         id: 51,
         country: "Korea",
-        city: "Jeju",
+        city: "제주",
         startDate: "2026-04-11",
         endDate: "2026-04-15",
         hotelName: "씨에라 콘도 스위트",
@@ -4532,7 +4533,7 @@ export default function ResortDate({children}){
         {
         id: 52,
         country: "Korea",
-        city: "Jeju",
+        city: "제주",
         startDate: "2026-04-29",
         endDate: "2026-05-03",
         hotelName: "블랑코 서머힐 호텔",
@@ -4550,7 +4551,7 @@ export default function ResortDate({children}){
         {
         id: 53,
         country: "Korea",
-        city: "Jeju",
+        city: "제주",
         startDate: "2026-05-10",
         endDate: "2026-05-14",
         hotelName: "에메랄드 베이 로지",
@@ -4568,7 +4569,7 @@ export default function ResortDate({children}){
         {
         id: 54,
         country: "Korea",
-        city: "Jeju",
+        city: "제주",
         startDate: "2026-05-25",
         endDate: "2026-05-29",
         hotelName: "서머필드 캠프 로지",
@@ -4588,7 +4589,7 @@ export default function ResortDate({children}){
         {
         id: 55,
         country: "Korea",
-        city: "Pohang",
+        city: "포항",
         startDate: "2026-03-14",
         endDate: "2026-03-18",
         hotelName: "포항 씨라인 호텔",
@@ -4606,7 +4607,7 @@ export default function ResortDate({children}){
         {
         id: 56,
         country: "Korea",
-        city: "Pohang",
+        city: "포항",
         startDate: "2026-04-01",
         endDate: "2026-04-05",
         hotelName: "포트웨이브 리조트",
@@ -4624,7 +4625,7 @@ export default function ResortDate({children}){
         {
         id: 57,
         country: "Korea",
-        city: "Pohang",
+        city: "포항",
         startDate: "2026-04-18",
         endDate: "2026-04-22",
         hotelName: "포항 마리나 스테이",
@@ -4642,7 +4643,7 @@ export default function ResortDate({children}){
         {
         id: 58,
         country: "Korea",
-        city: "Pohang",
+        city: "포항",
         startDate: "2026-04-30",
         endDate: "2026-05-04",
         hotelName: "오션스톤 콘도",
@@ -4660,7 +4661,7 @@ export default function ResortDate({children}){
         {
         id: 59,
         country: "Korea",
-        city: "Pohang",
+        city: "포항",
         startDate: "2026-05-09",
         endDate: "2026-05-13",
         hotelName: "블루웨이브 캠프",
@@ -4678,7 +4679,7 @@ export default function ResortDate({children}){
         {
         id: 60,
         country: "Korea",
-        city: "Pohang",
+        city: "포항",
         startDate: "2026-05-27",
         endDate: "2026-05-31",
         hotelName: "포항 클리프오션 호텔",
@@ -4697,7 +4698,7 @@ export default function ResortDate({children}){
         {
             id: 61,
             country: "Japan",
-            city: "Tokyo",
+            city: "도쿄",
             startDate: "2026-03-03",
             endDate: "2026-03-07",
             hotelName: "스카이 브리즈 호텔",
@@ -4715,7 +4716,7 @@ export default function ResortDate({children}){
         {
             id: 62,
             country: "Japan",
-            city: "Tokyo",
+            city: "도쿄",
             startDate: "2026-03-12",
             endDate: "2026-03-16",
             hotelName: "블루문 라이트 호텔",
@@ -4733,7 +4734,7 @@ export default function ResortDate({children}){
         {
             id: 63,
             country: "Japan",
-            city: "Tokyo",
+            city: "도쿄",
             startDate: "2026-04-21",
             endDate: "2026-04-25",
             hotelName: "그랜드 루미에르 호텔",
@@ -4751,7 +4752,7 @@ export default function ResortDate({children}){
         {
             id: 64,
             country: "Japan",
-            city: "Tokyo",
+            city: "도쿄",
             startDate: "2026-05-09",
             endDate: "2026-05-13",
             hotelName: "라이트 힐즈 스위트",
@@ -4769,7 +4770,7 @@ export default function ResortDate({children}){
         {
             id: 65,
             country: "Japan",
-            city: "Tokyo",
+            city: "도쿄",
             startDate: "2026-03-28",
             endDate: "2026-04-01",
             hotelName: "센트럴 오닉스 호텔",
@@ -4787,7 +4788,7 @@ export default function ResortDate({children}){
         {
             id: 66,
             country: "Japan",
-            city: "Tokyo",
+            city: "도쿄",
             startDate: "2026-04-08",
             endDate: "2026-04-12",
             hotelName: "프리미어노바 호텔",
@@ -4805,7 +4806,7 @@ export default function ResortDate({children}){
         {
             id: 67,
             country: "Japan",
-            city: "Tokyo",
+            city: "도쿄",
             startDate: "2026-05-19",
             endDate: "2026-05-23",
             hotelName: "모던크레센트 호텔",
@@ -4823,7 +4824,7 @@ export default function ResortDate({children}){
         {
             id: 68,
             country: "Japan",
-            city: "Tokyo",
+            city: "도쿄",
             startDate: "2026-03-17",
             endDate: "2026-03-21",
             hotelName: "루프테라스 호텔",
@@ -4844,7 +4845,7 @@ export default function ResortDate({children}){
         {
             id: 69,
             country: "Japan",
-            city: "Sapporo",
+            city: "삿포로",
             startDate: "2026-03-02",
             endDate: "2026-03-06",
             hotelName: "스노우바레 호텔",
@@ -4862,7 +4863,7 @@ export default function ResortDate({children}){
         {
             id: 70,
             country: "Japan",
-            city: "Sapporo",
+            city: "삿포로",
             startDate: "2026-03-29",
             endDate: "2026-04-02",
             hotelName: "화이트 마운틴 스위트",
@@ -4880,7 +4881,7 @@ export default function ResortDate({children}){
         {
             id: 71,
             country: "Japan",
-            city: "Sapporo",
+            city: "삿포로",
             startDate: "2026-05-14",
             endDate: "2026-05-18",
             hotelName: "하이번 크로스 호텔",
@@ -4898,7 +4899,7 @@ export default function ResortDate({children}){
         {
             id: 72,
             country: "Japan",
-            city: "Sapporo",
+            city: "삿포로",
             startDate: "2026-04-06",
             endDate: "2026-04-10",
             hotelName: "딥 블리자드 호텔",
@@ -4916,7 +4917,7 @@ export default function ResortDate({children}){
         {
             id: 73,
             country: "Japan",
-            city: "Sapporo",
+            city: "삿포로",
             startDate: "2026-03-19",
             endDate: "2026-03-23",
             hotelName: "프레시 폴라리스 호텔",
@@ -4934,7 +4935,7 @@ export default function ResortDate({children}){
         {
             id: 74,
             country: "Japan",
-            city: "Sapporo",
+            city: "삿포로",
             startDate: "2026-04-15",
             endDate: "2026-04-19",
             hotelName: "스노우 브리즈 리조트",
@@ -4952,7 +4953,7 @@ export default function ResortDate({children}){
         {
             id: 75,
             country: "Japan",
-            city: "Sapporo",
+            city: "삿포로",
             startDate: "2026-05-27",
             endDate: "2026-05-31",
             hotelName: "스노우 하모니 호텔",
@@ -4970,7 +4971,7 @@ export default function ResortDate({children}){
         {
             id: 76,
             country: "Japan",
-            city: "Sapporo",
+            city: "삿포로",
             startDate: "2026-04-26",
             endDate: "2026-04-30",
             hotelName: "라이트 애스펜 호텔",
@@ -4990,7 +4991,7 @@ export default function ResortDate({children}){
         {
             id: 77,
             country: "USA",
-            city: "LosAngeles",
+            city: "로스앤젤레스",
             startDate: "2026-03-04",
             endDate: "2026-03-08",
             hotelName: "포레스트 힐스호텔",
@@ -5008,7 +5009,7 @@ export default function ResortDate({children}){
         {
             id: 78,
             country: "USA",
-            city: "LosAngeles",
+            city: "로스앤젤레스",
             startDate: "2026-03-21",
             endDate: "2026-03-25",
             hotelName: "오션 클라우드 리조트",
@@ -5026,7 +5027,7 @@ export default function ResortDate({children}){
         {
             id: 79,
             country: "USA",
-            city: "LosAngeles",
+            city: "로스앤젤레스",
             startDate: "2026-04-10",
             endDate: "2026-04-14",
             hotelName: "어반 블루 스위트",
@@ -5044,7 +5045,7 @@ export default function ResortDate({children}){
         {
             id: 80,
             country: "USA",
-            city: "LosAngeles",
+            city: "로스앤젤레스",
             startDate: "2026-04-27",
             endDate: "2026-05-01",
             hotelName: "선셋 마레 호텔",
@@ -5062,7 +5063,7 @@ export default function ResortDate({children}){
         {
             id: 81,
             country: "USA",
-            city: "LosAngeles",
+            city: "로스앤젤레스",
             startDate: "2026-05-13",
             endDate: "2026-05-17",
             hotelName: "레드스톤 힐스 호텔",
@@ -5080,7 +5081,7 @@ export default function ResortDate({children}){
         {
             id: 82,
             country: "USA",
-            city: "LosAngeles",
+            city: "로스앤젤레스",
             startDate: "2026-03-14",
             endDate: "2026-03-18",
             hotelName: "하버링크 호텔",
@@ -5098,7 +5099,7 @@ export default function ResortDate({children}){
         {
             id: 83,
             country: "USA",
-            city: "LosAngeles",
+            city: "로스앤젤레스",
             startDate: "2026-04-05",
             endDate: "2026-04-09",
             hotelName: "그랜드 웨이브 호텔",
@@ -5116,7 +5117,7 @@ export default function ResortDate({children}){
         {
             id: 84,
             country: "USA",
-            city: "LosAngeles",
+            city: "로스앤젤레스",
             startDate: "2026-05-22",
             endDate: "2026-05-26",
             hotelName: "라구나브리즈 호텔",
@@ -5137,7 +5138,7 @@ export default function ResortDate({children}){
         {
             id: 85,
             country: "USA",
-            city: "NewYork",
+            city: "뉴욕",
             startDate: "2026-03-06",
             endDate: "2026-03-10",
             hotelName: "센트럴 브리즈 호텔",
@@ -5155,7 +5156,7 @@ export default function ResortDate({children}){
         {
             id: 86,
             country: "USA",
-            city: "NewYork",
+            city: "뉴욕",
             startDate: "2026-03-28",
             endDate: "2026-04-01",
             hotelName: "에메랄드파크 리조트",
@@ -5173,7 +5174,7 @@ export default function ResortDate({children}){
         {
             id: 87,
             country: "USA",
-            city: "NewYork",
+            city: "뉴욕",
             startDate: "2026-04-17",
             endDate: "2026-04-21",
             hotelName: "노바 크라운 스위트",
@@ -5191,7 +5192,7 @@ export default function ResortDate({children}){
         {
             id: 88,
             country: "USA",
-            city: "NewYork",
+            city: "뉴욕",
             startDate: "2026-05-03",
             endDate: "2026-05-07",
             hotelName: "하모니 프라임 호텔",
@@ -5209,7 +5210,7 @@ export default function ResortDate({children}){
         {
             id: 89,
             country: "USA",
-            city: "NewYork",
+            city: "뉴욕",
             startDate: "2026-03-15",
             endDate: "2026-03-19",
             hotelName: "브로드웨이 샤인 호텔",
@@ -5227,7 +5228,7 @@ export default function ResortDate({children}){
         {
             id: 90,
             country: "USA",
-            city: "NewYork",
+            city: "뉴욕",
             startDate: "2026-04-30",
             endDate: "2026-05-04",
             hotelName: "미드타운 힐즈호텔",
@@ -5245,7 +5246,7 @@ export default function ResortDate({children}){
         {
             id: 91,
             country: "USA",
-            city: "NewYork",
+            city: "뉴욕",
             startDate: "2026-05-20",
             endDate: "2026-05-24",
             hotelName: "센트럴 스카이라인 호텔",
@@ -5263,7 +5264,7 @@ export default function ResortDate({children}){
         {
             id: 92,
             country: "USA",
-            city: "NewYork",
+            city: "뉴욕",
             startDate: "2026-03-25",
             endDate: "2026-03-29",
             hotelName: "브루클린 웨이브 호텔",
@@ -5284,7 +5285,7 @@ export default function ResortDate({children}){
         {
             id: 93,
             country: "USA",
-            city: "Guam",
+            city: "괌",
             startDate: "2026-03-11",
             endDate: "2026-03-15",
             hotelName: "트로피컬 웨이브 호텔",
@@ -5302,7 +5303,7 @@ export default function ResortDate({children}){
         {
             id: 94,
             country: "USA",
-            city: "Guam",
+            city: "괌",
             startDate: "2026-04-09",
             endDate: "2026-04-13",
             hotelName: "블루샌드 스위트",
@@ -5320,7 +5321,7 @@ export default function ResortDate({children}){
         {
             id: 95,
             country: "USA",
-            city: "Guam",
+            city: "괌",
             startDate: "2026-05-02",
             endDate: "2026-05-06",
             hotelName: "아이랜더베이 리조트",
@@ -5338,7 +5339,7 @@ export default function ResortDate({children}){
         {
             id: 96,
             country: "USA",
-            city: "Guam",
+            city: "괌",
             startDate: "2026-03-18",
             endDate: "2026-03-22",
             hotelName: "코랄리프 호텔",
@@ -5356,7 +5357,7 @@ export default function ResortDate({children}){
         {
             id: 97,
             country: "USA",
-            city: "Guam",
+            city: "괌",
             startDate: "2026-04-25",
             endDate: "2026-04-29",
             hotelName: "에메랄드비치 호텔",
@@ -5374,7 +5375,7 @@ export default function ResortDate({children}){
         {
             id: 98,
             country: "USA",
-            city: "Guam",
+            city: "괌",
             startDate: "2026-05-11",
             endDate: "2026-05-15",
             hotelName: "트로피컬코브 호텔",
@@ -5392,7 +5393,7 @@ export default function ResortDate({children}){
         {
             id: 99,
             country: "USA",
-            city: "Guam",
+            city: "괌",
             startDate: "2026-03-23",
             endDate: "2026-03-27",
             hotelName: "코코넛하버 호텔",
@@ -5410,7 +5411,7 @@ export default function ResortDate({children}){
         {
             id: 100,
             country: "USA",
-            city: "Guam",
+            city: "괌",
             startDate: "2026-04-13",
             endDate: "2026-04-17",
             hotelName: "블루리프 베이스위트",
@@ -5430,7 +5431,7 @@ export default function ResortDate({children}){
         {
             id: 101,
             country: "China",
-            city: "Zhangjiajie",
+            city: "장가계",
             startDate: "2026-03-04",
             endDate: "2026-03-08",
             hotelName: "스카이브리즈 프라임 호텔",
@@ -5448,7 +5449,7 @@ export default function ResortDate({children}){
         {
             id: 102,
             country: "China",
-            city: "Zhangjiajie",
+            city: "장가계",
             startDate: "2026-04-12",
             endDate: "2026-04-16",
             hotelName: "블루웨이브 시그니처 호텔",
@@ -5466,7 +5467,7 @@ export default function ResortDate({children}){
         {
             id: 103,
             country: "China",
-            city: "Zhangjiajie",
+            city: "장가계",
             startDate: "2026-05-03",
             endDate: "2026-05-07",
             hotelName: "하모니힐 클래식 호텔",
@@ -5484,7 +5485,7 @@ export default function ResortDate({children}){
         {
             id: 104,
             country: "China",
-            city: "Zhangjiajie",
+            city: "장가계",
             startDate: "2026-04-01",
             endDate: "2026-04-05",
             hotelName: "루미너스 파크 호텔",
@@ -5502,7 +5503,7 @@ export default function ResortDate({children}){
         {
             id: 105,
             country: "China",
-            city: "Zhangjiajie",
+            city: "장가계",
             startDate: "2026-04-21",
             endDate: "2026-04-25",
             hotelName: "레브클라우드 시그니처 호텔",
@@ -5520,7 +5521,7 @@ export default function ResortDate({children}){
         {
             id: 106,
             country: "China",
-            city: "Zhangjiajie",
+            city: "장가계",
             startDate: "2026-05-15",
             endDate: "2026-05-19",
             hotelName: "클라우드하버 프리미엄 호텔",
@@ -5538,7 +5539,7 @@ export default function ResortDate({children}){
         {
             id: 107,
             country: "China",
-            city: "Zhangjiajie",
+            city: "장가계",
             startDate: "2026-03-18",
             endDate: "2026-03-22",
             hotelName: "에코파크 하모니 호텔",
@@ -5556,7 +5557,7 @@ export default function ResortDate({children}){
         {
             id: 108,
             country: "China",
-            city: "Zhangjiajie",
+            city: "장가계",
             startDate: "2026-05-28",
             endDate: "2026-06-01",
             hotelName: "브릴리언트힐 로얄 호텔",
@@ -5578,7 +5579,7 @@ export default function ResortDate({children}){
         {
             id: 109,
             country: "China",
-            city: "Shanghai",
+            city: "상하이",
             startDate: "2026-04-02",
             endDate: "2026-04-06",
             hotelName: "블루문 프레스티지 호텔",
@@ -5596,7 +5597,7 @@ export default function ResortDate({children}){
         {
             id: 110,
             country: "China",
-            city: "Shanghai",
+            city: "상하이",
             startDate: "2026-03-07",
             endDate: "2026-03-11",
             hotelName: "레브코스트 디럭스 호텔",
@@ -5614,7 +5615,7 @@ export default function ResortDate({children}){
         {
             id: 111,
             country: "China",
-            city: "Shanghai",
+            city: "상하이",
             startDate: "2026-05-12",
             endDate: "2026-05-16",
             hotelName: "오션힐 클래식 호텔",
@@ -5632,7 +5633,7 @@ export default function ResortDate({children}){
         {
             id: 112,
             country: "China",
-            city: "Shanghai",
+            city: "상하이",
             startDate: "2026-05-28",
             endDate: "2026-06-01",
             hotelName: "하모니브릿지 로얄 호텔",
@@ -5650,7 +5651,7 @@ export default function ResortDate({children}){
         {
             id: 113,
             country: "China",
-            city: "Shanghai",
+            city: "상하이",
             startDate: "2026-04-18",
             endDate: "2026-04-22",
             hotelName: "라이트베이 모던 호텔",
@@ -5668,7 +5669,7 @@ export default function ResortDate({children}){
         {
             id: 114,
             country: "China",
-            city: "Shanghai",
+            city: "상하이",
             startDate: "2026-03-21",
             endDate: "2026-03-25",
             hotelName: "에메랄드스테이 시그니처 호텔",
@@ -5686,7 +5687,7 @@ export default function ResortDate({children}){
         {
             id: 115,
             country: "China",
-            city: "Shanghai",
+            city: "상하이",
             startDate: "2026-05-03",
             endDate: "2026-05-07",
             hotelName: "피스포레스트 프라임 호텔",
@@ -5704,7 +5705,7 @@ export default function ResortDate({children}){
         {
             id: 116,
             country: "China",
-            city: "Shanghai",
+            city: "상하이",
             startDate: "2026-04-09",
             endDate: "2026-04-13",
             hotelName: "코발트시티 모던 호텔",
@@ -5728,7 +5729,7 @@ export default function ResortDate({children}){
         {
             id: 117,
             country: "Italy",
-            city: "Rome",
+            city: "로마",
             startDate: "2026-03-04",
             endDate: "2026-03-08",
             hotelName: "로마 엘레강트 스위트",
@@ -5746,7 +5747,7 @@ export default function ResortDate({children}){
         {
             id: 118,
             country: "Italy",
-            city: "Rome",
+            city: "로마",
             startDate: "2026-04-10",
             endDate: "2026-04-14",
             hotelName: "로마 그랜드 팰리스",
@@ -5764,7 +5765,7 @@ export default function ResortDate({children}){
         {
             id: 119,
             country: "Italy",
-            city: "Rome",
+            city: "로마",
             startDate: "2026-05-02",
             endDate: "2026-05-06",
             hotelName: "호텔 로마 클래시코",
@@ -5782,7 +5783,7 @@ export default function ResortDate({children}){
         {
             id: 120,
             country: "Italy",
-            city: "Rome",
+            city: "로마",
             startDate: "2026-03-18",
             endDate: "2026-03-22",
             hotelName: "로마 럭셔리 베이 호텔",
@@ -5800,7 +5801,7 @@ export default function ResortDate({children}){
         {
             id: 121,
             country: "Italy",
-            city: "Rome",
+            city: "로마",
             startDate: "2026-04-25",
             endDate: "2026-04-29",
             hotelName: "로마 비스타 가든 호텔",
@@ -5818,7 +5819,7 @@ export default function ResortDate({children}){
         {
             id: 122,
             country: "Italy",
-            city: "Rome",
+            city: "로마",
             startDate: "2026-05-15",
             endDate: "2026-05-19",
             hotelName: "로마 블루 스카이 호텔",
@@ -5836,7 +5837,7 @@ export default function ResortDate({children}){
         {
             id: 123,
             country: "Italy",
-            city: "Rome",
+            city: "로마",
             startDate: "2026-03-30",
             endDate: "2026-04-03",
             hotelName: "로마 임페리얼 스테이",
@@ -5854,7 +5855,7 @@ export default function ResortDate({children}){
         {
             id: 124,
             country: "Italy",
-            city: "Rome",
+            city: "로마",
             startDate: "2026-05-05",
             endDate: "2026-05-09",
             hotelName: "로마 모던 라이트 호텔",
@@ -5874,7 +5875,7 @@ export default function ResortDate({children}){
         {
             id: 125,
             country: "Italy",
-            city: "Venice",
+            city: "베네치아",
             startDate: "2026-03-07",
             endDate: "2026-03-11",
             hotelName: "베네치아 카날 뷰 호텔",
@@ -5892,7 +5893,7 @@ export default function ResortDate({children}){
         {
             id: 126,
             country: "Italy",
-            city: "Venice",
+            city: "베네치아",
             startDate: "2026-04-02",
             endDate: "2026-04-06",
             hotelName: "베네치아 라구나 팰리스",
@@ -5910,7 +5911,7 @@ export default function ResortDate({children}){
         {
             id: 127,
             country: "Italy",
-            city: "Venice",
+            city: "베네치아",
             startDate: "2026-05-10",
             endDate: "2026-05-14",
             hotelName: "베네치아 하버 스카이 호텔",
@@ -5928,7 +5929,7 @@ export default function ResortDate({children}){
         {
             id: 128,
             country: "Italy",
-            city: "Venice",
+            city: "베네치아",
             startDate: "2026-03-28",
             endDate: "2026-04-01",
             hotelName: "베네치아 워터라인 스위트",
@@ -5946,7 +5947,7 @@ export default function ResortDate({children}){
         {
             id: 129,
             country: "Italy",
-            city: "Venice",
+            city: "베네치아",
             startDate: "2026-05-06",
             endDate: "2026-05-10",
             hotelName: "베네치아 씨 브리즈 호텔",
@@ -5964,7 +5965,7 @@ export default function ResortDate({children}){
         {
             id: 130,
             country: "Italy",
-            city: "Venice",
+            city: "베네치아",
             startDate: "2026-04-14",
             endDate: "2026-04-18",
             hotelName: "베네치아 골드 카날 호텔",
@@ -5982,7 +5983,7 @@ export default function ResortDate({children}){
         {
             id: 131,
             country: "Italy",
-            city: "Venice",
+            city: "베네치아",
             startDate: "2026-03-12",
             endDate: "2026-03-16",
             hotelName: "베네치아 클래식 하버 호텔",
@@ -6000,7 +6001,7 @@ export default function ResortDate({children}){
         {
             id: 132,
             country: "Italy",
-            city: "Venice",
+            city: "베네치아",
             startDate: "2026-05-21",
             endDate: "2026-05-25",
             hotelName: "베네치아 라군 선셋 호텔",
@@ -6024,7 +6025,7 @@ export default function ResortDate({children}){
         {
             id: 133,
             country: "France",
-            city: "Paris",
+            city: "파리",
             startDate: "2026-03-10",
             endDate: "2026-03-14",
             hotelName: "파리 에펠 뷰 호텔",
@@ -6042,7 +6043,7 @@ export default function ResortDate({children}){
         {
             id: 134,
             country: "France",
-            city: "Paris",
+            city: "파리",
             startDate: "2026-03-15",
             endDate: "2026-03-19",
             hotelName: "파리 루브르 센터 호텔",
@@ -6060,7 +6061,7 @@ export default function ResortDate({children}){
         {
             id: 135,
             country: "France",
-            city: "Paris",
+            city: "파리",
             startDate: "2026-03-21",
             endDate: "2026-03-25",
             hotelName: "파리 샹젤리제 프리미어 호텔",
@@ -6078,7 +6079,7 @@ export default function ResortDate({children}){
         {
             id: 136,
             country: "France",
-            city: "Paris",
+            city: "파리",
             startDate: "2026-04-01",
             endDate: "2026-04-05",
             hotelName: "파리 몽마르트 트래블 호텔",
@@ -6096,7 +6097,7 @@ export default function ResortDate({children}){
         {
             id: 137,
             country: "France",
-            city: "Paris",
+            city: "파리",
             startDate: "2026-04-07",
             endDate: "2026-04-11",
             hotelName: "파리 노트르담 리버 뷰 호텔",
@@ -6114,7 +6115,7 @@ export default function ResortDate({children}){
         {
             id: 138,
             country: "France",
-            city: "Paris",
+            city: "파리",
             startDate: "2026-04-13",
             endDate: "2026-04-17",
             hotelName: "파리 센강 프레스티지 호텔",
@@ -6132,7 +6133,7 @@ export default function ResortDate({children}){
         {
             id: 139,
             country: "France",
-            city: "Paris",
+            city: "파리",
             startDate: "2026-04-20",
             endDate: "2026-04-24",
             hotelName: "파리 라데팡스 스테이 호텔",
@@ -6150,7 +6151,7 @@ export default function ResortDate({children}){
         {
             id: 140,
             country: "France",
-            city: "Paris",
+            city: "파리",
             startDate: "2026-04-28",
             endDate: "2026-05-02",
             hotelName: "파리 오페라 하우스 클래식 호텔",
@@ -6167,8 +6168,23 @@ export default function ResortDate({children}){
         }
     ];
 
+    // 호텔 input에 들어가는 지역, 호텔명 상태변수
+    const [hotelInput, setHotelInput] = useState('');
+
+    // 선택한 날짜를 담을 변수
+    const [DayData,setDayData] = useState(() => {
+        const saved = localStorage.getItem('DayDate')
+        return saved ? JSON.parse(saved) : []
+    })
+    useEffect(()=>{
+        localStorage.setItem('DayData', JSON.stringify(DayData))
+    },[DayData])
+
+    
+
+
     return(
-        <ResortDateContext.Provider value={{RoomData, HotelData}}>
+        <ResortDateContext.Provider value={{RoomData, HotelData, hotelInput, setHotelInput, DayData, setDayData}}>
             {children}
         </ResortDateContext.Provider>
     );

@@ -3,13 +3,15 @@ import { useContext, useState, useEffect, use } from 'react';
 import { Link } from 'react-router-dom';
 import { ResortDateContext } from '../Api/ResortDate';
 import 'leaflet/dist/leaflet.css';
+import Calendar from './Calendar';
+import Room from './Room';
 
 export default function Main(){    
-    // 2025-12-19 병합
+    // 2025-12-19 병합2
     // 호텔, 객실데이터 useContext로 가져오는 훅
-    const {RoomData, HotelData} = useContext(ResortDateContext);
+    const {RoomData, HotelData, hotelInput, setHotelInput, DayData, setDayData} = useContext(ResortDateContext);
     // 호텔 input에 들어가는 지역, 호텔명 상태변수
-    const [hotelInput, setHotelInput] = useState('');
+    // const [hotelInput, setHotelInput] = useState('');
     // 호텔 input 아래 모달 상태변수
     const [isInput, setIsInput] = useState(false);
     // 호텔 input 아래 모달 map 사용할 오브젝트 배열
@@ -40,6 +42,11 @@ export default function Main(){
     const [slideMove4, setSlideMove4] = useState(0)
     // 관광명소 마스크
     const [citySpotmask, setCitySpotMask] = useState(null)
+    // 달력
+    const [openC, setOpenC] = useState(false)
+    // const [openC, setOpenC] = useState(1)
+    // 선택한 날짜를 담을 변수
+    // const [DayData,setDayData] = useState([])
 
     // 호텔 유형별로 접근하기 위한 사진 map돌리기 위한 오브젝트 배열
     const hotelType = [
@@ -59,6 +66,12 @@ export default function Main(){
         {id:5, image:'/mainImg/f-1.jpg', cityName: '뉴욕', cityInfo:'세계적인 문화·예술·엔터테인먼트를 경험할 수 있습니다!'},
         {id:6, image:'/mainImg/g-1.jpg', cityName: '파리', cityInfo:'한 도시에 역사적인 건축물과 예술적 분위기를 한번에!'},
     ];
+
+    // 관광명소 호텔 map
+    const hotel_modal = HotelData.filter((item) => item.city === '서울')
+    console.log('rkskekfksk')
+    console.log(hotel_modal)
+    
 
     // 호텔 평점순으로 재배열
     const hotelRating = [...HotelData].sort((a,b) => b.score - a.score);
@@ -168,21 +181,33 @@ export default function Main(){
     // 즉, 현재 .className 에 들어간 hotelModal의 하위 input, ul, li 만 묶음으로 지정
     // !!e.target.closest('.hotelModal') 를 통해 부정하여 반대로 적용시켜서 input, ul, li 이외에 다른곳을 클릭하면
     // setIsInput(false) 로 모달 닫기
-    const closeUl = (e) => {
+    const closeUl1 = (e) => {
         if (!e.target.closest('.hotelModal')) {
             setIsInput(false);
         }
+
+        if (
+            !e.target.closest('.CalendarModal') &&
+            !e.target.closest('.calenertBtn')
+        ) {
+            setOpenC(false);
+        }
     }
 
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const date = today.getDate();
+
     return(
-        <div className='main_container' onClick={closeUl}>
+        <div className='main_container' onClick={closeUl1}>
             {/* 베너 박스 */}
             <div className='mainImgBenner'>
                 {/* 메인 베너 이미지 */}
                 <div className='mainBanner'>
                     <img src='../public/img/10-1.jpg' style={{width:'1920px', height:'600px'}} />
                 </div>
-                <h1 className='searchTitle'>여행을 고민중이라면?!</h1>
+                <h1 className='searchTitle'>여행을 고민중이라면?</h1>
                 {/* 국내, 해외 숙박 검색 */}
                 <div className='hotelSearch'>
                     
@@ -212,14 +237,21 @@ export default function Main(){
                                         </span>
                                         <span className='rankName' onClick={() => inputHandeler(item.id)}>
                                             {item.localName}
-                                        </span>    
+                                        </span>
                                     </li>
                                     ))}
                                 </ul>
                             </>}
                         </div>
                         <i className="fa-solid fa-magnifying-glass searchIcon"></i>
-                        <div>달력</div>
+                        
+                        <button type='button' onClick={() => setOpenC(!openC)} className='calenertBtn'>
+                            <i className="fa-solid fa-calendar"></i>
+                            <span style={{marginRight:'5px'}}>{DayData.length < 2 ? `${year}-${month}-${date} - ${year}-${month}-${date + 1} ` : `${DayData[0]} - ${DayData[1]}`}</span>
+                        </button>
+                        <div className='CalendarModal'>
+                            {openC && <Calendar setDayData={setDayData}/>}
+                        </div>
                         {/* 인원 */}
                         <div className='guestSum'>
                             {/* 버튼 */}
@@ -234,9 +266,9 @@ export default function Main(){
                                 <i className="fa-solid fa-minus"></i>
                             </button>
                             <span className='guests'>{guestCount}</span>
-                            <button type='button' 
-                            onClick={plusBtn} 
-                            className='plus_btn' 
+                            <button type='button'
+                            onClick={plusBtn}
+                            className='plus_btn'
                             style={{
                                 backgroundColor : guestCount === 4 ? '#e7e7e7ff' : '#42799b',
                                 color:'#fff',
@@ -367,7 +399,6 @@ export default function Main(){
                         <i className="bi bi-arrow-right-circle" style={{fontSize:'30px'}}></i>
                     </button>
                 </div>
-
             </div>
             {/* 관광명소 - 근처 숙소 */}
             <div className='spotsAndStays'>
@@ -379,7 +410,6 @@ export default function Main(){
                             <i className="bi bi-arrow-left-circle" style={{fontSize:'30px'}}></i>
                         </button>
                     }
-                    
                     <div className='citySpotsBox'>
                         <ul className='citySpots' style={{marginLeft:`${slideMove2}px`}}>
                             {popularSpot.map((item) => (
@@ -395,8 +425,19 @@ export default function Main(){
                                     {spotModalOpen === item.id && 
                                     <div className='overlay' onClick={()=>{setSpotModalOpen(null)}}>
                                             <div className='spotsModal'>
-                                            <img src={item.image} alt={item.cityName} className='modalImg'/>
-                                            {/* <button type='button' style={{zIndex:'999'}} onClick={()=>{setSpotModalOpen(null)}}>닫기</button> */}
+                                                <div className='spotsModal_in'>
+                                                    <img src={item.image} alt={item.cityName} className='modalImg'/>
+                                                </div>
+                                                <div className='spotsModal_hotel'>
+                                                    <ul>
+                                                        {HotelData.map((item) => (
+                                                           <li key={item.id}>
+                                                                <img src = {item.img[0]} />
+                                                           </li> 
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            <button type='button' style={{zIndex:'999'}} onClick={()=>{setSpotModalOpen(null)}}>닫기</button>
                                         </div>
                                     </div>
                                     }
