@@ -19,23 +19,24 @@ import Pay from './Page/Pay'
 function App() {
 
   return (
-    <BrowserRouter>
+   
       <ResortDate>
-        <Header />
+         <BrowserRouter>
+          <Header />
           <Routes>
             <Route path='/login' element={<Login />}/>
             <Route path='/signup1' element={<SignUp1 />}/>
             <Route path='/signup2' element={<SignUp2 />}/>
             <Route path='/signup3' element={<SignUp3 />}/>
             <Route path='/' element={<Main />} />
-            <Route path='/room' element={<Room />} />
+            <Route path='/room' element={<Room  />} />
             <Route path='/detail/:id' element={<Detail />}/>  
             <Route path='/guest' element={<Guest />}/>  
             <Route path='/pay' element={<Pay />}/>  
           </Routes>
-        <Footer />
-      </ResortDate>  
-    </BrowserRouter>
+          <Footer />
+        </BrowserRouter>
+      </ResortDate> 
   )
 }
 

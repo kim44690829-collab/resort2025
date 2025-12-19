@@ -8,7 +8,7 @@ import LeafletMap from '../Api/LeafletMap';
 
 export default function Room(){
     // 가져오는 호텔, 개실 데이터
-    const {HotelData,RoomData,DayData,setDayData} = useContext(ResortDateContext);
+    const {HotelData,RoomData, hotelInput, setHotelInput, DayData, setDayData} = useContext(ResortDateContext);
     //const {selectDate,setSelectDate,setSelectday} = useContext(calendarAuth)
     /* console.log(selectDate) */
     /* 필터 목록 */
@@ -196,7 +196,7 @@ export default function Room(){
 
     return(
         <>  
-            
+            <Calendar />
             {/* 상품 메뉴영역 */}
             <div className="Room_section">
                 <Calendar />
