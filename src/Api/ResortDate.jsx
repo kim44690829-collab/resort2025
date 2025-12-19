@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import { useState, useEffect } from "react";
 
 export const ResortDateContext = createContext();
 
@@ -6167,8 +6168,23 @@ export default function ResortDate({children}){
         }
     ];
 
+    // 호텔 input에 들어가는 지역, 호텔명 상태변수
+    const [hotelInput, setHotelInput] = useState('');
+
+    // 선택한 날짜를 담을 변수
+    const [DayData,setDayData] = useState(() => {
+        const saved = localStorage.getItem('DayDate')
+        return saved ? JSON.parse(saved) : []
+    })
+    useEffect(()=>{
+        localStorage.setItem('DayData', JSON.stringify(DayData))
+    },[DayData])
+
+    
+
+
     return(
-        <ResortDateContext.Provider value={{RoomData, HotelData}}>
+        <ResortDateContext.Provider value={{RoomData, HotelData, hotelInput, setHotelInput, DayData, setDayData}}>
             {children}
         </ResortDateContext.Provider>
     );

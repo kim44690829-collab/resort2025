@@ -4,7 +4,9 @@ import '../Page/calendar.css'
 import { ResortDateContext } from '../Api/ResortDate';
 import { data } from "react-router-dom";
 
-export default function Calendar({setDayData}){
+export default function Calendar(){
+    // context에서 받아온 데이터
+    const {RoomData, HotelData, hotelInput, setHotelInput, DayData, setDayData} = useContext(ResortDateContext);
     // 선택한 달
     const [selectMonth,setSelectMonth] = useState(new Date()) //선택한 달력
     const [calArr,setCalArr] = useState(
