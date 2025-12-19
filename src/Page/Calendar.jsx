@@ -5,26 +5,26 @@ import { ResortDateContext } from '../Api/ResortDate';
 import { data } from "react-router-dom";
 
 export default function Calendar(){
-    // context에서 받아온 데이터
-    const {RoomData, HotelData, hotelInput, setHotelInput, DayData, setDayData} = useContext(ResortDateContext);
+
+    const {RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth} = useContext(ResortDateContext);
     // 선택한 달
-    const [selectMonth,setSelectMonth] = useState(new Date()) //선택한 달력
+    //const [selectMonth,setSelectMonth] = useState(new Date()) //선택한 달력
     const [calArr,setCalArr] = useState(
         Array.from(Array(6),() => new Array(7).fill(''))
     ) //달력에 들어가는 배열
 
+   console.log('2025-12-19',selectMonth.getFullYear());
     const nextMonth= new Date(selectMonth.getFullYear(),selectMonth.getMonth() + 1,1) //선택한 다음달 달력
     const [calArr02,setCalArr02] = useState(
         Array.from(Array(6),() => new Array(7).fill(''))
     ) //달력에 들어가는 배열
 
     //선택한 날짜
-    const [selectDate,setSelectDate] = useState([]) // 달력에서 선택한 날짜
-    const [selectday,setSelectday] = useState([])
+    //const [selectDate,setSelectDate] = useState([]) // 달력에서 선택한 날짜
+    //const [selectday,setSelectday] = useState([])
     
     useEffect(()=>{
         setDayData(selectday)
-        
     },[selectday])
 
 
@@ -221,13 +221,13 @@ export default function Calendar(){
                     <table className="week">
                         <thead className="table_head">
                             <tr>
-                                <th style={{color:'red'}}>일</th>
-                                <th>월</th>
-                                <th>화</th>
-                                <th>수</th>
-                                <th>목</th>
-                                <th>금</th>
-                                <th style={{color:'blue'}}>토</th>
+                                <th style={{color:'red'}}><span className="weeks">일</span></th>
+                                <th><span className="weeks">월</span></th>
+                                <th><span className="weeks">화</span></th>
+                                <th><span className="weeks">수</span></th>
+                                <th><span className="weeks">목</span></th>
+                                <th><span className="weeks">금</span></th>
+                                <th style={{color:'blue'}}><span className="weeks">토</span></th>
                             </tr>
                         </thead>
                         <tbody className="table_body">
@@ -264,13 +264,13 @@ export default function Calendar(){
                     <table className="week">
                         <thead className="table_head">
                             <tr>
-                                <th style={{color:'red'}}>일</th>
-                                <th>월</th>
-                                <th>화</th>
-                                <th>수</th> 
-                                <th>목</th>
-                                <th>금</th>
-                                <th style={{color:'blue'}}>토</th>
+                                <th style={{color:'red'}}><span className="weeks">일</span></th>
+                                <th><span className="weeks">월</span></th>
+                                <th><span className="weeks">화</span></th>
+                                <th><span className="weeks">수</span></th> 
+                                <th><span className="weeks">목</span></th>
+                                <th><span className="weeks">금</span></th>
+                                <th style={{color:'blue'}}><span className="weeks">토</span></th>
                             </tr>
                         </thead>
                         <tbody className="table_body">
@@ -302,7 +302,7 @@ export default function Calendar(){
                     
                 </div>
                 <button type="button" onClick={back} className="prvBtn calBtn"><i class="fa-solid fa-angle-left"></i></button>
-                <button type="button" onClick={next}className="nextBtn calBtn"><i class="fa-solid fa-angle-right"></i></button>
+                <button type="button" onClick={next} className="nextBtn calBtn"><i class="fa-solid fa-angle-right"></i></button>
                 <div className="line"></div>
                 <div className="choose_day">
                     <p>{selectDate.length===2?`${selectDate[0]} 부터 - ${selectDate[1]} 까지`:'일정을 선택해 주세요'}</p>

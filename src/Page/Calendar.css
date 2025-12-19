@@ -48,6 +48,12 @@
     line-height: 35px;
     box-sizing: border-box;
 }
+.calendar .calendar_manu .week .table_head tr .weeks{
+    text-align: center;
+    padding-left: 5px;
+    display: inline-block;
+    width: 35px;
+}
 .calendar .calendar_manu .week .table_body tr .active:hover .cal_num{
     background-color: #7ED6E4;
     cursor: pointer;

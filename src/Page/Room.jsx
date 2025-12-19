@@ -27,15 +27,11 @@ export default function Room(){
     // 종아요 버튼
     const [likeBtn,setLikeBtn] =useState(true)
     // 선택한 날짜를 담을 변수
-    // const [DayData,setDayData] = useState([])
+    //const [DayData,setDayData] = useState([])
 
     //날짜에 따른 목록 필터
     useEffect(()=>{
         const dateFilter = HotelData.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
-
-        console.log('aaaaaaaaaa');
-        console.log(DayData);
-
     },[DayData])
 
     
@@ -203,6 +199,7 @@ export default function Room(){
             <Calendar />
             {/* 상품 메뉴영역 */}
             <div className="Room_section">
+                <Calendar />
                 {/* 상단 필터 영역 */}
                 <div className="filter_menu">
                     <div className="left_filter">

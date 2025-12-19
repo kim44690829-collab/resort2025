@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { ResortDateContext } from '../Api/ResortDate';
 import 'leaflet/dist/leaflet.css';
 import Calendar from './Calendar';
-import Room from './Room';
 
 export default function Main(){    
     // 2025-12-19 병합2
