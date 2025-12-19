@@ -6208,6 +6208,7 @@ export default function ResortDate({children}){
         localStorage.setItem('selectMonth',JSON.stringify(selectMonth));
         
     },[selectMonth]) 
+
     return(
         <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth}}>
     

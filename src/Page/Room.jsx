@@ -192,14 +192,21 @@ export default function Room(){
         }
     }
     
-    
+    const year = new Date().getFullYear()
+    const month = new Date().getMonth()
+    const date = new Date().getDate()
 
     return(
         <>  
-            <Calendar />
             {/* 상품 메뉴영역 */}
             <div className="Room_section">
-                <Calendar />
+                <div className="serch_box">
+                    <input type="text" placeholder="여행지나 숙소를 검색해주세요"/>
+                    <button type='button' onClick={() => setOpenC(!openC)} className='calenertBtn'>
+                        <i className="fa-solid fa-calendar"></i>
+                        <span style={{marginRight:'5px'}}>{DayData.length < 2 ? `${year}-${month}-${date} - ${year}-${month}-${date + 1} ` : `${DayData[0]} - ${DayData[1]}`}</span>
+                    </button>
+                </div>
                 {/* 상단 필터 영역 */}
                 <div className="filter_menu">
                     <div className="left_filter">
