@@ -1,51 +1,154 @@
 .main_container .mainImgBenner{
     width: 1920px;
-    height: 500px;
+    height: 600px;
     margin: 0 auto;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     position: relative;
 }
 .main_container .mainImgBenner .hotelSearch{
     width: 1200px;
+    height: 200px;
     position: absolute;
     bottom: -100px;
     left: 350px;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
+    z-index: 100;
+    background-color: #fff;
+    padding: 30px;
+    /* border: 1px solid black; */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+.main_container .mainImgBenner .searchTitle{
+    position: absolute;
+    top: 430px;
+    left: 348px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+    z-index: 1000;
 }
 .main_container .mainImgBenner .hotelSearch .hotelSearchBtn{
-    width: 500px;
+    width: 100px;
     height: 50px;
-    margin-top: 50px;
     border: none;
-    background-color: rgb(83, 83, 209);
+    background-color: #42799b;
     color: #fff;
     border-radius: 10px;
 }
 .main_container .mainImgBenner .hotelSearch .globalBtn{
-    margin-left: 30px;
+    margin-left: 10px;
 }
 .main_container .mainImgBenner .hotelSearch .hotelInput{
     display: flex;
     justify-content: space-between;
     margin-top: 50px;
     position: relative;
+    /* border-top: 1px solid black; */
 }
 .main_container .mainImgBenner .hotelSearch .hotelInput #citySearch{
+    width: 400px;
+    height: 45px;
+    padding: 15px 10px 10px 10px;
+    padding-left: 40px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: rgb(228, 228, 228);
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); */
+}
+/* .main_container .mainImgBenner .hotelSearch .hotelInput #citySearch:focus + ul.rankBox{
+    height: 430px;
+} */
+.main_container .mainImgBenner .hotelSearch .hotelInput #citySearch:hover{
+    background-color: #cecece;
+}
+.main_container .mainImgBenner .hotelSearch .hotelInput #citySearch:hover::placeholder{
+    color: #505050;
+}
+.main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankName{
+    display: inline-block;
+    width: 420px;
+}
+/* 검색창 클릭시 나오는 지역 css */
+.main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .countryInRank,
+.main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankName{
+    cursor: pointer;
+}
+/* .rankBoxRelat{
+    position: relative;
+} */
+/* 검색창 ul */
+.main_container .mainImgBenner .hotelSearch .hotelInput .rankBox{
     width: 500px;
+    height: 430px;
+    margin: 10px 0 10px 0;
+    position: absolute;
+    background-color: #fff;
+    z-index: 20;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    top: 35px;
+    left: 0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+/* .main_container .mainImgBenner .hotelSearch:focus-within .rankBox{
+    height: 430px;
+} */
+/* 검색창 li */
+.main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankBoxLi{
+    padding: 10px;
+}
+.main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankBoxLi .inputInfo{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0 10px 0;
+}
+/* 검색창 순위 */
+.main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankBoxLi .countryInRank{
+    padding-right: 30px;
+    width: 50px;
+    display: inline-block;
 }
 .main_container .mainImgBenner .hotelSearch .hotelInput .Search_Btn{
     width: 100px;
-    height: 30px;
+    height: 45px;
     border-radius: 10px;
     border: none;
-    background-color: rgb(83, 83, 209);
+    background-color: #42799b;
     color: #fff;
+    padding: 10px;
 }
 .main_container .mainImgBenner .hotelSearch .hotelInput .searchIcon{
     position: absolute;
-    top: 8px;
-    left: 5px;
+    top: 16px;
+    left: 10px;
 }
+/* 인원 */
+.guests{
+    display: inline-block;
+    width: 50px;
+    padding: 10px;
+    text-align: center;
+}
+/* 달력 버튼 */
+.calenertBtn{
+    width: 300px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(228, 228, 228);
+}
+.fa-calendar{
+    margin-right: 10px;
+}
+.CalendarModal{
+    position: absolute;
+    top: 60px;
+    left: 462px;
+    
+}
+/* 호텔 타입별 선택 */
 .main_container .hotel_type{
     width: 1200px;
     margin: 0 auto;
@@ -55,11 +158,8 @@
     gap: 10px;
 }
 .main_container .hotel_type .accomCat{
-    width: 240px;
-    height: 240px;
-    border: 1px solid green;
     position: relative;
-    overflow: hidden;
+    cursor: pointer;
 }
 .main_container .hotel_type .accomCat .HotelImg,
 .main_container .hotel_type .accomCat .ResortImg,
@@ -70,7 +170,15 @@
     bottom: 10px;
     right: 10px;
 }
-/*  */
+.guestSum .minus_btn,
+.guestSum .plus_btn{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border: none;
+}
+/* 인기순 호텔 */
 .main_container .popularAccom{
     margin-top: 70px;
 }
@@ -79,33 +187,185 @@
     margin: 0 auto;
     margin-bottom: 30px;
 }
-.main_container .popularAccom .popularAccomSub1 .popularAccomSub2{
-    display: flex;
+.main_container .popularAccom .popularAccomSub1{
+    position: relative;
     width: 1200px;
     margin: 0 auto;
-    gap: 10px;
-    overflow: hidden;
+    display: flex;
 }
+.main_container .popularAccom .popularAccomSub1 .leftBtn1{
+    position: absolute;
+    top: -120px;
+    left: -50px;
+    width: 50px;
+    height: 500px;
+    background-color: transparent;
+    border: none;
+}
+.main_container .popularAccom .popularAccomSub1 .rightBtn1{
+    position: absolute;
+    top: -120px;
+    right: -50px;
+    width: 50px;
+    height: 500px;
+    border: none;
+    background-color: transparent;
+}
+/* 인기호텔 슬라이드를 위한 div */
+.main_container .popularAccom .popularAccomSub1 .slideBox{
+    overflow: hidden;
+    width: 1200px;
+}
+/* 인기호텔 슬라이드 ul */
+.main_container .popularAccom .popularAccomSub1 .slideBox .popularAccomSub2{
+    display: flex;
+    gap: 10px;
+    transition: 0.3s;
+}
+/* 인기호텔 슬라이드 li 구성요소 css */
 .main_container .popularAccom .popularAccomSub1 .popularAccomSub2 .popularAccomMainImg{
-    width: 232px;
+    width: 290px;
     height: 240px;
+    border-radius: 10px;
+}
+.main_container .popularAccom .popularAccomSub1 .popularAccomSub2 .popularAccom_type{
+    font-size: 14px;
+    margin: 10px 0 5px 0;
+    color: gray;
 }
 .main_container .popularAccom .popularAccomSub1 .popularAccomSub2 .popularAccom_name{
+    font-size: 18px;
     margin-bottom: 10px;
 }
 .main_container .popularAccom .popularAccomSub1 .popularAccomSub2 .popularAccom_review{
     margin-bottom: 10px;
+    vertical-align: middle;
 }
 .main_container .popularAccom .popularAccomSub1 .popularAccomSub2 .popularAccom_score{
-    border: 1px solid red;
-    margin: 3px;
-    background-color: yellow;
+    /* border: 1px solid red; */
+    /* margin: 3px; */
+    /* background-color: yellow; */
+    border: 1px solid rgb(192, 134, 8);
+    padding: 3px;
+}
+.main_container .popularAccom .popularAccomSub1 .popularAccomSub2 .popularAccom_score .starScore{
+    display: inline-block;
+    margin-left: 10px;
+}
+.popularAccom_discount{
+    font-size: 20px;
+    /* margin-right: 10px; */
+}
+.popularAccom_price{
+    font-size: 15px;
+    color: gray;
+    text-decoration: line-through;
 }
 .main_container .popularAccom .popularAccomSub1 .popularAccomSub2 .popularAccom_count{
     margin-left: 10px;
     color: rgb(68, 68, 68);
 }
-/*  */
+/* 중간 배너 EcoStay 회원만의 특별한 혜택 */
+.main_container .EcoMember{
+    width: 1920px;
+    margin: 100px auto 0;
+    position: relative;
+}
+.main_container .EcoMember .EcoMemberInfo{
+    position: absolute;
+    top: 100px;
+    left: 350px;
+}
+.main_container .EcoMember .EcoMemberInfo .EcoMemberInfo-1{
+    font-size: 32px;
+    line-height: 40px;
+    margin-bottom: 10px;
+}
+.EcoMemberHotel{
+    display: flex;
+    position: absolute;
+    top: 43px;
+    right: 350px;
+}
+.EcoMemberUlBox{
+    overflow: hidden;
+    width: 635px;
+}
+.EcoMemberHotelAll{
+    display: flex;
+    width: 630px;
+    transition: 0.5s;
+}
+.EcoMemberHotelAllLi{
+    display: flex;
+    width: 774px;
+}
+.EcoMemberHotelAll-2{
+    /* margin-left: 50px; */
+    width: 350px;
+    /* height: 195px; */
+    background-color: #fff;
+    /* padding-left: 30px; */
+    box-sizing: border-box;
+    padding: 20px 0 20px 30px;
+    border-radius: 0 10px 10px 0;
+}
+.bennerType{
+    display: inline-block;
+    color: #777;
+    margin-bottom: 10px;
+}
+.bennerClub{
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+.bennerHotelName{
+    display: inline-block;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+.bennerText{
+    color: rgb(233, 76, 76);
+    line-height: 25px;
+}
+.bennerPrice1{
+    display: inline-block;
+    margin-top: 30px;
+    font-size: 25px;
+    font-weight: 500;
+}
+.bennerPrice2{
+    display: inline-block;
+    margin-top: 25px;
+    font-size: 20px;
+    text-decoration: line-through;
+    color: #aaa;
+    margin-left: 30px;
+}
+.bennerPrice2-1{
+    display: inline-block;
+    color: #aaa;
+}
+.rightBtn4{
+    position: absolute;
+    top: 20px;
+    right: -80px;
+    width: 50px;
+    height: 195px;
+    border: none;
+    background-color: transparent;
+}
+.leftBtn4{
+    position: absolute;
+    top: 20px;
+    left: -90px;
+    width: 50px;
+    height: 195px;
+    background-color: transparent;
+    border: none;
+}
+/* 관광명소  */
 .main_container .spotsAndStays .spotsAndStaysTitle{
     width: 1200px;
     margin: 0 auto;
@@ -113,51 +373,186 @@
     margin-bottom: 30px;
 }
 .main_container .spotsAndStays .spotsAndStaysAll{
-    display: flex;
     width: 1200px;
     margin: 0 auto;
-    gap: 10px;
+    display: flex;
+    position: relative;
+}
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox{
     overflow: hidden;
+    width: 1200px;
+}
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots{
+    display: flex;
+    gap: 10px;
+    transition: 0.3s;
+}
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap{
+    position: relative;
+}
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .citySpotImg{
+    border-radius: 10px;
+}
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .SpotsMask{
+    width: 390px;
+    height: 500px;
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .SpotsMask .maskCity{
+    font-size: 50px;
+    color: #ecb865;
+    text-align: center;
+    margin-top: 100px;
+}
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .SpotsMask .maskCityInfo{
+    color: #fff;
+    margin: 30px 50px 0 50px;
+    font-size: 25px;
+    line-height: 40px;
+}
+.main_container .spotsAndStays .spotsAndStaysAll .leftBtn2{
+    position: absolute;
+    top: 0;
+    left: -50px;
+    width: 50px;
+    height: 500px;
+    background-color: transparent;
+    border: none;
+}
+.main_container .spotsAndStays .spotsAndStaysAll .rightBtn2{
+    position: absolute;
+    top: 0;
+    right: -50px;
+    width: 50px;
+    height: 500px;
+    border: none;
+    background-color: transparent;
 }
 .main_container .spotsAndStays .spotsAndStaysAll .spotsAndStaysImg{
     width: 390px;
     height: 500px;
 }
-/*  */
+/* 평점순 */
 .staySortByRating .staySortByRating_title{
     width: 1200px;
     margin: 0 auto;
     margin-top: 70px;
     margin-bottom: 30px;
 }
-.staySortByRating .hotelRating_desc .hotelRating_each{
-    display: flex;
+.staySortByRating .hotelRating_desc{
     width: 1200px;
     margin: 0 auto;
-    gap: 10px;
+    position: relative;
+}
+.staySortByRating .hotelRating_desc .leftBtn3{
+    position: absolute;
+    top: 0;
+    left: -50px;
+    width: 50px;
+    height: 500px;
+    background-color: transparent;
+    border: none;
+}
+.staySortByRating .hotelRating_desc .rightBtn3{
+    position: absolute;
+    top: 0;
+    right: -50px;
+    width: 50px;
+    height: 500px;
+    border: none;
+    background-color: transparent;
+}
+.staySortByRating .hotelRating_desc .hotelRatingBox{
     overflow: hidden;
+    padding-top: 32px;
+    width: 1200px;
+    padding-bottom: 150px;
+}
+.staySortByRating .hotelRating_desc .hotelRating_each{
+    display: flex;
+    margin: 0 auto;
+    gap: 10px;
+    transition: 0.3s;
 }
 .staySortByRating .hotelRating_desc .hotelRating_each .hotelRating_each_sub{
     position: relative;
 }
+.ratingItemWrapper{
+    position: relative;
+}
 .staySortByRating .hotelRating_desc .hotelRating_each .hotelRatingImg{
     width: 390px;
-    height: 500px;
+    height: 430px;
+    border-radius: 10px;
+}
+.staySortByRating .hotelRating_desc .hotelRating_each .hotelRating_each_sub .ratingLabel{
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    z-index: 10;
+}
+.labelImg{
+    width: 100px;
+    height: 100px;
+}
+.hotelRatingScore{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -51%);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 19px;
 }
 .staySortByRating .hotelRating_desc .hotelRating_each_sub2{
-    border: 1px solid red;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    width: 200px;
-    height: 100px;
+    bottom: -50px;
+    right: 0px;
+    width: 280px;
+    height: 150px;
     background-color: #fff;
-    text-align: center;
-    padding-top: 15px;
+    color: black;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    border-radius: 10px 10px 0 10px;
+    z-index: 10;
 }
 .main_container .eventBanner{
-    width: 1980px;
+    width: 1920px;
     height: 400px;
-    margin: 100px auto;
+    margin: 50px auto;
     border: 1px solid red;
+}
+/* 관광명소 모달 */
+.main_container .overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 998;
+}
+.spotsModal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 500px;
+    background-color: #fff;
+    z-index: 999;
+    border-radius: 10px;
+}
+.modalImg{
+    width: 300px;
+    height: 400px;
+    margin: 50px;
+    border-radius: 10px;
 }

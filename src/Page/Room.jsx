@@ -4,8 +4,13 @@ import '../Page/Room.css'
 import { ResortDateContext } from '../Api/ResortDate';
 import Calendar from "./Calendar";
 import { Link } from "react-router-dom";
+import LeafletMap from '../Api/LeafletMap';
 
 export default function Room(){
+    // 가져오는 호텔, 개실 데이터
+    const {HotelData,RoomData, hotelInput, setHotelInput, DayData, setDayData} = useContext(ResortDateContext);
+    //const {selectDate,setSelectDate,setSelectday} = useContext(calendarAuth)
+    /* console.log(selectDate) */
     /* 필터 목록 */
     const filter_publicService = [{id:1,name:'피트니스'},{id:2,name:'레스토랑'},{id:3,name:'사우나'},{id:4,name:'실내수영장'},{id:5,name:'야외수영장'},{id:6,name:'편의점'},{id:7,name:'바'},{id:8,name:'라운지'},{id:9,name:'엘리베이터'},{id:10,name:'비즈니스센터'},{id:11,name:'건조기'},{id:12,name:'탈수기'},{id:13,name:'바베큐'}]
     const filter_roomservice = [{id:14,name:'무선인터넷'},{id:15,name:'욕실용품'},{id:16,name:'에어컨'},{id:17,name:'드라이기'},{id:18,name:'샤워실'},{id:19,name:'냉장고'},{id:20,name:'TV'},{id:21,name:'객실내취사'},{id:22,name:'욕조'},{id:23,name:'금연'},{id:24,name:'전기주전자'},{id:25,name:'실내수영장'},{id:26,name:'개인콘센트'}]
@@ -21,10 +26,16 @@ export default function Room(){
     const [hotelSort,setHotelSort] = useState(1)
     // 종아요 버튼
     const [likeBtn,setLikeBtn] =useState(true)
+    // 선택한 날짜를 담을 변수
+    //const [DayData,setDayData] = useState([])
 
+    //날짜에 따른 목록 필터
+    useEffect(()=>{
+        const dateFilter = HotelData.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
+    },[DayData])
 
-    // 가져오는 호텔, 개실 데이터
-    const {HotelData,RoomData} = useContext(ResortDateContext);
+    
+    
     //
     //
     useEffect(()=>{
@@ -44,17 +55,17 @@ export default function Room(){
         })
         const pricefilter = filterHotel.filter((f)=>f.price > minPrice && f.price<=maxPrice)
         //console.log(pricefilter,'가격필터까지')
-
+        const dateFilter = pricefilter.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
         if(hotelSort===1){
-            pricefilter.sort((a,b) => a.id - b.id)
+            dateFilter.sort((a,b) => a.id - b.id)
         }else if(hotelSort===2){
-            pricefilter.sort((a,b) => b.score - a.score)
+            dateFilter.sort((a,b) => b.score - a.score)
         }else if(hotelSort===3){
-            pricefilter.sort((a,b) => a.score - b.score)
+            dateFilter.sort((a,b) => a.score - b.score)
         }else if(hotelSort===4){
-            pricefilter.sort((a,b) => b.price - a.price)
+            dateFilter.sort((a,b) => b.price - a.price)
         }else{
-            pricefilter.sort((a,b) => a.price - b.price)
+            dateFilter.sort((a,b) => a.price - b.price)
         }
 
         // 가격 최솟값 최대값 조정 함수
@@ -89,12 +100,22 @@ export default function Room(){
         
          */
 
-    setmyhotel(pricefilter)
+    setmyhotel(dateFilter)
         
 
-    },[myFilter,minPrice,maxPrice,hotelSort])
+    },[myFilter,minPrice,maxPrice,hotelSort,DayData])
 
+    useEffect(()=>{
+        if(minPrice<0){
+            setMinPrice(0)
+            setMaxPrice(10000)
+        }
 
+        if(maxPrice>300000){
+            setMaxPrice(300000)
+            setMinPrice(290000)
+        }
+    },[minPrice,maxPrice])
 
     
 
@@ -170,12 +191,15 @@ export default function Room(){
             setMaxPrice(Number(e.target.value))
         }
     }
+    
+    
 
     return(
         <>  
-            <Calendar/>
+            <Calendar />
             {/* 상품 메뉴영역 */}
             <div className="Room_section">
+                <Calendar />
                 {/* 상단 필터 영역 */}
                 <div className="filter_menu">
                     <div className="left_filter">
@@ -213,38 +237,45 @@ export default function Room(){
                                 
                                 <div className="minprice">
                                     <p className="price_txt">최소금액</p>
-                                    <input className="price_input" type="text" value={`${minPrice}원`} placeholder="최소금액" onChange={(e)=>setMinPrice(e.target.value)}/>
+                                    <input className="price_input" type="text" value={`${minPrice.toLocaleString()}`} placeholder="최소금액" onChange={(e)=>setMinPrice(e.target.value)}/>
+                                    <span>원</span>
                                 </div>
                                 <div className="maxprice">
                                     <p className="price_txt">최대금액</p>
-                                    <input className="price_input" type="text" value={`${maxPrice}원`} placeholder="최대금액" onChange={(e)=>setMaxPrice(e.target.value)}/>
+                                    <input className="price_input" type="text" value={`${maxPrice.toLocaleString()}`} placeholder="최대금액" onChange={(e)=>setMaxPrice(e.target.value)}/>
+                                    <span>원</span>
                                 </div>
                             </div>
                             <div className="reset">
-                                <button type="button" onClick={()=>{setMyfilter([]),setMaxPrice(300000),setMinPrice(0)}} className="reset_btn">🔄<span className="resettxt">필터 초기화</span></button>
+                                <button type="button" onClick={()=>{setMyfilter([]),setMaxPrice(300000),setMinPrice(0)}} className="reset_btn"><i class="fa-solid fa-arrow-rotate-right"></i><span className="resettxt"> 필터 초기화</span></button>
                             </div>
                     </div>
                     <div className="right_filter">
-                        <div className="map"><span>map</span></div>
+                        <div className="map">
+                            <LeafletMap city={'seoul'} hotelName={'가가가'} style={{width:'100%',height:'200px',border: '1px solid #e7e7e7',borderRadius:'10px'}}/>    
+                        </div>
                     </div>
                 </div>
                 {/* 중단 정렬 영역 */}
                 <div className="arr_menu">
+                    <span className="arr_total">총 {myhotel.length}개</span>
                     <ul className="arr_group">
-                        <li className="arr_list" onClick={()=>sortHandeler(1)} style={{color:hotelSort===1?'black':'#aaa'}}>추천수</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(2)} style={{color:hotelSort===2?'black':'#aaa'}}>높은평점순</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(3)} style={{color:hotelSort===3?'black':'#aaa'}}>낮은평점순</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(4)} style={{color:hotelSort===4?'black':'#aaa'}}>높은가격순</li>
-                        <li className="arr_list" onClick={()=>sortHandeler(5)} style={{color:hotelSort===5?'black':'#aaa'}}>낮은가격순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(1)} style={{color:hotelSort===1?'white':'#ccc',fontWeight:hotelSort===1?600:400}}>추천수</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(2)} style={{color:hotelSort===2?'white':'#ccc',fontWeight:hotelSort===2?600:400}}>높은평점순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(3)} style={{color:hotelSort===3?'white':'#ccc',fontWeight:hotelSort===3?600:400}}>낮은평점순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(4)} style={{color:hotelSort===4?'white':'#ccc',fontWeight:hotelSort===4?600:400}}>높은가격순</li>
+                        <li className="arr_list" onClick={()=>sortHandeler(5)} style={{color:hotelSort===5?'white':'#ccc',fontWeight:hotelSort===5?600:400}}>낮은가격순</li>
                     </ul>
                 </div>
                 {/* 방정보 영역 */}
                 <div className="room_menu">
                     <ul className="room_product">
                         {myhotel.length !== 0?myhotel.map((item)=>(
-                            <Link to={`/detail/${item.id}`}>
+                            
                             <li key={item.id} className="room_list">
+                                
                                 <div className="img_box"><img src={item.img[0]} alt={`${item.img[0]}이미지`} className="hotelimg"/></div>
+                                <Link to={`/detail/${item.id}`}>
                                 <div className="room_info">
                                     <h2 className="menu_title">{item.hotelName}</h2>
                                     <p className="menu_city">{item.city}</p>
@@ -260,10 +291,12 @@ export default function Room(){
                                         }
                                     </p>
                                     <p className="menu_price">{item.discount===1?(item.price*0.9).toLocaleString():item.price.toLocaleString()}원</p>
-                                    <button type="button" className="menu_wishbtn" onClick={()=>setLikeBtn(!likeBtn)}>{likeBtn?'❤':'💖'}</button>
+                                    
                                 </div>
+                                </Link>
+                                <button type="button" className="menu_wishbtn" onClick={()=>setLikeBtn(!likeBtn)}>{likeBtn?'❤':'💖'}</button>
                             </li>
-                            </Link>
+                            
                         )): <h2>검색된 상품이 없습니다.</h2>}
                     </ul>
                 </div>
