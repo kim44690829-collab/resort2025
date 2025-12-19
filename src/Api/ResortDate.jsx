@@ -6195,18 +6195,19 @@ export default function ResortDate({children}){
 
     useEffect(()=>{
         localStorage.setItem('selectday',JSON.stringify(selectday))
+        console.log(selectDate,selectday,'12-19확인ㅇㅅ')
     },[selectday])
 
-    const [selectMonth,setSelectMonth] = useState(()=>{
+     const [selectMonth,setSelectMonth] = useState(()=>{
         const saved = localStorage.getItem('selectMonth')
         //저장된 value가 있으면 복원, 없으면 빈 배열
-        return saved ? JSON.parse(saved) : new Date()
-    })
-    console.log((localStorage.getItem('selectMonth')))
+        return saved ===null ?JSON.parse(saved): new Date() 
+    }) 
+    
     useEffect(()=>{
         localStorage.setItem('selectMonth',JSON.stringify(selectMonth));
         
-    },[selectMonth])
+    },[selectMonth]) 
     return(
         <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth}}>
             {children}

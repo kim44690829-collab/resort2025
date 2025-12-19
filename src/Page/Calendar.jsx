@@ -221,13 +221,13 @@ export default function Calendar(){
                     <table className="week">
                         <thead className="table_head">
                             <tr>
-                                <th style={{color:'red'}}>일</th>
-                                <th>월</th>
-                                <th>화</th>
-                                <th>수</th>
-                                <th>목</th>
-                                <th>금</th>
-                                <th style={{color:'blue'}}>토</th>
+                                <th style={{color:'red'}}><span className="weeks">일</span></th>
+                                <th><span className="weeks">월</span></th>
+                                <th><span className="weeks">화</span></th>
+                                <th><span className="weeks">수</span></th>
+                                <th><span className="weeks">목</span></th>
+                                <th><span className="weeks">금</span></th>
+                                <th style={{color:'blue'}}><span className="weeks">토</span></th>
                             </tr>
                         </thead>
                         <tbody className="table_body">
@@ -264,13 +264,13 @@ export default function Calendar(){
                     <table className="week">
                         <thead className="table_head">
                             <tr>
-                                <th style={{color:'red'}}>일</th>
-                                <th>월</th>
-                                <th>화</th>
-                                <th>수</th> 
-                                <th>목</th>
-                                <th>금</th>
-                                <th style={{color:'blue'}}>토</th>
+                                <th style={{color:'red'}}><span className="weeks">일</span></th>
+                                <th><span className="weeks">월</span></th>
+                                <th><span className="weeks">화</span></th>
+                                <th><span className="weeks">수</span></th> 
+                                <th><span className="weeks">목</span></th>
+                                <th><span className="weeks">금</span></th>
+                                <th style={{color:'blue'}}><span className="weeks">토</span></th>
                             </tr>
                         </thead>
                         <tbody className="table_body">
