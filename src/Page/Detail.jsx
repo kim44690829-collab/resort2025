@@ -166,7 +166,7 @@ console.log(recommStar);
         //console.log(wishList.length);
     },[]);
     //console.log(wish);
-
+//
     //찜목록 쿠키 저장 및 삭제
     const wishHandler = () =>{
         let wishList = JSON.parse(cookie.get('wishList') || '[]');          
