@@ -138,15 +138,15 @@ export default function Detail(){
         setAvgRoom(roomStar);
 
         //추천호텔 별점
-        const recommStar = [];
+        // const recommStar = [];
 
-        for(let i=0; i<RecommHotel.length; i++){
-            recommStar.push(RecommHotel[i].score);
-        }
-        console.log(recommStar);
-        for(let j=0; j<recommStar.length; j++){
-            
-        }
+        // for(let i=0; i<RecommHotel.length; i++){
+        //     recommStar.push(RecommHotel[i].score);
+        // }
+        // console.log(recommStar);
+        // for(let j=0; j<recommStar.length; j++){
+
+        // }
         
 
     },[id]);
