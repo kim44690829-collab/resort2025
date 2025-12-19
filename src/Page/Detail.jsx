@@ -19,11 +19,18 @@ export default function Detail(){
     //예외처리
     if(!Room) return <p>잠시만 기다려주세요...</p>
     
+    //추천호텔 데이터
+    const RecommHotel = HotelData.filter((item)=>item.city === Hotel.city && item.id !== Number(id));
+    //예외처리
+    if(!RecommHotel) return <p>잠시만 기다려주세요...</p>
+
     console.log(Hotel);
     console.log(Room);
-    //
+    
     //호텔별점 이미지
     const[starImg, setStarImg] = useState([]);
+    //추천호텔 별점 이미지
+    const[recommStar, setRecommStar] = useState([]);
     //객실당 스마일 이미지
     const[smileRoom, setSmileRoom] = useState([]);
     //객실당 별점 이미지
@@ -34,7 +41,7 @@ export default function Detail(){
 
     useEffect(()=>{
         //해당호텔 별점 가져오기
-        const score = Hotel.score;
+        const score = Hotel.score;      
         //별점 정수
         const scoreInt = Math.floor(score);
         //별점 소수
@@ -130,9 +137,22 @@ export default function Detail(){
 
         setAvgRoom(roomStar);
 
+        //추천호텔 별점
+        const recommStar = [];
+
+        for(let i=0; i<RecommHotel.length; i++){
+            recommStar.push(RecommHotel[i].score);
+        }
+        console.log(recommStar);
+        for(let j=0; j<recommStar.length; j++){
+            
+        }
+        
+
     },[id]);
   
 console.log(starRoom);
+console.log(recommStar);
     
     const [wish, setWish] = useState([]);
 
@@ -577,7 +597,7 @@ console.log(starRoom);
                 <div className="recommend-slider">
                     <ul>
                         {(HotelData.filter((item)=>item.city === Hotel.city)).map((hotel,index)=>(
-                            hotel.id === id ? null : (
+                            hotel.id === Number(id) ? null : (
                                 <li key={index}>
                                     <Link to={`/detail/${hotel.id}`}>
                                         <div className="hotel-img-wrap">
@@ -586,8 +606,8 @@ console.log(starRoom);
                                         <div className="hotel-txt">
                                             <h3>{hotel.hotelName}</h3>
                                             <div className="intro-left">
-                                                {avgRoom[index] && avgRoom[index].map((star, ind) => (
-                                                    <img src={star} alt="roomScore" key={ind} />
+                                                {starImg.map((star,index)=>(
+                                                    <img src={star} alt="score" key={index} />
                                                 ))}
                                             </div>
                                         </div>
