@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import { useState,useEffect } from "react";
 
 export const ResortDateContext = createContext();
 
@@ -6167,8 +6168,47 @@ export default function ResortDate({children}){
         }
     ];
 
+    const [DayData,setDayData] = useState(()=>{
+        const saved = localStorage.getItem('DayData')
+        //저장된 value가 있으면 복원, 없으면 빈 배열
+        return saved ? JSON.parse(saved) : []
+    })
+    useEffect(()=>{
+        localStorage.setItem('DayData',JSON.stringify(DayData))
+    },[DayData])
+
+    const [selectDate,setSelectDate] = useState(()=>{
+        const saved = localStorage.getItem('selectDate')
+        //저장된 value가 있으면 복원, 없으면 빈 배열
+        return saved ? JSON.parse(saved) : []
+    })
+
+    useEffect(()=>{
+        localStorage.setItem('selectDate',JSON.stringify(selectDate))
+    },[DayData])
+
+    const [selectday,setSelectday] = useState(()=>{
+        const saved = localStorage.getItem('selectday')
+        //저장된 value가 있으면 복원, 없으면 빈 배열
+        return saved ? JSON.parse(saved) : []
+    })
+
+    useEffect(()=>{
+        localStorage.setItem('selectday',JSON.stringify(selectday))
+    },[selectday])
+
+    const [selectMonth,setSelectMonth] = useState(()=>{
+        const saved = localStorage.getItem('selectMonth')
+        //저장된 value가 있으면 복원, 없으면 빈 배열
+        return saved ? JSON.parse(saved) : new Date()
+    })
+    console.log((localStorage.getItem('selectMonth')))
+    useEffect(()=>{
+        localStorage.setItem('selectMonth',JSON.stringify(selectMonth));
+        
+    },[selectMonth])
     return(
-        <ResortDateContext.Provider value={{RoomData, HotelData}}>
+        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth}}>
             {children}
         </ResortDateContext.Provider>
     );

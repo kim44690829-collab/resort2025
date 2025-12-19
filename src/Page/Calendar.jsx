@@ -4,25 +4,27 @@ import '../Page/calendar.css'
 import { ResortDateContext } from '../Api/ResortDate';
 import { data } from "react-router-dom";
 
-export default function Calendar({setDayData}){
+export default function Calendar(){
+
+    const {RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth} = useContext(ResortDateContext);
     // 선택한 달
-    const [selectMonth,setSelectMonth] = useState(new Date()) //선택한 달력
+    //const [selectMonth,setSelectMonth] = useState(new Date()) //선택한 달력
     const [calArr,setCalArr] = useState(
         Array.from(Array(6),() => new Array(7).fill(''))
     ) //달력에 들어가는 배열
 
+   console.log('2025-12-19',selectMonth.getFullYear());
     const nextMonth= new Date(selectMonth.getFullYear(),selectMonth.getMonth() + 1,1) //선택한 다음달 달력
     const [calArr02,setCalArr02] = useState(
         Array.from(Array(6),() => new Array(7).fill(''))
     ) //달력에 들어가는 배열
 
     //선택한 날짜
-    const [selectDate,setSelectDate] = useState([]) // 달력에서 선택한 날짜
-    const [selectday,setSelectday] = useState([])
+    //const [selectDate,setSelectDate] = useState([]) // 달력에서 선택한 날짜
+    //const [selectday,setSelectday] = useState([])
     
     useEffect(()=>{
         setDayData(selectday)
-        
     },[selectday])
 
 
@@ -300,7 +302,7 @@ export default function Calendar({setDayData}){
                     
                 </div>
                 <button type="button" onClick={back} className="prvBtn calBtn"><i class="fa-solid fa-angle-left"></i></button>
-                <button type="button" onClick={next}className="nextBtn calBtn"><i class="fa-solid fa-angle-right"></i></button>
+                <button type="button" onClick={next} className="nextBtn calBtn"><i class="fa-solid fa-angle-right"></i></button>
                 <div className="line"></div>
                 <div className="choose_day">
                     <p>{selectDate.length===2?`${selectDate[0]} 부터 - ${selectDate[1]} 까지`:'일정을 선택해 주세요'}</p>

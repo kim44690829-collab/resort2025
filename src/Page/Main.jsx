@@ -3,11 +3,12 @@ import { useContext, useState, useEffect, use } from 'react';
 import { Link } from 'react-router-dom';
 import { ResortDateContext } from '../Api/ResortDate';
 import 'leaflet/dist/leaflet.css';
+import Calendar from './Calendar';
 
 export default function Main(){    
     // 2025-12-19 병합
     // 호텔, 객실데이터 useContext로 가져오는 훅
-    const {RoomData, HotelData} = useContext(ResortDateContext);
+    const {RoomData, HotelData,DayData,setDayData} = useContext(ResortDateContext);
     // 호텔 input에 들어가는 지역, 호텔명 상태변수
     const [hotelInput, setHotelInput] = useState('');
     // 호텔 input 아래 모달 상태변수
@@ -220,6 +221,7 @@ export default function Main(){
                         </div>
                         <i className="fa-solid fa-magnifying-glass searchIcon"></i>
                         <div>달력</div>
+                        <Calendar/>
                         {/* 인원 */}
                         <div className='guestSum'>
                             {/* 버튼 */}
