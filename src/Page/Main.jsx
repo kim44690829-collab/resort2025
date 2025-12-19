@@ -68,7 +68,10 @@ export default function Main(){
     ];
 
     // 관광명소 호텔 map
-    const hotel_modal = HotelData.filter( (item) => {popularSpot.id === spotModalOpen && item.city === popularSpot.cityName})
+    const hotel_modal = HotelData.filter((item) => item.city === '서울')
+    console.log('rkskekfksk')
+    console.log(hotel_modal)
+    
 
     // 호텔 평점순으로 재배열
     const hotelRating = [...HotelData].sort((a,b) => b.score - a.score);
