@@ -5,6 +5,7 @@ import { ResortDateContext } from '../Api/ResortDate';
 import 'leaflet/dist/leaflet.css';
 
 export default function Main(){    
+    // 2025-12-19 병합
     // 호텔, 객실데이터 useContext로 가져오는 훅
     const {RoomData, HotelData} = useContext(ResortDateContext);
     // 호텔 input에 들어가는 지역, 호텔명 상태변수
