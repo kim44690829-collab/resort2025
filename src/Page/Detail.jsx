@@ -31,6 +31,8 @@ export default function Detail(){
     const[starImg, setStarImg] = useState([]);
     //추천호텔 별점 이미지
     const[recommStar, setRecommStar] = useState([]);
+    //찜한호텔 별점 이미지
+    const[wishStar, setWishStar] = useState([]);
     //객실당 스마일 이미지
     const[smileRoom, setSmileRoom] = useState([]);
     //객실당 별점 이미지
@@ -97,7 +99,7 @@ export default function Detail(){
 
             }
         }
-        console.log(starRoom2);
+        //console.log(starRoom2);
         setSmileRoom(smileRoom2);
 
 
@@ -164,13 +166,13 @@ export default function Detail(){
             }
         }
         setRecommStar(recommStarImg);
-        //console.log(recommStar);     
-        
+        //console.log(recommStar);        
     },[]);
   
-console.log(starRoom);
-console.log(recommStar);
-    
+// console.log(starRoom);
+// console.log(recommStar);
+
+    //찜목록 id
     const [wish, setWish] = useState([]);
 
     useEffect(()=>{
@@ -183,9 +185,9 @@ console.log(recommStar);
         //console.log(wishList.length);
     },[]);
     //console.log(wish);
-//
+
     //찜목록 쿠키 저장 및 삭제
-    const wishHandler = () =>{
+    const wishHandler = (hotel) =>{
         let wishList = JSON.parse(cookie.get('wishList') || '[]');          
         let now = Date.now();
 
@@ -193,8 +195,8 @@ console.log(recommStar);
 
         //이미 추가된 아이디가 있으면 삭제
         for(let i=0; i<wishList.length; i++){
-            if(wishList[i].id === Number(id)){
-                wishList = wishList.filter((item)=>item.id !== Number(id));
+            if(wishList[i].id === Number(hotel)){
+                wishList = wishList.filter((item)=>item.id !== Number(hotel));
                 cookie.set('wishList', JSON.stringify(wishList), {expires: 30, path:'/'});
                 setWish(wishList);
                 return;
@@ -206,18 +208,67 @@ console.log(recommStar);
             return;
         }
         //30일간 보관(추가한 리스트 개별로)
-        wishList.push({id: Number(id), expires: now + 30*24*60*60*1000});
+        wishList.push({id: Number(hotel), expires: now + 30*24*60*60*1000});
 
         cookie.set('wishList', JSON.stringify(wishList), {expires: 30, path:'/'});   
         setWish(wishList);
     }
+
+    //찜목록 id불러온후 해당 호텔정보 배열로 저장
+    const [wishArray, setWishArray] = useState([]);
+    
+    useEffect(()=>{
+        if(wish.length === 0){
+            setWishArray([]);
+            return;
+        }     
+        let wishIdArray = [];
+        wishIdArray = wish.map(item=>item.id);
+
+        let wishArray2= [];
+        wishArray2 = HotelData.filter(item=>wishIdArray.includes(item.id));
+        
+        setWishArray(wishArray2);
+
+        //찜한호텔 별점
+        const wishStar2 = [];
+        const wishStarImg = [];
+
+        for(let i=0; i<wishArray2.length; i++){
+            wishStar2.push(wishArray2[i].score);
+
+            wishStarImg[i] = [];
+                        
+            //별점 정수
+            const starInt2 = Math.floor(wishStar2[i]);
+            //별점 소수
+            const starFloat2 = Math.floor(wishStar2[i]*10)/10 - starInt2;
+            //별점 빈칸
+            const starZero2 = Math.floor(5 - starInt2- starFloat2);
+            
+            for(let k=0; k<starInt2; k++){
+                wishStarImg[i].push('/img/star-one.png');                  
+            }
+            if(starFloat2>0){
+                wishStarImg[i].push('/img/star-half.png');                    
+            }
+            for(let j=0; j<starZero2; j++){
+                wishStarImg[i].push('/img/star-zero.png');                    
+            }
+        }
+        setWishStar(wishStarImg);
+        console.log(wishStarImg);
+        
+    },[wish]);
+    
+    //console.log(wishArray);
 
     //공유하기 버튼
     const shareClick = () =>{
         navigator.clipboard.writeText(`${window.location.origin}/detail/${id}`);
         alert("링크가 복사되었습니다!");
     }   
-    //공유하기 버튼
+    //주소복사 버튼
     const addressCopy = () =>{
         navigator.clipboard.writeText(`${Hotel.city === 'Sokcho'?'대한민국, 강원도 속초시':Hotel.city === 'Gyeongju'?'대한민국, 경상북도 경주시':Hotel.city === 'Busan'?'대한민국, 부산시':Hotel.city === 'Gangneung'?'대한민국, 강원도 강릉시':Hotel.city === 'Yeosu'?'대한민국, 전라남도 여수시':Hotel.city === 'Daejeon'?'대한민국, 대전시':Hotel.city === 'Gwangju'?'대한민국, 광주시':Hotel.city === 'Jeju'?'대한민국, 제주도':Hotel.city === 'Pohang'?'대한민국, 경상북도 포항시':Hotel.city === 'Seoul'?'대한민국, 서울시':Hotel.city === 'Tokyo'?'일본, 도쿄':Hotel.city === 'Sapporo'?'일본, 훗카이도 삿포로':Hotel.city === 'LosAngeles'?'미국, 캘리포니아 로스앤젤레스':Hotel.city === 'NewYork'?'미국, 뉴욕':Hotel.city === 'Guam'?'미국, 괌':Hotel.city === 'Zhangjiajie'?'중국, 후난성 장가계':Hotel.city === 'Shanghai'?'중국, 상하이':Hotel.city === 'Rome'?'이탈리아, 로마':Hotel.city === 'Venice'?'이탈리아, 베네치아':Hotel.city === 'Paris'?'프랑스, 파리':null} ${Hotel.hotelName}`);
         alert("주소가 복사되었습니다!");
@@ -254,9 +305,57 @@ console.log(recommStar);
     //console.log(starCount);
     //console.log(starCountTotal);
 
-    //더보기 버튼
+    //내용 더보기 버튼
     const [more, setMore] = useState(false);
-                            
+
+    //슬라이드 인덱스
+    const [current01, setCurrent01] = useState(0);//(추천호텔)
+    const [current02, setCurrent02] = useState(0);//(찜한호텔)
+
+    // 슬라이드 좌측 버튼(추천호텔)
+    const leftClick01 = ()=>{   
+        let copyCurrent01 = current01;
+        if(current01 === 0){
+            copyCurrent01 = 0;
+        }else{
+            copyCurrent01--;
+        }
+        setCurrent01(copyCurrent01);
+    }
+
+    // 슬라이드 우측 버튼(추천호텔)
+    const rightClick01 = ()=>{
+        let copyCurrent01 = current01;
+        //보여지는 갯수(4개)만큼 빼기
+        if(current01 === RecommHotel.length-4){
+            copyCurrent01 = RecommHotel.length-4;
+        }else{
+            copyCurrent01++;
+        }
+        setCurrent01(copyCurrent01);
+    }
+
+    // 슬라이드 좌측 버튼(찜한호텔)
+    const leftClick02 = ()=>{   
+        let copyCurrent02 = current02;
+        if(current02 === 0){
+            copyCurrent02 = 0;
+        }else{
+            copyCurrent02--;
+        }
+        setCurrent02(copyCurrent02);
+    }    
+    // 슬라이드 우측 버튼(찜한호텔)
+    const rightClick02 = ()=>{
+        let copyCurrent02 = current02;
+        //보여지는 갯수(4개)만큼 빼기
+        if(current02 === wishArray.length-4){
+            copyCurrent02 = wishArray.length-4;
+        }else{
+            copyCurrent02++;
+        }
+        setCurrent02(copyCurrent02);
+    }                                 
 
     return(
         <section className="detail-wrap">
@@ -277,6 +376,8 @@ console.log(recommStar);
                                 {starImg.map((star,index)=>(
                                     <img src={star} alt="score" key={index} />
                                 ))}
+                                <span className='starScore'>{(Hotel.score - Math.floor(Hotel.score) === 0) ? Hotel.score+'.0' : Hotel.score}</span>
+                                <span className='scoreCount'>{(Hotel.scoreCount).toLocaleString()}명 평가</span>
                             </div>
                             <div className="title-right">
                                 {Hotel.discount === 1 ? (
@@ -291,7 +392,7 @@ console.log(recommStar);
                                     </>
                                 )}
                                 <div className="btns">
-                                    <button type='button' onClick={wishHandler}>
+                                    <button type='button' onClick={()=>wishHandler(id)}>
                                         <i className="fa-solid fa-heart" style={
                                         wish.find((item) => item.id === Number(id)) ?
                                             {color:'#f94239'}
@@ -346,6 +447,9 @@ console.log(recommStar);
                                                 {avgRoom[index] && avgRoom[index].map((star, ind) => (
                                                     <img src={star} alt="roomScore" key={ind} />
                                                 ))}
+                                                <span className='starScore'>
+                                                    {(item.score[index] - Math.floor(item.score[index]) === 0) ? item.score[index]+'.0' : item.score[index]}
+                                                </span>
                                             </div>
                                             <div className="intro-right">
                                                 <button type='button'>상세정보 <i className="fa-solid fa-angle-right"></i></button>
@@ -612,7 +716,7 @@ console.log(recommStar);
             <div className="recommend">
                 <h2>같은 지역의 다른 호텔추천</h2>
                 <div className="recommend-slider">
-                    <ul>
+                    <ul style={{transform: `translateX(-${307 * current01}px)`}}>
                         {RecommHotel.map((hotel,index)=>(
                             <li key={index}>
                                 <a href={`/detail/${hotel.id}`}>
@@ -620,19 +724,112 @@ console.log(recommStar);
                                         <img src={`/img/${hotel.id}-1.jpg`} alt={hotel.hotelName} className='hotel-img'/>
                                     </div>
                                     <div className="hotel-txt">
+                                        <p className='hotel-type'>{hotel.type==='Hotel'?'호텔':hotel.type==='Resort'?'리조트':hotel.type==='GuestHouse'?'게스트하우스/비앤비':hotel.type==='Condo'?'콘도':'캠핑장'}</p>
                                         <h3>{hotel.hotelName}</h3>
                                         <div className="intro-left">
                                             {recommStar && recommStar[index] && recommStar[index].map((star,ind)=>(
-                                                <img src={star} alt="score" key={ind} />
+                                                <img src={star} alt="score" key={ind} className='star' />
                                             ))}
+                                            <span className='starScore'>
+                                                {(hotel.score - Math.floor(hotel.score) === 0) ? hotel.score+'.0' : hotel.score}
+                                            </span>
+                                            <span className='scoreCount'>{(hotel.scoreCount).toLocaleString()}명 평가</span>
+                                        </div>
+                                        <div className="hotel-price">
+                                            {hotel.discount === 1 ? (
+                                                <>
+                                                    <p className='discount'><span className='red'>10% 할인</span> <span className='origin-price'>{hotel.price.toLocaleString()}원</span></p>
+                                                    <p className='final-price'>{(hotel.price - (hotel.price*0.1)).toLocaleString()}원<span>/1박</span></p>
+                                                </>
+                                            ):(
+                                                <>
+                                                    <p className='discount'><span className='red'>회원가입시 10,000원 할인쿠폰</span></p>
+                                                    <p className='final-price'>{(hotel.price).toLocaleString()}원<span>/1박</span></p>
+                                                </>
+                                            )}
                                         </div>
                                     </div>
                                 </a>
+                                <button type='button' onClick={()=>wishHandler(hotel.id)}>
+                                    <i className="fa-solid fa-heart" style={
+                                    wish.find((item) => item.id === Number(hotel.id)) ?
+                                        {color:'#f94239'}
+                                    :
+                                        {color:'#6b6b6b'}
+                                    
+                                    }></i>
+                                </button>
                             </li>
                         ))}
                     </ul>
                 </div>
+                <button type='button' className='left-arrow' onClick={leftClick01} style={{display: current01 === 0 ? 'none' : 'block'}}>
+                    <i className="fa-solid fa-angle-right"></i>
+                </button>
+                <button type='button' className='right-arrow' onClick={rightClick01} style={{display: current01 === RecommHotel.length-4 ? 'none' : 'block'}}>
+                    <i className="fa-solid fa-angle-right"></i>
+                </button>
             </div>
+            {/* 찜한 리스트가 있을때만 보여짐 */}
+            {wishArray.length > 0 && 
+                <div className="wish">
+                    <h2>내가 찜한 호텔</h2>
+                    <div className="wish-slider">
+                        <ul style={{transform: `translateX(-${307 * current02}px)`}}>
+                            {wishArray.map((hotel,index)=>(
+                                <li key={index}>
+                                    <a href={`/detail/${hotel.id}`}>
+                                        <div className="hotel-img-wrap">
+                                            <img src={`/img/${hotel.id}-1.jpg`} alt={hotel.hotelName} className='hotel-img'/>
+                                        </div>
+                                        <div className="hotel-txt">
+                                            <p className='hotel-type'>{hotel.type==='Hotel'?'호텔':hotel.type==='Resort'?'리조트':hotel.type==='GuestHouse'?'게스트하우스/비앤비':hotel.type==='Condo'?'콘도':'캠핑장'}</p>
+                                            <h3>{hotel.hotelName}</h3>
+                                            <div className="intro-left">
+                                                {wishStar && wishStar[index] && wishStar[index].map((star,ind)=>(
+                                                    <img src={star} alt="score" key={ind} className='star' />
+                                                ))}
+                                                <span className='starScore'>
+                                                    {(hotel.score - Math.floor(hotel.score) === 0) ? hotel.score+'.0' : hotel.score}
+                                                </span>
+                                                <span className='scoreCount'>{(hotel.scoreCount).toLocaleString()}명 평가</span>
+                                            </div>
+                                            <div className="hotel-price">
+                                                {hotel.discount === 1 ? (
+                                                    <>
+                                                        <p className='discount'><span className='red'>10% 할인</span> <span className='origin-price'>{hotel.price.toLocaleString()}원</span></p>
+                                                        <p className='final-price'>{(hotel.price - (hotel.price*0.1)).toLocaleString()}원<span>/1박</span></p>
+                                                    </>
+                                                ):(
+                                                    <>
+                                                        <p className='discount'><span className='red'>회원가입시 10,000원 할인쿠폰</span></p>
+                                                        <p className='final-price'>{(hotel.price).toLocaleString()}원<span>/1박</span></p>
+                                                    </>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <button type='button' onClick={()=>wishHandler(hotel.id)}>
+                                        <i className="fa-solid fa-heart" style={
+                                        wish.find((item) => item.id === Number(hotel.id)) ?
+                                            {color:'#f94239'}
+                                        :
+                                            {color:'#6b6b6b'}
+                                        
+                                        }></i>
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <button type='button' className='left-arrow' onClick={leftClick02} style={{display: current02 === 0 || wishArray.length < 5 ? 'none' : 'block'}}>
+                        <i className="fa-solid fa-angle-right"></i>
+                    </button>
+                    <button type='button' className='right-arrow' onClick={rightClick02} style={{display: current02 === wishArray.length-4 || wishArray.length < 5 ? 'none' : 'block'}}>
+                        <i className="fa-solid fa-angle-right"></i>
+                    </button>
+                </div>
+            }
         </section>
     )
 }
