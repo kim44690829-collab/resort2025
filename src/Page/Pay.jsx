@@ -146,24 +146,24 @@ export default function Pay(){
                                 
                             </table>
                             <div className="labelAll_item">
-                                <input type="checkbox" name="terms_all" id="terms" checked={chking[0].state} onClick={()=>chkAllHandler()}/>
+                                <input type="checkbox" name="terms_all" style={{display:'none'}} id="terms" checked={chking[0].state} onClick={()=>chkAllHandler()}/>
                                 <label htmlFor="terms" className="labelAll_txt">약관 전체동의</label>
                             </div>
                             <div className="label_list">
                                 <div className="label_item">
-                                    <input type="checkbox" name="chk1" id="agreement01" checked={chking[1].state} onClick={()=>chkHandler(1)}/>
+                                    <input type="checkbox" name="chk1" style={{display:'none'}} id="agreement01" checked={chking[1].state} onClick={()=>chkHandler(1)}/>
                                     <label htmlFor="agreement01" className="paybox_item">숙소 이용규칙 및 취소/환불규정 동의 (필수)</label>
                                 </div>
                                 <div className="label_item">
-                                    <input type="checkbox" name="chk2" id="agreement02" checked={chking[2].state} onClick={()=>chkHandler(2)}/>
+                                    <input type="checkbox" name="chk2" style={{display:'none'}} id="agreement02" checked={chking[2].state} onClick={()=>chkHandler(2)}/>
                                     <label htmlFor="agreement02" className="paybox_item">개인정보 수집 및 이용 동의 (필수)</label>
                                 </div>
                                 <div className="label_item">
-                                    <input type="checkbox" name="chk3" id="agreement03" checked={chking[3].state} onClick={()=>chkHandler(3)}/>
+                                    <input type="checkbox" name="chk3" style={{display:'none'}} id="agreement03" checked={chking[3].state} onClick={()=>chkHandler(3)}/>
                                     <label htmlFor="agreement03" className="paybox_item">개인정보 제3자 제공 동의 (필수)</label>
                                 </div>
                                 <div className="label_item">
-                                    <input type="checkbox" name="chk4" id="agreement04" checked={chking[4].state} onClick={()=>chkHandler(4)}/>
+                                    <input type="checkbox" name="chk4" style={{display:'none'}} id="agreement04" checked={chking[4].state} onClick={()=>chkHandler(4)}/>
                                     <label htmlFor="agreement04" className="paybox_item">만 14세 이상 확인 (필수)</label>
                                 </div>
                             </div>

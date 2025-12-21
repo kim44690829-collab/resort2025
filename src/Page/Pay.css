@@ -142,7 +142,9 @@
     color: #fff;
     text-align: center;
 }
-.paysection .room_info{}
+.paysection .room_info{
+    margin-top: 20px;
+}
 .paysection .room_info .room_box{
     width: 340px;
     height: 370px;
@@ -214,16 +216,59 @@
 .paysection .paybox .labelAll_item .labelAll_txt{
     font-size: 16px;
     font-weight: 500;
+    position: relative;
+    padding-left: 30px;
+}
+.paysection .paybox .labelAll_item .labelAll_txt::before{
+    content: '';
+    border: 1px solid #aaa;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    border-radius: 5px;
+    position: absolute;
+    top: 3px;
+    left: 5px;
+}
+.paysection .paybox .labelAll_item #terms:checked + .labelAll_txt::before{
+    background-color: #42799b;
+    content: '✔';
+    color: #fff;
+    text-align: center;
 }
 .paysection .paybox .label_list{
     width: 290px;
-    padding: 10px;
+    padding: 5px;
 }
 .paysection .paybox .label_list .label_item{
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+}
+.paysection .paybox .label_list .paybox_item::before{
+    content: '';
+    border: 1px solid #aaa;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    left: 10px;
+}
+
+.paysection .paybox .label_list #agreement01:checked + .paybox_item::before,
+.paysection .paybox .label_list #agreement02:checked + .paybox_item::before,
+.paysection .paybox .label_list #agreement03:checked + .paybox_item::before,
+.paysection .paybox .label_list #agreement04:checked + .paybox_item::before{
+    background-color: #42799b;
+    content: '✔';
+    color: #fff;
+    text-align: center;
+    line-height: 16px;
 }
 .paysection .paybox .label_list .paybox_item{
-    font-size: 14px;
+    font-size: 12px;
+    position: relative;
+    padding-left: 35px;
 }
 .paysection .paybox .paybox_btn{
     color: #fff;
