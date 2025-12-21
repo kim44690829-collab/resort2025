@@ -252,7 +252,7 @@ export default function Detail(){
     //객실 인원수 버튼
     const [head, setHead] = useState(1);
 
-    //플러스 버튼 클릭
+    ////플러스 버튼 클릭
     const plusClick = () =>{
         let copyHead = head;
         if(copyHead === 30){
