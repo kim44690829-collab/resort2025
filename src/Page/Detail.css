@@ -203,6 +203,47 @@ button{
     font-size: 18px;
     font-weight: 700;
 }
+.detail-wrap .detail-content .detail-left .room-select .empty-room{
+    text-align: center;
+    padding-top: 24px;
+}
+.detail-wrap .detail-content .detail-left .room-select .empty-room .x-icon{
+    border: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 auto;
+    background-color: #e7e7e7;
+}
+.detail-wrap .detail-content .detail-left .room-select .empty-room .x-icon i{
+    font-size: 21px;
+    color: #6b6b6b;
+    text-align: center;
+    line-height: 41px;
+}
+.detail-wrap .detail-content .detail-left .room-select .empty-room .empty-tit{
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    margin: 15px 0 11px;
+}
+.detail-wrap .detail-content .detail-left .room-select .empty-room .empty-txt{
+    font-size: 14px;
+    color: #707070;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    padding-bottom: 55px;
+}
+.detail-wrap .detail-content .detail-left .room-select .empty-room .empty-bottom{
+    text-align: left;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+
+
+
+
 .detail-wrap .detail-content .detail-left .room-select ul li{
     overflow: hidden;
     border-radius: 10px;
@@ -754,7 +795,6 @@ button{
     border-radius: 100%;
     border: 1px solid #e7e7e7;
     background-color: #fff;
-    color: #000;
 }
 .detail-wrap .detail-content .detail-right .hotel-headcount .head-select .btns button:hover{
     background-color: #e7e7e7;
@@ -763,10 +803,32 @@ button{
     font-size: 14px;
     line-height: 30px;
 }
+.detail-wrap .detail-content .detail-right .hotel-headcount .head-select .btns button.die{
+    color: #c2c2c2;
+}
+.detail-wrap .detail-content .detail-right .hotel-headcount .head-select .btns button.die:hover{
+    background-color: #fff;
+}
 .detail-wrap .detail-content .detail-right .hotel-headcount .head-select .btns span{
     padding: 0 15px;
     font-weight: 600;
     font-size: 18px;
+}
+.detail-wrap .detail-content .detail-right .hotel-headcount .search{
+    background-color: #42799b;
+    color: #fff;
+    border: 1px solid #42799b;
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: 0.5px;
+    line-height: 40px;
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+.detail-wrap .detail-content .detail-right .hotel-headcount .search:hover{
+    background-color: #31688a;
+    border-color: #31688a;
 }
 .detail-wrap .detail-content .detail-right .hotel-select{
     padding: 25px 30px;

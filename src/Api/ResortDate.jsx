@@ -1,5 +1,7 @@
 import { createContext } from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
+import cookie from 'js-cookie';
+import { ModalContext } from "../Page/Modal";
 
 export const ResortDateContext = createContext();
 
@@ -6198,19 +6200,138 @@ export default function ResortDate({children}){
         console.log(selectDate,selectday,'12-19확인ㅇㅅ')
     },[selectday])
 
-     const [selectMonth,setSelectMonth] = useState(()=>{
+    const [selectMonth,setSelectMonth] = useState(()=>{
         const saved = localStorage.getItem('selectMonth')
         //저장된 value가 있으면 복원, 없으면 빈 배열
         return saved ===null ?JSON.parse(saved): new Date() 
     }) 
-    
+
     useEffect(()=>{
         localStorage.setItem('selectMonth',JSON.stringify(selectMonth));
-        
     },[selectMonth]) 
-    return(
-        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth}}>
+
+    //모달 프로바이더
+    const {toggle,setModalContent} = useContext(ModalContext);
     
+    //찜목록 id
+    const [wish, setWish] = useState([]);
+
+    useEffect(()=>{
+        //찜목록 불러오기
+        let wishList = JSON.parse(cookie.get('wishList') || '[]');          
+        let now = Date.now();
+        wishList = wishList.filter(item=>item.expires > now);
+        cookie.set('wishList', JSON.stringify(wishList), {expires: 30, path:'/'});
+        setWish(wishList);
+        //console.log(wishList.length);
+    },[]);
+    //console.log(wish);
+
+    //찜목록 쿠키 저장 및 삭제
+    const wishHandler = (hotel) =>{
+        let wishList = JSON.parse(cookie.get('wishList') || '[]');          
+        let now = Date.now();
+
+        wishList = wishList.filter(item=>item.expires > now);
+
+        //이미 추가된 아이디가 있으면 삭제
+        for(let i=0; i<wishList.length; i++){
+            if(wishList[i].id === Number(hotel)){
+                wishList = wishList.filter((item)=>item.id !== Number(hotel));
+                cookie.set('wishList', JSON.stringify(wishList), {expires: 30, path:'/'});
+                setWish(wishList);
+                return;
+            }
+        }
+        //갯수 50개 제한
+        if(wishList.length >= 5){
+            setModalContent(
+                <>
+                    <p className='icon' style={{border: '0',
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '50%',
+                        margin: '0 auto',
+                        textAlign: 'center',
+                        backgroundColor: '#e7e7e7'}}>
+                        <i className="fa-solid fa-exclamation" style={{
+                            fontSize: '21px',
+                            color: '#6b6b6b',
+                            lineHeight: '41px'
+                        }}></i>
+                    </p>
+                    <p className='txt' style={{
+                        fontSize: '20px',
+                        fontWeight: '700',
+                        color: '#000',
+                        margin: '15px 0 11px'
+                    }}>찜은 50개까지 추가 가능합니다.</p>
+                </>
+            );
+            toggle();
+            return;
+        }
+        //30일간 보관(추가한 리스트 개별로)
+        wishList.push({id: Number(hotel), expires: now + 30*24*60*60*1000});
+
+        cookie.set('wishList', JSON.stringify(wishList), {expires: 30, path:'/'});   
+        setWish(wishList);
+    }
+
+    //찜목록 id불러온후 해당 호텔정보 배열로 저장
+    const [wishArray, setWishArray] = useState([]);
+    //찜한호텔 별점 이미지
+    const[wishStar, setWishStar] = useState([]);
+    
+    useEffect(()=>{
+        if(wish.length === 0){
+            setWishArray([]);
+            return;
+        }     
+        let wishIdArray = [];
+        wishIdArray = wish.map(item=>item.id);
+
+        let wishArray2= [];
+        wishArray2 = HotelData.filter(item=>wishIdArray.includes(item.id));
+        
+        setWishArray(wishArray2);
+
+        //찜한호텔 별점
+        const wishStar2 = [];
+        const wishStarImg = [];
+
+        for(let i=0; i<wishArray2.length; i++){
+            wishStar2.push(wishArray2[i].score);
+
+            wishStarImg[i] = [];
+                        
+            //별점 정수
+            const starInt2 = Math.floor(wishStar2[i]);
+            //별점 소수
+            const starFloat2 = Math.floor(wishStar2[i]*10)/10 - starInt2;
+            //별점 빈칸
+            const starZero2 = Math.floor(5 - starInt2- starFloat2);
+            
+            for(let k=0; k<starInt2; k++){
+                wishStarImg[i].push('/img/star-one.png');                  
+            }
+            if(starFloat2>0){
+                wishStarImg[i].push('/img/star-half.png');                    
+            }
+            for(let j=0; j<starZero2; j++){
+                wishStarImg[i].push('/img/star-zero.png');                    
+            }
+        }
+        setWishStar(wishStarImg);
+        console.log(wishStarImg);
+        
+    },[wish]);        
+        //console.log(wishArray);
+    
+    
+
+    return(
+        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler}}>
             {children}
         </ResortDateContext.Provider>
     );

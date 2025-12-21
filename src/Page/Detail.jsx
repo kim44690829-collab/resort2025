@@ -1,15 +1,17 @@
 import './Detail.css';
 import { useContext,useState,useEffect,useRef } from 'react';
 import { useParams,Link } from 'react-router-dom';
-import cookie from 'js-cookie';
+//import cookie from 'js-cookie';
 import { ResortDateContext } from '../Api/ResortDate';
+import { ModalContext } from './Modal';
 import LeafletMap from '../Api/LeafletMap';
+import Calendar from './Calendar';
 
 
 export default function Detail(){  
     const {id} = useParams();
     //호텔,객실 데이터  
-    const {HotelData,RoomData} = useContext(ResortDateContext);
+    const {RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler} = useContext(ResortDateContext);
     //아이디값 비교
     const Hotel = HotelData.find((item)=>item.id === Number(id));
     //예외처리
@@ -26,20 +28,20 @@ export default function Detail(){
 
     console.log(Hotel);
     console.log(Room);
+
+    //모달 프로바이더
+    const {toggle,setModalContent} = useContext(ModalContext);
     
     //호텔별점 이미지
     const[starImg, setStarImg] = useState([]);
     //추천호텔 별점 이미지
     const[recommStar, setRecommStar] = useState([]);
-    //찜한호텔 별점 이미지
-    const[wishStar, setWishStar] = useState([]);
     //객실당 스마일 이미지
     const[smileRoom, setSmileRoom] = useState([]);
     //객실당 별점 이미지
     const[starRoom, setStarRoom] = useState([]);
     //객실당 평균별점 이미지
     const[avgRoom, setAvgRoom] = useState([]);
-
 
     useEffect(()=>{
         //해당호텔 별점 가져오기
@@ -172,96 +174,8 @@ export default function Detail(){
 // console.log(starRoom);
 // console.log(recommStar);
 
-    //찜목록 id
-    const [wish, setWish] = useState([]);
-
-    useEffect(()=>{
-        //찜목록 불러오기
-        let wishList = JSON.parse(cookie.get('wishList') || '[]');          
-        let now = Date.now();
-        wishList = wishList.filter(item=>item.expires > now);
-        cookie.set('wishList', JSON.stringify(wishList), {expires: 30, path:'/'});
-        setWish(wishList);
-        //console.log(wishList.length);
-    },[]);
-    //console.log(wish);
-
-    //찜목록 쿠키 저장 및 삭제
-    const wishHandler = (hotel) =>{
-        let wishList = JSON.parse(cookie.get('wishList') || '[]');          
-        let now = Date.now();
-
-        wishList = wishList.filter(item=>item.expires > now);
-
-        //이미 추가된 아이디가 있으면 삭제
-        for(let i=0; i<wishList.length; i++){
-            if(wishList[i].id === Number(hotel)){
-                wishList = wishList.filter((item)=>item.id !== Number(hotel));
-                cookie.set('wishList', JSON.stringify(wishList), {expires: 30, path:'/'});
-                setWish(wishList);
-                return;
-            }
-        }
-        //갯수 50개 제한
-        if(wishList.length >= 50){
-            alert('찜은 50개까지만 담으실 수 있습니다.');
-            return;
-        }
-        //30일간 보관(추가한 리스트 개별로)
-        wishList.push({id: Number(hotel), expires: now + 30*24*60*60*1000});
-
-        cookie.set('wishList', JSON.stringify(wishList), {expires: 30, path:'/'});   
-        setWish(wishList);
-    }
-
-    //찜목록 id불러온후 해당 호텔정보 배열로 저장
-    const [wishArray, setWishArray] = useState([]);
     
-    useEffect(()=>{
-        if(wish.length === 0){
-            setWishArray([]);
-            return;
-        }     
-        let wishIdArray = [];
-        wishIdArray = wish.map(item=>item.id);
 
-        let wishArray2= [];
-        wishArray2 = HotelData.filter(item=>wishIdArray.includes(item.id));
-        
-        setWishArray(wishArray2);
-
-        //찜한호텔 별점
-        const wishStar2 = [];
-        const wishStarImg = [];
-
-        for(let i=0; i<wishArray2.length; i++){
-            wishStar2.push(wishArray2[i].score);
-
-            wishStarImg[i] = [];
-                        
-            //별점 정수
-            const starInt2 = Math.floor(wishStar2[i]);
-            //별점 소수
-            const starFloat2 = Math.floor(wishStar2[i]*10)/10 - starInt2;
-            //별점 빈칸
-            const starZero2 = Math.floor(5 - starInt2- starFloat2);
-            
-            for(let k=0; k<starInt2; k++){
-                wishStarImg[i].push('/img/star-one.png');                  
-            }
-            if(starFloat2>0){
-                wishStarImg[i].push('/img/star-half.png');                    
-            }
-            for(let j=0; j<starZero2; j++){
-                wishStarImg[i].push('/img/star-zero.png');                    
-            }
-        }
-        setWishStar(wishStarImg);
-        console.log(wishStarImg);
-        
-    },[wish]);
-    
-    //console.log(wishArray);
 
     //공유하기 버튼
     const shareClick = () =>{
@@ -312,50 +226,68 @@ export default function Detail(){
     const [current01, setCurrent01] = useState(0);//(추천호텔)
     const [current02, setCurrent02] = useState(0);//(찜한호텔)
 
-    // 슬라이드 좌측 버튼(추천호텔)
-    const leftClick01 = ()=>{   
-        let copyCurrent01 = current01;
-        if(current01 === 0){
-            copyCurrent01 = 0;
+    // 슬라이드 좌측 버튼
+    const leftClick = (current,setCurrent)=>{   
+        let copyCurrent = current;
+        if(current === 0){
+            copyCurrent = 0;
         }else{
-            copyCurrent01--;
+            copyCurrent--;
         }
-        setCurrent01(copyCurrent01);
+        setCurrent(copyCurrent);
     }
 
-    // 슬라이드 우측 버튼(추천호텔)
-    const rightClick01 = ()=>{
-        let copyCurrent01 = current01;
+    // 슬라이드 우측 버튼
+    const rightClick = (current,setCurrent,array)=>{
+        let copyCurrent = current;
         //보여지는 갯수(4개)만큼 빼기
-        if(current01 === RecommHotel.length-4){
-            copyCurrent01 = RecommHotel.length-4;
+        if(current === array.length-4){
+            copyCurrent = array.length-4;
         }else{
-            copyCurrent01++;
+            copyCurrent++;
         }
-        setCurrent01(copyCurrent01);
+        setCurrent(copyCurrent);
     }
 
-    // 슬라이드 좌측 버튼(찜한호텔)
-    const leftClick02 = ()=>{   
-        let copyCurrent02 = current02;
-        if(current02 === 0){
-            copyCurrent02 = 0;
+    //객실 인원수 버튼
+    const [head, setHead] = useState(1);
+
+    //플러스 버튼 클릭
+    const plusClick = () =>{
+        let copyHead = head;
+        if(copyHead === 30){
+            copyHead = 30;
         }else{
-            copyCurrent02--;
+            copyHead++;
         }
-        setCurrent02(copyCurrent02);
-    }    
-    // 슬라이드 우측 버튼(찜한호텔)
-    const rightClick02 = ()=>{
-        let copyCurrent02 = current02;
-        //보여지는 갯수(4개)만큼 빼기
-        if(current02 === wishArray.length-4){
-            copyCurrent02 = wishArray.length-4;
+        setHead(copyHead);
+    }
+
+    //마이너스 버튼 클릭
+    const minusClick = () =>{
+        let copyHead = head;
+        if(copyHead === 1){
+            copyHead = 1;
         }else{
-            copyCurrent02++;
+            copyHead--;
         }
-        setCurrent02(copyCurrent02);
-    }                                 
+        setHead(copyHead);
+    }
+
+
+    //검색버튼 클릭여부
+    const [search, setSearch] = useState(false);
+    //검색 필터링
+    const [RoomFilter, setRoomFilter] = useState([]);
+    //객실검색 필터링(인원수)
+    const searchClick = () =>{
+        const RoomFilter2 = Room.filter((item)=>item.maxOccupancy >= head);
+        setRoomFilter(RoomFilter2);
+        setSearch(true);
+    }
+    
+
+
 
     return(
         <section className="detail-wrap">
@@ -434,8 +366,18 @@ export default function Detail(){
                     
                     <div className="room-select">
                         <p className='room-title'>객실 선택</p>
+                        {search && RoomFilter.length === 0 ? (
+                            <div className="empty-room">
+                                <p className='x-icon'>
+                                    <i className="fa-solid fa-xmark"></i>
+                                </p>
+                                <p className='empty-tit'>설정한 인원에 부합하는 객실이 없습니다.</p>
+                                <p className='empty-txt'>객실별 투숙 가능 인원을 다시 확인해주세요.</p>
+                                <p className='empty-bottom'>아래 객실들은 설정한 인원보다 투숙 가능한 인원이 적은 객실입니다.</p>
+                            </div>
+                        ) : null}
                         <ul>
-                            {Room.map((item,index)=>(
+                            {(search && RoomFilter.length >= 1 ? RoomFilter : Room).map((item,index)=>(
                                 <li key={index}>
                                     <div className="room-left">
                                         <img src={`/img/${Hotel.id}-${index+2}.jpg`} alt={Hotel.hotelName} />
@@ -452,7 +394,7 @@ export default function Detail(){
                                                 </span>
                                             </div>
                                             <div className="intro-right">
-                                                <button type='button'>상세정보 <i className="fa-solid fa-angle-right"></i></button>
+                                                <button type='button' onClick={()=>{setModalContent(<p>상세정보 준비중</p>);toggle();}}>상세정보 <i className="fa-solid fa-angle-right"></i></button>
                                             </div>
                                         </div>
                                         <div className="room-info">
@@ -692,18 +634,19 @@ export default function Detail(){
                             <span className='day-tit'>종료일</span>
                             <span className='day-txt'>2025.12.17(수)</span>
                         </p>
-                        <button type='button'>예약일 변경</button>
+                        <button type='button' onClick={()=>{setModalContent(<Calendar />);toggle();}}>예약일 변경</button>
                     </div>
                     <div className="hotel-headcount">
                         <p className='head-tit'>예약인원 선택</p>
                         <div className="head-select">
                             <span className='head-txt'>인원</span>
                             <div className="btns">
-                                <button type='button'><i className="fa-solid fa-minus"></i></button>
-                                <span>1</span>
-                                <button type='button'><i className="fa-solid fa-plus"></i></button>
+                                <button type='button' onClick={minusClick} className={head === 1 ? 'die' : null} ><i className="fa-solid fa-minus"></i></button>
+                                <span>{head}</span>
+                                <button type='button' onClick={plusClick} className={head === 30 ? 'die' : null}><i className="fa-solid fa-plus"></i></button>
                             </div>
                         </div>
+                        <button type='button' className='search' onClick={searchClick}>객실 검색</button>
                     </div>
                     <div className="hotel-select">
                         <p className='select-tit'>예약 전 참고사항</p>
@@ -763,10 +706,10 @@ export default function Detail(){
                         ))}
                     </ul>
                 </div>
-                <button type='button' className='left-arrow' onClick={leftClick01} style={{display: current01 === 0 ? 'none' : 'block'}}>
+                <button type='button' className='left-arrow' onClick={()=>leftClick(current01,setCurrent01)} style={{display: current01 === 0 ? 'none' : 'block'}}>
                     <i className="fa-solid fa-angle-right"></i>
                 </button>
-                <button type='button' className='right-arrow' onClick={rightClick01} style={{display: current01 === RecommHotel.length-4 ? 'none' : 'block'}}>
+                <button type='button' className='right-arrow' onClick={()=>rightClick(current01,setCurrent01,RecommHotel)} style={{display: current01 === RecommHotel.length-4 ? 'none' : 'block'}}>
                     <i className="fa-solid fa-angle-right"></i>
                 </button>
             </div>
@@ -822,10 +765,10 @@ export default function Detail(){
                             ))}
                         </ul>
                     </div>
-                    <button type='button' className='left-arrow' onClick={leftClick02} style={{display: current02 === 0 || wishArray.length < 5 ? 'none' : 'block'}}>
+                    <button type='button' className='left-arrow' onClick={()=>leftClick(current02,setCurrent02)} style={{display: current02 === 0 || wishArray.length < 5 ? 'none' : 'block'}}>
                         <i className="fa-solid fa-angle-right"></i>
                     </button>
-                    <button type='button' className='right-arrow' onClick={rightClick02} style={{display: current02 === wishArray.length-4 || wishArray.length < 5 ? 'none' : 'block'}}>
+                    <button type='button' className='right-arrow' onClick={()=>rightClick(current02,setCurrent02,wishArray)} style={{display: current02 === wishArray.length-4 || wishArray.length < 5 ? 'none' : 'block'}}>
                         <i className="fa-solid fa-angle-right"></i>
                     </button>
                 </div>

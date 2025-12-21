@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 // import './App.css'
 import ResortDate from './Api/ResortDate'
+import Modal from './Page/Modal'
 import Header from './Common/Header'
 import Login from './Common/Login'
 import SignUp1 from './Page/SignUp1'
@@ -19,7 +20,8 @@ import Pay from './Page/Pay'
 function App() {
 
   return (
-   
+    
+    <Modal>
       <ResortDate>
          <BrowserRouter>
           <Header />
@@ -36,7 +38,8 @@ function App() {
           </Routes>
           <Footer />
         </BrowserRouter>
-      </ResortDate> 
+      </ResortDate>
+    </Modal>
   )
 }
 

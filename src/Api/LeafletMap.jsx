@@ -30,7 +30,7 @@ const geoCache = new Map();
     setError(false);
     setPosition(null);
 
-    // ✅ 캐시 있으면 API 호출 안 함
+    // 캐시 있으면 API 호출 안 함
     if (geoCache.has(city)) {
       setPosition(geoCache.get(city));
       setLoading(false);
@@ -62,7 +62,7 @@ const geoCache = new Map();
           Number(data[0].lon),
         ];
 
-        geoCache.set(city, pos); // ⭐ 캐싱
+        geoCache.set(city, pos); // 캐싱
         setPosition(pos);
       })
       .catch(() => {
