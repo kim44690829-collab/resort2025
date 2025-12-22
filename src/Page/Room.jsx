@@ -196,7 +196,6 @@ export default function Room(){
 
     return(
         <>  
-            
             {/* 상품 메뉴영역 */}
             <div className="Room_section">
                 <Calendar />

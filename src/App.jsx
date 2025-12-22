@@ -16,6 +16,7 @@ import Detail from './Page/Detail'
 import Footer from './Common/Footer'
 import Guest from './Page/Guest'
 import Pay from './Page/Pay'
+import HelpCenter from './Page/HelpCenter'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
             <Route path='/detail/:id' element={<Detail />}/>  
             <Route path='/guest' element={<Guest />}/>  
             <Route path='/pay' element={<Pay />}/>  
+            <Route path='/helpCenter' element={<HelpCenter />} />
           </Routes>
           <Footer />
         </BrowserRouter>
