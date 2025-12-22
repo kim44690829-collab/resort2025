@@ -26,7 +26,7 @@
     font-size: 30px;
     font-weight: 700;
     color: #fff;
-    z-index: 1000;
+    z-index: 200;
 }
 .main_container .mainImgBenner .hotelSearch .hotelSearchBtn{
     width: 100px;
@@ -167,8 +167,121 @@
 .main_container .hotel_type .accomCat .GuestHouseImg,
 .main_container .hotel_type .accomCat .CampingImg{
     position: absolute;
-    bottom: 10px;
+    bottom: -20px;
     right: 10px;
+}
+.main_container .hotel_type .accomCat .hTypeMask{
+    width: 231px;
+    height: 240px;
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+/* 호텔 타입 모달 */
+.main_container .hotel_type .accomCat .hotelType_overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 998;
+}
+.main_container .hotel_type .accomCat .hotelType_overlay .hTypeModal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 500px;
+    background-color: #fff;
+    z-index: 999;
+    border-radius: 10px;
+}
+.main_container .hotel_type .accomCat .hotelType_overlay .hTypeModal .hTypeModal_hotel{
+    height: 400px;
+    overflow: hidden;
+}
+.main_container .hotel_type .accomCat .hotelType_overlay .hTypeModal .hTypeModal_hotel .Modal_hType_Ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-left: 10px;
+    /* 스크롤 관련 속성 */
+    max-height: 400px; /* 원하는 높이 제한 */
+    /* overflow-y: auto; */
+    /* 세로 스크롤 자동 생성 */
+    padding-right: 5px; /* 스크롤 때문에 글자 잘리지 않도록 여백 */
+    overflow-y: auto; /* 세로 스크롤 허용 */
+    overflow-x: hidden; /* 가로 스크롤 차단 */
+    padding-right: 8px; /* 스크롤과 텍스트 겹치지 않도록 여백 */
+    box-sizing: border-box;
+}
+
+/* 스크롤바 스타일 (선택) */
+.main_container .hotel_type .accomCat .hotelType_overlay .hTypeModal .hTypeModal_hotel .Modal_hType_Ul::-webkit-scrollbar {
+  width: 6px;
+}
+.main_container .hotel_type .accomCat .hotelType_overlay .hTypeModal .hTypeModal_hotel .Modal_hType_Ul::-webkit-scrollbar-thumb {
+  background: #42799b;
+  border-radius: 3px;
+}
+.main_container .hotel_type .accomCat .hotelType_overlay .hTypeModal .hTypeModal_hotel .Modal_hType_Ul .Modal_hType_Li{
+    position: relative;
+    margin-bottom: 20px;
+    background-color: #f5f7fa;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 12px;
+}
+.main_container .hotel_type .accomCat .hotelType_overlay .hTypeModal .hTypeModal_hotel .Modal_hType_Ul .Modal_hType_Li .Modal_hType_Img{
+    width: 290px;
+    height: 200px;
+    border-radius: 10px 10px 0 0;
+}
+.Modal_hTypeText{
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+    width: 290px;
+    height: 118px;
+}
+.Modal_hTypeText1{
+    margin: 0 0 5px 10px;
+    padding-top: 10px;
+    color: #888;
+}
+.Modal_hTypeText2{
+    width: 280px;
+    height: 22px;
+    font-size: 22px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.Modal_hTypeText3{
+    font-size: 20px;
+    margin-right: 10px;
+    padding-bottom: 10px;
+    text-align: right;
+}
+.hTypeModal_Xbtn{
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    border: none;
+    background-color: transparent;
+}
+.wishBtn1{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: none;
+    padding: 5px;
+    border-radius: 50%;
 }
 .guestSum .minus_btn,
 .guestSum .plus_btn{
@@ -222,6 +335,9 @@
     gap: 10px;
     transition: 0.3s;
 }
+.popularAccomSub3{
+    position: relative;
+}
 /* 인기호텔 슬라이드 li 구성요소 css */
 .main_container .popularAccom .popularAccomSub1 .popularAccomSub2 .popularAccomMainImg{
     width: 290px;
@@ -265,6 +381,16 @@
     margin-left: 10px;
     color: rgb(68, 68, 68);
 }
+/* 찜 목록 */
+.wishBtn2{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 50%;
+    padding: 5px;
+    border: none;
+    /* background-color: transparent; */
+}
 /* 중간 배너 EcoStay 회원만의 특별한 혜택 */
 .main_container .EcoMember{
     width: 1920px;
@@ -299,6 +425,10 @@
 .EcoMemberHotelAllLi{
     display: flex;
     width: 774px;
+}
+.EcoMemberA{
+    display: flex;
+    text-decoration: none;
 }
 .EcoMemberHotelAll-2{
     /* margin-left: 50px; */
@@ -530,7 +660,7 @@
     border: 1px solid red;
 }
 /* 관광명소 모달 */
-.main_container .overlay{
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .overlay{
     position: fixed;
     top: 0;
     left: 0;
@@ -539,7 +669,7 @@
     background-color: rgba(0,0,0,0.5);
     z-index: 998;
 }
-.spotsModal{
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .overlay .spotsModal{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -550,60 +680,182 @@
     z-index: 999;
     border-radius: 10px;
 }
-.modalImg{
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .overlay .spotsModal .spotsModal_in .modalImg{
     width: 300px;
     height: 400px;
     margin: 50px;
     border-radius: 10px;
 }
-.spotsModal_hotel{
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .overlay .spotsModal .spotsModal_hotel{
     position: absolute;
     top: 53px;
     right: 10px;
     height: 400px;
     overflow: hidden;
 }
-.Modal_hotel_Ul{
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .overlay .spotsModal .spotsModal_hotel .Modal_hotel_Ul{
     width: 600px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    /* 스크롤 관련 속성 */
+    max-height: 400px; /* 원하는 높이 제한 */
+    /* overflow-y: auto; */
+    /* 세로 스크롤 자동 생성 */
+    padding-right: 5px; /* 스크롤 때문에 글자 잘리지 않도록 여백 */
+    overflow-y: auto; /* 세로 스크롤 허용 */
+    overflow-x: hidden; /* 가로 스크롤 차단 */
+    padding-right: 8px; /* 스크롤과 텍스트 겹치지 않도록 여백 */
+    box-sizing: border-box;
 }
-.Modal_hotel_Li{
+/* 스크롤바 스타일 (선택) */
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .overlay .spotsModal .spotsModal_hotel .Modal_hotel_Ul::-webkit-scrollbar {
+  width: 6px;
+}
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .overlay .spotsModal .spotsModal_hotel .Modal_hotel_Ul::-webkit-scrollbar-thumb {
+  background: #42799b;
+  border-radius: 3px;
+}
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .overlay .spotsModal .spotsModal_hotel .Modal_hotel_Ul .Modal_hotel_Li{
     display: flex;
     padding: 15px;
     background-color: #f5f7fa;
     border-radius: 10px;
+    position: relative;
 }
-.Modal_hotel_Img{
+.hotelLink{
+    display: flex;
+    text-decoration: none;
+}
+.wishBtn3{
+    position: absolute;
+    top: 20px;
+    left: 165px;
+    border: none;
+    padding: 5px;
+    border-radius: 50%;
+}
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .overlay .spotsModal .spotsModal_hotel .Modal_hotel_Ul .Modal_hotel_Li .Modal_hotel_Img{
     width: 182px;
     height: 145px;
     border-radius: 10px;
 }
-.Modal_hotelText{
-    /* margin-left: 30px; */
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .overlay .spotsModal .spotsModal_hotel .Modal_hotel_Ul .Modal_hotel_Li .Modal_hotelText{
     background-color: #fff;
     padding-left: 30px;
-    width: 390px;
+    width: 375px;
     border-radius: 10px;
 }
-.Modal_hotelText1{
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .overlay .spotsModal .spotsModal_hotel .Modal_hotel_Ul .Modal_hotel_Li .Modal_hotelText .Modal_hotelText1{
     color: #888;
     margin: 10px 0 5px 0;
 }
-.Modal_hotelText2{
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .overlay .spotsModal .spotsModal_hotel .Modal_hotel_Ul .Modal_hotel_Li .Modal_hotelText .Modal_hotelText2{
     font-size: 22px;
-    margin-bottom: 65px;
+    margin-bottom: 25px;
 }
-.Modal_hotelText3{
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .overlay .spotsModal .spotsModal_hotel .Modal_hotel_Ul .Modal_hotel_Li .Modal_hotelText .Modal_hotelText3{
     font-size: 20px;
     margin-right: 10px;
     text-align: right;
 }
-.spotModal_Xbtn{
+.main_container .spotsAndStays .spotsAndStaysAll .citySpotsBox .citySpots .SpotsWrap .overlay .spotsModal .spotModal_Xbtn{
     border: none;
     background-color: transparent;
     position: absolute;
     top: 10px;
     right: 10px;
+}
+/* 할인 or 회원가입시 쿠폰 전체 css */
+.discount{
+    text-align: left;
+    padding-top: 5px;
+}
+.discount .red{
+    background-color: #ffedea;
+    color: #f94239;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 5px;
+    text-decoration: none !important;
+}
+.discount .origin-price{
+    font-size: 13px;
+    color: #707070;    
+    text-decoration: line-through;
+    margin-left: 10px;
+}
+.final-price{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 40px;
+    text-align: left;
+}
+.final-price span{
+    font-size: 15px;
+    color: #707070;
+}
+/* 호텔 타입 모달 안에 할인/ 회원가입 쿠폰 가격 */
+.discount1{
+    text-align: left;
+    padding-top: 5px;
+    margin-left: 10px;
+}
+.discount1 .red1{
+    background-color: #ffedea;
+    color: #f94239;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 5px;
+    text-decoration: none !important;
+}
+.discount1 .origin-price1{
+    font-size: 13px;
+    color: #707070;    
+    text-decoration: line-through;
+    margin-left: 10px;
+}
+.final-price1{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 40px;
+    text-align: left;
+    margin-left: 10px;
+}
+.final-price1 span{
+    font-size: 15px;
+    color: #707070;
+}
+/* 관광명소 모달 안에 할인/ 회원가입 쿠폰 가격 */
+.discount2{
+    text-align: right;
+    padding-top: 5px;
+    margin-left: 10px;
+}
+.discount2 .red2{
+    background-color: #ffedea;
+    color: #f94239;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 5px;
+    margin-right: 10px;
+    text-decoration: none !important;
+}
+.discount2 .origin-price2{
+    font-size: 13px;
+    color: #707070;    
+    text-decoration: line-through;
+    margin-right: 10px;
+}
+.final-price2{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 40px;
+    text-align: right;
+    margin-right: 10px;
+}
+.final-price2 span{
+    font-size: 15px;
+    color: #707070;
 }
