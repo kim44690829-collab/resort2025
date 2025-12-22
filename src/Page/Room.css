@@ -35,6 +35,15 @@
     font-size: 12px;
     cursor: pointer;
     background-color: #fff;
+    display: inline-block;
+}
+.Room_section .filter_menu .left_filter .filter01 .fil_btn > .fa-solid{
+    display: inline;
+    color: #42799b;
+    font-size: 12px;
+}
+.Room_section .filter_menu .left_filter .filter01 .fil_btn > .fa-solid >span{
+    font-size: 12px;
 }
 .Room_section .filter_menu .left_filter .under_filter{
     margin-top: 10px;

@@ -6,7 +6,7 @@ import { data } from "react-router-dom";
 
 export default function Calendar(){
 
-    const {RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth} = useContext(ResortDateContext);
+    const {RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,selectDateRemoveAll} = useContext(ResortDateContext);
     // 선택한 달
     //const [selectMonth,setSelectMonth] = useState(new Date()) //선택한 달력
     const [calArr,setCalArr] = useState(
@@ -144,7 +144,7 @@ export default function Calendar(){
         } */
         
     }
-    
+
     //왼쪽달력
     const leftcal =(items,item,years)=>{
         const selectDateCopy = [...selectDate]
@@ -153,6 +153,8 @@ export default function Calendar(){
         }else{
             console.log(selectDateCopy)
             selectDateCopy.splice(0,2)
+            //selectDateRemoveAll()
+            //selectDateCopy.push(`${selectMonth.getFullYear()}-${selectMonth.getMonth()+1}-${items}`)
         }
        // console.log(selectDateCopy)
         selectDateCopy.sort((a,b)=> a-b)
@@ -181,13 +183,18 @@ export default function Calendar(){
         console.log(selectdayCopy.sort())
         console.log(`${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?`0${selectMonth.getMonth()+1}`:selectMonth.getMonth()+1}-${items<10?'0'+items:items}`)
     }
+    
     //오른쪽 달력
     const right = (items,item,years)=>{
+        
         const selectDateCopy = [...selectDate]
         if(selectDateCopy.length<2){
-            selectDateCopy.push(`${nextMonth.getFullYear()}-${nextMonth.getMonth()+1}-${items}`)
+            selectDateCopy.push(`${nextMonth.getFullYear()}-${nextMonth.getMonth()+1}-${items}`);
+            
+            
         }else{
             selectDateCopy.splice(0,2)
+            //selectDateRemoveAll()
         }
         selectDateCopy.sort((a,b)=> a-b)
         setSelectDate(selectDateCopy.sort())
