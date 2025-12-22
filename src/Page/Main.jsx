@@ -9,9 +9,9 @@ import Calendar from './Calendar';
 export default function Main(){    
     // 2025-12-19 병합2
     // 호텔, 객실데이터 useContext로 가져오는 훅
-    const {RoomData, HotelData, hotelInput, setHotelInput, DayData, setDayData} = useContext(ResortDateContext);
+    const {RoomData, HotelData, DayData, setDayData} = useContext(ResortDateContext);
     // 호텔 input에 들어가는 지역, 호텔명 상태변수
-    // const [hotelInput, setHotelInput] = useState('');
+    const [hotelInput, setHotelInput] = useState('');
     // 호텔 input 아래 모달 상태변수
     const [isInput, setIsInput] = useState(false);
     // 호텔 input 아래 모달 map 사용할 오브젝트 배열
@@ -261,7 +261,7 @@ export default function Main(){
                             {/* input 클릭시 나오는 순위 */}
                             {isInput &&
                             <>
-                                <ul className='rankBox'>
+                                <ul className='rankBox' style={{width:'400px'}}>
                                     <li className='rankBoxLi'>
                                         <span className='inputInfo'>EcoStay 검색 순위</span>
                                     </li>

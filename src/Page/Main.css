@@ -57,9 +57,6 @@
     background-color: rgb(228, 228, 228);
     /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); */
 }
-/* .main_container .mainImgBenner .hotelSearch .hotelInput #citySearch:focus + ul.rankBox{
-    height: 430px;
-} */
 .main_container .mainImgBenner .hotelSearch .hotelInput #citySearch:hover{
     background-color: #cecece;
 }
@@ -68,7 +65,7 @@
 }
 .main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankName{
     display: inline-block;
-    width: 420px;
+    width: 300px;
 }
 /* 검색창 클릭시 나오는 지역 css */
 .main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .countryInRank,
@@ -97,7 +94,9 @@
 } */
 /* 검색창 li */
 .main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankBoxLi{
+    width: 400px;
     padding: 10px;
+
 }
 .main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankBoxLi .inputInfo{
     display: inline-block;
