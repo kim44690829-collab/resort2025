@@ -254,8 +254,14 @@ export default function Room(){
                         </div>
                     </div>
                     <div className="right_filter">
+                        <div className="under_filter">
+                            <div className="map">
+                                <LeafletMap city={'seoul'} hotelName={'가가가'} style={{width:'100%',height:'200px',border: '1px solid #e7e7e7',borderRadius:'10px'}}/>    
+                            </div>
+                        </div>
                         <div className="top_filter">
                             <div className="price_filter">
+                                <h1 style={{marginTop:'10px',fontWeight:600}}>가격 필터</h1>
                                 <div className="price_slide">
                                     <div className="price_inner" style={{left:`${minPrice/300000*100}%`,right:`${100-(maxPrice/300000)*100}%`}}></div>
                                     <input type="range" min='0' max='300000' value={minPrice} onChange={(e)=>rangeHandler01(e)} className="slide_input" step={10000}/>
@@ -273,10 +279,8 @@ export default function Room(){
                                     <span>원</span>
                                 </div>
                             </div>
-                        </div>
-                        <div className="under_filter">
-                            <div className="map">
-                                <LeafletMap city={'seoul'} hotelName={'가가가'} style={{width:'100%',height:'300px',border: '1px solid #e7e7e7',borderRadius:'10px'}}/>    
+                            <div className="reset">
+                                <button type="button" onClick={()=>{setMyfilter([]),setMaxPrice(300000),setMinPrice(0)}} className="reset_btn"><i className="fa-solid fa-arrow-rotate-right"></i><span className="resettxt"> 필터 초기화</span></button>
                             </div>
                         </div>
                     </div>
@@ -340,24 +344,24 @@ export default function Room(){
                                         <p style={{marginBottom:'10px'}}>
                                             기타시설: 
                                             {item.otherService.map((item,index)=>(
-                                                <span key={index} className="service_item" style={{color:myFilter.findIndex((f)=>f.name===item)>=0?'#42799b':'#333'}}>
-                                                    {item === '스프링클러' ? <span>#스프링클러</span> : item === '반려견동반' ? <span>#반려견동반</span>: item === '카드결제' ?<span>#카드결제</span>: item === '짐보관가능' ?<span>#짐보관가능</span>: item === '개인사물함' ?<span>#개인사물함</span> : item === '픽업서비스' ?<span>#픽업서비스</span> : item === '캠프파이어' ? <span>#캠프파이어</span> : item === '무료주차' ? <span>#무료주차</span> : item === '조식제공' ?  <span>#조식제공</span> : null}
+                                                <span key={index} className="service_item" style={{color:myFilter.findIndex((f)=>f.name===item)>=0?'#42799b':'#333',fontWeight:myFilter.findIndex((f)=>f.name===item)>=0?600:400}}>
+                                                    {item === '스프링클러' ? '#스프링클러' : item === '반려견동반' ? '#반려견동반': item === '카드결제' ?'#카드결제': item === '짐보관가능' ?'#짐보관가능': item === '개인사물함' ?'#개인사물함' : item === '픽업서비스' ?'#픽업서비스' : item === '캠프파이어' ? '#캠프파이어' : item === '무료주차' ? '#무료주차': item === '조식제공' ? '#조식제공' : null}
                                                 </span>
                                             ))}
                                         </p>
                                         <p style={{marginBottom:'10px'}}>
                                             공용시설: 
                                             {item.publicService.map((item,index)=>(
-                                                <span key={index} className="service_item" style={{color:myFilter.findIndex((f)=>f.name===item)>=0?'#42799b':'#333'}}>
-                                                    {item === '피트니스' ? <span>#피트니스</span>: item === '레스토랑' ?<span>#레스토랑</span>: item === '사우나' ?<span>#사우나</span> : item === '실내수영장' ?<span>#실내수영장</span>: item === '야외수영장' ?<span>#야외수영장</span> : item === '편의점' ? <span>#편의점</span> : item === '바' ? <span>#바</span> : item === '라운지' ? <span>#라운지</span>: item === '엘리베이터' ?<span>#엘리베이터</span> : item === '비즈니스센터' ?<span>#비즈니스센터</span>: item === '건조기' ? <span>#건조기</span> : item === '탈수기' ?<span>#탈수기</span>: item === '바베큐' ? <span>#바베큐</span> : null}
+                                                <span key={index} className="service_item" style={{color:myFilter.findIndex((f)=>f.name===item)>=0?'#42799b':'#333',fontWeight:myFilter.findIndex((f)=>f.name===item)>=0?600:400}}>
+                                                    {item === '피트니스' ? '#피트니스': item === '레스토랑' ?'#레스토랑': item === '사우나' ?'#사우나' : item === '실내수영장' ?'#실내수영장': item === '야외수영장' ?'#야외수영장' : item === '편의점' ? '#편의점' : item === '바' ? '#바' : item === '라운지' ? '#라운지': item === '엘리베이터' ?'#엘리베이터' : item === '비즈니스센터' ?'#비즈니스센터': item === '건조기' ? '#건조기' : item === '탈수기' ?'#탈수기': item === '바베큐' ? '#바베큐' : null}
                                                 </span>
                                             ))}
                                         </p>
                                         <p style={{marginBottom:'10px'}}>
                                             객내시설: 
                                             {item.roomservice.map((item,index)=>(
-                                                <span key={index} className="service_item" style={{color:myFilter.findIndex((f)=>f.name===item)>=0?'#42799b':'#333'}}>
-                                                    {item === '무선인터넷' ? <span>#무선인터넷</span>: item === '욕실용품' ?<span>#욕실용품</span>: item === '샤워실' ?<span>#샤워실</span> : item === 'TV' ?<span>#텔레비전</span>: item === '실내수영장' ?<span>#실내수영장</span> : item === '욕조' ?<span>#욕조</span>: item === '객실내취사' ? <span>#객실내취사</span> : item === '금연' ? <span>#금연</span>: item === '에어컨' ?<span>#에어컨</span>: item === '드라이기' ? <span>#드라이기</span>: item === '냉장고' ?<span>#냉장고</span> : item === '개인콘센트' ? <span>#개인콘센트</span> : item === '전기주전자' ? <span>#전기주전자</span>:null}
+                                                <span key={index} className="service_item" style={{color:myFilter.findIndex((f)=>f.name===item)>=0?'#42799b':'#333',fontWeight:myFilter.findIndex((f)=>f.name===item)>=0?600:400}}>
+                                                    {item === '무선인터넷' ? '#무선인터넷': item === '욕실용품' ?'#욕실용품': item === '샤워실' ?'#샤워실' : item === 'TV' ?'#텔레비전': item === '실내수영장' ?'#실내수영장' : item === '욕조' ?'#욕조': item === '객실내취사' ? '#객실내취사' : item === '금연' ? '#금연': item === '에어컨' ?'#에어컨': item === '드라이기' ? '#드라이기': item === '냉장고' ?'#냉장고' : item === '개인콘센트' ? '#개인콘센트' : item === '전기주전자' ? '#전기주전자':null}
                                                 </span>
                                             ))}
                                         </p>

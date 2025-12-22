@@ -56,6 +56,7 @@
     width: 1000px;
     overflow: hidden;
 }
+
 .Room_section .filter_menu .left_filter .filter01{
     border-bottom: 1px solid #aaa;
     box-sizing: border-box;
@@ -109,6 +110,11 @@
 /* 우측 상단 필터 */
 .Room_section .filter_menu .right_filter{
     width: 660px;
+    position: relative;
+    margin-left: 20px;
+}
+.Room_section .filter_menu .right_filter .top_filter{
+    margin-bottom: 20px;
 }
 .Room_section .filter_menu .right_filter .price_filter{
     display: flex;
@@ -117,7 +123,7 @@
 .Room_section .filter_menu .right_filter .price_slide{
     position: relative;
     height: 4px;
-    width: 600px;
+    width: 520px;
     border-radius: 10px;
     background-color: #dddddd;
     margin: 20px 0;
@@ -153,13 +159,15 @@
     border-radius: 10px;
     background-color: #7ED6E4;
 }
+.Room_section .filter_menu .right_filter .minprice{
+    margin-right: 20px;
+}
 .Room_section .filter_menu .right_filter .minprice,
 .Room_section .filter_menu .right_filter .maxprice{
     border-radius: 10px;
     text-align: right;
     width: 250px;
     overflow: hidden;
-    margin: 0px 50px 0 0px;
     background-color: #dddddd;
     padding-right: 10px;
 }
@@ -176,6 +184,26 @@
     background-color: #dddddd;
     width: 70px;
     text-align: right;
+}
+.Room_section .filter_menu .right_filter .reset{
+    position: absolute;
+    bottom: 5px;
+    right: 0px;
+}
+.Room_section .filter_menu .right_filter .reset .reset_btn{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: #aaa;
+}
+.Room_section .filter_menu .right_filter .reset .reset_btn:hover{
+    color: #42799b;
+    font-weight: 600;
+}
+.Room_section .filter_menu .right_filter .reset .reset_btn:hover .resettxt{
+    color: #333;
+    font-weight: 600;
+    text-decoration: underline;
 }
 /* 필터 중앙 부분 */
 /* 
@@ -382,20 +410,17 @@
     background-color: #f5f7fc;
     padding: 15px;
     border-radius: 10px;
-    width: 550px;
+    width: 560px;
 }
 
 .Room_section .room_menu .room_product .room_list .room_info .service_list .service_item{
     margin-bottom: 20px;
     color: #333;
     margin-right: 5px;
+    font-size: 14px;
     
 }
 
-.Room_section .room_menu .room_product .room_list .room_info .service_list .service_item >span{
-    font-size: 14px;
-    font-weight: 500;
-}
 .Room_section .room_menu .room_product .room_list .room_info .menu_discount{
     text-align: right;
     font-size: 18px;
