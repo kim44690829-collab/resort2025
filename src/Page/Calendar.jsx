@@ -148,7 +148,7 @@ export default function Calendar(){
     //왼쪽달력
     const leftcal =(items,item,years)=>{
         const selectDateCopy = [...selectDate]
-        if(selectDateCopy.length<2){
+        if(selectDateCopy.length<2 ){
             selectDateCopy.push(`${selectMonth.getFullYear()}-${selectMonth.getMonth()+1}-${items}`)
         }else{
             console.log(selectDateCopy)

@@ -5,10 +5,47 @@
     box-sizing: border-box;
     border-top: 2px solid #c7c7c7;
 }
+.Room_section .serch_box{
+    position: relative;
+    padding-top: 3px;
+    vertical-align: bottom;
+    margin-left: 10px;
+}
+.Room_section .serch_box .city_name{
+    width: 320px;
+    height: 40px;
+    padding: 0 0 0 35px;
+    border-radius: 10px;
+    background-color: #fff;
+    border: 2px solid #42799b55;
+    box-sizing: border-box;
+    line-height: 60px;
+    position: absolute;
+    top: 3px;
+    left: 0;
+}
+.Room_section .serch_box .city_name:focus{
+    background-color: #fff;
+    border: 2px solid #7ED6E4;
+    box-sizing: border-box;
+}
+.Room_section .serch_box .calenertBtn{
+    width: 300px;
+    height: 40px;
+    margin-left: 340px;
+    border: 2px solid #42799b55;
+    background-color: #fff;
+    line-height: 0px;
+}
+.Room_section .serch_box .calendar_box{
+    position: absolute;
+    top: 50px;
+    left: 0;
+}
 /* 상품 필터 영역 시작----------------------------------------------------*/
 .Room_section .filter_menu{
     width: 100%;
-    height: 350px;
+    height: 360px;
     display: flex;
     box-sizing: border-box;
     margin-bottom: 10px;
@@ -16,7 +53,8 @@
 .Room_section .filter_menu .left_filter{
     padding: 10px;
     box-sizing: border-box;
-    width: 600px;
+    width: 1000px;
+    overflow: hidden;
 }
 .Room_section .filter_menu .left_filter .filter01{
     border-bottom: 1px solid #aaa;
@@ -37,13 +75,16 @@
     background-color: #fff;
     display: inline-block;
 }
+.Room_section .filter_menu .left_filter .filter01 .fil_btn > .fa-regular,
 .Room_section .filter_menu .left_filter .filter01 .fil_btn > .fa-solid{
     display: inline;
     color: #42799b;
     font-size: 12px;
 }
+.Room_section .filter_menu .left_filter .filter01 .fil_btn > .fa-regular >span,
 .Room_section .filter_menu .left_filter .filter01 .fil_btn > .fa-solid >span{
     font-size: 12px;
+    color: #333;
 }
 .Room_section .filter_menu .left_filter .under_filter{
     margin-top: 10px;
@@ -64,12 +105,84 @@
     background-color:rgb(96, 142, 192) ;
     color: #fff;
 }
-/* 필터 중앙 부분 */
 
+/* 우측 상단 필터 */
+.Room_section .filter_menu .right_filter{
+    width: 660px;
+}
+.Room_section .filter_menu .right_filter .price_filter{
+    display: flex;
+    flex-wrap: wrap;
+}
+.Room_section .filter_menu .right_filter .price_slide{
+    position: relative;
+    height: 4px;
+    width: 600px;
+    border-radius: 10px;
+    background-color: #dddddd;
+    margin: 20px 0;
+    
+}
+.Room_section .filter_menu .right_filter .price_slide .slide_input{
+    position: absolute;
+    top: -8px;
+    left: 0;
+    width: 100%;
+    -webkit-appearance: none;
+    background: none;
+    pointer-events: none;
+}
+.Room_section .filter_menu .right_filter .price_slide .slide_input::-webkit-slider-thumb{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%; 
+    background-color: #7ED6E4;
+    -webkit-appearance: none;
+    pointer-events: auto;
+    cursor: pointer;
+}
+.Room_section .filter_menu .right_filter .price_slide .slide_input::-webkit-slider-thumb:hover{
+    background-color: #42799b;
+    border: 2px solid #fff;
+}
+.Room_section .filter_menu .right_filter .price_slide .price_inner{
+    position: absolute;
+    left: 30%;
+    right: 20%;
+    height: 4px;
+    border-radius: 10px;
+    background-color: #7ED6E4;
+}
+.Room_section .filter_menu .right_filter .minprice,
+.Room_section .filter_menu .right_filter .maxprice{
+    border-radius: 10px;
+    text-align: right;
+    width: 250px;
+    overflow: hidden;
+    margin: 0px 50px 0 0px;
+    background-color: #dddddd;
+    padding-right: 10px;
+}
+.Room_section .filter_menu .right_filter .price_txt{
+    color: #aaa;
+    font-size: 14px;
+    padding: 5px;
+    text-align: left;
+}
+.Room_section .filter_menu .right_filter .price_input{
+    border: none;
+    padding: 5px;
+    font-weight: 600;
+    background-color: #dddddd;
+    width: 70px;
+    text-align: right;
+}
+/* 필터 중앙 부분 */
+/* 
 .Room_section .filter_menu .center_filter{
     padding: 10px;
     box-sizing: border-box;
-    width: 400px;
+    width: 330px;
     border-right: 2px solid #c7c7c7;
     position: relative;
     text-align: center;
@@ -97,7 +210,7 @@
 .Room_section .filter_menu .center_filter .price_slide{
     position: relative;
     height: 4px;
-    width: 300px;
+    width: 250px;
     border-radius: 10px;
     background-color: #dddddd;
     margin: 20px 0;
@@ -136,7 +249,7 @@
 .Room_section .filter_menu .center_filter .maxprice{
     border-radius: 10px;
     text-align: right;
-    width: 300px;
+    width: 250px;
     overflow: hidden;
     margin: 20px 0 0;
     background-color: #dddddd;
@@ -155,9 +268,9 @@
     background-color: #dddddd;
     width: 70px;
     text-align: right;
-}
+} */
 
-/* 필터 오른쪽 부분 */
+/* 필터 오른쪽 부분 *//* 
 .Room_section .filter_menu .right_filter{
     width: 400px;
     box-sizing: border-box;
@@ -168,7 +281,7 @@
     height: 200px;
     background-color: #7ED6E4;
     border-radius: 10px;
-}
+} */
 
 /* 상품 필터 영역 끝 */
 
@@ -220,7 +333,7 @@
     border-bottom: 1px solid #ccc;
     gap: 10px;
     position: relative;
-    background-color: #f5f7fc;
+    background-color: #fff;
 }
 .Room_section .room_menu .room_product .room_list .img_box{
     width: 350px;
@@ -246,23 +359,42 @@
 }
 .Room_section .room_menu .room_product .room_list .room_info .menu_title{
     font-weight: 600;
-    font-size: 30px;
+    font-size: 24px;
     margin-bottom: 5px;
 }
 .Room_section .room_menu .room_product .room_list .room_info .menu_city{
     color: #666;
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 10px;
 }
 .Room_section .room_menu .room_product .room_list .room_info .menu_score{
     background-color: #42799b;
     width: 60px;
     text-align: center;
-    padding: 10px 3px;
+    padding: 10px 10px;
     border-radius: 10px;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 14px;
     color: #fff;
+}
+.Room_section .room_menu .room_product .room_list .room_info .service_list{
+    margin-top: 10px;
+    background-color: #f5f7fc;
+    padding: 15px;
+    border-radius: 10px;
+    width: 550px;
+}
+
+.Room_section .room_menu .room_product .room_list .room_info .service_list .service_item{
+    margin-bottom: 20px;
+    color: #333;
+    margin-right: 5px;
+    
+}
+
+.Room_section .room_menu .room_product .room_list .room_info .service_list .service_item >span{
+    font-size: 14px;
+    font-weight: 500;
 }
 .Room_section .room_menu .room_product .room_list .room_info .menu_discount{
     text-align: right;
@@ -271,7 +403,9 @@
     margin-bottom: 10px;
 }
 .Room_section .room_menu .room_product .room_list .room_info .menu_discount .disC{
-    
+    position: absolute;
+    bottom: 50px;
+    right: 20px;
 }
 .Room_section .room_menu .room_product .room_list .room_info .menu_discount .disC .s_box{
     color: #f22f2f;
@@ -295,11 +429,17 @@
     padding: 0 3px;
     font-weight: 600;
     border-radius: 5px;
+    position: absolute;
+    bottom: 50px;
+    right: 20px;
 }
 .Room_section .room_menu .room_product .room_list .room_info .menu_price{
     text-align: right;
     font-size: 32px;
     font-weight: 600;
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
 }
 .Room_section .room_menu .room_product .room_list .menu_wishbtn{
     position: absolute;
