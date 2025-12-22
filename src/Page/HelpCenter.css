@@ -1,0 +1,175 @@
+.helpCenter_container{
+    width: 1200px;
+    margin: 200px auto;
+    display: flex;
+}
+/* 고객센터 메뉴 선택 */
+.helpCenter_container .helpCenter_list{
+    width: 280px;
+    height: 300px;
+    margin-right: 70px;
+}
+.helpCenter_container .helpCenter_list .list_title{
+    border-bottom: 3px solid black;
+    font-size: 26px;
+    padding-bottom: 40px;
+    font-weight: bold;
+}
+.helpCenter_container .helpCenter_list .list_menu{
+    border-bottom: 1px solid gray;
+    padding: 30px 0 30px 0;
+}
+.helpCenter_container .helpCenter_list .list_menu .list_menuBtn{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 16px;
+}
+.helpCenter_container .helpCenter_list .list_menu .list_menuBtn:hover{
+    color: #42799b;
+    cursor: pointer;
+}
+/* 고객센터 내용 */
+.helpCenter_text{
+    width: 600px;
+} 
+.helpCenter_text .text_title{
+    margin-bottom: 50px;
+    font-size: 30px;
+    font-weight: 600;
+}
+.helpCenter_text .helpCenter_texts{
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 0 25px 0;
+    border-bottom: 1px solid gray;
+}
+.helpCenter_text .helpCenter_texts .textDownBtn{
+    border: none;
+    background-color: transparent;
+}
+.text_contents{
+    padding: 25px 0 25px 0;
+    line-height: 30px;
+}
+/* 고객센터 전화번호 */
+.helpCenter_tel{
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-left: 50px;
+    height: 652px;
+    background-color: #ddd;
+}
+.helpCenter_tel .helpCenter_tel1{
+    width: 250px;
+    padding: 30px 30px 15px 30px;
+    background-color: #fff;
+    border-radius: 10px 10px 0 0;
+}
+.helpCenter_tel .helpCenter_tel1 .tel1_title{
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ddd;
+}
+.helpCenter_tel .helpCenter_tel1 .tel_list{
+    padding: 20px 0 20px 0;
+    font-size: 18px;
+    border-bottom: 1px solid #ddd;
+}
+.helpCenter_tel .helpCenter_tel1 .tel_list .fa-phone{
+    margin-right: 10px;
+}
+.helpCenter_tel .helpCenter_tel1 .tel_list .info_tel{
+    font-size: 21px;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #42799b;
+}
+.helpCenter_tel .helpCenter_tel2{
+    /* background-color: #ddd; */
+    border-radius: 0 0 10px 10px;
+    width: 250px;
+    padding: 30px 10px 30px 10px;
+}
+.helpCenter_tel .helpCenter_tel2 .tel2_title{
+    margin-bottom: 20px;
+}
+.helpCenter_tel .helpCenter_tel2 .tel2_title .fa-circle-info{
+    margin-right: 10px;
+}
+.helpCenter_tel .helpCenter_tel2 .tel2_info{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+.helpCenter_tel .helpCenter_tel2 .tel2_info2{
+    font-size: 11px;
+    margin-left: 12px;
+}
+/* .signup_container{
+    width: 1200px;
+    margin: 10px auto;
+    margin-bottom: 200px;
+    margin-top: 200px;
+}
+.signup_container .signup_title{
+    text-align: center;
+    font-size: 20px;
+    margin: 50px 0 50px 0;
+    line-height: 30px;
+}
+.signup_container .agreeForm{
+    width: 700px;
+    margin: 10px auto;
+}
+.signup_container .agreeForm > input[type='checkbox'],
+.signup_container .agreeForm > .agree1 > .agree2 > input[type='checkbox']{
+    margin-right: 10px;
+}
+.signup_container .agreeForm .agree1{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.signup_container .agreeForm .agreeBtn{
+    width: 700px;
+    padding: 15px 10px 15px 10px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border: none;
+}
+
+.signup_container .agreeForm .agree1 .agreeSeeBtn{
+    border: none;
+    background-color: transparent;
+}
+.signup_container .agreeForm .agreeContentBox .contentTitle{
+    display: inline-block;
+    margin-bottom: 10px;
+}
+/* 1번 항목 - 이용약관 */
+/* .signup_container .agreeForm .agreeContentBox .agreeContent1{
+    width: 700px;
+    line-height: 1.5em;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.signup_container .agreeForm .agreeContentBox .agreeContent1 .agreeContent1Ol{
+    list-style-type: decimal;
+    padding-left: 40px;
+}
+.signup_container .agreeForm .agreeContentBox .agreeContent1 .agreeContent1Ol .agreeContent1Li{
+    margin-bottom: 6px;
+    list-style-type: decimal;
+}
+.signup_container .agreeForm .agreeContentBox .agreeContent1 .agreeContent1Ol .agreeContent1Li .agreeContent1UlLi{
+    margin-bottom: 6px;
+    margin-top: 6px;
+    margin-left: 30px;
+    list-style-type: disc;
+}  */

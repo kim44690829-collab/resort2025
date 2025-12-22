@@ -256,7 +256,7 @@ export default function Room(){
                                 </div>
                             </div>
                             <div className="reset">
-                                <button type="button" onClick={()=>{setMyfilter([]),setMaxPrice(300000),setMinPrice(0)}} className="reset_btn"><i class="fa-solid fa-arrow-rotate-right"></i><span className="resettxt"> 필터 초기화</span></button>
+                                <button type="button" onClick={()=>{setMyfilter([]),setMaxPrice(300000),setMinPrice(0)}} className="reset_btn"><i className="fa-solid fa-arrow-rotate-right"></i><span className="resettxt"> 필터 초기화</span></button>
                             </div>
                     </div>
                     <div className="right_filter">

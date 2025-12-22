@@ -33,7 +33,7 @@
 
 }
 /* 메뉴 클릭 시 모달 */
-.menus{
+.Header_container .menus{
     position: absolute;
     top: 80px;
     right: 0;
@@ -42,12 +42,14 @@
     z-index: 900;
     background-color: rgba(255, 255, 255, 0.295);
 }
-.menus_sub{
+.Header_container .menus .menus_sub{
     margin: 0 auto;
     padding: 10px 0 10px 0;
 }
-.menus_sub > button,
-.menus_sub .menuLoginBtn{
+.Header_container .menus  .menus_sub > .domestic-hotels,
+.Header_container .menus  .menus_sub > .wishList_menu,
+.Header_container .menus  .menus_sub > .international-hotels,
+.Header_container .menus  .menus_sub .support-center{
     width: 200px;
     padding: 10px;
     border: none;

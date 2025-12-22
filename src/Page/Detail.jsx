@@ -1,31 +1,36 @@
 import './Detail.css';
 import { useContext,useState,useEffect,useRef } from 'react';
 import { useParams,Link } from 'react-router-dom';
-import cookie from 'js-cookie';
+//import cookie from 'js-cookie';
 import { ResortDateContext } from '../Api/ResortDate';
+import { ModalContext } from './Modal';
 import LeafletMap from '../Api/LeafletMap';
+import Calendar from './Calendar';
 
 
 export default function Detail(){  
     const {id} = useParams();
     //호텔,객실 데이터  
-    const {HotelData,RoomData} = useContext(ResortDateContext);
+    const {RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler} = useContext(ResortDateContext);
     //아이디값 비교
     const Hotel = HotelData.find((item)=>item.id === Number(id));
     //예외처리
-    if(!Hotel) return <p>잠시만 기다려주세요...</p>
+    if(!Hotel) return <p>호텔 정보가 없습니다.</p>
     //호텔이름 비교
     const Room = RoomData.filter((item)=>item.hotelName === Hotel.hotelName);
     //예외처리
-    if(!Room) return <p>잠시만 기다려주세요...</p>
+    if (Room.length === 0) return <p>객실 정보가 없습니다.</p>;
     
     //추천호텔 데이터
     const RecommHotel = HotelData.filter((item)=>item.city === Hotel.city && item.id !== Number(id));
     //예외처리
-    if(!RecommHotel) return <p>잠시만 기다려주세요...</p>
+    if(RecommHotel.length === 0) return null;
 
     console.log(Hotel);
     console.log(Room);
+
+    //모달 프로바이더
+    const {toggle,setModalContent} = useContext(ModalContext);
     
     //호텔별점 이미지
     const[starImg, setStarImg] = useState([]);
@@ -37,7 +42,6 @@ export default function Detail(){
     const[starRoom, setStarRoom] = useState([]);
     //객실당 평균별점 이미지
     const[avgRoom, setAvgRoom] = useState([]);
-
 
     useEffect(()=>{
         //해당호텔 별점 가져오기
@@ -97,7 +101,7 @@ export default function Detail(){
 
             }
         }
-        console.log(starRoom2);
+        //console.log(starRoom2);
         setSmileRoom(smileRoom2);
 
 
@@ -138,69 +142,47 @@ export default function Detail(){
         setAvgRoom(roomStar);
 
         //추천호텔 별점
-        // const recommStar = [];
+        const recommStar = [];
+        const recommStarImg = [];
 
-        // for(let i=0; i<RecommHotel.length; i++){
-        //     recommStar.push(RecommHotel[i].score);
-        // }
-        // console.log(recommStar);
-        // for(let j=0; j<recommStar.length; j++){
+        for(let i=0; i<RecommHotel.length; i++){
+            recommStar.push(RecommHotel[i].score);
 
-        // }
-        
-
-    },[id]);
-  
-console.log(starRoom);
-console.log(recommStar);
-    
-    const [wish, setWish] = useState([]);
-
-    useEffect(()=>{
-        //찜목록 불러오기
-        let wishList = JSON.parse(cookie.get('wishList') || '[]');          
-        let now = Date.now();
-        wishList = wishList.filter(item=>item.expires > now);
-        cookie.set('wishList', JSON.stringify(wishList), {expires: 30, path:'/'});
-        setWish(wishList);
-        //console.log(wishList.length);
-    },[]);
-    //console.log(wish);
-//
-    //찜목록 쿠키 저장 및 삭제
-    const wishHandler = () =>{
-        let wishList = JSON.parse(cookie.get('wishList') || '[]');          
-        let now = Date.now();
-
-        wishList = wishList.filter(item=>item.expires > now);
-
-        //이미 추가된 아이디가 있으면 삭제
-        for(let i=0; i<wishList.length; i++){
-            if(wishList[i].id === Number(id)){
-                wishList = wishList.filter((item)=>item.id !== Number(id));
-                cookie.set('wishList', JSON.stringify(wishList), {expires: 30, path:'/'});
-                setWish(wishList);
-                return;
+            recommStarImg[i] = [];
+                        
+            //별점 정수
+            const starInt = Math.floor(recommStar[i]);
+            //별점 소수
+            const starFloat = Math.floor(recommStar[i]*10)/10 - starInt;
+            //별점 빈칸
+            const starZero = Math.floor(5 - starInt - starFloat);
+            
+            for(let k=0; k<starInt; k++){
+                recommStarImg[i].push('/img/star-one.png');                  
+            }
+            if(starFloat>0){
+                recommStarImg[i].push('/img/star-half.png');                    
+            }
+            for(let j=0; j<starZero; j++){
+                recommStarImg[i].push('/img/star-zero.png');                    
             }
         }
-        //갯수 50개 제한
-        if(wishList.length >= 50){
-            alert('찜은 50개까지만 담으실 수 있습니다.');
-            return;
-        }
-        //30일간 보관(추가한 리스트 개별로)
-        wishList.push({id: Number(id), expires: now + 30*24*60*60*1000});
+        setRecommStar(recommStarImg);
+        //console.log(recommStar);        
+    },[]);
+  
+// console.log(starRoom);
+// console.log(recommStar);
 
-        cookie.set('wishList', JSON.stringify(wishList), {expires: 30, path:'/'});   
-        setWish(wishList);
-    }
+    
+
 
     //공유하기 버튼
     const shareClick = () =>{
         navigator.clipboard.writeText(`${window.location.origin}/detail/${id}`);
         alert("링크가 복사되었습니다!");
     }   
-    //공유하기 버튼
+    //주소복사 버튼
     const addressCopy = () =>{
         navigator.clipboard.writeText(`${Hotel.city === 'Sokcho'?'대한민국, 강원도 속초시':Hotel.city === 'Gyeongju'?'대한민국, 경상북도 경주시':Hotel.city === 'Busan'?'대한민국, 부산시':Hotel.city === 'Gangneung'?'대한민국, 강원도 강릉시':Hotel.city === 'Yeosu'?'대한민국, 전라남도 여수시':Hotel.city === 'Daejeon'?'대한민국, 대전시':Hotel.city === 'Gwangju'?'대한민국, 광주시':Hotel.city === 'Jeju'?'대한민국, 제주도':Hotel.city === 'Pohang'?'대한민국, 경상북도 포항시':Hotel.city === 'Seoul'?'대한민국, 서울시':Hotel.city === 'Tokyo'?'일본, 도쿄':Hotel.city === 'Sapporo'?'일본, 훗카이도 삿포로':Hotel.city === 'LosAngeles'?'미국, 캘리포니아 로스앤젤레스':Hotel.city === 'NewYork'?'미국, 뉴욕':Hotel.city === 'Guam'?'미국, 괌':Hotel.city === 'Zhangjiajie'?'중국, 후난성 장가계':Hotel.city === 'Shanghai'?'중국, 상하이':Hotel.city === 'Rome'?'이탈리아, 로마':Hotel.city === 'Venice'?'이탈리아, 베네치아':Hotel.city === 'Paris'?'프랑스, 파리':null} ${Hotel.hotelName}`);
         alert("주소가 복사되었습니다!");
@@ -237,9 +219,75 @@ console.log(recommStar);
     //console.log(starCount);
     //console.log(starCountTotal);
 
-    //더보기 버튼
+    //내용 더보기 버튼
     const [more, setMore] = useState(false);
-                            
+
+    //슬라이드 인덱스
+    const [current01, setCurrent01] = useState(0);//(추천호텔)
+    const [current02, setCurrent02] = useState(0);//(찜한호텔)
+
+    // 슬라이드 좌측 버튼
+    const leftClick = (current,setCurrent)=>{   
+        let copyCurrent = current;
+        if(current === 0){
+            copyCurrent = 0;
+        }else{
+            copyCurrent--;
+        }
+        setCurrent(copyCurrent);
+    }
+
+    // 슬라이드 우측 버튼
+    const rightClick = (current,setCurrent,array)=>{
+        let copyCurrent = current;
+        //보여지는 갯수(4개)만큼 빼기
+        if(current === array.length-4){
+            copyCurrent = array.length-4;
+        }else{
+            copyCurrent++;
+        }
+        setCurrent(copyCurrent);
+    }
+
+    //객실 인원수 버튼
+    const [head, setHead] = useState(1);
+
+    ////플러스 버튼 클릭
+    const plusClick = () =>{
+        let copyHead = head;
+        if(copyHead === 30){
+            copyHead = 30;
+        }else{
+            copyHead++;
+        }
+        setHead(copyHead);
+    }
+
+    //마이너스 버튼 클릭
+    const minusClick = () =>{
+        let copyHead = head;
+        if(copyHead === 1){
+            copyHead = 1;
+        }else{
+            copyHead--;
+        }
+        setHead(copyHead);
+    }
+
+
+    //검색버튼 클릭여부
+    const [search, setSearch] = useState(false);
+    //검색 필터링
+    const [RoomFilter, setRoomFilter] = useState([]);
+    //객실검색 필터링(인원수)
+    const searchClick = () =>{
+        const RoomFilter2 = Room.filter((item)=>item.maxOccupancy >= head);
+        setRoomFilter(RoomFilter2);
+        setSearch(true);
+    }
+    
+
+
 
     return(
         <section className="detail-wrap">
@@ -260,6 +308,8 @@ console.log(recommStar);
                                 {starImg.map((star,index)=>(
                                     <img src={star} alt="score" key={index} />
                                 ))}
+                                <span className='starScore'>{(Hotel.score - Math.floor(Hotel.score) === 0) ? Hotel.score+'.0' : Hotel.score}</span>
+                                <span className='scoreCount'>{(Hotel.scoreCount).toLocaleString()}명 평가</span>
                             </div>
                             <div className="title-right">
                                 {Hotel.discount === 1 ? (
@@ -274,7 +324,7 @@ console.log(recommStar);
                                     </>
                                 )}
                                 <div className="btns">
-                                    <button type='button' onClick={wishHandler}>
+                                    <button type='button' onClick={()=>wishHandler(id)}>
                                         <i className="fa-solid fa-heart" style={
                                         wish.find((item) => item.id === Number(id)) ?
                                             {color:'#f94239'}
@@ -316,8 +366,18 @@ console.log(recommStar);
                     
                     <div className="room-select">
                         <p className='room-title'>객실 선택</p>
+                        {search && RoomFilter.length === 0 ? (
+                            <div className="empty-room">
+                                <p className='x-icon'>
+                                    <i className="fa-solid fa-xmark"></i>
+                                </p>
+                                <p className='empty-tit'>설정한 인원에 부합하는 객실이 없습니다.</p>
+                                <p className='empty-txt'>객실별 투숙 가능 인원을 다시 확인해주세요.</p>
+                                <p className='empty-bottom'>아래 객실들은 설정한 인원보다 투숙 가능한 인원이 적은 객실입니다.</p>
+                            </div>
+                        ) : null}
                         <ul>
-                            {Room.map((item,index)=>(
+                            {(search && RoomFilter.length >= 1 ? RoomFilter : Room).map((item,index)=>(
                                 <li key={index}>
                                     <div className="room-left">
                                         <img src={`/img/${Hotel.id}-${index+2}.jpg`} alt={Hotel.hotelName} />
@@ -329,9 +389,12 @@ console.log(recommStar);
                                                 {avgRoom[index] && avgRoom[index].map((star, ind) => (
                                                     <img src={star} alt="roomScore" key={ind} />
                                                 ))}
+                                                <span className='starScore'>
+                                                    {(item.score[index] - Math.floor(item.score[index]) === 0) ? item.score[index]+'.0' : item.score[index]}
+                                                </span>
                                             </div>
                                             <div className="intro-right">
-                                                <button type='button'>상세정보 <i className="fa-solid fa-angle-right"></i></button>
+                                                <button type='button' onClick={()=>{setModalContent(<p>상세정보 준비중</p>);toggle();}}>상세정보 <i className="fa-solid fa-angle-right"></i></button>
                                             </div>
                                         </div>
                                         <div className="room-info">
@@ -369,7 +432,7 @@ console.log(recommStar);
                     </div>
                     <div className="hotel-map">
                         <p className='map-title'>위치안내</p>
-                        <LeafletMap city={Hotel.city} hotelName={Hotel.hotelName} style={{width:'100%',height:'400px',border: '1px solid #e7e7e7',borderRadius:'10px'}}/>
+                        <LeafletMap city={Hotel.city} hotelName={Hotel.hotelName} style={{width:'100%',height:'400px',border: '1px solid #e7e7e7',borderRadius:'10px'}} key={Hotel.id}/>
                         <p className='map-address'>
                             <i className="fa-solid fa-location-dot"></i>&nbsp;
                             {Hotel.city === 'Sokcho'?'대한민국, 강원도 속초시':Hotel.city === 'Gyeongju'?'대한민국, 경상북도 경주시':Hotel.city === 'Busan'?'대한민국, 부산시':Hotel.city === 'Gangneung'?'대한민국, 강원도 강릉시':Hotel.city === 'Yeosu'?'대한민국, 전라남도 여수시':Hotel.city === 'Daejeon'?'대한민국, 대전시':Hotel.city === 'Gwangju'?'대한민국, 광주시':Hotel.city === 'Jeju'?'대한민국, 제주도':Hotel.city === 'Pohang'?'대한민국, 경상북도 포항시':Hotel.city === 'Seoul'?'대한민국, 서울시':Hotel.city === 'Tokyo'?'일본, 도쿄':Hotel.city === 'Sapporo'?'일본, 훗카이도 삿포로':Hotel.city === 'LosAngeles'?'미국, 캘리포니아 로스앤젤레스':Hotel.city === 'NewYork'?'미국, 뉴욕':Hotel.city === 'Guam'?'미국, 괌':Hotel.city === 'Zhangjiajie'?'중국, 후난성 장가계':Hotel.city === 'Shanghai'?'중국, 상하이':Hotel.city === 'Rome'?'이탈리아, 로마':Hotel.city === 'Venice'?'이탈리아, 베네치아':Hotel.city === 'Paris'?'프랑스, 파리':null}
@@ -571,18 +634,19 @@ console.log(recommStar);
                             <span className='day-tit'>종료일</span>
                             <span className='day-txt'>2025.12.17(수)</span>
                         </p>
-                        <button type='button'>예약일 변경</button>
+                        <button type='button' onClick={()=>{setModalContent(<Calendar />);toggle();}}>예약일 변경</button>
                     </div>
                     <div className="hotel-headcount">
                         <p className='head-tit'>예약인원 선택</p>
                         <div className="head-select">
                             <span className='head-txt'>인원</span>
                             <div className="btns">
-                                <button type='button'><i className="fa-solid fa-minus"></i></button>
-                                <span>1</span>
-                                <button type='button'><i className="fa-solid fa-plus"></i></button>
+                                <button type='button' onClick={minusClick} className={head === 1 ? 'die' : null} ><i className="fa-solid fa-minus"></i></button>
+                                <span>{head}</span>
+                                <button type='button' onClick={plusClick} className={head === 30 ? 'die' : null}><i className="fa-solid fa-plus"></i></button>
                             </div>
                         </div>
+                        <button type='button' className='search' onClick={searchClick}>객실 검색</button>
                     </div>
                     <div className="hotel-select">
                         <p className='select-tit'>예약 전 참고사항</p>
@@ -595,29 +659,120 @@ console.log(recommStar);
             <div className="recommend">
                 <h2>같은 지역의 다른 호텔추천</h2>
                 <div className="recommend-slider">
-                    <ul>
-                        {(HotelData.filter((item)=>item.city === Hotel.city)).map((hotel,index)=>(
-                            hotel.id === Number(id) ? null : (
+                    <ul style={{transform: `translateX(-${307 * current01}px)`}}>
+                        {RecommHotel.map((hotel,index)=>(
+                            <li key={index}>
+                                <a href={`/detail/${hotel.id}`}>
+                                    <div className="hotel-img-wrap">
+                                        <img src={`/img/${hotel.id}-1.jpg`} alt={hotel.hotelName} className='hotel-img'/>
+                                    </div>
+                                    <div className="hotel-txt">
+                                        <p className='hotel-type'>{hotel.type==='Hotel'?'호텔':hotel.type==='Resort'?'리조트':hotel.type==='GuestHouse'?'게스트하우스/비앤비':hotel.type==='Condo'?'콘도':'캠핑장'}</p>
+                                        <h3>{hotel.hotelName}</h3>
+                                        <div className="intro-left">
+                                            {recommStar && recommStar[index] && recommStar[index].map((star,ind)=>(
+                                                <img src={star} alt="score" key={ind} className='star' />
+                                            ))}
+                                            <span className='starScore'>
+                                                {(hotel.score - Math.floor(hotel.score) === 0) ? hotel.score+'.0' : hotel.score}
+                                            </span>
+                                            <span className='scoreCount'>{(hotel.scoreCount).toLocaleString()}명 평가</span>
+                                        </div>
+                                        <div className="hotel-price">
+                                            {hotel.discount === 1 ? (
+                                                <>
+                                                    <p className='discount'><span className='red'>10% 할인</span> <span className='origin-price'>{hotel.price.toLocaleString()}원</span></p>
+                                                    <p className='final-price'>{(hotel.price - (hotel.price*0.1)).toLocaleString()}원<span>/1박</span></p>
+                                                </>
+                                            ):(
+                                                <>
+                                                    <p className='discount'><span className='red'>회원가입시 10,000원 할인쿠폰</span></p>
+                                                    <p className='final-price'>{(hotel.price).toLocaleString()}원<span>/1박</span></p>
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
+                                </a>
+                                <button type='button' onClick={()=>wishHandler(hotel.id)}>
+                                    <i className="fa-solid fa-heart" style={
+                                    wish.find((item) => item.id === Number(hotel.id)) ?
+                                        {color:'#f94239'}
+                                    :
+                                        {color:'#6b6b6b'}
+                                    
+                                    }></i>
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <button type='button' className='left-arrow' onClick={()=>leftClick(current01,setCurrent01)} style={{display: current01 === 0 ? 'none' : 'block'}}>
+                    <i className="fa-solid fa-angle-right"></i>
+                </button>
+                <button type='button' className='right-arrow' onClick={()=>rightClick(current01,setCurrent01,RecommHotel)} style={{display: current01 === RecommHotel.length-4 ? 'none' : 'block'}}>
+                    <i className="fa-solid fa-angle-right"></i>
+                </button>
+            </div>
+            {/* 찜한 리스트가 있을때만 보여짐 */}
+            {wishArray.length > 0 && 
+                <div className="wish">
+                    <h2>내가 찜한 호텔</h2>
+                    <div className="wish-slider">
+                        <ul style={{transform: `translateX(-${307 * current02}px)`}}>
+                            {wishArray.map((hotel,index)=>(
                                 <li key={index}>
-                                    <Link to={`/detail/${hotel.id}`}>
+                                    <a href={`/detail/${hotel.id}`}>
                                         <div className="hotel-img-wrap">
                                             <img src={`/img/${hotel.id}-1.jpg`} alt={hotel.hotelName} className='hotel-img'/>
                                         </div>
                                         <div className="hotel-txt">
+                                            <p className='hotel-type'>{hotel.type==='Hotel'?'호텔':hotel.type==='Resort'?'리조트':hotel.type==='GuestHouse'?'게스트하우스/비앤비':hotel.type==='Condo'?'콘도':'캠핑장'}</p>
                                             <h3>{hotel.hotelName}</h3>
                                             <div className="intro-left">
-                                                {starImg.map((star,index)=>(
-                                                    <img src={star} alt="score" key={index} />
+                                                {wishStar && wishStar[index] && wishStar[index].map((star,ind)=>(
+                                                    <img src={star} alt="score" key={ind} className='star' />
                                                 ))}
+                                                <span className='starScore'>
+                                                    {(hotel.score - Math.floor(hotel.score) === 0) ? hotel.score+'.0' : hotel.score}
+                                                </span>
+                                                <span className='scoreCount'>{(hotel.scoreCount).toLocaleString()}명 평가</span>
+                                            </div>
+                                            <div className="hotel-price">
+                                                {hotel.discount === 1 ? (
+                                                    <>
+                                                        <p className='discount'><span className='red'>10% 할인</span> <span className='origin-price'>{hotel.price.toLocaleString()}원</span></p>
+                                                        <p className='final-price'>{(hotel.price - (hotel.price*0.1)).toLocaleString()}원<span>/1박</span></p>
+                                                    </>
+                                                ):(
+                                                    <>
+                                                        <p className='discount'><span className='red'>회원가입시 10,000원 할인쿠폰</span></p>
+                                                        <p className='final-price'>{(hotel.price).toLocaleString()}원<span>/1박</span></p>
+                                                    </>
+                                                )}
                                             </div>
                                         </div>
-                                    </Link>
+                                    </a>
+                                    <button type='button' onClick={()=>wishHandler(hotel.id)}>
+                                        <i className="fa-solid fa-heart" style={
+                                        wish.find((item) => item.id === Number(hotel.id)) ?
+                                            {color:'#f94239'}
+                                        :
+                                            {color:'#6b6b6b'}
+                                        
+                                        }></i>
+                                    </button>
                                 </li>
-                            )
-                        ))}
-                    </ul>
+                            ))}
+                        </ul>
+                    </div>
+                    <button type='button' className='left-arrow' onClick={()=>leftClick(current02,setCurrent02)} style={{display: current02 === 0 || wishArray.length < 5 ? 'none' : 'block'}}>
+                        <i className="fa-solid fa-angle-right"></i>
+                    </button>
+                    <button type='button' className='right-arrow' onClick={()=>rightClick(current02,setCurrent02,wishArray)} style={{display: current02 === wishArray.length-4 || wishArray.length < 5 ? 'none' : 'block'}}>
+                        <i className="fa-solid fa-angle-right"></i>
+                    </button>
                 </div>
-            </div>
+            }
         </section>
     )
 }
