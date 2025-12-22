@@ -239,7 +239,8 @@ export default function Main(){
             <div className='mainImgBenner'>
                 {/* 메인 베너 이미지 */}
                 <div className='mainBanner'>
-                    <img src='../public/img/10-1.jpg' style={{width:'1920px', height:'600px'}} />
+                    <img src='../public/bennerImg/benner2.jpg' style={{width:'1920px', height:'600px'}} />
+                    <div className='bennerMask'></div>
                 </div>
                 <h1 className='searchTitle'>여행을 고민중이라면?</h1>
                 {/* 국내, 해외 숙박 검색 */}
