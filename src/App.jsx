@@ -17,6 +17,7 @@ import Footer from './Common/Footer'
 import Guest from './Page/Guest'
 import Pay from './Page/Pay'
 import HelpCenter from './Page/HelpCenter'
+import Wish from './Page/Wish'
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
             <Route path='/guest' element={<Guest />}/>  
             <Route path='/pay' element={<Pay />}/>  
             <Route path='/helpCenter' element={<HelpCenter />} />
+            <Route path='/wish' element={<Wish />}/>
           </Routes>
           <Footer />
         </BrowserRouter>
