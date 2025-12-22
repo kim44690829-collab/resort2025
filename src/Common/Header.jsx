@@ -55,7 +55,9 @@ export default function Header(){
                             <button type="button" className="international-hotels">해외숙소</button>
                         </li>
                         <li className="menus_sub">
-                            <button type="button" className="support-center">고객센터</button>
+                            <Link to='/helpCenter'>
+                                <button type="button" className="support-center">고객센터</button>
+                            </Link>
                         </li>
                     </ul>
                 </>
