@@ -213,7 +213,9 @@ export default function Room(){
                         <div className="filter01">
                             <h4 className="filter_tag">객내시설</h4>
                             {filter_roomservice.map((item,index)=>(
-                                <button key={index} className="fil_btn" type="button" onClick={()=>filterHandeler(item)}>{item.name}</button>
+                                <button key={index} className="fil_btn" type="button" onClick={()=>filterHandeler(item)}>
+                                    {item.name === '무선인터넷' ? <i className="fa-solid fa-wifi"> <span>무선인터넷</span></i> : item.name === '욕실용품' ? <i className="fa-solid fa-soap"> <span>욕실용품</span></i> : item.name === '샤워실' ? <i className="fa-solid fa-shower"> <span>샤워실</span></i> : item.name === 'TV' ? <i className="fa-solid fa-tv"> <span>텔레비전</span></i> : item.name === '실내수영장' ? <i className="fa-solid fa-water-ladder"> <span>실내수영장</span></i> : item.name === '욕조' ? <i className="fa-solid fa-bath"> <span>욕조</span></i> : item.name === '객실내취사' ? <i className="fa-solid fa-kitchen-set"> <span>객실내취사</span></i> : item.name === '금연' ? <i className="fa-solid fa-ban-smoking"> <span>금연</span></i> : item.name === '에어컨' ? <i className="fa-solid fa-fan"> <span>에어컨</span></i> : item.name === '드라이기' ? <i className="fa-solid fa-wind"> <span>드라이기</span></i> : item.name === '냉장고' ? <i className="fa-solid fa-snowflake"> <span>냉장고</span></i> : item.name === '개인콘센트' ? <i className="fa-solid fa-plug"> <span>개인콘센트</span></i> : item.name === '전기주전자' ? <i className="fa-solid fa-blender"> <span>전기주전자</span></i>:null}
+                                </button>
                             ))}
                         </div>
                         <div className="filter01">
