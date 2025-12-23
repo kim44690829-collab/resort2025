@@ -1,6 +1,6 @@
 import './Detail.css';
 import { useContext,useState,useEffect,useRef } from 'react';
-import { useParams,Link } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 //import cookie from 'js-cookie';
 import { ResortDateContext } from '../Api/ResortDate';
 import { ModalContext } from './Modal';
@@ -10,8 +10,10 @@ import Calendar from './Calendar';
 
 export default function Detail(){  
     const {id} = useParams();
-    //호텔,객실 데이터  
-    const {RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler} = useContext(ResortDateContext);
+    const navigate = useNavigate();
+
+    //호텔,객실,찜,예약날짜,예약인원,예약객실 데이터  
+    const {RoomData, HotelData,DayData,wish,wishStar,wishArray,wishHandler,setPayHead,setPayRoom} = useContext(ResortDateContext);
     //아이디값 비교
     const Hotel = HotelData.find((item)=>item.id === Number(id));
     //예외처리
@@ -28,6 +30,13 @@ export default function Detail(){
 
     console.log(Hotel);
     console.log(Room);
+
+    //달력 
+    const [Cal, setCal] = useState(false);
+
+    const year = new Date().getFullYear()
+    const month = new Date().getMonth()
+    const date = new Date().getDate()
 
     //모달 프로바이더
     const {toggle,setModalContent} = useContext(ModalContext);
@@ -180,12 +189,14 @@ export default function Detail(){
     //공유하기 버튼
     const shareClick = () =>{
         navigator.clipboard.writeText(`${window.location.origin}/detail/${id}`);
-        alert("링크가 복사되었습니다!");
+        setModalContent(<p style={{fontSize:'18px',fontWeight:'700'}}>링크가 복사되었습니다.</p>);
+        toggle();
     }   
     //주소복사 버튼
     const addressCopy = () =>{
         navigator.clipboard.writeText(`${Hotel.city === 'Sokcho'?'대한민국, 강원도 속초시':Hotel.city === 'Gyeongju'?'대한민국, 경상북도 경주시':Hotel.city === 'Busan'?'대한민국, 부산시':Hotel.city === 'Gangneung'?'대한민국, 강원도 강릉시':Hotel.city === 'Yeosu'?'대한민국, 전라남도 여수시':Hotel.city === 'Daejeon'?'대한민국, 대전시':Hotel.city === 'Gwangju'?'대한민국, 광주시':Hotel.city === 'Jeju'?'대한민국, 제주도':Hotel.city === 'Pohang'?'대한민국, 경상북도 포항시':Hotel.city === 'Seoul'?'대한민국, 서울시':Hotel.city === 'Tokyo'?'일본, 도쿄':Hotel.city === 'Sapporo'?'일본, 훗카이도 삿포로':Hotel.city === 'LosAngeles'?'미국, 캘리포니아 로스앤젤레스':Hotel.city === 'NewYork'?'미국, 뉴욕':Hotel.city === 'Guam'?'미국, 괌':Hotel.city === 'Zhangjiajie'?'중국, 후난성 장가계':Hotel.city === 'Shanghai'?'중국, 상하이':Hotel.city === 'Rome'?'이탈리아, 로마':Hotel.city === 'Venice'?'이탈리아, 베네치아':Hotel.city === 'Paris'?'프랑스, 파리':null} ${Hotel.hotelName}`);
-        alert("주소가 복사되었습니다!");
+        setModalContent(<p style={{fontSize:'18px',fontWeight:'700'}}>주소가 복사되었습니다.</p>);
+        toggle();        
     }  
 
     //스크롤 내리면 오른쪽 부분 따라 내려오기
@@ -277,20 +288,36 @@ export default function Detail(){
 
     //검색버튼 클릭여부
     const [search, setSearch] = useState(false);
-    //검색 필터링
-    const [RoomFilter, setRoomFilter] = useState([]);
-    //객실검색 필터링(인원수)
-    const searchClick = () =>{
-        const RoomFilter2 = Room.filter((item)=>item.maxOccupancy >= head);
-        setRoomFilter(RoomFilter2);
+
+    //날짜 필터링
+    const [dateFilter, setDateFilter] = useState(null);
+    //인원수 필터링
+    const [headFilter, setHeadFilter] = useState([]);
+
+    //객실검색
+    const searchClick = () =>{        
+
+        if(Hotel.startDate > DayData[0] && Hotel.endDate < DayData[1]){
+            setDateFilter(true);
+            const headFilter2 = Room.filter((item)=>item.maxOccupancy >= head);
+            setHeadFilter(headFilter2);
+        }else{
+            setDateFilter(false);
+            setHeadFilter([]);
+        }
         setSearch(true);
     }
-    
 
+    //예약하기 버튼클릭시 예약정보 보내기
+    const payClick = (headCount,roomId) =>{
+        setPayHead(headCount);
+        setPayRoom(roomId);
+        navigate('/pay');
+    }
 
 
     return(
-        <section className="detail-wrap">
+        <section className="detail-wrap" onClick={()=>setCal(false)}>
            <ul className="detail-img">
                 {Hotel.img.map((img,index)=>(
                     <li key={index}>
@@ -366,7 +393,18 @@ export default function Detail(){
                     
                     <div className="room-select">
                         <p className='room-title'>객실 선택</p>
-                        {search && RoomFilter.length === 0 ? (
+                        {search && !dateFilter
+                        ?(
+                            <div className="empty-room">
+                                <p className='x-icon'>
+                                    <i className="fa-solid fa-xmark"></i>
+                                </p>
+                                <p className='empty-tit'>설정한 날짜에 부합하는 객실이 없습니다.</p>
+                                <p className='empty-txt'>예약날짜를 다시 설정해주세요.</p>
+                                <p className='empty-bottom'>아래 객실들은 설정한 날짜 외 다른 날짜에 투숙 가능한 객실입니다.</p>
+                            </div>
+                        ): search && dateFilter && headFilter.length === 0
+                        ?(
                             <div className="empty-room">
                                 <p className='x-icon'>
                                     <i className="fa-solid fa-xmark"></i>
@@ -377,7 +415,7 @@ export default function Detail(){
                             </div>
                         ) : null}
                         <ul>
-                            {(search && RoomFilter.length >= 1 ? RoomFilter : Room).map((item,index)=>(
+                            {(search && headFilter.length >= 1 ? headFilter : Room).map((item,index)=>(
                                 <li key={index}>
                                     <div className="room-left">
                                         <img src={`/img/${Hotel.id}-${index+2}.jpg`} alt={Hotel.hotelName} />
@@ -422,7 +460,7 @@ export default function Detail(){
                                                     </>
                                                 }
                                                 <button type='button' className='cart'><i className="fa-solid fa-basket-shopping"></i></button>
-                                                <button type='button' className='pay'>예약하기</button>
+                                                <button type='button' className='pay' onClick={()=>payClick(head,item.id)} >예약하기</button>
                                             </div>
                                         </div>
                                     </div>
@@ -625,16 +663,27 @@ export default function Detail(){
                     </div>
                 </div>
                 <div className={`detail-right ${isFixed ? 'fixed' : null}`}>
+                    {Cal &&
+                        <div className="Cal" style={{position:'absolute',left:'-655px'}} onClick={ e =>{
+                            setCal((Cal === true) ? true : false);
+                            e.stopPropagation();
+                        }}>
+                            <Calendar/>
+                        </div>
+                    }
                     <div className="hotel-day">
                         <p className='day-wrap'>
                             <span className='day-tit'>예약일</span>
-                            <span className='day-txt'>2025.12.16(화)</span>
+                            <span className='day-txt'>{DayData.length < 2 ? `${year}-${month}-${date}` : `${DayData[0]}`}</span>
                         </p>
                         <p className='day-wrap'>
                             <span className='day-tit'>종료일</span>
-                            <span className='day-txt'>2025.12.17(수)</span>
+                            <span className='day-txt'>{DayData.length < 2 ? `${year}-${month}-${date + 1}` : `${DayData[1]}`}</span>
                         </p>
-                        <button type='button' onClick={()=>{setModalContent(<Calendar />);toggle();}}>예약일 변경</button>
+                        <button type='button' onClick={ e =>{
+                            setCal((Cal === true) ? false : true);
+                            e.stopPropagation();
+                        }}>예약일 변경</button>
                     </div>
                     <div className="hotel-headcount">
                         <p className='head-tit'>예약인원 선택</p>
@@ -646,7 +695,7 @@ export default function Detail(){
                                 <button type='button' onClick={plusClick} className={head === 30 ? 'die' : null}><i className="fa-solid fa-plus"></i></button>
                             </div>
                         </div>
-                        <button type='button' className='search' onClick={searchClick}>객실 검색</button>
+                        <button type='button' className='search' onClick={()=>{searchClick();setCal(false);}}>객실 검색</button>
                     </div>
                     <div className="hotel-select">
                         <p className='select-tit'>예약 전 참고사항</p>

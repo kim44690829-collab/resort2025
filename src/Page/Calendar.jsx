@@ -12,7 +12,7 @@ export default function Calendar(){
     const [calArr,setCalArr] = useState(
         Array.from(Array(6),() => new Array(7).fill(''))
     ) //달력에 들어가는 배열
-
+//git 
    console.log('2025-12-19',selectMonth.getFullYear());
     const nextMonth= new Date(selectMonth.getFullYear(),selectMonth.getMonth() + 1,1) //선택한 다음달 달력
     const [calArr02,setCalArr02] = useState(
@@ -148,7 +148,7 @@ export default function Calendar(){
     //왼쪽달력
     const leftcal =(items,item,years)=>{
         const selectDateCopy = [...selectDate]
-        if(selectDateCopy.length<2){
+        if(selectDateCopy.length<2 ){
             selectDateCopy.push(`${selectMonth.getFullYear()}-${selectMonth.getMonth()+1}-${items}`)
         }else{
             console.log(selectDateCopy)

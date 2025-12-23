@@ -6248,7 +6248,7 @@ export default function ResortDate({children}){
             }
         }
         //갯수 50개 제한
-        if(wishList.length >= 5){
+        if(wishList.length > 50){
             setModalContent(
                 <>
                     <p className='icon' style={{border: '0',
@@ -6353,10 +6353,16 @@ export default function ResortDate({children}){
             localStorage.removeItem('userNickName');
         }
     
+    //상세페이지- 예약하기 정보
+    //인원수
+    const [payHead, setPayHead] = useState(1);
+    //객실아이디
+    const [payRoom, setPayRoom] = useState(null);
+
     
 
     return(
-        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler, userNumFront, setUserNumFront, userNumBack, setUserNumBack, userNickName, loginSave, logout}}>
+        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler, payHead,setPayHead,payRoom,setPayRoom, userNumFront, setUserNumFront, userNumBack, setUserNumBack, userNickName, loginSave, logout}}>
             {children}
         </ResortDateContext.Provider>
     );
