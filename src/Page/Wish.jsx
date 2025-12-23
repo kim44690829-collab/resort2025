@@ -212,7 +212,7 @@ console.log(wishMinMax);
                                                         </>
                                                     }
                                                     <button type='button' className='cart'><i className="fa-solid fa-basket-shopping"></i></button>
-                                                    <button type='button' className='pay' onClick={()=>payClick(head,item.id)} >예약하기</button>
+                                                    <a href={`/detail/${item.id}`} className='pay'>상세보기</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -265,8 +265,7 @@ console.log(wishMinMax);
                     </div>
                     <div className="hotel-select">
                         <p className='select-tit'>예약 전 참고사항</p>
-                        <p className='select-txt'>· 좌측 <span className='bold'> '객실선택'</span>란에서 <span className='bold'>객실종류 확인 및 예약</span>이 가능합니다.</p>
-                        <p className='select-txt'>· 객실종류별 <span className='bold'>최대 투숙객 수</span>를 참고하셔서 인원변경 해주시기 바랍니다.</p>
+                        <p className='select-txt'>· 호텔별 <span className='bold'>예약가능 날짜</span>와 <span className='bold'>최대 투숙객 수</span>를  참고하셔서 검색 해주시기 바랍니다.</p>
                         <p className='select-txt'>· <span className='bold red'>회원가입시 10,000원 할인쿠폰</span>이 지급됩니다.</p>
                     </div>
                 </div>
