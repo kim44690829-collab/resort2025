@@ -1,5 +1,5 @@
 import '../Page/Main.css';
-import { useContext, useState, useEffect, use } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import cookie from 'js-cookie';
 import { Link } from 'react-router-dom';
 import { ResortDateContext } from '../Api/ResortDate';
@@ -78,7 +78,7 @@ export default function Main(){
         {id:2, image:'/mainImg/c-1.jpg', cityNameE:'Jeju', cityName: '제주도', cityInfo:'아름다운 자연경관과 휴양·체험 관광을 동시에 즐길 수 있는 섬!'},
         {id:3, image:'/mainImg/d-1.jpg', cityNameE:'Busan', cityName: '부산', cityInfo:'바다와 도심이 어우러진 해양 관광! 맛있는 먹거리까지!'},
         {id:4, image:'/mainImg/e-1.jpg', cityNameE:'Sapporo', cityName: '삿포로', cityInfo:'사계절 뚜렷한 자연! 특히 겨울의 축제는 일품!'},
-        {id:5, image:'/mainImg/f-1.jpg', cityNameE:'NewYork', cityName: '뉴욕', cityInfo:'세계적인 문화·예술·엔터테인먼트를 경험할 수 있습니다!'},
+        {id:5, image:'/mainImg/f-1.jpg', cityNameE:'New York', cityName: '뉴욕', cityInfo:'세계적인 문화·예술·엔터테인먼트를 경험할 수 있습니다!'},
         {id:6, image:'/mainImg/g-1.jpg', cityNameE:'Paris', cityName: '파리', cityInfo:'한 도시에 역사적인 건축물과 예술적 분위기를 한번에!'},
     ];
 
@@ -106,7 +106,7 @@ export default function Main(){
             item.city === 'Jeju' ? '제주도' : 
             item.city === 'Busan' ? '부산' : 
             item.city === 'Sapporo' ? '삿포로' : 
-            item.city === 'NewYork' ? '뉴욕' : 
+            item.city === 'New York' ? '뉴욕' : 
             item.city === 'Paris' ? '파리' : 
             null ) === popularSpot[spotModalOpen2].cityName && item.score >= 4)
         setCityAndHotel(hotel_modal2)
@@ -237,22 +237,98 @@ export default function Main(){
     const month = today.getMonth() + 1;
     const date = today.getDate();
 
+    // 이미지 배너
+    const [currentImg, setCurrent] = useState(0);
+    const bennerImg = ['/bennerImg/benner2.jpg','/bennerImg/benner6.jpg','/bennerImg/benner7.jpg'];
+
+    useEffect(() => {
+        const current = setInterval(() => {
+            if(currentImg < 2){
+                setCurrent(currentImg + 1)
+            }else{
+                setCurrent(0)
+            }
+        }, 5000);
+        return(() => {clearInterval(current)});
+    },[currentImg])
+
+    // 이벤트 배너
+    const [eventImgS, setEventImgS] = useState(0);
+    const [eventImgE, setEventImgE] = useState(3);
+    const eventBennerImg = ['/eventbenner/1.jpg', '/eventbenner/2.jpg', '/eventbenner/3.jpg', '/eventbenner/4.jpg', '/eventbenner/5.jpg', '/eventbenner/6.jpg']
+    // 이벤트 배너 하단 동그라미
+    const [bennerCircle, setBennerCircle] = useState(0);
+
+    // 이벤트 배너 자동회전
+    useEffect(() => {
+        const play = setInterval(() => {
+            if(eventImgS < 3 && eventImgE < 6){
+                setEventImgS(eventImgS + 1);
+                setEventImgE(eventImgE + 1);
+            }else{
+                setEventImgS(0);
+                setEventImgE(3);
+            }
+        }, 3000);
+        return(() => {clearInterval(play)})
+    },[eventImgS, eventImgE])
+
+    // 이벤트 배너 클릭
+    const eventBennerRightHandeler = () => {
+        if(eventImgS < 3 && eventImgE < 6){
+            setEventImgS(eventImgS + 1);
+            setEventImgE(eventImgE + 1);
+        }else{
+            setEventImgS(0);
+            setEventImgE(3);
+        }
+
+        if(bennerCircle < 2){
+            setBennerCircle(bennerCircle + 1)
+        }else{
+            setBennerCircle(0)
+        }
+    }
+    const eventBennerLeftHandeler = () => {
+        if(eventImgS > 0 && eventImgE > 3){
+            setEventImgS(eventImgS - 1);
+            setEventImgE(eventImgE - 1);
+        }else{
+            setEventImgS(3);
+            setEventImgE(6);
+        }
+
+        if(bennerCircle > 0){
+            setBennerCircle(bennerCircle - 1)
+        }else{
+            setBennerCircle(2)
+        }
+        
+    }
+
+    useEffect(() => {
+        const circles = setInterval(() => {
+            if(bennerCircle < 2){
+                setBennerCircle(bennerCircle + 1);
+            }else{
+                setBennerCircle(0);
+            }
+        }, 3000);
+        return(() => {clearInterval(circles)})
+    }, [eventImgS])
+
     return(
         <div className='main_container' onClick={closeUl1}>
             {/* 베너 박스 */}
             <div className='mainImgBenner'>
                 {/* 메인 베너 이미지 */}
                 <div className='mainBanner'>
-                    <img src='../public/bennerImg/benner2.jpg' style={{width:'1920px', height:'600px'}} />
+                    <img src={bennerImg[currentImg]} /* style={{width:'1920px', height:'600px'}} */ className='bennerImgs'/>
                     <div className='bennerMask'></div>
                 </div>
                 <h1 className='searchTitle'>여행을 고민중이라면?</h1>
                 {/* 국내, 해외 숙박 검색 */}
                 <div className='hotelSearch'>
-                    
-                    {/* 국내, 해외 change 버튼 */}
-                    {/* <button type='button' className='koreaBtn hotelSearchBtn'>국내</button>
-                    <button type='button' className='globalBtn hotelSearchBtn'>해외</button> */}
                     {/* input form */}
                     <form className='hotelInput'>
                         <div className='hotelModal'>
@@ -323,10 +399,31 @@ export default function Main(){
                     </form>
                 </div>
             </div>
+            {/* 이벤트 배너 */}
+            <div className='eventBenner'>
+                <p className='eventTitle'>이벤트</p>
+                <button type='button' className='eventLeftBtn' onClick={eventBennerLeftHandeler}>
+                    <i className="fa-solid fa-angle-right"></i>
+                </button>
+                {eventBennerImg.slice(eventImgS,eventImgE).map((item, index) => (
+                    <img src={item} alt='eventBennerImg' className='event' key={index} />
+                ))}
+                <button type='button' className='eventRightBtn' onClick={eventBennerRightHandeler}>
+                    <i className="fa-solid fa-angle-right"></i>
+                </button>
+                <div className='circleWrap'>
+                    <span className={bennerCircle === 0 ? 'circleMain' : 'circle'}></span>
+                    <span className={bennerCircle === 1 ? 'circleMain' : 'circle'}></span>
+                    <span className={bennerCircle === 2 ? 'circleMain' : 'circle'}></span>
+                    {/* <span className={bennerCircle === 4 ? 'circleMain' : 'circle'}></span>
+                    <span className={bennerCircle === 5 ? 'circleMain' : 'circle'}></span>
+                    <span className={bennerCircle === 6 ? 'circleMain' : 'circle'}></span> */}
+                </div>
+            </div>
             {/* 호텔 유형에 따라 나눔 */}
             <div className='hotelTypeWrap'>
                 <div className='hotelTypeTitle'>
-                    <p style={{fontSize:'30px', fontWeight:'700'}}>숙소 유형</p>
+                    <p style={{fontSize:'30px', fontWeight:'700'}}>취향에 맞는 숙소</p>
                 </div>
                 <div>
                     <ul className='hotel_type'>
@@ -523,6 +620,7 @@ export default function Main(){
                     }
                 </div>
             </div>
+            {/* 국내  인기 스테이 PICK! */}
             {/* 평점 - 호텔 평점순 */}
             <div className='spotsAndStays'>
                 <p className='spotsAndStaysTitle'>지역 평점 TOP!</p>

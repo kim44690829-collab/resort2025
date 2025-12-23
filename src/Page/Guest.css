@@ -24,11 +24,12 @@
 }
 /* 예약번호 css */
 .Guest_container .Guest_form #guestId{
-    padding: 15px 10px 15px 10px;
+    padding: 15px 10px 15px 25px;
     border-radius: 10px;
+    height: 58px;
     border: none;
     outline: none;
-    background-color: #e0e0e0;
+    background-color: #f0f0f0;
 }
 .Guest_container .Guest_form .guestIdInfo{
     margin-bottom: 50px;
@@ -39,7 +40,7 @@
     border: none;
     border-radius: 10px;
     margin-bottom: 10px;
-    background-color: #e0e0e0;
+    background-color: #f0f0f0;
 }
 /* 핸드폰 번호 input css */
 .Guest_container .Guest_form .guestPhone > input[type='text']{
@@ -48,7 +49,7 @@
     border: none;
     border-radius: 10px;
     outline: none;
-    background-color: #e0e0e0;
+    background-color: #f0f0f0;
 }
 /* 확인 버튼 */
 .Guest_container .Guest_form .guestBtn{

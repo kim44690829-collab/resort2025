@@ -5140,7 +5140,7 @@ export default function ResortDate({children}){
         {
             id: 85,
             country: "USA",
-            city: "NewYork",
+            city: "New York",
             startDate: "2026-03-06",
             endDate: "2026-03-10",
             hotelName: "센트럴 브리즈 호텔",
@@ -5158,7 +5158,7 @@ export default function ResortDate({children}){
         {
             id: 86,
             country: "USA",
-            city: "NewYork",
+            city: "New York",
             startDate: "2026-03-28",
             endDate: "2026-04-01",
             hotelName: "에메랄드파크 리조트",
@@ -5176,7 +5176,7 @@ export default function ResortDate({children}){
         {
             id: 87,
             country: "USA",
-            city: "NewYork",
+            city: "New York",
             startDate: "2026-04-17",
             endDate: "2026-04-21",
             hotelName: "노바 크라운 스위트",
@@ -5194,7 +5194,7 @@ export default function ResortDate({children}){
         {
             id: 88,
             country: "USA",
-            city: "NewYork",
+            city: "New York",
             startDate: "2026-05-03",
             endDate: "2026-05-07",
             hotelName: "하모니 프라임 호텔",
@@ -5212,7 +5212,7 @@ export default function ResortDate({children}){
         {
             id: 89,
             country: "USA",
-            city: "NewYork",
+            city: "New York",
             startDate: "2026-03-15",
             endDate: "2026-03-19",
             hotelName: "브로드웨이 샤인 호텔",
@@ -5230,7 +5230,7 @@ export default function ResortDate({children}){
         {
             id: 90,
             country: "USA",
-            city: "NewYork",
+            city: "New York",
             startDate: "2026-04-30",
             endDate: "2026-05-04",
             hotelName: "미드타운 힐즈호텔",
@@ -5248,7 +5248,7 @@ export default function ResortDate({children}){
         {
             id: 91,
             country: "USA",
-            city: "NewYork",
+            city: "New York",
             startDate: "2026-05-20",
             endDate: "2026-05-24",
             hotelName: "센트럴 스카이라인 호텔",
@@ -5266,7 +5266,7 @@ export default function ResortDate({children}){
         {
             id: 92,
             country: "USA",
-            city: "NewYork",
+            city: "New York",
             startDate: "2026-03-25",
             endDate: "2026-03-29",
             hotelName: "브루클린 웨이브 호텔",
@@ -6359,10 +6359,12 @@ export default function ResortDate({children}){
     //객실아이디
     const [payRoom, setPayRoom] = useState(null);
 
+    // 국내호텔 해외호텔 나누기 위한 변수
+    const [Domestic, setDomestic] = useState(0)
     
 
     return(
-        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler, payHead,setPayHead,payRoom,setPayRoom, userNumFront, setUserNumFront, userNumBack, setUserNumBack, userNickName, loginSave, logout}}>
+        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler, payHead,setPayHead,payRoom,setPayRoom, userNumFront, setUserNumFront, userNumBack, setUserNumBack, userNickName, loginSave, logout, Domestic, setDomestic}}>
             {children}
         </ResortDateContext.Provider>
     );
