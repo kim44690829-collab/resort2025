@@ -26,7 +26,7 @@
     border: none;
     border-radius: 10px;
     margin-bottom: 10px;
-    background-color: #e0e0e0;
+    background-color: #f0f0f0;
 }
 .signup2_container .tel_form .userPhone > input[type='text']{
     width: 113px;
@@ -34,7 +34,7 @@
     border: none;
     border-radius: 10px;
     outline: none;
-    background-color: #e0e0e0;
+    background-color: #f0f0f0;
 }
 /* 인증번호 작성 css */
 .signup2_container .tel_form #smsCode{
@@ -45,7 +45,7 @@
     border-radius: 10px;
     border: none;
     outline: none;
-    background-color: #e0e0e0;
+    background-color: #f0f0f0;
 }
 /* 버튼 css */
 .signup2_container .tel_form .telBtn{
