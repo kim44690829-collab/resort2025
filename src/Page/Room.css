@@ -11,10 +11,29 @@
     vertical-align: bottom;
     margin-left: 10px;
 }
-.Room_section .serch_box .city_name{
-    width: 320px;
+.Room_section .serch_box .serch_btn{
     height: 40px;
-    padding: 0 0 0 35px;
+    margin-left: 5px;
+    border-radius: 10px;
+    padding: 0 10px;
+    background-color: #fff;
+    border: 2px solid #7ED6E4;
+    color: #7ED6E4;
+    font-weight: 600;
+}
+.Room_section .serch_box .serch_btn:hover{
+    background-color: #fff;
+    border: 2px solid #42799b;
+    color: #42799b;
+    font-weight: 600;
+}
+.Room_section .serch_box .city_name::placeholder{
+    font-size: 12px;
+}
+.Room_section .serch_box .city_name{
+    width: 260px;
+    height: 40px;
+    padding: 0 0 0 20px;
     border-radius: 10px;
     background-color: #fff;
     border: 2px solid #42799b55;
@@ -23,6 +42,7 @@
     position: absolute;
     top: 3px;
     left: 0;
+    font-size: 15px;
 }
 .Room_section .serch_box .city_name:focus{
     background-color: #fff;
@@ -30,9 +50,9 @@
     box-sizing: border-box;
 }
 .Room_section .serch_box .calenertBtn{
-    width: 300px;
+    width: 290px;
     height: 40px;
-    margin-left: 340px;
+    margin-left: 265px;
     border: 2px solid #42799b55;
     background-color: #fff;
     line-height: 0px;
@@ -474,9 +494,15 @@
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    background-color: #aaa;
+    background-color: #f0f0f0;
     font-size: 20px;
     line-height: 41px;
+    cursor: pointer;
+}
+.Room_section .room_menu .room_product .room_list .menu_wishbtn i{
+    font-size: 21px;
+    color: #6b6b6b;
+    text-align: center;
 }
 .Room_section .room_menu .room_product .room_list .menu_wishbtn:hover{
     

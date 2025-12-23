@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect, use } from "react";
 import { useContext } from "react";
 import '../Page/Room.css'
 import { ResortDateContext } from '../Api/ResortDate';
@@ -8,7 +8,7 @@ import LeafletMap from '../Api/LeafletMap';
 
 export default function Room(){
     // 가져오는 호텔, 개실 데이터
-    const {HotelData,RoomData, hotelInput, setHotelInput, DayData, setDayData} = useContext(ResortDateContext);
+    const {HotelData,RoomData, hotelInput, setHotelInput, DayData, setDayData,countryEn,cityEn,town,setTown,serchHandler,hotelSort,setHotelSort,myhotel,setmyhotel,wish,wishStar,wishArray,wishHandler,} = useContext(ResortDateContext);
     //const {selectDate,setSelectDate,setSelectday} = useContext(calendarAuth)
     /* console.log(selectDate) */
     /* 필터 목록 */
@@ -18,12 +18,13 @@ export default function Room(){
     /* 필터 된 목록 */
     const [myFilter,setMyfilter] = useState([])
     // 필터 된 호텔 항목
-    const [myhotel,setmyhotel] = useState([])
+    //const [myhotel,setmyhotel] = useState([])
+    const [myhotel02,setmyhotel02] = useState([])
     //가격 필터의 값
     const [minPrice,setMinPrice] = useState(0)
     const [maxPrice,setMaxPrice] = useState(300000)
     // 정렬 번호
-    const [hotelSort,setHotelSort] = useState(1)
+    //const [hotelSort,setHotelSort] = useState(1)
     // 종아요 버튼
     const [likeBtn,setLikeBtn] =useState(true)
     // 선택한 날짜를 담을 변수
@@ -31,15 +32,62 @@ export default function Room(){
 
     //달력을 여닫기 위한 변수
     const [openC,setOpenC]=useState(false)
+    //도시 검색
+    //const [town,setTown] = useState('')
+    const [test,setTest] = useState('ㅋㅋ')
+    //검색어 한국어 , 영문으로 변환
+    
 
-    const [town,setTown] = useState('')
-
+    const [dateFilter,setDateFilter] = useState([])
     //날짜에 따른 목록 필터
     useEffect(()=>{
-        const dateFilter = HotelData.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
+        let dateFilterCopy = [...dateFilter]
+        dateFilterCopy = HotelData.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
+        setDateFilter(dateFilterCopy)
     },[DayData])
+    /* useEffect(()=>{
+        console.log(dateFilter)
+        if (cityEn) {
+            const overFilter = dateFilter.filter(f => f.city === cityEn);
+            console.log(cityEn,'도시')
+            setmyhotel(overFilter)
+        } else if (countryEn) {
+            const overFilter = dateFilter.filter(f => f.country === countryEn);
+            console.log(countryEn,'나라')
+            setmyhotel(overFilter)
+        } else {
+            const overFilter = dateFilter;
+            setmyhotel(overFilter)
+        }
+        
+    },[myFilter,minPrice,maxPrice,hotelSort,DayData]) */
 
-    
+    // 검색어 입력, 날짜 선택 필터
+    /* const serchHandler =()=>{
+        const dateFilter = HotelData.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
+        let overFilter = []
+        if(cityEn !== null){
+            overFilter = dateFilter.filter((f)=>f.city===cityEn)
+        }else if(countryEn !== null){
+            overFilter = dateFilter.filter((f)=>f.country===countryEn)
+        }else{
+            overFilter = dateFilter
+        }
+        console.log(overFilter)
+        // 필터한 내용 정렬
+        if(hotelSort===1){
+            overFilter.sort((a,b) => a.id - b.id)
+        }else if(hotelSort===2){
+            overFilter.sort((a,b) => b.score - a.score)
+        }else if(hotelSort===3){
+            overFilter.sort((a,b) => a.score - b.score)
+        }else if(hotelSort===4){
+            overFilter.sort((a,b) => b.price - a.price)
+        }else{
+            overFilter.sort((a,b) => a.price - b.price)
+        }
+        setmyhotel(overFilter)
+    } */
     
     //
     //
@@ -52,7 +100,7 @@ export default function Room(){
         const selectfilter02 = myFilterCopy.filter((f)=>f.id>13 && f.id <27) // roomservice 항목 구분
         const selectfilter03 = myFilterCopy.filter((f)=>f.id>26 && f.id <=35) // otherService 항목 구분
 
-        const filterHotel = HotelData.filter((data)=>{ // 각 항목별로 만족하는것 필터링
+        const filterHotel = myhotel.filter((data)=>{ // 각 항목별로 만족하는것 필터링
             const f1 = selectfilter02.every((filter)=>data.roomservice.includes(filter.name)); 
             const f2 = selectfilter01.every((filter)=>data.publicService.includes(filter.name)); 
             const f3 = selectfilter03.every((filter)=>data.otherService.includes(filter.name));
@@ -60,8 +108,8 @@ export default function Room(){
         })
         const pricefilter = filterHotel.filter((f)=>f.price > minPrice && f.price<=maxPrice)
         //console.log(pricefilter,'가격필터까지')
-        const dateFilter = pricefilter.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
-        if(hotelSort===1){
+        //const dateFilter = pricefilter.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
+        /* if(hotelSort===1){
             dateFilter.sort((a,b) => a.id - b.id)
         }else if(hotelSort===2){
             dateFilter.sort((a,b) => b.score - a.score)
@@ -71,6 +119,17 @@ export default function Room(){
             dateFilter.sort((a,b) => b.price - a.price)
         }else{
             dateFilter.sort((a,b) => a.price - b.price)
+        } */
+        if(hotelSort===1){
+            pricefilter.sort((a,b) => a.id - b.id)
+        }else if(hotelSort===2){
+            pricefilter.sort((a,b) => b.score - a.score)
+        }else if(hotelSort===3){
+            pricefilter.sort((a,b) => a.score - b.score)
+        }else if(hotelSort===4){
+            pricefilter.sort((a,b) => b.price - a.price)
+        }else{
+            pricefilter.sort((a,b) => a.price - b.price)
         }
 
         // 가격 최솟값 최대값 조정 함수
@@ -105,10 +164,11 @@ export default function Room(){
         
          */
 
-    setmyhotel(dateFilter)
+    setmyhotel02(pricefilter)
+    //setmyhotel(dateFilter)
         
 
-    },[myFilter,minPrice,maxPrice,hotelSort,DayData])
+    },[myFilter,minPrice,maxPrice,hotelSort,DayData,myhotel])
 
     useEffect(()=>{
         if(minPrice<0){
@@ -137,7 +197,7 @@ export default function Room(){
         setmyhotel(maxfilter)
     },[maxPrice]) */
 
-
+    //병합 dkdkdkdk
     /* 필터의 항목 클릭시 적용 함수 */
     const filterHandeler=(item)=>{
         const myFilterCopy = [...myFilter]
@@ -209,11 +269,12 @@ export default function Room(){
             {/* 상품 메뉴영역 */}
             <div className="Room_section">
                 <div className="serch_box">
-                    <input type="text" placeholder="여행지나 숙소를 검색해주세요" className="city_name" onChange={(e)=>townHandler(e)} value={town}/>
+                    <input type="text" placeholder="여행지나 숙소를 검색해주세요 ex)파리,속초" className="city_name" onChange={(e)=>townHandler(e)} value={town}/>
                     <button type='button' onClick={() => setOpenC(!openC)} style={{border:!openC?'2px solid #42799b55':'2px solid #7ED6E4'}} className='calenertBtn'>
                         <i className="fa-solid fa-calendar" style={{color:!openC?'#42799b55':'#7ED6E4'}}></i>
                         <span style={{marginRight:'5px'}}>{DayData.length < 2 ? `${year}-${month}-${date} - ${year}-${month}-${date + 1} ` : `${DayData[0]} - ${DayData[1]}`}</span>
                     </button>
+                    <button type="button" className="serch_btn" onClick={serchHandler}>검색하기</button>
                     {openC && 
                     <div className="calendar_box">
                         <Calendar/>
@@ -256,7 +317,7 @@ export default function Room(){
                     <div className="right_filter">
                         <div className="under_filter">
                             <div className="map">
-                                <LeafletMap city={'seoul'} hotelName={'가가가'} style={{width:'100%',height:'200px',border: '1px solid #e7e7e7',borderRadius:'10px'}}/>    
+                                <LeafletMap city={countryEn?countryEn:cityEn?cityEn:''} hotelName={town} style={{width:'100%',height:'200px',border: '1px solid #e7e7e7',borderRadius:'10px'}}/>    
                             </div>
                         </div>
                         <div className="top_filter">
@@ -315,7 +376,7 @@ export default function Room(){
                 </div>
                 {/* 중단 정렬 영역 */}
                 <div className="arr_menu">
-                    <span className="arr_total">총 {myhotel.length}개</span>
+                    <span className="arr_total">총 {myhotel02.length}개</span>
                     <ul className="arr_group">
                         <li className="arr_list" onClick={()=>sortHandeler(1)} style={{color:hotelSort===1?'white':'#ccc',fontWeight:hotelSort===1?600:400}}>추천수</li>
                         <li className="arr_list" onClick={()=>sortHandeler(2)} style={{color:hotelSort===2?'white':'#ccc',fontWeight:hotelSort===2?600:400}}>높은평점순</li>
@@ -327,7 +388,7 @@ export default function Room(){
                 {/* 방정보 영역 */}
                 <div className="room_menu">
                     <ul className="room_product">
-                        {myhotel.length !== 0?myhotel.map((item)=>(
+                        {myhotel02.length !== 0?myhotel02.map((item)=>(
                             
                             <li key={item.id} className="room_list">
                                 <Link to={`/detail/${item.id}`}>
@@ -337,7 +398,7 @@ export default function Room(){
                                 <div className="room_info">
                                     <h2 className="menu_title">{item.hotelName}</h2>
                                     <p className="menu_city">
-                                        {item.city === 'Sokcho'?'대한민국, 강원도 속초시':item.city === 'Gyeongju'?'대한민국, 경상북도 경주시':item.city === 'Busan'?'대한민국, 부산시':item.city === 'Gangneung'?'대한민국, 강원도 강릉시':item.city === 'Yeosu'?'대한민국, 전라남도 여수시':item.city === 'Daejeon'?'대한민국, 대전시':item.city === 'Gwangju'?'대한민국, 광주시':item.city === 'Jeju'?'대한민국, 제주도':item.city === 'Pohang'?'대한민국, 경상북도 포항시':item.city === 'Seoul'?'대한민국, 서울시':item.city === 'Tokyo'?'일본, 도쿄':item.city === 'Sapporo'?'일본, 훗카이도 삿포로':item.city === 'LosAngeles'?'미국, 캘리포니아 로스앤젤레스':item.city === 'NewYork'?'미국, 뉴욕':item.city === 'Guam'?'미국, 괌':item.city === 'Zhangjiajie'?'중국, 후난성 장가계':item.city === 'Shanghai'?'중국, 상하이':item.city === 'Rome'?'이탈리아, 로마':item.city === 'Venice'?'이탈리아, 베네치아':item.city === 'Paris'?'프랑스, 파리':null}
+                                        {item.city === 'Sokcho'?'대한민국, 강원도 속초시':item.city === 'Gyeongju'?'대한민국, 경상북도 경주시':item.city === 'Busan'?'대한민국, 부산시':item.city === 'Gangneung'?'대한민국, 강원도 강릉시':item.city === 'Yeosu'?'대한민국, 전라남도 여수시':item.city === 'Daejeon'?'대한민국, 대전시':item.city === 'Gwangju'?'대한민국, 광주시':item.city === 'Jeju'?'대한민국, 제주도':item.city === 'Pohang'?'대한민국, 경상북도 포항시':item.city === 'Seoul'?'대한민국, 서울시':item.city === 'Tokyo'?'일본, 도쿄':item.city === 'Sapporo'?'일본, 훗카이도 삿포로':item.city === 'LosAngeles'?'미국, 캘리포니아 로스앤젤레스':item.city === 'New York'?'미국, 뉴욕':item.city === 'Guam'?'미국, 괌':item.city === 'Zhangjiajie'?'중국, 후난성 장가계':item.city === 'Shanghai'?'중국, 상하이':item.city === 'Rome'?'이탈리아, 로마':item.city === 'Venice'?'이탈리아, 베네치아':item.city === 'Paris'?'프랑스, 파리':null}
                                     </p>
                                     <p className="menu_score">{item.score}점</p>
                                     <div className="service_list">
@@ -403,7 +464,15 @@ export default function Room(){
                                     
                                 </div>
                                 </Link>
-                                <button type="button" className="menu_wishbtn" onClick={()=>setLikeBtn(!likeBtn)}>{likeBtn?'❤':'💖'}</button>
+                                <button type='button' onClick={()=>wishHandler(item.id)} className="menu_wishbtn">
+                                    <i className="fa-solid fa-heart" style={
+                                    wish.find((items) => items.id === Number(item.id)) ?
+                                        {color:'#f94239'}
+                                    :
+                                        {color:'#6b6b6b'}
+                                    
+                                    }></i>
+                                </button>
                             </li>
                             
                         )): <h2>검색된 상품이 없습니다.</h2>}
