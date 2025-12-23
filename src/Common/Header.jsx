@@ -77,7 +77,9 @@ export default function Header(){
                             <button type="button" className="domestic-hotels">국내숙소</button>
                         </li>
                         <li className="menus_sub">
-                            <button type="button" className="wishList_menu">찜목록</button>
+                            <Link to='/wish'>
+                                <button type="button" className="wishList_menu">찜목록</button>
+                            </Link>
                         </li>
                         <li className="menus_sub">
                             <button type="button" className="international-hotels">해외숙소</button>

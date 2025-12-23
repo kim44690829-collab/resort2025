@@ -297,7 +297,7 @@ export default function Detail(){
     //객실검색
     const searchClick = () =>{        
 
-        if(Hotel.startDate > DayData[0] && Hotel.endDate < DayData[1]){
+        if((DayData[1] >= Hotel.startDate && Hotel.startDate >= DayData[0]) || (DayData[0] <= Hotel.endDate && Hotel.endDate <= DayData[1])){
             setDateFilter(true);
             const headFilter2 = Room.filter((item)=>item.maxOccupancy >= head);
             setHeadFilter(headFilter2);
@@ -306,13 +306,77 @@ export default function Detail(){
             setHeadFilter([]);
         }
         setSearch(true);
+        console.log(DayData[1]);
     }
 
     //예약하기 버튼클릭시 예약정보 보내기
-    const payClick = (headCount,roomId) =>{
-        setPayHead(headCount);
-        setPayRoom(roomId);
-        navigate('/pay');
+    const payClick = (headCount,roomId) =>{   
+        if (search && !dateFilter) {
+            setModalContent(
+                <>
+                <p className="icon" style={{
+                    border: '0',
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    margin: '0 auto',
+                    textAlign: 'center',
+                    backgroundColor: '#e7e7e7'
+                }}>
+                    <i className="fa-solid fa-exclamation" style={{
+                    fontSize: '21px',
+                    color: '#6b6b6b',
+                    lineHeight: '41px'
+                    }} />
+                </p>
+                <p className="txt" style={{
+                    fontSize: '20px',
+                    fontWeight: '700',
+                    color: '#000',
+                    margin: '15px 0 11px'
+                }}>
+                    예약날짜를 다시 설정해주세요.
+                </p>
+                </>
+            );
+            toggle();
+            return;
+        } else if (search && dateFilter && headFilter.length === 0) {
+            setModalContent(
+                <>
+                <p className="icon" style={{
+                    border: '0',
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    margin: '0 auto',
+                    textAlign: 'center',
+                    backgroundColor: '#e7e7e7'
+                }}>
+                    <i className="fa-solid fa-exclamation" style={{
+                    fontSize: '21px',
+                    color: '#6b6b6b',
+                    lineHeight: '41px'
+                    }} />
+                </p>
+                <p className="txt" style={{
+                    fontSize: '20px',
+                    fontWeight: '700',
+                    color: '#000',
+                    margin: '15px 0 11px'
+                }}>
+                    예약인원을 다시 설정해주세요.
+                </p>
+                </>
+            );
+            toggle();
+            return;
+        } else {
+            setPayHead(headCount);
+            setPayRoom(roomId);
+            navigate('/pay');
+            return;
+        }        
     }
 
 
@@ -674,11 +738,11 @@ export default function Detail(){
                     <div className="hotel-day">
                         <p className='day-wrap'>
                             <span className='day-tit'>예약일</span>
-                            <span className='day-txt'>{DayData.length < 2 ? `${year}-${month}-${date}` : `${DayData[0]}`}</span>
+                            <span className='day-txt'>{DayData.length < 2 ? `${year}-${month+1}-${date}` : `${DayData[0]}`}</span>
                         </p>
                         <p className='day-wrap'>
                             <span className='day-tit'>종료일</span>
-                            <span className='day-txt'>{DayData.length < 2 ? `${year}-${month}-${date + 1}` : `${DayData[1]}`}</span>
+                            <span className='day-txt'>{DayData.length < 2 ? `${year}-${month+1}-${date + 1}` : `${DayData[1]}`}</span>
                         </p>
                         <button type='button' onClick={ e =>{
                             setCal((Cal === true) ? false : true);
