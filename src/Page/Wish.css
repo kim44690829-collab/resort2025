@@ -1,0 +1,14 @@
+.detail-wrap .detail-content .detail-left .room-select .room-empty{
+    height: 292px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #f5f7fa;
+    padding: 25px;
+    text-align: center;
+    margin-top: 18px;
+    line-height: 238px;
+}
+.detail-wrap .detail-content .detail-left .room-select ul li .room-right h2 a{
+    font-size: 20px;
+    font-weight: 600;
+}

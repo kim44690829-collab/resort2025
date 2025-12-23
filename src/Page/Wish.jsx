@@ -7,7 +7,33 @@ import Calendar from './Calendar';
 export default function Wish(){
     const navigate = useNavigate();
 
-    const {RoomData, HotelData,DayData,wish,wishStar,wishArray,wishHandler,setPayHead,setPayRoom} = useContext(ResortDateContext);
+    const {RoomData, HotelData,DayData,wish,wishStar,wishArray,wishHandler,setPayHead,setPayRoom,selectday,setSelectday} = useContext(ResortDateContext);
+
+    //호텔의 객실별 투숙객 인원 불러오기
+    //위시리스트의 객실 리스트 필터링
+    const wishRoom = RoomData.filter((item)=> wishArray.some(w => w.hotelName === item.hotelName));
+    //console.log(wishRoom);    
+
+    const wishOccupancy = [];
+    //새 배열에 호텔명과 객실별 투숙객 수 담기
+    for(let i=0;i<wishRoom.length;i++){
+        wishOccupancy.push({hotelName: wishRoom[i].hotelName,maxOccupancy: wishRoom[i].maxOccupancy});
+    }
+    console.log(wishOccupancy);
+    // console.log(wishOccupancy.map(item=>item.hotelName === item.hotelName ?  ));
+
+    const wishMinMax = Object.values(
+        wishOccupancy.reduce((acc, { hotelName, maxOccupancy }) => {
+            acc[hotelName] ??= { hotelName, min: maxOccupancy, max: maxOccupancy };
+            acc[hotelName].min = Math.min(acc[hotelName].min, maxOccupancy);
+            acc[hotelName].max = Math.max(acc[hotelName].max, maxOccupancy);
+            return acc;
+        }, {})
+    );
+
+console.log(wishMinMax);
+
+
 
 
     //달력 
@@ -65,21 +91,35 @@ export default function Wish(){
     const [search, setSearch] = useState(false);
 
     //날짜 필터링
-    const [dateFilter, setDateFilter] = useState(null);
+    const [dateFilter, setDateFilter] = useState(false);
     //인원수 필터링
     const [headFilter, setHeadFilter] = useState([]);
 
     //객실검색
     const searchClick = () =>{        
+        //날짜검색 범위 안에 드는 배열
+        const dateArray = wishArray.filter(item=>(DayData[1] >= item.startDate && item.startDate >= DayData[0]) || (DayData[0] <= item.endDate && item.endDate <= DayData[1]) ? item :null);
 
-        if(Hotel.startDate > DayData[0] && Hotel.endDate < DayData[1]){
-            setDateFilter(true);
-            const headFilter2 = Room.filter((item)=>item.maxOccupancy >= head);
-            setHeadFilter(headFilter2);
-        }else{
+        //console.log(dateArray);
+        if(dateArray === null || dateArray.length === 0){
             setDateFilter(false);
             setHeadFilter([]);
+            setSearch(true);
+            return;
         }
+
+        setDateFilter(true);
+
+        const headArray = dateArray.filter(d=> wishOccupancy.some(w=>w.hotelName === d.hotelName && w.maxOccupancy >= head));
+
+        if(headArray === null || headArray.length === 0){
+            setHeadFilter([]);
+            setSearch(true);
+            return;
+        }else{
+            setHeadFilter(headArray);
+        }
+       
         setSearch(true);
     }
 
@@ -90,14 +130,16 @@ export default function Wish(){
         navigate('/pay');
     }
 
+    console.log(wishArray);
 
-    return(
-        
-        wishArray.length > 0 && 
-        <section className="detail-wrap" onClick={()=>setCal(false)}>
+    const [dayClick, setDayClick] = useState(false);
+
+
+    return(    
+        <section className="detail-wrap" onClick={()=>setCal(false)} style={{marginTop:'50px'}}>
             <div className="detail-content">
                 <div className="detail-left" ref={triggerRef}>                       
-                    <div className="room-select">
+                    <div className="room-select" style={{borderTop:'0px'}}>
                         <p className='room-title'>찜한 목록</p>
                         {search && !dateFilter
                         ?(
@@ -115,64 +157,71 @@ export default function Wish(){
                                 <p className='x-icon'>
                                     <i className="fa-solid fa-xmark"></i>
                                 </p>
-                                <p className='empty-tit'>설정한 인원에 부합하는 객실이 없습니다.</p>
-                                <p className='empty-txt'>객실별 투숙 가능 인원을 다시 확인해주세요.</p>
-                                <p className='empty-bottom'>아래 객실들은 설정한 인원보다 투숙 가능한 인원이 적은 객실입니다.</p>
+                                <p className='empty-tit'>설정한 인원에 부합하는 호텔이 없습니다.</p>
+                                <p className='empty-txt'>호텔별 투숙 가능 인원을 다시 확인해주세요.</p>
+                                <p className='empty-bottom'>아래 호텔들은 설정한 인원보다 투숙 가능한 인원이 적은 객실입니다.</p>
                             </div>
                         ) : null}
-                        <ul>
-                            {(search && headFilter.length >= 1 ? headFilter : wishArray).map((item,index)=>(
-                                <li key={index}>
-                                    <div className="room-left">
-                                        <img src={`/img/${item.id}-${index+2}.jpg`} alt={item.hotelName} />
-                                    </div>
-                                    <div className="room-right">
-                                        <h2>{item.roomName}</h2>
-                                        <div className="room-intro">
-                                            <div className="intro-left">
-                                                {wishStar[index] && wishStar[index].map((star, ind) => (
-                                                    <img src={star} alt="roomScore" key={ind} />
-                                                ))}
-                                                <span className='starScore'>
-                                                    {(item.score[index] - Math.floor(item.score[index]) === 0) ? item.score[index]+'.0' : item.score[index]}
-                                                </span>
-                                            </div>
-                                            <div className="intro-right">
-                                                <button type='button' onClick={()=>{setModalContent(<p>상세정보 준비중</p>);toggle();}}>상세정보 <i className="fa-solid fa-angle-right"></i></button>
-                                            </div>
+
+                        {wishArray.length > 0 ? ( 
+                            <ul>
+                                {(search && headFilter.length >= 1 ? headFilter : wishArray).map((item,index)=>(
+                                    <li key={index}>
+                                        <div className="room-left">
+                                            <a href={`/detail/${item.id}`}>
+                                                <img src={`/img/${item.id}-1.jpg`} alt={item.hotelName} />
+                                            </a>
                                         </div>
-                                        <div className="room-info">
-                                            <p><i className="fa-solid fa-ban"></i> <span className='bold'>무료 취소불가</span></p>
-                                            <p><i className="fa-regular fa-clock"></i> 체크인 <span className='bold'>15:00</span> ~ 체크아웃 <span className='bold'>11:00</span></p>
-                                            <p><i className="fa-solid fa-user-group"></i> 최대 투숙객 수 : <span className='bold'>{item.maxOccupancy}명</span></p>
-                                            <p><i className="fa-solid fa-tag"></i> <span className='bold'>할인혜택 :</span>
-                                                <span className='red'>
+                                        <div className="room-right">
+                                            <h2><a href={`/detail/${item.id}`}>{item.hotelName}</a></h2>
+                                            <div className="room-intro">
+                                                <div className="intro-left">
+                                                    {wishStar[index] && wishStar[index].map((star, ind) => (
+                                                        <img src={star} alt="roomScore" key={ind} />
+                                                    ))}
+                                                    <span className='starScore'>
+                                                        {(item.score[index] - Math.floor(item.score[index]) === 0) ? item.score[index]+'.0' : item.score[index]}
+                                                    </span>
+                                                </div>
+                                                <div className="intro-right">
+                                                    <button type='button' onClick={()=>{setModalContent(<p>상세정보 준비중</p>);toggle();}}>상세정보 <i className="fa-solid fa-angle-right"></i></button>
+                                                </div>
+                                            </div>
+                                            <div className="room-info">
+                                                <p><i className="fa-solid fa-ban"></i> <span className='bold'>무료 취소불가</span></p>
+                                                <p><i className="fa-regular fa-clock"></i> 체크인 <span className='bold'>15:00</span> ~ 체크아웃 <span className='bold'>11:00</span></p>
+                                                <p><i className="fa-solid fa-user-group"></i> 최대 투숙객 수 : <span className='bold'>{wishMinMax.map(w=>w.hotelName===item.hotelName ? w.min:null)}~{wishMinMax.map(w=>w.hotelName===item.hotelName ? w.max:null)}명</span></p>
+                                                <p><i className="fa-solid fa-tag"></i> <span className='bold'>할인혜택 :</span>
+                                                    <span className='red'>
+                                                        {item.discount === 1 ? 
+                                                            '10%할인 이벤트 중'
+                                                        :
+                                                            '회원가입시 10,000원 할인쿠폰'
+                                                        }
+                                                    </span>
+                                                </p>
+                                                <div className="room-pay">
                                                     {item.discount === 1 ? 
-                                                        '10%할인 이벤트 중'
-                                                    :
-                                                        '회원가입시 10,000원 할인쿠폰'
+                                                        <>
+                                                            <span className='origin-price'>{(item.price).toLocaleString()}원</span>
+                                                            <span className='final-price'>{((item.price) - ((item.price)*0.1)).toLocaleString()}원<span>/1박</span></span>
+                                                        </>                                                    
+                                                    :                                                    
+                                                        <>
+                                                            <span className='final-price'>{(item.price).toLocaleString()}원<span>/1박</span></span>
+                                                        </>
                                                     }
-                                                </span>
-                                            </p>
-                                            <div className="room-pay">
-                                                {item.discount === 1 ? 
-                                                    <>
-                                                        <span className='origin-price'>{(item.price + index * 12000).toLocaleString()}원</span>
-                                                        <span className='final-price'>{((item.price + index * 12000) - ((item.price + index * 12000)*0.1)).toLocaleString()}원<span>/1박</span></span>
-                                                    </>                                                    
-                                                :                                                    
-                                                    <>
-                                                        <span className='final-price'>{(item.price + index * 12000).toLocaleString()}원<span>/1박</span></span>
-                                                    </>
-                                                }
-                                                <button type='button' className='cart'><i className="fa-solid fa-basket-shopping"></i></button>
-                                                <button type='button' className='pay' onClick={()=>payClick(head,item.id)} >예약하기</button>
+                                                    <button type='button' className='cart'><i className="fa-solid fa-basket-shopping"></i></button>
+                                                    <button type='button' className='pay' onClick={()=>payClick(head,item.id)} >예약하기</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
+                                    </li>
+                                ))}
+                            </ul>
+                        ):(
+                            <p className='room-empty'>찜한 목록이 없습니다.</p>
+                        )}
                     </div>
                 </div>
                 <div className={`detail-right ${isFixed ? 'fixed' : null}`}>
@@ -184,22 +233,26 @@ export default function Wish(){
                             <Calendar/>
                         </div>
                     }
-                    <div className="hotel-day">
+                    <div className="hotel-day" style={{marginTop:'37px'}}>
                         <p className='day-wrap'>
                             <span className='day-tit'>예약일</span>
-                            <span className='day-txt'>{DayData.length < 2 ? `${year}-${month}-${date}` : `${DayData[0]}`}</span>
+                            <span className='day-txt'>{dayClick === true ? (DayData.length < 2 ? `${year}-${month+1}-${date}` : `${DayData[0]}`) : ('예약날짜를 설정해주세요.')}</span>
                         </p>
                         <p className='day-wrap'>
                             <span className='day-tit'>종료일</span>
-                            <span className='day-txt'>{DayData.length < 2 ? `${year}-${month}-${date + 1}` : `${DayData[1]}`}</span>
+                            <span className='day-txt'>
+                                {dayClick === true ? (DayData.length < 2 ? `${year}-${month+1}-${date+1}` : `${DayData[1]}`) : ('예약날짜를 설정해주세요.')}
+                            </span>
                         </p>
                         <button type='button' onClick={ e =>{
                             setCal((Cal === true) ? false : true);
+                            setDayClick(true);
+                            setSelectday([]);
                             e.stopPropagation();
                         }}>예약일 변경</button>
                     </div>
                     <div className="hotel-headcount">
-                        <p className='head-tit'>예약인원 선택</p>
+                        <p className='head-tit'>투숙인원 선택</p>
                         <div className="head-select">
                             <span className='head-txt'>인원</span>
                             <div className="btns">
@@ -208,7 +261,7 @@ export default function Wish(){
                                 <button type='button' onClick={plusClick} className={head === 30 ? 'die' : null}><i className="fa-solid fa-plus"></i></button>
                             </div>
                         </div>
-                        <button type='button' className='search' onClick={()=>{searchClick();setCal(false);}}>객실 검색</button>
+                        <button type='button' className='search' onClick={()=>{searchClick();setCal(false);}}>검색 적용</button>
                     </div>
                     <div className="hotel-select">
                         <p className='select-tit'>예약 전 참고사항</p>
@@ -218,6 +271,6 @@ export default function Wish(){
                     </div>
                 </div>
             </div>               
-        </section>    
+        </section>
     )               
 }

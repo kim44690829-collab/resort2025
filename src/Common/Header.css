@@ -13,6 +13,7 @@
     z-index: 700;
     top: 0;
     background-color: #fff;
+    box-shadow: 3px 3px 3px rgb(0 0 0 / 8%);
 }
 /* Header 우측 버튼 css */
 .Header_right{
