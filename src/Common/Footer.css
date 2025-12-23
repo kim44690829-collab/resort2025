@@ -1,14 +1,15 @@
 .footer_container{
     /* width: 1980px; */
     width: 100%;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
     margin: 0 auto;
+    background-color: #2f2f2f;
 }
 
 .footer_container .footerInfo{
     width: 1200px;
-    margin: 100px auto;
-    padding-top: 30px;
+    margin: 100px auto 0;
+    padding: 100px 0 100px 0;
     display: flex;
     gap: 30px;
 }
@@ -29,13 +30,14 @@
 .footer_container .footerInfo .footer_link .footer_sns .fa-youtube{
     font-size: 30px;
     cursor: pointer;
-    color: #502d19;
+    color: #fff;
 }
 .footer_container .footerInfo .footer_link .footer_sns .bi-instagram{
     font-size: 27px;
     cursor: pointer;
-    color: #502d19;
+    color: #fff;
 }
 .footer_container .companyInfoSection .companyInfo{
     line-height: 25px;
+    color: #fff;
 }

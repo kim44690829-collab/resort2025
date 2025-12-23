@@ -359,7 +359,6 @@ export default function Main(){
                             </>}
                         </div>
                         <i className="fa-solid fa-magnifying-glass searchIcon"></i>
-                        
                         <button type='button' onClick={() => setOpenC(!openC)} className='calenertBtn'>
                             <i className="fa-solid fa-calendar"></i>
                             <span style={{marginRight:'5px'}}>{DayData.length < 2 ? `${year}-${month}-${date} - ${year}-${month}-${date + 1} ` : `${DayData[0]} - ${DayData[1]}`}</span>

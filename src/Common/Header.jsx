@@ -88,9 +88,6 @@ export default function Header(){
                             <Link to='/hotelSection' >
                                 <button type="button" className="international-hotels" onClick={() => {setDomestic(1);  setMenuModal(false)}}>해외숙소</button>
                             </Link>
-                            <Link to='/wish'>
-                                <button type="button" className="wishList_menu">찜목록</button>
-                            </Link>
                         </li>
                         <li className="menus_sub">
                             <Link to='/wish'>
