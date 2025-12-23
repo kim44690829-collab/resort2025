@@ -9,9 +9,9 @@ import Calendar from './Calendar';
 export default function Main(){    
     // 2025-12-19 병합2
     // 호텔, 객실데이터 useContext로 가져오는 훅
-    const {RoomData, HotelData, DayData, setDayData} = useContext(ResortDateContext);
+    const {RoomData, HotelData, DayData, setDayData,town,setTown,serchHandler} = useContext(ResortDateContext);
     // 호텔 input에 들어가는 지역, 호텔명 상태변수
-    const [hotelInput, setHotelInput] = useState('');
+    //const [hotelInput, setHotelInput] = useState('');
     // 호텔 input 아래 모달 상태변수
     const [isInput, setIsInput] = useState(false);
     // 호텔 input 아래 모달 map 사용할 오브젝트 배열
@@ -175,25 +175,25 @@ export default function Main(){
     // num에 해당하는 번호를 누르면 그에 해당하는 지역이 input에 들어가는 함수
     const inputHandeler = (num) => {
         if(num === 1){
-            setHotelInput('서울')
+            setTown('서울')
         }else if(num === 2){
-            setHotelInput('부산')
+            setTown('부산')
         }else if(num === 3){
-            setHotelInput('강릉')
+            setTown('강릉')
         }else if(num === 4){
-            setHotelInput('속초')
+            setTown('속초')
         }else if(num === 5){
-            setHotelInput('경주')
+            setTown('경주')
         }else if(num === 6){
-            setHotelInput('여수')
+            setTown('여수')
         }else if(num === 7){
-            setHotelInput('대전')
+            setTown('대전')
         }else if(num === 8){
-            setHotelInput('광주')
+            setTown('광주')
         }else if(num === 9){
-            setHotelInput('제주')
+            setTown('제주')
         }else{
-            setHotelInput('포항')
+            setTown('포항')
         }
     }
 
@@ -253,8 +253,8 @@ export default function Main(){
                     <form className='hotelInput'>
                         <div className='hotelModal'>
                             <input type='text' id='citySearch' name='citySearch' 
-                            value={hotelInput}
-                            onChange={(e) => setHotelInput(e.target.value)}
+                            value={town}
+                            onChange={(e) => setTown(e.target.value)}
                             onClick={() => setIsInput(true)}
                             placeholder='여행지나 숙소를 검색해주세요'
                             />
@@ -314,7 +314,7 @@ export default function Main(){
                         </div>
                         {/* 검색 */} 
                         <Link to='/room'>
-                            <button type='button' className='Search_Btn'>검색</button>
+                            <button type='button' className='Search_Btn' onClick={serchHandler}>검색</button>
                         </Link>
                     </form>
                 </div>

@@ -1,11 +1,19 @@
 import { useState,useEffect } from "react";
 import '../Page/pay.css'
+import { useContext } from "react";
+import { ResortDateContext } from "../Api/ResortDate";
 
 export default function Pay(){
+
+    const {payHead,setPayHead,payRoom,setPayRoom,HotelData,RoomData,DayData} = useContext(ResortDateContext)
     //전체 동의 변수
     const [chking,setchking] = useState([{id:1,state:false},{id:2,state:false},{id:3,state:false},{id:4,state:false},{id:5,state:false}])
     //예약내역 확인창 변수
     const [open,setOpen] = useState(false)
+    //방정보
+    const myRoom = RoomData.filter((f)=>f.id===payRoom)
+    //방에 해당하는 호텔 정보
+    const roomprice = HotelData.filter((f)=>f.hotelName === myRoom[0].hotelName)
     //전체 선택 함수
     const chkAllHandler=()=>{
         if(chking[0].state===false){
@@ -14,6 +22,7 @@ export default function Pay(){
             setchking([{id:1,state:false},{id:2,state:false},{id:3,state:false},{id:4,state:false},{id:5,state:false}])
         }
     }
+    const [btnNum,setBtnNum] = useState(0)
     //개별 선택 함수
     const chkHandler=(num)=>{
         const chkingCopy = [...chking]
@@ -60,11 +69,13 @@ export default function Pay(){
             chkingCopy[4].state=false
             setchking(chkingCopy)
         }
+        
     }
+    const totalPrice = roomprice[0].price*(new Date(DayData[1]).getTime()-new Date(DayData[0]).getTime())/(1000*24*60*60)
     return(
         <>
             <div className="paysection">
-                <h2 className="pay_title"><i className="fa-solid fa-arrow-left"></i>예약 확인 및 결제</h2>
+                <h2 className="pay_title">{/* <i className="fa-solid fa-arrow-left"></i> */}예약 확인 및 결제</h2>
                 <div className="pay_info">
                     <div className="user_info">
                         <h4 className="pay_left_title">예약자 정보</h4>
@@ -94,15 +105,15 @@ export default function Pay(){
                         <div className="payline"></div>
                         <h4 className="pay_left_title">결제 수단</h4>
                         <ul className="pay_type">
-                            <li className="type_list"><span style={{color:'#ffcd00', fontWeight:700}}>카카오페이</span></li>
-                            <li className="type_list"><span style={{color:'#034ea2', fontWeight:700}}>토스페이</span></li>
-                            <li className="type_list"><span style={{fontWeight:500}}>신용/체크 카드</span></li>
-                            <li className="type_list"><span style={{fontWeight:500}}>퀵계좌이체</span></li>
-                            <li className="type_list"><span style={{color:'#ffee00', fontWeight:700}}>KB페이</span></li>
-                            <li className="type_list"><span style={{color:'#03cf5d', fontWeight:700}}>N PAY</span></li>
-                            <li className="type_list"><span style={{color:'#b8092fff', fontWeight:700}}>PAYCO</span></li>
-                            <li className="type_list"><span style={{fontWeight:500}}>법인 카드</span></li>
-                            <li className="type_list"><span style={{fontWeight:500}}>휴대폰 결제</span></li>
+                            <li className="type_list"><button onClick={()=>setBtnNum(1)} type="button" className="type_btn" style={{backgroundColor:btnNum===1?'#fff':''}}><img src="payLogo5.png" alt="kakao pay" style={{height:'30px',width:'70px', marginTop:'10px'}}></img></button></li>
+                            <li className="type_list"><button onClick={()=>setBtnNum(2)} type="button" className="type_btn" style={{backgroundColor:btnNum===2?'#fff':''}}><img src="payLogo4.png" alt="kakao pay" style={{height:'13px',width:'70px'}}></img></button></li>
+                            <li className="type_list"><button onClick={()=>setBtnNum(3)} type="button" className="type_btn" style={{fontWeight:500,backgroundColor:btnNum===3?'#fff':''}}>신용/체크 카드</button></li>
+                            <li className="type_list"><button onClick={()=>setBtnNum(4)} type="button" className="type_btn" style={{fontWeight:500,backgroundColor:btnNum===4?'#fff':''}}>퀵계좌이체</button></li>
+                            <li className="type_list"><button onClick={()=>setBtnNum(5)} type="button" className="type_btn" style={{backgroundColor:btnNum===5?'#fff':''}}><img src="payLogo3.png" alt="kakao pay" style={{height:'30px',width:'70px',marginTop:'10px'}}></img></button></li>
+                            <li className="type_list"><button onClick={()=>setBtnNum(6)} type="button" className="type_btn" style={{backgroundColor:btnNum===6?'#fff':''}} ><img src="payLogo2.png" alt="kakao pay" style={{height:'30px',width:'70px',marginTop:'10px'}}></img></button></li>
+                            <li className="type_list"><button onClick={()=>setBtnNum(7)} type="button" className="type_btn" style={{backgroundColor:btnNum===7?'#fff':''}}><img src="payLogo1.png" alt="kakao pay" style={{height:'30px',width:'70px',marginTop:'10px'}}></img></button></li>
+                            <li className="type_list"><button onClick={()=>setBtnNum(8)} type="button" className="type_btn" style={{fontWeight:500,backgroundColor:btnNum===8?'#fff':''}}>법인 카드</button></li>
+                            <li className="type_list"><button onClick={()=>setBtnNum(9)} type="button" className="type_btn" style={{fontWeight:500,backgroundColor:btnNum===9?'#fff':''}}>휴대폰 결제</button></li>
                         </ul>
                         <div className="paychk">
                             <input type="checkbox" name="pay_chk" id="pay_chk" />
@@ -111,21 +122,24 @@ export default function Pay(){
                     </div>
                     <div className="room_info">
                         <div className="room_box">
-                            <h2 className="room_name">호텔명</h2>
+                            <h2 className="room_name">{myRoom[0].hotelName}</h2>
                             <img src="/img/1-2.jpg" alt="roomImg" className="room_img"/>
                             <table className="room_table">
                                 <tbody>
                                     <tr>
                                         <td className="ta_list ta_sub">객실</td>
-                                        <td className="ta_list">D type. FLAT FAMILY (저층/시티뷰)</td>
+                                        <td className="ta_list">{myRoom[0].roomName}</td>
                                     </tr>
                                     <tr>
                                         <td className="ta_list ta_sub">일정</td>
-                                        <td className="ta_list">12.21 (일) 15:00 ~ <br />12.22 (월) 11:00 (1박)</td>
+                                        <td className="ta_list"> {DayData[0]}({new Date(DayData[0]).getDay()===0?'일':new Date(DayData[0]).getDay()===1?'월':new Date(DayData[0]).getDay()===2?'화':new Date(DayData[0]).getDay()===3?'수':new Date(DayData[0]).getDay()===4?'목':new Date(DayData[0]).getDay()===5?'금':new Date(DayData[0]).getDay()===6?'토':undefined})
+                                             15:00 ~ <br />
+                                             {DayData[1]}({new Date(DayData[1]).getDay()===0?'일':new Date(DayData[1]).getDay()===1?'월':new Date(DayData[1]).getDay()===2?'화':new Date(DayData[1]).getDay()===3?'수':new Date(DayData[1]).getDay()===4?'목':new Date(DayData[1]).getDay()===5?'금':new Date(DayData[1]).getDay()===6?'토':undefined})
+                                              11:00 ({(new Date(DayData[1]).getTime()-new Date(DayData[0]).getTime())/(1000*24*60*60)})박</td>
                                     </tr>
                                     <tr>
                                         <td className="ta_list ta_sub">기준인원</td>
-                                        <td className="ta_list">2인기준, 최대 2인</td>
+                                        <td className="ta_list">{payHead}인기준, 최대 {payHead}인</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -136,38 +150,40 @@ export default function Pay(){
                                 <tbody>
                                     <tr style={{borderBottom:'1px solid #e4e4e4'}}>
                                         <td className="paybox_list">객실 가격(1박)</td>
-                                        <td className="paybox_list" style={{textAlign:'right'}}>169,200</td>
+                                        <td className="paybox_list" style={{textAlign:'right'}}>
+                                            {roomprice[0].price.toLocaleString()}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td className="paybox_list">총 결제 금액</td>
-                                        <td className="paybox_list" style={{color:'red',textAlign:'right',fontWeight:600,fontSize:'24px'}}>169,200</td>
+                                        <td className="paybox_list" style={{color:'red',textAlign:'right',fontWeight:600,fontSize:'24px'}}>{totalPrice.toLocaleString() }원</td>
                                     </tr>
                                 </tbody>
                                 
                             </table>
                             <div className="labelAll_item">
-                                <input type="checkbox" name="terms_all" style={{display:'none'}} id="terms" checked={chking[0].state} onClick={()=>chkAllHandler()}/>
+                                <input type="checkbox" name="terms_all" style={{display:'none'}} id="terms" checked={chking[0].state} onChange={()=>chkAllHandler(0)}/>
                                 <label htmlFor="terms" className="labelAll_txt">약관 전체동의</label>
                             </div>
                             <div className="label_list">
                                 <div className="label_item">
-                                    <input type="checkbox" name="chk1" style={{display:'none'}} id="agreement01" checked={chking[1].state} onClick={()=>chkHandler(1)}/>
+                                    <input type="checkbox" name="chk1" style={{display:'none'}} id="agreement01" checked={chking[1].state} onChange={()=>chkHandler(1)}/>
                                     <label htmlFor="agreement01" className="paybox_item">숙소 이용규칙 및 취소/환불규정 동의 (필수)</label>
                                 </div>
                                 <div className="label_item">
-                                    <input type="checkbox" name="chk2" style={{display:'none'}} id="agreement02" checked={chking[2].state} onClick={()=>chkHandler(2)}/>
+                                    <input type="checkbox" name="chk2" style={{display:'none'}} id="agreement02" checked={chking[2].state} onChange={()=>chkHandler(2)}/>
                                     <label htmlFor="agreement02" className="paybox_item">개인정보 수집 및 이용 동의 (필수)</label>
                                 </div>
                                 <div className="label_item">
-                                    <input type="checkbox" name="chk3" style={{display:'none'}} id="agreement03" checked={chking[3].state} onClick={()=>chkHandler(3)}/>
+                                    <input type="checkbox" name="chk3" style={{display:'none'}} id="agreement03" checked={chking[3].state} onChange={()=>chkHandler(3)}/>
                                     <label htmlFor="agreement03" className="paybox_item">개인정보 제3자 제공 동의 (필수)</label>
                                 </div>
                                 <div className="label_item">
-                                    <input type="checkbox" name="chk4" style={{display:'none'}} id="agreement04" checked={chking[4].state} onClick={()=>chkHandler(4)}/>
+                                    <input type="checkbox" name="chk4" style={{display:'none'}} id="agreement04" checked={chking[4].state} onChange={()=>chkHandler(4)}/>
                                     <label htmlFor="agreement04" className="paybox_item">만 14세 이상 확인 (필수)</label>
                                 </div>
                             </div>
-                            <button type="button" className="paybox_btn" onClick={chking[0].state===true?()=>setOpen(!open):''}>169,200원 결제하기</button>
+                            <button type="button" className="paybox_btn" onClick={chking[0].state===true?()=>setOpen(!open):undefined}>{totalPrice.toLocaleString() }원 결제하기</button>
                         </div>
                     </div>
                 </div>
@@ -177,17 +193,17 @@ export default function Pay(){
                     <div className="modal_content">
                         <h2 className="pay_modal_title">예약내역 확인</h2>
                         <div className="modal_info">
-                            <h4 className="modal_hotel">호텔명</h4>
-                            <p className="modal_room">객실명</p>
+                            <h4 className="modal_hotel">{myRoom[0].hotelName}</h4>
+                            <p className="modal_room">{myRoom[0].roomName}</p>
                         </div>
                         <table className="modal_table">
                             <tr>
                                 <td className="modal_list">체크인</td>
-                                <td className="modal_list">시작날짜</td>
+                                <td className="modal_list">{DayData[0]}</td>
                             </tr>
                             <tr>
                                 <td className="modal_list">체크아웃</td>
-                                <td className="modal_list">끝날짜</td>
+                                <td className="modal_list">{DayData[1]}</td>
                             </tr>
                         </table>
                         <ul className="modal_txt">

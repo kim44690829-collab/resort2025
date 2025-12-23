@@ -27,7 +27,7 @@
 .paysection .pay_info .user_info .guest_info .guest_list .guest_name{
     width: 340px;
     height: 48px;
-    background-color: #e4e4e4;
+    background-color: #f5f7fa;
     border: none;
     border-radius: 10px;
     padding: 0 18px;
@@ -36,7 +36,7 @@
 .paysection .pay_info .user_info .guest_info .guest_list .guest_birth01{
     width: 150px;
     height: 48px;
-    background-color: #e4e4e4;
+    background-color: #f5f7fa;
     border: none;
     border-radius: 10px;
     padding: 0 18px;
@@ -45,7 +45,7 @@
 .paysection .pay_info .user_info .guest_info .guest_list .guest_birth02{
     width: 45px;
     height: 48px;
-    background-color: #e4e4e4;
+    background-color: #f5f7fa;
     border: none;
     border-radius: 10px;
     padding: 0 18px;
@@ -54,7 +54,7 @@
 .paysection .pay_info .user_info .guest_info .guest_list .guest_phone{
     width: 200px;
     height: 48px;
-    background-color: #e4e4e4;
+    background-color: #f5f7fa;
     border: none;
     border-radius: 10px;
     padding: 0 18px;
@@ -64,7 +64,7 @@
     width: 130px;
     height: 48px;
     background-color: #fff;
-    border: 1px solid #e4e4e4;
+    border: 1px solid #f5f7fa;
     border-radius: 10px;
     padding: 0 10px;
     margin-bottom: 5px;
@@ -75,7 +75,7 @@
     display: flex;
     width: 340px;
     height: 48px;
-    background-color: #e4e4e4;
+    background-color: #f5f7fa;
     border: none;
     border-radius: 10px;
     padding: 0 18px;
@@ -93,7 +93,7 @@
 }
 .paysection .pay_info .user_info .guest_info .guest_list .phone_txt .phone_under{
     border: none;
-    background-color: #e4e4e4;
+    background-color: #f5f7fa;
     color: #aaa;
 }
 .payline{
@@ -107,6 +107,18 @@
     flex-wrap: wrap;
     width: 900px;
     text-align: center;
+}
+
+.paysection .pay_info .user_info .pay_type .type_list .type_btn{
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    line-height: 48px;
+    background-color: #f5f7fa;
+}
+.paysection .pay_info .user_info .pay_type .type_list .type_btn:focus{
+    background-color: #fff;
 }
 .paysection .pay_info .user_info .pay_type .type_list{
     width: 280px;
@@ -208,7 +220,8 @@
     font-size: 14px;
 }
 .paysection .paybox .labelAll_item{
-    background-color: #e4e4e4;
+    background-color: #fff;
+    border: 1px solid #42799b55;
     padding: 15px 10px;
     margin-top: 10px;
     border-radius:10px;
