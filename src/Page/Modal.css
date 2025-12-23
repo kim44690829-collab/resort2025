@@ -13,7 +13,7 @@
     right: 0;
     bottom: 0;
     background-color: #000000cf;
-    z-index: 9999999;
+    z-index: 99999999999;
 }
 .modalOverlay .modalWrap{
     position: absolute;

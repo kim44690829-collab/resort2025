@@ -721,7 +721,7 @@ button{
 
 
 .detail-wrap .detail-content .detail-right{
-    position: static;
+    position: relative;
     margin-top: 25px;
     margin-left: 3.5%;
 }
@@ -730,6 +730,7 @@ button{
     top: 20px;
     align-self: flex-start;
     width: 318px;
+    z-index: 999999999999;
 }
 .detail-wrap .detail-content .detail-right .hotel-day{
     padding: 25px 30px;
