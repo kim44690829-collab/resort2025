@@ -61,7 +61,7 @@
     padding: 10px 0 10px 0;
 }
 .Header_container .menus  .menus_sub > .domestic-hotels,
-.Header_container .menus  .menus_sub > .wishList_menu,
+.Header_container .menus  .menus_sub .wishList_menu,
 .Header_container .menus  .menus_sub > .international-hotels,
 .Header_container .menus  .menus_sub .support-center{
     width: 200px;

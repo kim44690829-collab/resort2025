@@ -9,7 +9,7 @@ import Calendar from './Calendar';
 export default function Main(){    
     // 2025-12-19 병합2
     // 호텔, 객실데이터 useContext로 가져오는 훅
-    const {RoomData, HotelData, DayData, setDayData} = useContext(ResortDateContext);
+    const {RoomData, HotelData, DayData, setDayData, wish, wishHandler} = useContext(ResortDateContext);
     // 호텔 input에 들어가는 지역, 호텔명 상태변수
     const [hotelInput, setHotelInput] = useState('');
     // 호텔 input 아래 모달 상태변수
@@ -42,7 +42,7 @@ export default function Main(){
     // 관광명소 슬라이드
     const [slideMove2, setSlideMove2] = useState(0)
     // 평점 슬라이드
-    const [slideMove3, setSlideMove3] = useState(0)
+    // const [slideMove3, setSlideMove3] = useState(0)
     // 중간 배너 슬라이드
     const [slideMove4, setSlideMove4] = useState(0)
 
@@ -74,13 +74,18 @@ export default function Main(){
 
     // 관광명소 map돌리기 위한 오브젝트 배열
     const popularSpot = [
-        {id:1, image:'/mainImg/b-1.jpg', cityName: '서울', cityInfo:'전통 문화유산과 현대적인 도시 문화가 한곳에 공존하는 도시!'},
-        {id:2, image:'/mainImg/c-1.jpg', cityName: '제주도', cityInfo:'아름다운 자연경관과 휴양·체험 관광을 동시에 즐길 수 있는 섬!'},
-        {id:3, image:'/mainImg/d-1.jpg', cityName: '부산', cityInfo:'바다와 도심이 어우러진 해양 관광! 맛있는 먹거리까지!'},
-        {id:4, image:'/mainImg/e-1.jpg', cityName: '삿포로', cityInfo:'사계절 뚜렷한 자연! 특히 겨울의 축제는 일품!'},
-        {id:5, image:'/mainImg/f-1.jpg', cityName: '뉴욕', cityInfo:'세계적인 문화·예술·엔터테인먼트를 경험할 수 있습니다!'},
-        {id:6, image:'/mainImg/g-1.jpg', cityName: '파리', cityInfo:'한 도시에 역사적인 건축물과 예술적 분위기를 한번에!'},
+        {id:1, image:'/mainImg/b-1.jpg', cityNameE:'Seoul', cityName: '서울', cityInfo:'전통 문화유산과 현대적인 도시 문화가 한곳에 공존하는 도시!'},
+        {id:2, image:'/mainImg/c-1.jpg', cityNameE:'Jeju', cityName: '제주도', cityInfo:'아름다운 자연경관과 휴양·체험 관광을 동시에 즐길 수 있는 섬!'},
+        {id:3, image:'/mainImg/d-1.jpg', cityNameE:'Busan', cityName: '부산', cityInfo:'바다와 도심이 어우러진 해양 관광! 맛있는 먹거리까지!'},
+        {id:4, image:'/mainImg/e-1.jpg', cityNameE:'Sapporo', cityName: '삿포로', cityInfo:'사계절 뚜렷한 자연! 특히 겨울의 축제는 일품!'},
+        {id:5, image:'/mainImg/f-1.jpg', cityNameE:'NewYork', cityName: '뉴욕', cityInfo:'세계적인 문화·예술·엔터테인먼트를 경험할 수 있습니다!'},
+        {id:6, image:'/mainImg/g-1.jpg', cityNameE:'Paris', cityName: '파리', cityInfo:'한 도시에 역사적인 건축물과 예술적 분위기를 한번에!'},
     ];
+
+    // 호텔 해외 필터
+    const overseas = HotelData.filter(item => item.country !== 'Korea' && item.score >= 4);
+    const overseasRate = [...overseas].sort((a,b) => b.score - a.score);
+    console.log(overseas)
 
     // 호텔 타입 모달 - map
     useEffect(() => {
@@ -103,9 +108,11 @@ export default function Main(){
             item.city === 'Sapporo' ? '삿포로' : 
             item.city === 'NewYork' ? '뉴욕' : 
             item.city === 'Paris' ? '파리' : 
-            null )=== popularSpot[spotModalOpen2].cityName)
+            null ) === popularSpot[spotModalOpen2].cityName && item.score >= 4)
         setCityAndHotel(hotel_modal2)
     }, [spotModalOpen])
+
+    const hotelCityRating = [...cityAndHotel].sort((a,b) => b.score - a.score);
 
     // 호텔 평점순으로 재배열
     const hotelRating = [...HotelData].sort((a,b) => b.score - a.score);
@@ -113,7 +120,8 @@ export default function Main(){
     // 버튼을 클릭한 횟수를 저장하는 상태변수
     const [btnCount1, setBtnCount1] = useState(0);
     const [btnCount2, setBtnCount2] = useState(0);
-    const [btnCount3, setBtnCount3] = useState(0);
+    // const [btnCount3, setBtnCount3] = useState(0);
+    const [btnCount4, setBtnCount4] = useState(0);
 
     // 왼쪽, 오른쪽을 클릭했을때 조건을 만족하면 버튼을 없애는 함수
     const handleRightClick = (num) => {
@@ -121,8 +129,8 @@ export default function Main(){
             setBtnCount1(prev => prev + 1)
         }else if(btnCount2 < 3 && num === 2){
             setBtnCount2(prev => prev + 1)
-        }else if(btnCount3 < 7 && num === 3){
-            setBtnCount3(prev => prev + 1)
+        }else if(btnCount4 < 9 && num === 4){
+            setBtnCount4(prev => prev + 1)
         }else{
             null
         }
@@ -133,8 +141,8 @@ export default function Main(){
             setBtnCount1(prev => prev - 1)
         }else if(btnCount2 > 0 && num === 2){
             setBtnCount2(prev => prev - 1)
-        }else if(btnCount3 > 0 && num === 3){
-            setBtnCount3(prev => prev - 1)
+        }else if(btnCount4 > 0 && num === 4){
+            setBtnCount4(prev => prev - 1)
         }else{
             null
         }
@@ -148,8 +156,6 @@ export default function Main(){
             // console.log(slideMove1);
         }else if(slideMove2 < 0 && num === 2){
             setSlideMove2(slideMove2 + 400)
-        }else if(slideMove3 < 0 && num === 3){
-            setSlideMove3(slideMove3 + 400)
         }else if(slideMove4 < 0 && num === 4){
             setSlideMove4(slideMove4 + 635)
         }else{
@@ -161,8 +167,6 @@ export default function Main(){
             setSlideMove1(slideMove1 - 300)
         }else if(slideMove2 > -1200 && num === 2){
             setSlideMove2(slideMove2 - 400)
-        }else if(slideMove3 > -4000 && num === 3){
-            setSlideMove3(slideMove3 - 400)
         }else if(slideMove4 > -5715 && num === 4){
             setSlideMove4(slideMove4 - 635)
         }else{
@@ -320,81 +324,96 @@ export default function Main(){
                 </div>
             </div>
             {/* 호텔 유형에 따라 나눔 */}
-            <ul className='hotel_type'>
-                {hotelType.map((item) => (
-                    <li key={item.id} className='accomCat'>
-                        <img src={item.image} style={{width:'231px', height:'240px', borderRadius:'10px'}} onMouseOver={() => setHotelTypeMask(item.id)} />
-                        <span className='HotelImg'>{item.typeName}</span>
-                        {hotelTypeMask === item.id && 
-                        <div className='hTypeMask'  onMouseLeave={() => setHotelTypeMask(null)} onClick={() => {sethTypeModalOpen(item.id); sethTypeModalOpen2(item.id - 1)}}></div>
-                        }
-                        {/* 호텔 타입 클릭 후 모달 */}
-                        {htypeModalOpen === item.id && 
-                        <div className='hotelType_overlay' onClick={()=>{sethTypeModalOpen(null); setSpotModalOpen(0);}}>
-                            <div className='hTypeModal'>
-                                <h1 style={{textAlign:'center', margin:'30px', fontSize:'30px'}}>{item.typeName}</h1>
-                                <div className='hTypeModal_hotel'>
-                                    <ul className='Modal_hType_Ul'>
-                                        {typeAndHotel.slice(0,10).map((item) => (
-                                            <li key={item.id} className='Modal_hType_Li'>
-                                                <Link to = {`/detail/${item.id}`}>
-                                                    <div>
-                                                        <img src = {item.img[0]} alt={item.hotelName} className='Modal_hType_Img' />
-                                                    </div>
-                                                    <div className='Modal_hTypeText'>
-                                                        <p className='Modal_hTypeText1'>{item.type}</p>
-                                                        <p className='Modal_hTypeText2'>{item.hotelName}</p>
-                                                        {item.discount === 1 ? (
-                                                            <>
-                                                                <p className='discount1'><span className='red1'>10% 할인</span> <span className='origin-price1'>{item.price.toLocaleString()}원</span></p>
-                                                                <p className='final-price1'>{(item.price - (item.price*0.1)).toLocaleString()}원<span>/1박</span></p>
-                                                            </>
-                                                        ):(
-                                                            <>
-                                                                <p className='discount1'><span className='red1'>회원가입시 10,000원 할인쿠폰</span></p>
-                                                                <p className='final-price1'>{(item.price).toLocaleString()}원<span>/1박</span></p>
-                                                            </>
-                                                        )}
-                                                    </div>
-                                                </Link>
-                                                <button type='button' className='wishBtn1'>
-                                                    <i className="fa-solid fa-heart"></i>
-                                                </button>
-                                            </li> 
-                                        ))}
-                                    </ul>
+            <div className='hotelTypeWrap'>
+                <div className='hotelTypeTitle'>
+                    <p style={{fontSize:'30px', fontWeight:'700'}}>숙소 유형</p>
+                </div>
+                <div>
+                    <ul className='hotel_type'>
+                        {hotelType.map((item) => (
+                            <li key={item.id} className='accomCat'>
+                                <img src={item.image} style={{width:'231px', height:'240px', borderRadius:'10px'}} onMouseOver={() => setHotelTypeMask(item.id)} />
+                                <span className='HotelImg'>{item.typeName}</span>
+                                {hotelTypeMask === item.id && 
+                                <div className='hTypeMask'  onMouseLeave={() => setHotelTypeMask(null)} onClick={() => {sethTypeModalOpen(item.id); sethTypeModalOpen2(item.id - 1)}}></div>
+                                }
+                                {/* 호텔 타입 클릭 후 모달 */}
+                                {htypeModalOpen === item.id && 
+                                <div className='hotelType_overlay'>
+                                    <div className='hTypeModal'>
+                                        <h1 style={{textAlign:'center', margin:'30px', fontSize:'30px'}}>{item.typeName}</h1>
+                                        <div className='hTypeModal_hotel'>
+                                            <ul className='Modal_hType_Ul'>
+                                                {typeAndHotel.slice(0,10).map((item) => (
+                                                    <li key={item.id} className='Modal_hType_Li'>
+                                                        <Link to = {`/detail/${item.id}`}>
+                                                            <div>
+                                                                <img src = {item.img[0]} alt={item.hotelName} className='Modal_hType_Img' />
+                                                            </div>
+                                                            <div className='Modal_hTypeText'>
+                                                                <p className='Modal_hTypeText1'>{item.type}</p>
+                                                                <p className='Modal_hTypeText2'>{item.hotelName}</p>
+                                                                {item.discount === 1 ? (
+                                                                    <>
+                                                                        <p className='discount1'><span className='red1'>10% 할인</span> <span className='origin-price1'>{item.price.toLocaleString()}원</span></p>
+                                                                        <p className='final-price1'>{(item.price - (item.price*0.1)).toLocaleString()}원<span>/1박</span></p>
+                                                                    </>
+                                                                ):(
+                                                                    <>
+                                                                        <p className='discount1'><span className='red1'>회원가입시 10,000원 할인쿠폰</span></p>
+                                                                        <p className='final-price1'>{(item.price).toLocaleString()}원<span>/1박</span></p>
+                                                                    </>
+                                                                )}
+                                                            </div>
+                                                        </Link>
+                                                        <button type='button' className='wishBtn1' onClick={()=>wishHandler(item.id)}>
+                                                        <i className="fa-solid fa-heart" style={
+                                                        wish.find((hotel) => hotel.id === Number(item.id)) ?
+                                                            {color:'#f94239'}
+                                                        :
+                                                            {color:'#6b6b6b'}
+                                                        
+                                                        }></i>
+                                                        </button>
+                                                    </li> 
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <button type='button' onClick={()=>{sethTypeModalOpen(null)}} className='hTypeModal_Xbtn'>
+                                            <i class="fa-solid fa-x"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                                <button type='button' onClick={()=>{setSpotModalOpen(null)}} className='hTypeModal_Xbtn'>
-                                    <i class="fa-solid fa-x"></i>
-                                </button>
-                            </div>
-                        </div>
-                        }  
-                    </li>
-                ))}
-            </ul>
+                                }  
+                            </li>
+                        ))}
+                    </ul>
+                </div>    
+            </div>
             {/* 인기 호텔 모음 */}
             <div className='popularAccom'>
-                <p className='popularAccomTitle'>인기 스테이 PICK!</p>
+                <p className='popularAccomTitle'>해외 인기 스테이 PICK!</p>
                 <div className='popularAccomSub1'>
                     {/* 왼쪽 슬라이드 버튼 */}
                     {btnCount1 > 0 &&
                         <button type='button' className='leftBtn1' onClick={() => {leftSlide(1); handleLeftClick(1);}}> 
-                            <i className="bi bi-arrow-left-circle" style={{fontSize:'30px'}}></i>
+                            <i className="fa-solid fa-angle-right"></i>
                         </button>
                     }
-                    {/* 호텔 map */}
+                    {/* 해외 호텔 map */}
                     <div className='slideBox'>
                         <ul className='popularAccomSub2' style={{marginLeft:`${slideMove1}px`}} >
-                            {HotelData.slice(0,4).map((item) => (
+                            {overseasRate.slice(0,4).map((item) => (
                                     <li key={item.id} style={{cursor:'pointer'}} className='popularAccomSub3'>
                                         <Link to = {`/detail/${item.id}`}>
-                                            <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' />
+                                            {/* <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' /> */}
+                                            <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
                                             <p className='popularAccom_type'>{item.type}</p>
                                             <p className='popularAccom_name'>{item.hotelName}</p>
                                             <div className='popularAccom_review'>
                                                 <span className='popularAccom_score'>
-                                                    <img src='/img/star-one.png' alt='star' style={{width:'15px', height:'15px'}}/>
+                                                    {/* <img src='/img/star-one.png' alt='star' style={{width:'15px', height:'15px'}}/> */}
+                                                    <i className="fa-solid fa-star"></i>
                                                     <span className='starScore'>{item.score}</span>
                                                 </span>
                                                 <span className='popularAccom_count'>{item.scoreCount.toLocaleString()}명 참여</span>
@@ -411,12 +430,18 @@ export default function Main(){
                                                 </>
                                             )}
                                         </Link>
-                                        <button type='button' className='wishBtn2'>
-                                            <i className="fa-solid fa-heart"></i>
+                                        <button type='button' className='wishBtn2' onClick={()=>wishHandler(item.id)}>
+                                        <i className="fa-solid fa-heart" style={
+                                        wish.find((hotel) => hotel.id === Number(item.id)) ?
+                                            {color:'#f94239'}
+                                        :
+                                            {color:'#6b6b6b'}
+                                        
+                                        }></i>
                                         </button>
                                     </li>
                             ))}
-                            {HotelData.slice(61,64).map((item) => (
+                            {overseasRate.slice(20,24).map((item) => (
                                 <li key={item.id} style={{cursor:'pointer'}} className='popularAccomSub3'>
                                     <Link to = {`/detail/${item.id}`}>
                                         <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
@@ -424,7 +449,7 @@ export default function Main(){
                                         <p className='popularAccom_name'>{item.hotelName}</p>
                                         <div className='popularAccom_review'>
                                             <span className='popularAccom_score'>
-                                                <img src='/img/star-one.png' alt='star' style={{color:'red'}}/>
+                                                <i className="fa-solid fa-star"></i>
                                                 <span className='starScore'>{item.score}</span>
                                             </span>
                                             <span className='popularAccom_count'>{item.scoreCount.toLocaleString()}명 참여</span>
@@ -441,12 +466,18 @@ export default function Main(){
                                             </>
                                         )}
                                     </Link>
-                                    <button type='button' className='wishBtn2'>
-                                        <i className="fa-solid fa-heart"></i>
+                                    <button type='button' className='wishBtn2' onClick={()=>wishHandler(item.id)}>
+                                    <i className="fa-solid fa-heart" style={
+                                    wish.find((hotel) => hotel.id === Number(item.id)) ?
+                                        {color:'#f94239'}
+                                    :
+                                        {color:'#6b6b6b'}
+                                    
+                                    }></i>
                                     </button>
                                 </li>
                             ))}
-                            {HotelData.slice(100,103).map((item) => (
+                            {overseasRate.slice(30,33).map((item) => (
                                 <li key={item.id} style={{cursor:'pointer'}} className='popularAccomSub3'>
                                     <Link to = {`/detail/${item.id}`}>
                                         <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
@@ -454,7 +485,7 @@ export default function Main(){
                                         <p className='popularAccom_name'>{item.hotelName}</p>
                                         <div className='popularAccom_review'>
                                             <span className='popularAccom_score'>
-                                                <img src='/img/star-one.png' alt='star' style={{color:'#fff'}}/>
+                                                <i className="fa-solid fa-star"></i>
                                                 <span className='starScore'>{item.score}</span>
                                             </span>
                                             <span className='popularAccom_count'>{item.scoreCount.toLocaleString()}명 참여</span>
@@ -471,8 +502,14 @@ export default function Main(){
                                             </>
                                         )}
                                     </Link>
-                                    <button type='button' className='wishBtn2'>
-                                        <i className="fa-solid fa-heart"></i>
+                                    <button type='button' className='wishBtn2' onClick={()=>wishHandler(item.id)}>
+                                    <i className="fa-solid fa-heart" style={
+                                    wish.find((hotel) => hotel.id === Number(item.id)) ?
+                                        {color:'#f94239'}
+                                    :
+                                        {color:'#6b6b6b'}
+                                    
+                                    }></i>
                                     </button>
                                 </li>
                             ))}
@@ -481,78 +518,55 @@ export default function Main(){
                     {/* 오른쪽 슬라이드 버튼 */}
                     {btnCount1 < 6 && 
                         <button type='button' className='rightBtn1' onClick={() => {rightSlide(1); handleRightClick(1);}}>
-                            <i className="bi bi-arrow-right-circle" style={{fontSize:'30px'}}></i>
+                            <i className="fa-solid fa-angle-right"></i>
                         </button>
                     }
                 </div>
             </div>
-            {/* EcoStay 회원만의 특별한 혜택 */}
-            <div className='EcoMember'>
-                <img src='middleBenner.jpg' alt='middleBenner' />
-                <div className='EcoMemberInfo'>
-                    <p className='EcoMemberInfo-1'><span className='EcoMemberInfo-1' style={{fontWeight:'600', fontSize:'40px'}}>EcoMembers</span> 할인와 함께<br/> 특별한 여행 해보세요!</p>
-                    <p className='EcoMemberInfo-2'>오직 EcoStay 회원에게만의 특별한 혜택!</p>
-                </div>
-                <div className='EcoMemberHotel'>
-                    <button type='button' className='leftBtn4' onClick={() => leftSlide(4)}>
-                        <i className="bi bi-arrow-left-circle" style={{fontSize:'30px'}}></i>
-                    </button>
-                    <div className='EcoMemberUlBox'>
-                        <ul className='EcoMemberHotelAll' style={{marginLeft:`${slideMove4}px`}}>
-                            {HotelData.slice(0,10).map((item) => (
-                            <li key={item.id} className='EcoMemberHotelAllLi'>
-                                <Link to = {`/detail/${item.id}`} className='EcoMemberA'>
-                                    <img src={item.img[0]} alt={item.hotelName} style={{width:'285px', height:'230px',borderRadius:'10px 0 0 10px'}}/>
-                                    <div className='EcoMemberHotelAll-2'>
-                                        <span className='bennerType'>{item.type}</span><br/>
-                                        <p className='bennerClub'>[EcoMembers]</p>
-                                        <span className='bennerHotelName'>{item.hotelName}</span>
-                                        <p className='bennerText'>- 가족여행 추천</p>
-                                        <p className='bennerText'>- 10% 할인</p>
-                                        <span className='bennerPrice1'>{(item.price - item.price * 0.1).toLocaleString()}</span> <span className='bennerPrice1-1'>원 ~</span>
-                                        <span className='bennerPrice2'>{item.price}원</span><span className='bennerPrice2-1'>~</span> 
-                                    </div>
-                                </Link>
-                            </li> 
-                            ))}
-                        </ul>
-                    </div>
-                    <button type='button' className='rightBtn4' onClick={() => rightSlide(4)}>
-                        <i className="bi bi-arrow-right-circle" style={{fontSize:'30px'}}></i>
-                    </button>
-                </div>
-            </div>
-            {/* 관광명소 - 근처 숙소 */}
+            {/* 평점 - 호텔 평점순 */}
             <div className='spotsAndStays'>
-                <p className='spotsAndStaysTitle'>관광명소 - 근처 숙소(수정할예정)</p>
+                <p className='spotsAndStaysTitle'>지역 평점 TOP!</p>
                 <div className='spotsAndStaysAll'>
                     {/* 왼쪽 슬라이드 버튼 */}
                     {btnCount2 > 0 &&
                         <button type='button' className='leftBtn2' onClick={() => {leftSlide(2); handleLeftClick(2)}}>
-                            <i className="bi bi-arrow-left-circle" style={{fontSize:'30px'}}></i>
+                            <i className="fa-solid fa-angle-right"></i>
                         </button>
                     }
                     <div className='citySpotsBox'>
                         <ul className='citySpots' style={{marginLeft:`${slideMove2}px`}}>
                             {popularSpot.map((item) => (
                                 <li key={item.id} style={{cursor:'pointer'}} className='SpotsWrap' >
-                                    <img src={item.image} style={{width:'390px', height:'500px'}} className='citySpotImg' onMouseOver={() => setCitySpotMask(item.id)}/>
+                                    <div className='ratingItemWrapper'>
+                                        <img src={item.image} className='citySpotImg' /* onMouseOver={() => setCitySpotMask(item.id)} */ onClick={() => {setSpotModalOpen(item.id); setSpotModalOpen2(item.id - 1)}}/>
+                                        <div className='ratingLabel'>
+                                            <img src='/label.png' alt='label'/>
+                                            <span className='hotelRatingScore'>
+                                                고객<br/> 평점<br/> <span className='rating'>4.0+</span>
+                                            </span>
+                                        </div>
+                                        <div className='hotelRating_each_sub2'>
+                                            <span style={{display:'inline-block', marginBottom:'5px', fontSize:'13px', color:'#42799b', fontWeight:'700'}}>{item.cityNameE}</span> <br/>
+                                            <span style={{display:'inline-block', marginBottom:'10px', fontSize:'23px', color:'#42799b', fontWeight:'700'}}>{item.cityName}</span> <br/>
+                                            <span style={{display:'inline-block', marginBottom:'10px', fontSize:'15px'}}>{item.cityInfo}</span>
+                                        </div>
+                                    </div>
                                     {/* 마스크 */}
-                                    {citySpotMask === item.id && 
+                                    {/* {citySpotMask === item.id && 
                                     < div className='SpotsMask'  onMouseLeave={() => setCitySpotMask(null)} onClick={() => {setSpotModalOpen(item.id); setSpotModalOpen2(item.id - 1)}}>
                                         <p className='maskCity'>{item.cityName}</p>
                                         <p className='maskCityInfo'>{item.cityInfo}</p>
-                                    </div>}
-                                    {/* 관광명소 클릭 후 모달 */}
+                                    </div>} */}
+                                    {/* 평점순 클릭 후 모달 */}
                                     {spotModalOpen === item.id && 
-                                    <div className='overlay' onClick={()=>{setSpotModalOpen(null); setSpotModalOpen2(0);}}>
+                                    <div className='overlay'>
                                         <div className='spotsModal'>
                                             <div className='spotsModal_in'>
                                                 <img src={item.image} alt={item.cityName} className='modalImg'/>
                                             </div>
                                             <div className='spotsModal_hotel'>
                                                 <ul className='Modal_hotel_Ul'>
-                                                    {cityAndHotel.map((item) => (
+                                                    {hotelCityRating.map((item) => (
                                                         <li key={item.id} className='Modal_hotel_Li'>
                                                             <Link to = {`/detail/${item.id}`} className='hotelLink'>
                                                             <div>
@@ -574,8 +588,14 @@ export default function Main(){
                                                                 )}
                                                             </div>
                                                             </Link>
-                                                            <button type='button' className='wishBtn3'>
-                                                                <i className="fa-solid fa-heart"></i>
+                                                            <button type='button' className='wishBtn3' onClick={()=>wishHandler(item.id)}>
+                                                            <i className="fa-solid fa-heart wishBtn3-1" style={
+                                                            wish.find((hotel) => hotel.id === Number(item.id)) ?
+                                                                {color:'#f94239'}
+                                                            :
+                                                                {color:'#6b6b6b'}
+                                                            
+                                                            }></i>
                                                             </button>
                                                         </li> 
                                                     ))}
@@ -594,18 +614,18 @@ export default function Main(){
                     {/* 오른쪽 슬라이드 버튼 */}
                     {btnCount2 < 3 &&
                         <button type='button' className='rightBtn2' onClick={() => {rightSlide(2); handleRightClick(2);}}>
-                            <i className="bi bi-arrow-right-circle" style={{fontSize:'30px'}}></i>
+                            <i className="fa-solid fa-angle-right"></i>
                         </button>
                     }
                 </div>
             </div>
             {/* 평점순 */}
-            <div className='staySortByRating'>
-                <p className='staySortByRating_title'>평점순(수정할예정)</p>
+            {/* <div className='staySortByRating'>
+                <p className='staySortByRating_title'>평점 TOP</p>
                 <div className='hotelRating_desc'>
                     {btnCount3 > 0 && 
                         <button type='button' className='leftBtn3' onClick={() => {leftSlide(3);  handleLeftClick(3);}}>
-                            <i className="bi bi-arrow-left-circle" style={{fontSize:'30px', color:''}}></i>
+                            <i className="fa-solid fa-angle-right"></i>
                         </button>
                     }
                     <div className='hotelRatingBox'>
@@ -614,14 +634,14 @@ export default function Main(){
                                 <li key={item.id} className='hotelRating_each_sub' style={{cursor:'pointer'}}>
                                     <Link to = {`/detail/${item.id}`}>
                                         <div className='ratingItemWrapper'>
-                                            <img src='/img/5-1.jpg' alt={item.hotelName} className='hotelRatingImg' />
-                                            <div className='ratingLabel'>
+                                            <img src='/img/5-1.jpg' alt={item.hotelName} className='hotelRatingImg' /> */}
+                                            {/* <div className='ratingLabel'>
                                                 <img src='/label.png' alt='label'/>
                                                 <span className='hotelRatingScore'>
                                                     고객<br/> 평점<br/>{item.score >= 5 ? '5.0' : item.score}
                                                 </span>
-                                            </div>
-                                            <div className='hotelRating_each_sub2'>
+                                            </div> */}
+                                            {/* <div className='hotelRating_each_sub2'>
                                                 <span style={{display:'inline-block', marginBottom:'10px', fontSize:'14px', color:'#42799b'}}>{item.country} / {item.city}</span> <br/>
                                                 <span style={{display:'inline-block', marginBottom:'10px', fontSize:'22px'}}>{item.hotelName}</span> <br/>
                                                 <span style={{fontWeight:'700', marginLeft:'130px', fontSize:'18px'}}>{item.price.toLocaleString()} ~</span>
@@ -634,13 +654,50 @@ export default function Main(){
                     </div>
                     {btnCount3 < 7 && 
                         <button type='button' className='rightBtn3' onClick={() => {rightSlide(3); handleRightClick(3);}}>
-                            <i className="bi bi-arrow-right-circle" style={{fontSize:'30px'}}></i>
+                            <i className="fa-solid fa-angle-right"></i>
                         </button>
                     }
                 </div>
-            </div>
-            <div className='eventBanner'>
-                <img src='../public/img/22-1.jpg' style={{width:'1920px', height:'400px'}} />
+            </div> */}
+            {/* EcoStay 회원만의 특별한 혜택 */}
+            <div className='EcoMember'>
+                <img src='middleBenner.jpg' alt='middleBenner' />
+                <div className='EcoMemberInfo'>
+                    <p className='EcoMemberInfo-1'><span style={{fontSize:'40px', fontWeight:'bold'}}>[EcoStay]</span> 한정! 지금 뜬 호텔 특가!</p>
+                    <p className='EcoMemberInfo-2'>놓치면 끝! 한정 수량 할인 중인 숙소를 모았어요</p>
+                </div>
+                <div className='EcoMemberHotel'>
+                    {btnCount4 > 0 &&
+                        <button type='button' className='leftBtn4' onClick={() => {leftSlide(4); handleLeftClick(4);}}>
+                            <i className="fa-solid fa-angle-right"></i>
+                        </button>
+                    }
+                    <div className='EcoMemberUlBox'>
+                        <ul className='EcoMemberHotelAll' style={{marginLeft:`${slideMove4}px`}}>
+                            {HotelData.slice(0,10).map((item) => (
+                            <li key={item.id} className='EcoMemberHotelAllLi'>
+                                <Link to = {`/detail/${item.id}`} className='EcoMemberA'>
+                                    <img src={item.img[0]} alt={item.hotelName} style={{width:'285px', height:'230px',borderRadius:'10px 0 0 10px'}}/>
+                                    <div className='EcoMemberHotelAll-2'>
+                                        <span className='bennerType'>{item.type}</span><br/>
+                                        <p className='bennerClub'>[EcoStay]</p>
+                                        <span className='bennerHotelName'>{item.hotelName}</span>
+                                        <p className='bennerText'>- 가족여행 추천</p>
+                                        <p className='bennerText'>- 10% 할인</p>
+                                        <span className='bennerPrice1'>{(item.price - item.price * 0.1).toLocaleString()}</span> <span className='bennerPrice1-1'>원 ~</span>
+                                        <span className='bennerPrice2'>{item.price}원</span><span className='bennerPrice2-1'>~</span> 
+                                    </div>
+                                </Link>
+                            </li> 
+                            ))}
+                        </ul>
+                    </div>
+                    {btnCount4 < 9 &&
+                        <button type='button' className='rightBtn4' onClick={() => {rightSlide(4); handleRightClick(4);}}>
+                            <i className="fa-solid fa-angle-right"></i>
+                        </button>
+                    }
+                </div>
             </div>
         </div>
     )

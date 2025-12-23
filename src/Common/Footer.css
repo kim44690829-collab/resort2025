@@ -1,7 +1,6 @@
 .footer_container{
     /* width: 1980px; */
     width: 100%;
-    border-top: 1px solid red;
     margin-bottom: 100px;
     margin: 0 auto;
 }
@@ -25,6 +24,7 @@
 .instar_btn{
     border: none;
     width: 50px;
+    background-color: transparent;
 }
 .footer_container .footerInfo .footer_link .footer_sns .fa-youtube{
     font-size: 30px;
