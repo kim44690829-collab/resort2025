@@ -108,7 +108,7 @@ export default function Calendar(){
         const thisdate = new Date().getDate()
         const thismonth = new Date().getMonth()
 
-        if(selectMonth.getMonth()+1 === (thismonth)%12 && selectMonth.getFullYear()<=thisyears+1){ // 이번달 일때 달력에 오늘 일자가 들어간다
+        if(selectMonth.getMonth()+1 === (thismonth)%12 && selectMonth.getFullYear()<=thisyears){ // 이번달 일때 달력에 오늘 일자가 들어간다
             setSelectMonth(new Date(selectMonth.getFullYear(),selectMonth.getMonth() + 1,thisdate))
             console.log(selectMonth.getMonth()+1,'확인용1')
             console.log((thismonth)%12,'확인용1')
@@ -121,14 +121,20 @@ export default function Calendar(){
 
     //이전달 버튼
     const back =()=>{
-        const thisyears = new Date().getFullYear()
-        const thisdate = new Date().getDate()
-        const thismonth = new Date().getMonth()
+        const thisyears = new Date().getFullYear() // 오늘의 연도
+        const thisdate = new Date().getDate() //오늘의 날짜
+        const thismonth = new Date().getMonth() //오늘의 월
 
         console.log(selectMonth.getFullYear())
         console.log(thisyears)
 
-        if(selectMonth.getMonth()>=thismonth){
+        if(selectMonth.getFullYear() === thisyears && selectMonth.getMonth() === thismonth+1){
+            setSelectMonth(new Date(selectMonth.getFullYear(),selectMonth.getMonth() - 1,thisdate))
+        }else if(selectMonth.getFullYear()>thisyears+1 || selectMonth.getMonth()>=3){
+            setSelectMonth(new Date(selectMonth.getFullYear(),selectMonth.getMonth() - 1,1))
+        }
+
+        /* if(selectMonth.getMonth()>=thismonth){ //선택되었는는 월이 오늘의 월보다 클때
             setSelectMonth(new Date())
             console.log(thismonth)
             console.log(selectMonth.getMonth())
@@ -136,7 +142,7 @@ export default function Calendar(){
             setSelectMonth(new Date(selectMonth.getFullYear(),selectMonth.getMonth() - 1,thisdate))
         }else{
             setSelectMonth(new Date(selectMonth.getFullYear(),selectMonth.getMonth() - 1,1))
-        }
+        } */
         /* if(selectMonth.getMonth()===thismonth){ //선택된 월과 이번달이 같으면
             setSelectMonth(new Date(selectMonth.getFullYear(),selectMonth.getMonth() - 1,1))
         }else{
@@ -148,7 +154,9 @@ export default function Calendar(){
     //왼쪽달력
     const leftcal =(items,item,years)=>{
         const selectDateCopy = [...selectDate]
-        if(selectDateCopy.length<2 ){
+        const selectdayCopy = [...selectday]
+        //console.log(selectDateCopy.findIndex((f)=>f===`${selectMonth.getFullYear()}-${selectMonth.getMonth()+1}-${items}`))
+        if(selectDateCopy.length<2 && selectDateCopy.findIndex((f)=>f===`${selectMonth.getFullYear()}-${selectMonth.getMonth()+1}-${items}`) !== 0){
             selectDateCopy.push(`${selectMonth.getFullYear()}-${selectMonth.getMonth()+1}-${items}`)
         }else{
             console.log(selectDateCopy)
@@ -159,10 +167,20 @@ export default function Calendar(){
        // console.log(selectDateCopy)
         selectDateCopy.sort((a,b)=> a-b)
        // console.log(selectDateCopy.sort())
-        setSelectDate(selectDateCopy.sort())
+       
+       let chking = ''
+       if(item<10 && items<10){
+            chking = `${years}-0${item}-0${items}`
+        }else if(item<10 && items >=10){
+            chking = `${years}-0${item}-${items}`
+        }else if(item>=10 && items <10){
+            chking = `${years}-${item}-0${items}`
+        }else{
+            chking = `${years}-${item}-${items}`
+        }
         
-        const selectdayCopy = [...selectday]
-        if(selectdayCopy.length<2){
+        
+        if(selectdayCopy.length<2 && selectdayCopy.findIndex((f)=>f===chking) !== 0){
             //selectdayCopy.push(`${years}-${item}-${items}`)
             if(item<10 && items<10){
                 selectdayCopy.push(`${years}-0${item}-0${items}`)
@@ -173,12 +191,13 @@ export default function Calendar(){
             }else{
                 selectdayCopy.push(`${years}-${item}-${items}`)
             }
-        }else(
+        }else{
             selectdayCopy.splice(0,2)
-        )
+            console.log('aa')
+        }
         console.log(selectdayCopy)
         
-        
+        setSelectDate(selectDateCopy.sort())
         setSelectday(selectdayCopy.sort())
         console.log(selectdayCopy.sort())
         console.log(`${selectMonth.getFullYear()}-${selectMonth.getMonth()+1<10?`0${selectMonth.getMonth()+1}`:selectMonth.getMonth()+1}-${items<10?'0'+items:items}`)
@@ -186,21 +205,30 @@ export default function Calendar(){
     
     //오른쪽 달력
     const right = (items,item,years)=>{
-        
         const selectDateCopy = [...selectDate]
-        if(selectDateCopy.length<2){
+        const selectdayCopy = [...selectday]
+        if(selectDateCopy.length<2 && selectDateCopy.findIndex((f)=>f===`${nextMonth.getFullYear()}-${nextMonth.getMonth()+1}-${items}`) !== 0){
             selectDateCopy.push(`${nextMonth.getFullYear()}-${nextMonth.getMonth()+1}-${items}`);
-            
             
         }else{
             selectDateCopy.splice(0,2)
             //selectDateRemoveAll()
         }
         selectDateCopy.sort((a,b)=> a-b)
-        setSelectDate(selectDateCopy.sort())
 
-        const selectdayCopy = [...selectday]
-        if(selectdayCopy.length<2){
+        let chking = ''
+       if(item<10 && items<10){
+            chking = `${years}-0${item}-0${items}`
+        }else if(item<10 && items >=10){
+            chking = `${years}-0${item}-${items}`
+        }else if(item>=10 && items <10){
+            chking = `${years}-${item}-0${items}`
+        }else{
+            chking = `${years}-${item}-${items}`
+        }
+
+        
+        if(selectdayCopy.length<2 && selectdayCopy.findIndex((f)=>f===chking) !== 0){// selectdayCopy의 요소가 2개보다 작고 중복되는게 없을때 push
             if(item<10 && items<10){
                 selectdayCopy.push(`${years}-0${item}-0${items}`)
             }else if(item<10 && items >=10){
@@ -210,10 +238,11 @@ export default function Calendar(){
             }else{
                 selectdayCopy.push(`${years}-${item}-${items}`)
             }
-        }else(
+        }else{
             selectdayCopy.splice(0,2)
-        )
+        }
         console.log(selectdayCopy)
+        setSelectDate(selectDateCopy.sort())
         setSelectday(selectdayCopy.sort())
         console.log(`${selectMonth.getFullYear()}-${nextMonth.getMonth()+1<10?`0${nextMonth.getMonth()+1}`:nextMonth.getMonth()+1}-${items<10?'0'+items:items}`)
         
@@ -241,7 +270,7 @@ export default function Calendar(){
                             {calArr.map((item,index) => (
                                     <tr key={index}>
                                         {item.map((items,index) => (
-                                            <td key={index} onClick={()=>leftcal(items,selectMonth.getMonth()+1,selectMonth.getFullYear())} 
+                                            <td key={index} onClick={()=>items!=='' && selectMonth.getDate()<=items?leftcal(items,selectMonth.getMonth()+1,selectMonth.getFullYear()):''} 
                                             className={
                                                 `${selectMonth.getDate()>items?''
                                                 :
@@ -284,7 +313,7 @@ export default function Calendar(){
                             {calArr02.map((item,index) => (
                                     <tr key={index}>
                                         {item.map((items,index) => (
-                                            <td key={index} onClick={()=>{right(items,nextMonth.getMonth()+1,nextMonth.getFullYear())}} style={{color:item[0]===items?'red':'black'}} 
+                                            <td key={index} onClick={()=>{items!==''?right(items,nextMonth.getMonth()+1,nextMonth.getFullYear()):''}} style={{color:item[0]===items?'red':'black'}} 
                                             className={
                                                 `${items===''?''
                                                 :
