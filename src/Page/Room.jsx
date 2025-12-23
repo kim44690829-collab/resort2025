@@ -197,7 +197,7 @@ export default function Room(){
         setmyhotel(maxfilter)
     },[maxPrice]) */
 
-
+    //병합 dkdkdkdk
     /* 필터의 항목 클릭시 적용 함수 */
     const filterHandeler=(item)=>{
         const myFilterCopy = [...myFilter]
