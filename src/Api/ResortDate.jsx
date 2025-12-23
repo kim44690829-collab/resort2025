@@ -6170,6 +6170,10 @@ export default function ResortDate({children}){
         }
     ];
 
+    // 휴대폰 번호 상태저장 변수
+    const [userNumFront, setUserNumFront] = useState('');
+    const [userNumBack, setUserNumBack] = useState('');
+
     const [DayData,setDayData] = useState(()=>{
         const saved = localStorage.getItem('DayData')
         //저장된 value가 있으면 복원, 없으면 빈 배열
@@ -6327,6 +6331,27 @@ export default function ResortDate({children}){
         
     },[wish]);        
         //console.log(wishArray);
+        // 로그인 한 후 닉네임 저장
+        const [userNickName, setUserNickName] = useState(null);
+
+        useEffect(() => {
+            const saveNickName = localStorage.getItem('userNickName');
+            if(saveNickName){
+                setUserNickName(JSON.parse(saveNickName))
+            }
+        },[]);
+
+        // 로그인
+        const loginSave = (userData) => {
+            setUserNickName(userData);
+            localStorage.setItem('userNickName', JSON.stringify(userData));
+        }
+
+        // 로그아웃
+        const logout = () => {
+            setUserNickName(null);
+            localStorage.removeItem('userNickName');
+        }
     
     //상세페이지- 예약하기 정보
     //인원수
@@ -6337,7 +6362,7 @@ export default function ResortDate({children}){
     
 
     return(
-        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler,payHead,setPayHead,payRoom,setPayRoom}}>
+        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler, payHead,setPayHead,payRoom,setPayRoom, userNumFront, setUserNumFront, userNumBack, setUserNumBack, userNickName, loginSave, logout}}>
             {children}
         </ResortDateContext.Provider>
     );

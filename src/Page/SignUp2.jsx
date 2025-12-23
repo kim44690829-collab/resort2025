@@ -1,8 +1,11 @@
 import '../Page/SignUp2.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { ResortDateContext } from '../Api/ResortDate';
 
 export default function SignUp2(){
+    // 가져오는 유저 핸드폰 데이터 
+    const {userNumFront, setUserNumFront, userNumBack, setUserNumBack} = useContext(ResortDateContext);
     // 휴대폰 인증번호 전송 버튼 클릭 후 인증번호 나타나게하는 상태변수
     const [phoneVerificationCode, setPhoneVerificationCode] = useState(false);
     // 휴대폰 번호를 작성해야 인증번호 전송 버튼을 활성화하는 상태변수
@@ -11,9 +14,7 @@ export default function SignUp2(){
     const [VerificationCode, setVerificationCode] = useState('');
     // 버튼 비활성화
     const [isDisabled, setIsDisabled] = useState(true);
-    // 휴대폰 번호 상태저장 변수
-    const [userNumFront, setUserNumFront] = useState('');
-    const [userNumBack, setUserNumBack] = useState('');
+    
     // 마우스 변경
     const [mouseCursor1, setMouseCursor1] = useState(false);
     const [mouseCursor2, setMouseCursor2] = useState(false);
@@ -59,9 +60,9 @@ export default function SignUp2(){
                 <label>
                     휴대폰 번호<span style={{color:'red'}}>*</span></label>
                 <div className='userPhone'>
-                    <input type='text' id='usertel' name='usertel' value='010' disabled style={{color:'black'}}/> <span>-</span>
-                    <input type='text' id='usertelFront' name='usertel' placeholder='1234' value={userNumFront} onChange={(e) => setUserNumFront(e.target.value)} /><span>-</span>
-                    <input type='text' id='usertelBack' name='usertel' placeholder='5678' value={userNumBack} onChange={(e) => setUserNumBack(e.target.value)} />
+                    <input type='text' id='usertel' name='usertel' value='010' disabled style={{color:'black'}} maxLength="3"/> <span>-</span>
+                    <input type='text' id='usertelFront' name='usertel' placeholder='1234' value={userNumFront} onChange={(e) => setUserNumFront(e.target.value)} maxLength="4" /><span>-</span>
+                    <input type='text' id='usertelBack' name='usertel' placeholder='5678' value={userNumBack} onChange={(e) => setUserNumBack(e.target.value)} maxLength="4" />
                 </div>
                 {/* 휴대폰 번호를 입력하면 나타나는 인증번호 코드 */}
                 {phoneVerificationCode &&

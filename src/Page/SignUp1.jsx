@@ -110,7 +110,7 @@ export default function SignUp1(){
                         overflow:'hidden', 
                         transition:'height 0.3s ease' 
                         }}>
-                    <p className='agreeContent1'>
+                    <div className='agreeContent1'>
                         <b className='contentTitle'>제1조 (용어의 정의)</b><br/>
                         <ol className='agreeContent1Ol'>
                             <li className='agreeContent1Li'>“이용자”란 본 약관에 따라 회사가 제공하는 서비스를 이용하는 회원 및 비회원을 말합니다.</li>
@@ -184,7 +184,7 @@ export default function SignUp1(){
                             <li className='agreeContent1Li'>회사와 이용자 간 분쟁은 상호 협의를 통해 해결하도록 노력합니다.</li>
                             <li className='agreeContent1Li'>협의가 이루어지지 않는 경우, 관련 법령에 따른 관할 법원을 제1심 관할 법원으로 합니다.</li>
                         </ol>
-                    </p>
+                    </div>
                 </div>
                 {/* 2번 항목 - 14세 이상 */}
                 <div className="agree1">
@@ -202,13 +202,13 @@ export default function SignUp1(){
                         overflow:'hidden', 
                         transition:'height 0.3s ease' 
                         }}>
-                    <p className='agreeContent2'>
+                    <div className='agreeContent2'>
                         <b  style={{color:'red'}}>EcoStay는 만 14세 미만 아동의 서비스 이용을 제한하고 있습니다.</b><br/>
                         개인정보 보호법에는 만 14세미만 아동의 개인정보 수집 시 <br/>
                         법정대리인 동의를 받도록 규정하고 있으며, <br/>
                         만 14세 미만 아동이 법정대리인 동의없이 회원가입을 하는 경우 <br/>
                         회원탈퇴 또는 서비스 이용이 제한될 수 있음을 알려드립니다.
-                    </p>
+                    </div>
                 </div>
                 
                 {/* 3번 항목 - 개인정보 수집 및 이용 동의 (필수) */}
@@ -227,7 +227,7 @@ export default function SignUp1(){
                         overflow:'hidden', 
                         transition:'height 0.3s ease' 
                         }}>
-                    <p className='agreeContent3'>
+                    <div className='agreeContent3'>
                         <b  style={{color:'red'}}>수집 및 이용 목적</b><br/>
                         <ul className='agreeContent3Ul'>
                             <li className='agreeContent3Li'>서비스 제공 및 이용 관리</li>
@@ -272,7 +272,7 @@ export default function SignUp1(){
                                 동의를 거부하실 경우 회원가입 및 서비스 이용이 제한됩니다.</li>
                             <li className='agreeContent3Li'>개인정보 처리와 관련한 자세한 사항은 <b>개인정보처리방침</b>을 통해 확인하실 수 있습니다.</li>
                         </ul>
-                    </p>
+                    </div>
                 </div>
                 {/* 4번 항목 - 개인정보 수집 및 이용 동의 (선택) */}
                 <div className="agree1">
@@ -290,7 +290,7 @@ export default function SignUp1(){
                         overflow:'hidden', 
                         transition:'height 0.3s ease' 
                         }}>
-                    <p className='agreeContent4'>
+                    <div className='agreeContent4'>
                         <b className='contentTitle' style={{color:'red'}}>수집 및 이용 목적</b><br/>
                         <ul className='agreeContent4Ul'>
                             <li className='agreeContent4Li'>서비스 제공 및 이용 관리</li>
@@ -315,7 +315,7 @@ export default function SignUp1(){
                                 동의를 거부하더라도 기본적인 서비스 이용에는 제한이 없습니다.</li>
                             <li className='agreeContent4Li'>개인정보 처리와 관련한 자세한 사항은 <b>개인정보처리방침</b>을 통해 확인하실 수 있습니다.</li>
                         </ul>
-                    </p>
+                    </div>
                 </div>
                 {/* 5번 항목 - 마케팅 알림 수신 */}
                 <div className="agree1">
@@ -333,13 +333,13 @@ export default function SignUp1(){
                         overflow:'hidden', 
                         transition:'height 0.3s ease'
                         }}>
-                    <p className='agreeContent5'>
+                    <div className='agreeContent5'>
                         <b >
                             ㈜EcoStay는 이용자가 개인정보 수집 및 이용에 동의한 범위 내에서 <br/>
                             앱 푸시 알림, 이메일, 문자메시지, 카카오톡 등 전자적 전달 수단을 통해 <br/>
                             혜택 안내, 이벤트 정보, 맞춤형 프로모션 등 마케팅 정보를 제공할 수 있습니다.
                         </b><br/>
-                    </p>
+                    </div>
                     <p className='agreeContent5-1'>
                         본 동의는 선택 사항으로, 동의하지 않으셔도 서비스 이용에는 제한이 없습니다.
                         다만, 마케팅 수신 동의 이용자에게 제공되는 일부 혜택이나 이벤트 참여가 제한될 수 있습니다.
@@ -366,7 +366,7 @@ export default function SignUp1(){
                         overflow:'hidden', 
                         transition:'height 0.3s ease' 
                         }}>
-                    <p className='agreeContent6'>
+                    <div className='agreeContent6'>
                         <b className='contentTitle'>제1조 (위치기반 서비스의 내용)</b><br/>
                         <ol className='agreeContent6Ol'>
                             <li className='agreeContent6Li'>회사는 이용자의 위치 정보를 활용하여 다음과 같은 서비스를 제공합니다.
@@ -407,7 +407,7 @@ export default function SignUp1(){
                         <ol className='agreeContent6Ol'>
                             <li className='agreeContent6Li'>본 약관과 관련한 분쟁은 이용약관의 분쟁 해결 조항을 준용합니다.</li>
                         </ol>
-                    </p>
+                    </div>
                 </div>
                 {/* 다음 버튼 클릭시 휴대폰 인증 화면으로 이동 */}
                 <Link to='/SignUp2'>

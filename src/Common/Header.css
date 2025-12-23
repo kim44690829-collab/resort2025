@@ -2,7 +2,7 @@
 .Header_container{
     /* width: 1920px; */
     width: 100%;
-    height: 80px;
+    height: 65px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,6 +12,7 @@
     background-color: transparent;
     z-index: 700;
     top: 0;
+    background-color: #fff;
 }
 /* Header 우측 버튼 css */
 .Header_right{
@@ -22,7 +23,8 @@
     padding: 10px;
     cursor: pointer;
 }
-.Header_container .Header_right .HeaderBtn{
+.Header_container .Header_right .HeaderBtn,
+.Header_container .Header_right2 .HeaderBtn{
     margin-right: 5px;
     padding: 10px;
     border: none;
@@ -30,17 +32,29 @@
     cursor: pointer;
     background-color: transparent;
     font-weight: 600;
-
+}
+.Header_right2{
+    display: flex;
+}
+.login_nickName{
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #42799b;
+}
+.logoutBtn:hover{
+    text-decoration: underline;
+    color: #42799b;
 }
 /* 메뉴 클릭 시 모달 */
 .Header_container .menus{
     position: absolute;
-    top: 80px;
-    right: 0;
+    top: 60px;
+    right: 40px;
     width: 200px;
     /* height: 100vh; */
     z-index: 900;
-    background-color: rgba(255, 255, 255, 0.295);
+    background-color: #fff;
 }
 .Header_container .menus .menus_sub{
     margin: 0 auto;

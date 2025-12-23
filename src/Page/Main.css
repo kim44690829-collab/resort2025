@@ -7,9 +7,9 @@
 }
 .main_container .mainImgBenner .hotelSearch{
     width: 1200px;
-    height: 200px;
+    height: 100px;
     position: absolute;
-    bottom: -100px;
+    bottom: 200px;
     left: 350px;
     /* border: 1px solid blue; */
     z-index: 100;
@@ -21,7 +21,7 @@
 }
 .main_container .mainImgBenner .searchTitle{
     position: absolute;
-    top: 430px;
+    top: 230px;
     left: 348px;
     font-size: 30px;
     font-weight: 700;
@@ -42,7 +42,7 @@
 .main_container .mainImgBenner .hotelSearch .hotelInput{
     display: flex;
     justify-content: space-between;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     position: relative;
     /* border-top: 1px solid black; */
 }

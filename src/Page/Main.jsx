@@ -247,13 +247,13 @@ export default function Main(){
                 <div className='hotelSearch'>
                     
                     {/* 국내, 해외 change 버튼 */}
-                    <button type='button' className='koreaBtn hotelSearchBtn'>국내</button>
-                    <button type='button' className='globalBtn hotelSearchBtn'>해외</button>
+                    {/* <button type='button' className='koreaBtn hotelSearchBtn'>국내</button>
+                    <button type='button' className='globalBtn hotelSearchBtn'>해외</button> */}
                     {/* input form */}
                     <form className='hotelInput'>
                         <div className='hotelModal'>
                             <input type='text' id='citySearch' name='citySearch' 
-                            value={hotelInput} 
+                            value={hotelInput}
                             onChange={(e) => setHotelInput(e.target.value)}
                             onClick={() => setIsInput(true)}
                             placeholder='여행지나 숙소를 검색해주세요'
@@ -335,11 +335,11 @@ export default function Main(){
                                 <h1 style={{textAlign:'center', margin:'30px', fontSize:'30px'}}>{item.typeName}</h1>
                                 <div className='hTypeModal_hotel'>
                                     <ul className='Modal_hType_Ul'>
-                                        {typeAndHotel.map((item) => (
+                                        {typeAndHotel.slice(0,10).map((item) => (
                                             <li key={item.id} className='Modal_hType_Li'>
                                                 <Link to = {`/detail/${item.id}`}>
                                                     <div>
-                                                        <img src = '/img/1-1.jpg' alt={item.hotelName} className='Modal_hType_Img' />
+                                                        <img src = {item.img[0]} alt={item.hotelName} className='Modal_hType_Img' />
                                                     </div>
                                                     <div className='Modal_hTypeText'>
                                                         <p className='Modal_hTypeText1'>{item.type}</p>
@@ -556,7 +556,7 @@ export default function Main(){
                                                         <li key={item.id} className='Modal_hotel_Li'>
                                                             <Link to = {`/detail/${item.id}`} className='hotelLink'>
                                                             <div>
-                                                                <img src = '/img/1-1.jpg' alt={item.hotelName} className='Modal_hotel_Img' />
+                                                                <img src = {item.img[0]} alt={item.hotelName} className='Modal_hotel_Img' />
                                                             </div>
                                                             <div className='Modal_hotelText'>
                                                                 <p className='Modal_hotelText1'>{item.type}</p>
