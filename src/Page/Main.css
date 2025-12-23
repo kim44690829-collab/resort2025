@@ -7,9 +7,9 @@
 }
 .main_container .mainImgBenner .hotelSearch{
     width: 1200px;
-    height: 200px;
+    height: 100px;
     position: absolute;
-    bottom: -100px;
+    bottom: 200px;
     left: 350px;
     /* border: 1px solid blue; */
     z-index: 100;
@@ -21,7 +21,7 @@
 }
 .main_container .mainImgBenner .searchTitle{
     position: absolute;
-    top: 430px;
+    top: 230px;
     left: 348px;
     font-size: 30px;
     font-weight: 700;
@@ -42,7 +42,7 @@
 .main_container .mainImgBenner .hotelSearch .hotelInput{
     display: flex;
     justify-content: space-between;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     position: relative;
     /* border-top: 1px solid black; */
 }
@@ -57,6 +57,9 @@
     background-color: rgb(228, 228, 228);
     /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); */
 }
+/* .main_container .mainImgBenner .hotelSearch .hotelInput #citySearch:focus + ul.rankBox{
+    height: 430px;
+} */
 .main_container .mainImgBenner .hotelSearch .hotelInput #citySearch:hover{
     background-color: #cecece;
 }
@@ -65,7 +68,7 @@
 }
 .main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankName{
     display: inline-block;
-    width: 300px;
+    width: 420px;
 }
 /* 검색창 클릭시 나오는 지역 css */
 .main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .countryInRank,
@@ -94,9 +97,7 @@
 } */
 /* 검색창 li */
 .main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankBoxLi{
-    width: 400px;
     padding: 10px;
-
 }
 .main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankBoxLi .inputInfo{
     display: inline-block;

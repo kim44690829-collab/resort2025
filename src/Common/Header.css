@@ -23,7 +23,8 @@
     padding: 10px;
     cursor: pointer;
 }
-.Header_container .Header_right .HeaderBtn{
+.Header_container .Header_right .HeaderBtn,
+.Header_container .Header_right2 .HeaderBtn{
     margin-right: 5px;
     padding: 10px;
     border: none;
@@ -31,7 +32,19 @@
     cursor: pointer;
     background-color: transparent;
     font-weight: 600;
-
+}
+.Header_right2{
+    display: flex;
+}
+.login_nickName{
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #42799b;
+}
+.logoutBtn:hover{
+    text-decoration: underline;
+    color: #42799b;
 }
 /* 메뉴 클릭 시 모달 */
 .Header_container .menus{

@@ -1,8 +1,14 @@
 import '../Common/Login.css';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { ResortDateContext } from '../Api/ResortDate';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Login(){
+    // 공유 데이터
+    const {loginSave} = useContext(ResortDateContext)
+    const navigate = useNavigate();
     // 이메일, 비밀번호 저장 상태변수
     const [emailInput, setEmailInput] = useState('')
     const [pwInput, setPwInput] = useState('')
@@ -10,6 +16,31 @@ export default function Login(){
     const [isDisabledLogin, setIsDisabledLogin] = useState(true);
     // 마우스 변경
     const [mouseCursor, setMouseCursor] = useState(false);
+
+    const login = async (e) => {
+        e.preventDefault();
+        try{
+            const res = await axios.post('http://localhost/resort2025/backend/api/login.php',
+                {
+                    userEmail: emailInput,
+                    userPw: pwInput
+                }
+            );
+            console.log('로그인', res.data)
+            if(res.data.status === 'success'){
+                loginSave(res.data.nickname);
+                alert(`${res.data.nickname}님 환영합니다.`)
+                navigate('/');
+                setEmailInput('');
+                setPwInput('');
+            }else{
+                alert('로그인 실패')
+            }
+        }catch(error){
+            console.log('에러', error);
+            alert('서버 연결 오류');
+        }
+    }
 
     // 이메일, 비밀번호 onchange
     const emailHandeler = (e) => {
@@ -38,7 +69,7 @@ export default function Login(){
     return(
         <div className="Login_container">
             <h2 className='Login_title'>이메일로 시작하기</h2>
-            <form>
+            <form onSubmit={login}>
                 <div className='login_form'>
                     <label htmlFor="userEmail">
                         이메일<span style={{color:'red'}}>*</span>
