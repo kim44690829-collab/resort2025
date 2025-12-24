@@ -56,6 +56,53 @@ button{
     height: 150%;
 }
 
+.detail-wrap .detail-img li .hotel-img-slider{
+
+}
+.detail-wrap .detail-img li .hotel-img-slider .hotel-img{
+    width: 320px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 7px;
+    position: relative;
+}
+.detail-wrap .detail-img li .hotel-img-slider .hotel-img img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    transition: 0.3s;
+    visibility: hidden;
+    opacity: 0;
+}
+.detail-wrap .detail-img li .hotel-img-slider .hotel-img img.active{
+    visibility: visible;
+    opacity: 1;
+}
+.detail-wrap .detail-img li .hotel-img-slider .hotel-img-btn{
+    overflow: hidden;
+    padding-top: 15px;  
+}
+.detail-wrap .detail-img li .hotel-img-slider .hotel-img-btn *{
+    display: inline-block;
+}
+.detail-wrap .detail-img li .hotel-img-slider .hotel-img-btn .btn-left{
+    float: left;
+}
+.detail-wrap .detail-img li .hotel-img-slider .hotel-img-btn .btn-left .circle{}
+.detail-wrap .detail-img li .hotel-img-slider .hotel-img-btn .btn-left .circle span{
+    background-color: #a7a7a7;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.detail-wrap .detail-img li .hotel-img-slider .hotel-img-btn .btn-left .circle span.active{
+    background-color: #3d008c;
+}
+
+
 
 .detail-wrap .detail-title{
     overflow: hidden;
@@ -155,6 +202,7 @@ button{
 }
 .detail-wrap .detail-content .detail-left{
     width: 70%;
+    z-index: 0;
 }
 .detail-wrap .detail-content .detail-right{
     width: 26.5%;
@@ -730,7 +778,13 @@ button{
     top: 20px;
     align-self: flex-start;
     width: 318px;
-    z-index: 999999999999;
+    z-index: 99;
+}
+.detail-wrap .detail-content .detail-right.fixed .hotel-day{
+    margin-top: 70px;
+}
+.detail-wrap .detail-content .detail-right.fixed .calendar{
+    top: 70px;
 }
 .detail-wrap .detail-content .detail-right .hotel-day{
     padding: 25px 30px;
@@ -752,7 +806,8 @@ button{
 .detail-wrap .detail-content .detail-right .hotel-day .day-wrap .day-txt{
     float: right;
     font-weight: 600;
-    font-size: 17px;
+    font-size: 15px;
+    line-height: 0.8;
 }
 .detail-wrap .detail-content .detail-right .hotel-day button{
     background-color: #42799b;
@@ -1044,4 +1099,30 @@ button{
 .detail-wrap .recommend .right-arrow,
 .detail-wrap .wish .right-arrow{
     right: -20px;
+}
+
+
+.modalOverlay .modalWrap .hotel-map .map-title{
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+.modalOverlay .modalWrap .hotel-map .map-address{
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 33px;
+    margin-top: 10px;
+}
+.modalOverlay .modalWrap .hotel-map .map-address i{
+    color: #31688a;
+}
+.modalOverlay .modalWrap .hotel-map .map-address button{
+    border: 1px solid #e7e7e7;
+    background-color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 0 12px;
+    line-height: 33px;
+    margin-left: 10px;
 }
