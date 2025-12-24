@@ -1,7 +1,7 @@
 import '../Page/Main.css';
 import { useContext, useState, useEffect } from 'react';
 import cookie from 'js-cookie';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ResortDateContext } from '../Api/ResortDate';
 import 'leaflet/dist/leaflet.css';
 import Calendar from './Calendar';
@@ -87,6 +87,30 @@ export default function Main(){
     const overseasRate = [...overseas].sort((a,b) => b.score - a.score);
     console.log(overseas)
 
+    const {wishArray} = useContext(ResortDateContext);
+
+    //호텔의 객실별 투숙객 인원 불러오기
+    //위시리스트의 객실 리스트 필터링
+    const wishRoom = RoomData.filter((item)=> wishArray.some(w => w.hotelName === item.hotelName));
+    //console.log(wishRoom);    
+
+    const wishOccupancy = [];
+    //새 배열에 호텔명과 객실별 투숙객 수 담기
+    for(let i=0;i<wishRoom.length;i++){
+        wishOccupancy.push({hotelName: wishRoom[i].hotelName,maxOccupancy: wishRoom[i].maxOccupancy});
+    }
+    console.log(wishOccupancy);
+    // console.log(wishOccupancy.map(item=>item.hotelName === item.hotelName ?  ));
+
+    const wishMinMax = Object.values(
+        wishOccupancy.reduce((acc, { hotelName, maxOccupancy }) => {
+            acc[hotelName] ??= { hotelName, min: maxOccupancy, max: maxOccupancy };
+            acc[hotelName].min = Math.min(acc[hotelName].min, maxOccupancy);
+            acc[hotelName].max = Math.max(acc[hotelName].max, maxOccupancy);
+            return acc;
+        }, {})
+    );
+
     // 호텔 타입 모달 - map
     useEffect(() => {
         const hotel_modal1 = HotelData.filter((item) => 
@@ -99,7 +123,7 @@ export default function Main(){
         setTypeAndHotel(hotel_modal1)
     }, [htypeModalOpen])
 
-    // 관광명소 호텔 모달 - map
+    // 지역별 호텔 모달 - map
     useEffect(() => {
         const hotel_modal2 = HotelData.filter((item) => 
             (item.city === 'Seoul' ? '서울' : 
@@ -248,7 +272,7 @@ export default function Main(){
             }else{
                 setCurrent(0)
             }
-        }, 5000);
+        }, 10000);
         return(() => {clearInterval(current)});
     },[currentImg])
 
@@ -398,6 +422,7 @@ export default function Main(){
                     </form>
                 </div>
             </div>
+
             {/* 이벤트 배너 */}
             <div className='eventBenner'>
                 <p className='eventTitle'>이벤트</p>
@@ -419,6 +444,7 @@ export default function Main(){
                     <span className={bennerCircle === 6 ? 'circleMain' : 'circle'}></span> */}
                 </div>
             </div>
+
             {/* 호텔 유형에 따라 나눔 */}
             <div className='hotelTypeWrap'>
                 <div className='hotelTypeTitle'>
@@ -486,6 +512,7 @@ export default function Main(){
                     </ul>
                 </div>    
             </div>
+
             {/* 인기 호텔 모음 */}
             <div className='popularAccom'>
                 <p className='popularAccomTitle'>해외 인기 스테이 PICK!</p>
@@ -619,7 +646,66 @@ export default function Main(){
                     }
                 </div>
             </div>
+            
             {/* 국내  인기 스테이 PICK! */}
+            <div className="left_main">                       
+                <div className="room-select_main" style={{borderTop:'0px'}}>
+                    <p className='room-title_main'>국내 인기 스테이 PICK!</p>
+                    <ul className='roomUl'>
+                        {HotelData.slice(0,4).map((item,index)=>(
+                            <li key={index} style={{display:'flex'}}>
+                                <div className="room-left_main">
+                                    <a href={`/detail/${item.id}`}>
+                                        <img src={`/img/${item.id}-1.jpg`} alt={item.hotelName} />
+                                    </a>
+                                </div>
+                                <div className="room-right_main">
+                                    <h2><a href={`/detail/${item.id}`}>{item.hotelName}</a></h2>
+                                    <div className="room-intro_main">
+                                        <div className="intro-left_main">
+                                            {/* {wishStar[index] && wishStar[index].map((star, ind) => (
+                                                <img src={star} alt="roomScore" key={ind} />
+                                            ))} */}
+                                            <span className='starScore_main'>
+                                                {(item.score[index] - Math.floor(item.score[index]) === 0) ? item.score[index]+'.0' : item.score[index]}
+                                            </span>
+                                        </div>
+                                        <div className="intro-right_main">
+                                            <button type='button' onClick={()=>{setModalContent(<p>상세정보 준비중</p>);toggle();}}>상세정보 <i className="fa-solid fa-angle-right"></i></button>
+                                        </div>
+                                    </div>
+                                    <div className="room-info_main">
+                                        <p><i className="fa-regular fa-clock"></i> 체크인 <span className='bold_main'>15:00</span> ~ 체크아웃 <span className='bold_main'>11:00</span></p>
+                                        <p><i className="fa-solid fa-user-group"></i> 최대 투숙객 수 : <span className='bold_main'>{wishMinMax.map(w=>w.hotelName===item.hotelName ? w.min:null)}~{wishMinMax.map(w=>w.hotelName===item.hotelName ? w.max:null)}명</span></p>
+                                        <p><i className="fa-solid fa-tag"></i> <span className='bold_main'>할인혜택 :</span>
+                                            <span className='red_main'>
+                                                {item.discount === 1 ? 
+                                                    '10%할인 이벤트 중'
+                                                :
+                                                    '회원가입시 10,000원 할인쿠폰'
+                                                }
+                                            </span>
+                                        </p>
+                                        <div className="room-pay_main">
+                                            {item.discount === 1 ? 
+                                                <>
+                                                    <span className='origin-price_main'>{(item.price).toLocaleString()}원</span>
+                                                    <span className='final-price_main'>{((item.price) - ((item.price)*0.1)).toLocaleString()}원<span>/1박</span></span>
+                                                </>                                                    
+                                            :                                                    
+                                                <>
+                                                    <span className='final-price_main'>{(item.price).toLocaleString()}원<span>/1박</span></span>
+                                                </>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div> 
+
             {/* 평점 - 호텔 평점순 */}
             <div className='spotsAndStays'>
                 <p className='spotsAndStaysTitle'>지역 평점 TOP!</p>
@@ -756,6 +842,7 @@ export default function Main(){
                     }
                 </div>
             </div> */}
+
             {/* EcoStay 회원만의 특별한 혜택 */}
             <div className='EcoMember'>
                 <img src='middleBenner.jpg' alt='middleBenner' />
