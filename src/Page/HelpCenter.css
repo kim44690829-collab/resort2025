@@ -34,7 +34,7 @@
     width: 600px;
 } 
 .helpCenter_text .text_title{
-    margin-bottom: 50px;
+    margin-bottom: 36px;
     font-size: 30px;
     font-weight: 600;
 }
@@ -48,16 +48,28 @@
     border: none;
     background-color: transparent;
 }
-.text_contents{
+.helpCenter_text .text_contents{
     padding: 25px 0 25px 0;
     line-height: 30px;
+}
+.helpCenter_text .text_contents .contents5{
+    background-color: #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    line-height: 20px;
+}
+.helpCenter_text .text_contents .contents6{
+    background-color: #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    line-height: 20px;
 }
 /* 고객센터 전화번호 */
 .helpCenter_tel{
     border: 1px solid #ddd;
     border-radius: 10px;
     margin-left: 50px;
-    height: 652px;
+    height: 752px;
     background-color: #ddd;
 }
 .helpCenter_tel .helpCenter_tel1{
@@ -78,6 +90,20 @@
     font-size: 18px;
     border-bottom: 1px solid #ddd;
 }
+.helpCenter_tel .helpCenter_tel1 .chatLi{
+    height: 91px;
+}
+.chatBtn{
+    display: block;
+    width: 190px;
+    height: 51px;
+    margin: 0 auto;
+    border-radius: 10px;
+    border: #42799b;
+    background-color: #42799b;
+    color: #fff;
+}
+
 .helpCenter_tel .helpCenter_tel1 .tel_list .fa-phone{
     margin-right: 10px;
 }

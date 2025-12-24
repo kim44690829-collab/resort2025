@@ -1,57 +1,103 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import '../Common/Header.css';
 import { useContext } from 'react';
 import { ResortDateContext } from '../Api/ResortDate';
 import { useNavigate } from 'react-router-dom';
+import { useClickAway } from 'react-use';
 
 export default function Header(){
-    const [menuModal, setMenuModal] = useState(false);
     const navigate = useNavigate();
-    const {userNickName, logout, setDomestic} = useContext(ResortDateContext);
+    const {userNickName, logout} = useContext(ResortDateContext);
     const [headerChange, setHeaderChange] = useState(0);
+    // 헤더 메뉴바 모달
+    // useRef, useClickAway 를 사용하기 전 npm install react-use 를 해야 함.
+    // 모달 on / off 는 원래 useState쓰는대로 사용하면 된다.
+    // useRef는 무조건 null 상태, null은 현재 위치를 지정하지 않았다는 의미
+    // useClickAway를 통해 menuRef를 가져다 놓았을때 setMenuModal(false) 를 실행하겠다는 의미
+    // ref={menuRef} 를 모달 안 제일 큰 박스에 넣어두면 menuRef의 위치가 모달로 변경됨.
+
+    const [menuModal, setMenuModal] = useState(false);
+    const menuRef = useRef(null);
+
+    useClickAway(menuRef,  () => {
+        setMenuModal(false);
+    })
 
     const logoutHandeler = () => {
         logout();
         alert('로그아웃 되었습니다.');
         navigate('/');
+        setHeaderChange(0);
     }
+
+    useEffect(() => {
+        setMenuModal(false);
+    },[navigate])
+
+    const headChangeHandeler = (num) => {
+        if(num === 1){
+            setHeaderChange(0);
+            navigate('/');
+        }else if(num === 2){
+            setHeaderChange(1); 
+            navigate('/guest')
+        }else if(num === 3){
+            setHeaderChange(2);
+            navigate('/login')
+        }else{
+            setHeaderChange(3);
+            navigate('/signup1')
+        }
+        window.scrollTo(0,0);
+    }
+
+    const menuModalHandeler = (num) => {
+        if(num === 1){
+            setMenuModal(false);
+            navigate('/hotelSection')
+        }else if(num === 2){
+            setMenuModal(false);
+            navigate('/hotelSection2')
+        }else if(num === 3){
+            setMenuModal(false);
+            navigate('/wish')
+        }else{
+            setMenuModal(false);
+            navigate('/helpCenter')
+        }
+
+        window.scrollTo(0,0)
+    }
+
 
     return(
         <div className="Header_container">
             {/* 누르면 메인 페이지로 이동하는 로고 */}
-            <Link to='/'>
-                <img src="../public/mainlogo.png" alt="EcoStay 홈으로 바로가기" style={{width:'100px', height:'50px', cursor:'pointer'}} className="mainLogo" onClick={() => setHeaderChange(0)} />
-            </Link>
+                <img src="../public/mainlogo.png" alt="EcoStay 홈으로 바로가기" style={{width:'100px', height:'50px', cursor:'pointer'}} className="mainLogo" onClick={() => headChangeHandeler(1)} />
             {!userNickName ? 
             <ul className="Header_right">
                 {/* 비회원 예약조회 */}
                 {headerChange !== 1 && 
-                <li className="menu_list" onClick={() => setHeaderChange(1)}>
-                    <Link to='/guest'>
-                        <button type="button" className="HeaderBtn">
+                <li className="menu_list">
+                        <button type="button" className="HeaderBtn" onClick={() => headChangeHandeler(2)}>
                             비회원 예약조회
                         </button>
-                    </Link>
                 </li>}
                 {/* 로그인 */}
                 {headerChange !== 2 && 
-                    <li className="menu_list" onClick={() => setHeaderChange(2)} >
-                        <Link to='/login'>
-                            <button type="button" className="HeaderBtn">
+                    <li className="menu_list" >
+                            <button type="button" className="HeaderBtn" onClick={() => headChangeHandeler(3)}>
                                 로그인
                             </button>
-                        </Link>
                     </li>
                 }
                 {/* 회원가입 */}
                 {headerChange !== 3 && 
-                    <li className="menu_list" onClick={() => setHeaderChange(3)}>
-                        <Link to='/signup1'>
-                            <button type="button" className="HeaderBtn">
+                    <li className="menu_list" >
+                            <button type="button" className="HeaderBtn" onClick={() => headChangeHandeler(4)}>
                                 회원가입
                             </button>
-                        </Link>
                     </li>
                 }
                 <li className="menu_list menu_btn">
@@ -70,7 +116,7 @@ export default function Header(){
                 </li>
                 <li className="menu_list2 menu_btn">
                     {/* 메뉴 */}
-                    <button type="button" className="HeaderBtn" onClick={() => setMenuModal(!menuModal)} >
+                    <button type="button" className="HeaderBtn" >
                         <i className="fa-solid fa-bars"></i>
                     </button>
                 </li>
@@ -78,26 +124,18 @@ export default function Header(){
             }
             {menuModal && 
                 <>
-                    <ul className="menus">
+                    <ul className="menus" ref={menuRef}>
                         <li className="menus_sub">
-                            <Link to ='/hotelSection'>
-                                <button type="button" className="domestic-hotels" onClick={() => {setDomestic(0); setMenuModal(false)}}>국내숙소</button>
-                            </Link>
+                            <button type="button" className="domestic-hotels" onClick={() => menuModalHandeler(1)}>국내숙소</button>
                         </li>
                         <li className="menus_sub">
-                            <Link to='/hotelSection' >
-                                <button type="button" className="international-hotels" onClick={() => {setDomestic(1);  setMenuModal(false)}}>해외숙소</button>
-                            </Link>
+                            <button type="button" className="international-hotels" onClick={() => menuModalHandeler(2)}>해외숙소</button>
                         </li>
                         <li className="menus_sub">
-                            <Link to='/wish'>
-                                <button type="button" className="wishList_menu" onClick={() => setMenuModal(false)}>찜목록</button>
-                            </Link>
+                            <button type="button" className="wishList_menu" onClick={() => menuModalHandeler(3)}>찜목록</button>
                         </li>
                         <li className="menus_sub">
-                            <Link to='/helpCenter'>
-                                <button type="button" className="support-center" onClick={() => setMenuModal(false)}>고객센터</button>
-                            </Link>
+                            <button type="button" className="support-center" onClick={() => menuModalHandeler(4)}>고객센터</button>
                         </li>
                     </ul>
                 </>

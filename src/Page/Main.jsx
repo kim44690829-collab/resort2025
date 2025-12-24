@@ -1,5 +1,5 @@
 import '../Page/Main.css';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, use } from 'react';
 import cookie from 'js-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import { ResortDateContext } from '../Api/ResortDate';
@@ -9,7 +9,7 @@ import Calendar from './Calendar';
 export default function Main(){    
     // 2025-12-19 병합2
     // 호텔, 객실데이터 useContext로 가져오는 훅
-    const {RoomData, HotelData, DayData, setDayData,town,setTown,serchHandler, wish, wishHandler} = useContext(ResortDateContext);
+    const {RoomData, HotelData, DayData, setDayData,town,setTown,serchHandler, wish, wishHandler, menuModal, setMenuModal} = useContext(ResortDateContext);
     // 호텔 input에 들어가는 지역, 호텔명 상태변수
     //const [hotelInput, setHotelInput] = useState('');
     // 호텔 input 아래 모달 상태변수
@@ -27,6 +27,7 @@ export default function Main(){
         {id: 9, localName : '제주'}, 
         {id: 10, localName : '포항'},
     ]
+
     // 인원 상태변수
     const [guestCount, setGuestCount] = useState(1)
 
@@ -62,6 +63,10 @@ export default function Main(){
     const [htypeModalOpen2, sethTypeModalOpen2] = useState(0);
     // 타입별 호텔을 담을 변수
     const [typeAndHotel, setTypeAndHotel] = useState([]);
+    // 해외 호텔 담을 변수
+    const [overseasHotel, setOverSeasHotel] = useState([])
+    // 국내
+    const [internalHotel, setInternalHotel] = useState([])
 
     // 호텔 유형별로 접근하기 위한 사진 map돌리기 위한 오브젝트 배열
     const hotelType = [
@@ -83,33 +88,22 @@ export default function Main(){
     ];
 
     // 호텔 해외 필터
-    const overseas = HotelData.filter(item => item.country !== 'Korea' && item.score >= 4);
-    const overseasRate = [...overseas].sort((a,b) => b.score - a.score);
-    console.log(overseas)
+    useEffect(() => {
+        const overseas = HotelData.filter(item => item.country !== 'Korea' && item.score >= 4);
+        const overseasRate = [...overseas].sort((a,b) => b.score - a.score);
+        setOverSeasHotel(overseasRate)
+    },[])
+    
+    // console.log(overseas)
 
-    const {wishArray} = useContext(ResortDateContext);
-
-    //호텔의 객실별 투숙객 인원 불러오기
-    //위시리스트의 객실 리스트 필터링
-    const wishRoom = RoomData.filter((item)=> wishArray.some(w => w.hotelName === item.hotelName));
-    //console.log(wishRoom);    
-
-    const wishOccupancy = [];
-    //새 배열에 호텔명과 객실별 투숙객 수 담기
-    for(let i=0;i<wishRoom.length;i++){
-        wishOccupancy.push({hotelName: wishRoom[i].hotelName,maxOccupancy: wishRoom[i].maxOccupancy});
-    }
-    console.log(wishOccupancy);
-    // console.log(wishOccupancy.map(item=>item.hotelName === item.hotelName ?  ));
-
-    const wishMinMax = Object.values(
-        wishOccupancy.reduce((acc, { hotelName, maxOccupancy }) => {
-            acc[hotelName] ??= { hotelName, min: maxOccupancy, max: maxOccupancy };
-            acc[hotelName].min = Math.min(acc[hotelName].min, maxOccupancy);
-            acc[hotelName].max = Math.max(acc[hotelName].max, maxOccupancy);
-            return acc;
-        }, {})
-    );
+    // 호텔 국내 필터
+    useEffect(() => {
+        const internal = HotelData.filter(item => item.country === 'Korea');
+        const internalHotelSort =internal.sort((a,b) => b.score - a.score);
+        setInternalHotel(internalHotelSort)
+        // console.log('111111111111111111111111111'+internalHotelSort)
+    },[])
+    
 
     // 호텔 타입 모달 - map
     useEffect(() => {
@@ -139,7 +133,7 @@ export default function Main(){
     const hotelCityRating = [...cityAndHotel].sort((a,b) => b.score - a.score);
 
     // 호텔 평점순으로 재배열
-    const hotelRating = [...HotelData].sort((a,b) => b.score - a.score);
+    // const hotelRating = [...HotelData].sort((a,b) => b.score - a.score);
     
     // 버튼을 클릭한 횟수를 저장하는 상태변수
     const [btnCount1, setBtnCount1] = useState(0);
@@ -468,7 +462,7 @@ export default function Main(){
                                             <ul className='Modal_hType_Ul'>
                                                 {typeAndHotel.slice(0,10).map((item) => (
                                                     <li key={item.id} className='Modal_hType_Li'>
-                                                        <Link to = {`/detail/${item.id}`}>
+                                                        <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
                                                             <div>
                                                                 <img src = {item.img[0]} alt={item.hotelName} className='Modal_hType_Img' />
                                                             </div>
@@ -494,7 +488,6 @@ export default function Main(){
                                                             {color:'#f94239'}
                                                         :
                                                             {color:'#6b6b6b'}
-                                                        
                                                         }></i>
                                                         </button>
                                                     </li> 
@@ -526,9 +519,9 @@ export default function Main(){
                     {/* 해외 호텔 map */}
                     <div className='slideBox'>
                         <ul className='popularAccomSub2' style={{marginLeft:`${slideMove1}px`}} >
-                            {overseasRate.slice(0,4).map((item) => (
+                            {overseasHotel.slice(0,4).map((item) => (
                                     <li key={item.id} style={{cursor:'pointer'}} className='popularAccomSub3'>
-                                        <Link to = {`/detail/${item.id}`}>
+                                        <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
                                             {/* <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' /> */}
                                             <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
                                             <p className='popularAccom_type'>{item.type}</p>
@@ -564,9 +557,9 @@ export default function Main(){
                                         </button>
                                     </li>
                             ))}
-                            {overseasRate.slice(20,24).map((item) => (
+                            {overseasHotel.slice(20,24).map((item) => (
                                 <li key={item.id} style={{cursor:'pointer'}} className='popularAccomSub3'>
-                                    <Link to = {`/detail/${item.id}`}>
+                                    <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
                                         <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
                                         <p className='popularAccom_type'>{item.type}</p>
                                         <p className='popularAccom_name'>{item.hotelName}</p>
@@ -600,9 +593,9 @@ export default function Main(){
                                     </button>
                                 </li>
                             ))}
-                            {overseasRate.slice(30,33).map((item) => (
+                            {overseasHotel.slice(30,33).map((item) => (
                                 <li key={item.id} style={{cursor:'pointer'}} className='popularAccomSub3'>
-                                    <Link to = {`/detail/${item.id}`}>
+                                    <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
                                         <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
                                         <p className='popularAccom_type'>{item.type}</p>
                                         <p className='popularAccom_name'>{item.hotelName}</p>
@@ -652,7 +645,7 @@ export default function Main(){
                 <div className="room-select_main" style={{borderTop:'0px'}}>
                     <p className='room-title_main'>국내 인기 스테이 PICK!</p>
                     <ul className='roomUl'>
-                        {HotelData.slice(0,4).map((item,index)=>(
+                        {internalHotel.slice(0,4).map((item,index)=>(
                             <li key={index} style={{display:'flex'}}>
                                 <div className="room-left_main">
                                     <a href={`/detail/${item.id}`}>
@@ -663,20 +656,26 @@ export default function Main(){
                                     <h2><a href={`/detail/${item.id}`}>{item.hotelName}</a></h2>
                                     <div className="room-intro_main">
                                         <div className="intro-left_main">
-                                            {/* {wishStar[index] && wishStar[index].map((star, ind) => (
-                                                <img src={star} alt="roomScore" key={ind} />
-                                            ))} */}
+                                            <span>
+                                                <img src='../public/img/star-one.png' alt="score" />
+                                                <img src='../public/img/star-one.png' alt="score" />
+                                                <img src='../public/img/star-one.png' alt="score" />
+                                                <img src='../public/img/star-one.png' alt="score" />
+                                                <img src='../public/img/star-half.png' alt="score" />
+                                            </span>
                                             <span className='starScore_main'>
                                                 {(item.score[index] - Math.floor(item.score[index]) === 0) ? item.score[index]+'.0' : item.score[index]}
                                             </span>
                                         </div>
                                         <div className="intro-right_main">
-                                            <button type='button' onClick={()=>{setModalContent(<p>상세정보 준비중</p>);toggle();}}>상세정보 <i className="fa-solid fa-angle-right"></i></button>
+                                            <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
+                                                <button type='button'>상세정보 <i className="fa-solid fa-angle-right"></i></button>
+                                            </Link>
                                         </div>
                                     </div>
                                     <div className="room-info_main">
                                         <p><i className="fa-regular fa-clock"></i> 체크인 <span className='bold_main'>15:00</span> ~ 체크아웃 <span className='bold_main'>11:00</span></p>
-                                        <p><i className="fa-solid fa-user-group"></i> 최대 투숙객 수 : <span className='bold_main'>{wishMinMax.map(w=>w.hotelName===item.hotelName ? w.min:null)}~{wishMinMax.map(w=>w.hotelName===item.hotelName ? w.max:null)}명</span></p>
+                                        <p><i className="fa-solid fa-user-group"></i> 최대 투숙객 수 : 2 ~ 4명</p>
                                         <p><i className="fa-solid fa-tag"></i> <span className='bold_main'>할인혜택 :</span>
                                             <span className='red_main'>
                                                 {item.discount === 1 ? 
@@ -751,7 +750,7 @@ export default function Main(){
                                                 <ul className='Modal_hotel_Ul'>
                                                     {hotelCityRating.map((item) => (
                                                         <li key={item.id} className='Modal_hotel_Li'>
-                                                            <Link to = {`/detail/${item.id}`} className='hotelLink'>
+                                                            <Link to = {`/detail/${item.id}`} className='hotelLink' onClick={() => window.scrollTo(0,0)}>
                                                             <div>
                                                                 <img src = {item.img[0]} alt={item.hotelName} className='Modal_hotel_Img' />
                                                             </div>
@@ -860,7 +859,7 @@ export default function Main(){
                         <ul className='EcoMemberHotelAll' style={{marginLeft:`${slideMove4}px`}}>
                             {HotelData.slice(0,10).map((item) => (
                             <li key={item.id} className='EcoMemberHotelAllLi'>
-                                <Link to = {`/detail/${item.id}`} className='EcoMemberA'>
+                                <Link to = {`/detail/${item.id}`} className='EcoMemberA' onClick={() => window.scrollTo(0,0)}>
                                     <img src={item.img[0]} alt={item.hotelName} style={{width:'285px', height:'230px',borderRadius:'10px 0 0 10px'}}/>
                                     <div className='EcoMemberHotelAll-2'>
                                         <span className='bennerType'>{item.type}</span><br/>
