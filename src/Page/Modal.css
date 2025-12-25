@@ -4,8 +4,6 @@
 } */
 
 
-
-
 .modalOverlay{
     position: fixed;
     left: 0;
@@ -38,51 +36,4 @@
     color: #6b6b6b;
     text-align: center;
     line-height: 41px;
-}
-
-
-.detail-wrap .detail-img li .hotel-img-slider{
-
-}
-.detail-wrap .detail-img li .hotel-img-slider .hotel-img{
-    width: 320px;
-    height: 250px;
-    overflow: hidden;
-    border-radius: 7px;
-    position: relative;
-}
-.detail-wrap .detail-img li .hotel-img-slider .hotel-img img{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    width: 100%;
-    transition: 0.3s;
-    visibility: hidden;
-    opacity: 0;
-}
-.detail-wrap .detail-img li .hotel-img-slider .hotel-img img.active{
-    visibility: visible;
-    opacity: 1;
-}
-.detail-wrap .detail-img li .hotel-img-slider .hotel-img-btn{
-    overflow: hidden;
-    padding-top: 15px;  
-}
-.detail-wrap .detail-img li .hotel-img-slider .hotel-img-btn *{
-    display: inline-block;
-}
-.detail-wrap .detail-img li .hotel-img-slider .hotel-img-btn .btn-left{
-    float: left;
-}
-.detail-wrap .detail-img li .hotel-img-slider .hotel-img-btn .btn-left .circle{}
-.detail-wrap .detail-img li .hotel-img-slider .hotel-img-btn .btn-left .circle span{
-    background-color: #a7a7a7;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-.detail-wrap .detail-img li .hotel-img-slider .hotel-img-btn .btn-left .circle span.active{
-    background-color: #3d008c;
 }

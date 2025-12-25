@@ -383,33 +383,34 @@ export default function Detail(){
         }        
     }
 
+    const [slider, setSlider] = useState(false);
+    const [bigImg, setBigImg] = useState(`/img/${id}-1.jpg`);
 
 
     return(
         <section className="detail-wrap" onClick={()=>setCal(false)}>
-           <ul className="detail-img">
-                {Hotel.img.map((img,index)=>(
-                    <li key={index} onClick={()=>{setModalContent(
-                        <div className="hotel-img-slider">
-                            <div className="hotel-img" style={{borderRadius:'7px',position:'relative'}}>
+            {slider &&
+                <div className='hotel-modal-Overlay'>
+                    <div className="hotel-img-slider">
+                        <button className='closeBtn' onClick={()=>setSlider(false)}>
+                            <i className="fa-solid fa-xmark"></i>
+                        </button>
+                        <div className="hotel-img" style={{borderRadius:'7px',position:'relative'}}>
+                            <div className="bigImg">
+                                <img src={bigImg} alt={Hotel.hotelName} />
+                            </div>
+                            <div className="hotel-thumb">
                                 {Hotel.img.map((imgg,indd)=>(
-                                    <img src={imgg} alt={Hotel.hotelName} key={indd} style={{position: 'absolute',left: '50%',top: '50%',transform: 'translate(-50%,-50%)',transition: '0.3s', opacity: '1',width:'800px',height: '500px'}} />
+                                    <img src={imgg} alt={Hotel.hotelName} key={indd} onClick={()=>setBigImg(imgg)} />
                                 ))}
                             </div>
-                            <div className="hotel-img-btn">
-                                <div className="btn-left">
-                                    <div className="circle">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>                      
-                                </div>
-                            </div>
                         </div>
-                    );
-                    toggle();}}>
+                    </div>
+                </div>
+            }
+           <ul className="detail-img">
+                {Hotel.img.map((img,index)=>(
+                    <li key={index} onClick={()=>setSlider(true)}>
                         <img src={img} alt={Hotel.hotelName} />
                     </li>
                 ))}                
@@ -534,7 +535,28 @@ export default function Detail(){
                                                 </span>
                                             </div>
                                             <div className="intro-right">
-                                                <button type='button' onClick={()=>{setModalContent(<p>상세정보 준비중</p>);toggle();}}>상세정보 <i className="fa-solid fa-angle-right"></i></button>
+                                                <button type='button' onClick={()=>{
+                                                    setModalContent(
+                                                        <div className='room-explan'>
+                                                            <p className='room-tit'>{item.roomName}</p>
+                                                            <div className="room-part">
+                                                                <p className='tit'>객실 정보</p>
+                                                                <ul>
+                                                                    <li><span>대실</span> 최대 3시간 이용(마감시간 22시 까지)</li>
+                                                                    <li><span>체크인</span> 15:00 ~ <span>체크아웃</span> 11:00</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div className="room-part">
+                                                                <p className='tit'>할인 쿠폰 안내</p>
+                                                                <ul>
+                                                                    <li>할인 쿠폰은 예약페이지에서 사용이 가능합니다.</li>
+                                                                    <li>본 혜택은 제휴점 및 에코스테이 사정에 의해 변경/중지될 수 있습니다.</li>
+                                                                    <li>방문 결제 및 비회원 예약은 대상에서 제외됩니다.</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>                                            
+                                                    );
+                                            toggle();}}>상세정보 <i className="fa-solid fa-angle-right"></i></button>
                                             </div>
                                         </div>
                                         <div className="room-info">
@@ -673,7 +695,34 @@ export default function Detail(){
                                             </div>
                                             <div className="more">
                                                 <p className='more-txt'>더보기</p>
-                                                <button type='button'>
+                                                <button type='button' onClick={()=>{
+                                                    setModalContent(
+                                                        <>
+                                                        <h4 className='room-tit'>전체 객실 이용자 평가</h4>
+                                                        <div className='room-div'>
+                                                            <div className="hotel-img-wrap">
+                                                                <img src={`/img/${Hotel.id}-${index+2}.jpg`} alt={Hotel.hotelName} className='hotel-img'/>
+                                                            </div>
+                                                            <div className="review-txt-wrap">
+                                                                {item.score.map((review,ind)=>(
+                                                                    //여기서는 객실별 후기 3개씩만 보여지게
+                                                                    <p key={ind}>
+                                                                        <span className='room'>{item.roomName}</span>
+                                                                        {starRoom[index] && starRoom[index][ind] && starRoom[index][ind].map((star,i)=>(
+                                                                            <img src={star} alt="star" key={i} className='star' />
+                                                                        ))}
+                                                                        <span className='review'>{review}점</span>
+                                                                        <i className='comment-wrap'>
+                                                                            {smileRoom[index] && smileRoom[index][ind] && <img src={smileRoom[index][ind]} alt="score" className='score' />}
+                                                                            <span className='comment'>{item.comment[ind]}</span>
+                                                                        </i>
+                                                                    </p>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                        </>
+                                                    );
+                                                    toggle();}}>
                                                     <i className="fa-solid fa-angle-right"></i>
                                                 </button>
                                             </div>
