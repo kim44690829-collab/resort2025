@@ -47,13 +47,14 @@ export default function HelpCenter(){
         setIsName6(!isName6);
     }
 
-    // 목록보기 버튼
+    // 공지사항 목록보기 버튼
     const noticeBtnHandeler = () => {
         setListType(2);
     }
 
     return(
         <div className="helpCenter_container">
+            {/* 왼쪽 메뉴 */}
             <div className='helpCenter_list'>
                 <ul>
                     <li className='list_title'>고객센터</li>
@@ -74,12 +75,13 @@ export default function HelpCenter(){
                     </li>
                 </ul>
             </div>
+            {/* 자주찾는 질문 */}
             {listType === 1 &&
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>자주 찾는 질문</h1>
                 <div className='helpCenter_texts' style={{borderTop:'2px solid black'}}>
                     <div>
-                        <p>Q. [숙소] 예약을 취소하고 싶어요.</p>
+                        <p onClick={contentHandeler1} style={{cursor:'pointer'}}>Q. [숙소] 예약을 취소하고 싶어요.</p>
                     </div>
                     <div>
                         <button type="button" className={`${isName1 ? 'textDownBtn BtnChange' : 'textDownBtn'}`} onClick={contentHandeler1}>
@@ -104,7 +106,7 @@ export default function HelpCenter(){
 
                 <div  className='helpCenter_texts'>
                     <div>
-                        <p>Q. [공통] 천재지변 또는 감염병으로 예약을 취소해야 할 경우 어떻게 하나요?</p>
+                        <p onClick={contentHandeler2} style={{cursor:'pointer'}}>Q. [공통] 천재지변 또는 감염병으로 예약을 취소해야 할 경우 어떻게 하나요?</p>
                     </div>
                     <div>
                         <button type="button" className={`${isName2 ? 'textDownBtn BtnChange' : 'textDownBtn'}`} onClick={contentHandeler2}>
@@ -129,7 +131,7 @@ export default function HelpCenter(){
                 
                 <div  className='helpCenter_texts'>
                     <div>
-                        <p>Q. [숙소] 예약 대기 중인 예약을 취소하고 싶어요.</p>
+                        <p onClick={contentHandeler3} style={{cursor:'pointer'}}>Q. [숙소] 예약 대기 중인 예약을 취소하고 싶어요.</p>
                     </div>
                     <div>
                         <button type="button" className={`${isName3 ? 'textDownBtn BtnChange' : 'textDownBtn'}`} onClick={contentHandeler3}>
@@ -153,7 +155,7 @@ export default function HelpCenter(){
                 
                 <div  className='helpCenter_texts'>
                     <div>
-                        <p>Q. [숙소] 체크인 날짜 또는 객실 타입을 변경하고 싶어요.</p>
+                        <p onClick={contentHandeler4} style={{cursor:'pointer'}}>Q. [숙소] 체크인 날짜 또는 객실 타입을 변경하고 싶어요.</p>
                     </div>
                     <div>
                         <button type="button" className={`${isName4 ? 'textDownBtn BtnChange' : 'textDownBtn'}`} onClick={contentHandeler4}>
@@ -180,7 +182,7 @@ export default function HelpCenter(){
                 
                 <div  className='helpCenter_texts'>
                     <div>
-                        <p>Q. [공통] 현금영수증을 발급받고 싶어요.</p>
+                        <p onClick={contentHandeler5} style={{cursor:'pointer'}}>Q. [공통] 현금영수증을 발급받고 싶어요.</p>
                     </div>
                     <div>
                         <button type="button" className={`${isName5 ? 'textDownBtn BtnChange' : 'textDownBtn'}`} onClick={contentHandeler5}>
@@ -226,7 +228,7 @@ export default function HelpCenter(){
                 
                 <div  className='helpCenter_texts'>
                     <div>
-                        <p>Q. [공통] 영수증 또는 거래내역서를 발급받고 싶어요.</p>
+                        <p onClick={contentHandeler6} style={{cursor:'pointer'}}>Q. [공통] 영수증 또는 거래내역서를 발급받고 싶어요.</p>
                     </div>
                     <div>
                         <button type="button" className={`${isName6 ? 'textDownBtn BtnChange' : 'textDownBtn'}`} onClick={contentHandeler6}>
@@ -264,6 +266,7 @@ export default function HelpCenter(){
                 </div>
             </div>)
             }
+            {/* 공지사항 메인 */}
             {listType === 2 && 
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>공지사항</h1>
@@ -284,6 +287,7 @@ export default function HelpCenter(){
                 </div>
             </div>)
             }
+            {/* 공지 1번 */}
             {listType === 3 &&
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>공지사항</h1>
@@ -309,6 +313,7 @@ export default function HelpCenter(){
                 
             </div>)
             }
+            {/* 공지 2번 */}
             {listType === 4 &&
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>공지사항</h1>
@@ -332,6 +337,7 @@ export default function HelpCenter(){
                 
             </div>)
             }
+            {/* 공지 3번 */}
             {listType === 5 &&
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>공지사항</h1>
@@ -354,6 +360,7 @@ export default function HelpCenter(){
                 <button type='button' className='noticeContentsBtn' onClick={noticeBtnHandeler}>목록 보기</button>
             </div>)
             }
+            {/* 공지 4번 */}
             {listType === 6 &&
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>공지사항</h1>
@@ -375,6 +382,7 @@ export default function HelpCenter(){
                 <button type='button' className='noticeContentsBtn' onClick={noticeBtnHandeler}>목록 보기</button>
             </div>)
             }
+            {/* 공지 5번 */}
             {listType === 7 &&
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>공지사항</h1>
@@ -397,6 +405,7 @@ export default function HelpCenter(){
                 <button type='button' className='noticeContentsBtn' onClick={noticeBtnHandeler}>목록 보기</button>
             </div>)
             }
+            {/* 1대1 문의 */}
             {listType === 8 && 
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>1 대 1 문의</h1>
@@ -405,8 +414,8 @@ export default function HelpCenter(){
                 </div>
                 <button type='button' className='sportBtn'>문의하기</button>
             </div>)
-            
             }
+            {/* 우측 고객센터 전화번호 등 */}
             <div className='helpCenter_tel'>
                 <div className='helpCenter_tel1'>
                     <h1 className='tel1_title'>EcoStay 고객 센터</h1>

@@ -1,41 +1,29 @@
-import '../Common/Footer.css'
-import { Link } from "react-router-dom"
+import '../Common/Footer.css';
+import { Link } from "react-router-dom";
+import { useContext } from 'react';
+import { ResortDateContext } from '../Api/ResortDate';
+import { useNavigate } from 'react-router-dom';
 
 export default function Footer(){
+    const navigate = useNavigate();
+    const {setHeaderChange} = useContext(ResortDateContext);
+
+    const footerLogoBtn = () => {
+        navigate('/');
+        setHeaderChange(0);
+        window.scrollTo(0,0);
+    }
+
     return(
+        // 푸터
         <div className="footer_container">
-            {/* <div className='helpDeskWrapper'>
-                <div className='helpDesk'>
-                    <h1>고객센터</h1>
-                    <p>
-                        고객행복센터(전화) : 오전 9시 ~ 새벽 3시 운영
-                        채팅 상담 문의 : 24시간 운영
-                    </p>
-                    <div>
-                        <h1>
-                            <i className="fa-solid fa-phone"></i>
-                            1999-9999
-                        </h1>
-                        <button type='button'>
-                            <i className="fa-solid fa-comment"></i>
-                            채팅상담
-                        </button>
-                    </div>
-                </div>
-                <div>
-                    <p>공지사항</p>
-                    <p>
-                        <i className="fa-solid fa-plus"></i>
-                    </p>
-                </div>
-            </div> */}
             <div className="footerInfo">
                 <div className="footer_link">
+                    {/* 메인로고 */}
                     <div className="footer_logo">
-                        <Link to='/'>
-                            <img src="/footerLogo.png" alt="EcoStay 홈으로 바로가기" style={{width:'100px', height:'50px', cursor:'pointer'}} className="mainLogo" />
-                        </Link>
+                        <img src="/footerLogo.png" alt="EcoStay 홈으로 바로가기" style={{width:'100px', height:'50px', cursor:'pointer'}} className="mainLogo" onClick={footerLogoBtn} />
                     </div>
+                    {/* sns */}
                     <div className="footer_sns">
                         <button type="button" className='youtube_btn'>
                             <i className="fa-brands fa-youtube"></i>
@@ -45,6 +33,7 @@ export default function Footer(){
                         </button>
                     </div>
                 </div>
+                {/* 회사 소개 */}
                 <div className='companyInfoSection'>
                     <p className='companyInfo'>
                         (주)EcoStay <br/>

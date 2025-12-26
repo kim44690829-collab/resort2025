@@ -34,6 +34,7 @@ export default function HotelSection(){
 
     return(
         <div className="HotelSection_container">
+            {/* 좌측 메뉴 */}
             <ul className="HotelSection_menu">
                 <li className='HotelSection_Hotel HotelAll'>
                     숙소
@@ -51,7 +52,7 @@ export default function HotelSection(){
                     <ul className='HotelUl' >
                         {domesticHotelSort.slice(0,moreSee1).map((item) => (
                             <li key={item.id} style={{cursor:'pointer'}} className='HotelLi'>
-                                <Link to = {`/detail/${item.id}`}>
+                                <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
                                     <img src={item.img[0]} alt={item.hotelName} className='hotelSectionImg' style={{width:'280px', height:'169px'}} />
                                     <p className='hotelSection_type'>{item.type}</p>
                                     <p className='hotelSection_name'>{item.hotelName}</p>

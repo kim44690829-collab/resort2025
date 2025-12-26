@@ -138,6 +138,12 @@ export default function SignUp3(){
             }
     }, [userMail, userPw, userPwConfirm, BirthYear, BirthMonth, BirthDate, userGender, nickname])
 
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const date = today.getDate();
+    console.log(today);
+
     return(
         <div className='signup3_container'>
             <h1 className='signup3_title'>필수 정보 입력</h1>
@@ -197,13 +203,15 @@ export default function SignUp3(){
             <>
                 <div className='overlay'></div>
                 <div className='signupModal'>
-                    <img src='/mainlogo.png' alt='mainlogo' className='logomodal' />
+                    {/* <img src='/mainlogo.png' alt='mainlogo' className='logomodal' /> */}
                     <h1>회원가입이 완료되었습니다!</h1>
                     <p className='p1'>EcoStay로 오신걸 환영합니다!</p>
-                        <button type='button' 
-                        onClick={modalHandeler} 
-                        style={{color:'#fff', backgroundColor:'#42799b', border:'none', cursor:'pointer'}}
-                        className='signupModalBtn'>홈으로</button>
+                    <img src='/coupon.png' alt='couponImg' className='coupon' />
+                    <p className='couponDate'>오늘({year}.{month}.{date})부터 <span style={{color:'red', fontSize:'20px', fontWeight:'600'}}>‘한달’동안</span> 사용하실 수 있습니다!</p>
+                    <button type='button' 
+                    onClick={modalHandeler} 
+                    style={{color:'#fff', backgroundColor:'#42799b', border:'none', cursor:'pointer'}}
+                    className='signupModalBtn'>홈으로</button>
                 </div> 
             </>
             }
