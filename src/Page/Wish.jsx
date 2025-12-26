@@ -3,11 +3,13 @@ import { useEffect,useContext, useState,useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ResortDateContext } from '../Api/ResortDate';
 import Calendar from './Calendar';
+import Cookie from 'js-cookie';
+import { Link } from 'react-router-dom';
 
 export default function Wish(){
     const navigate = useNavigate();
 
-    const {RoomData, HotelData,DayData,wish,wishStar,wishArray,wishHandler,setPayHead,setPayRoom,selectday,setSelectday} = useContext(ResortDateContext);
+    const {RoomData, HotelData,DayData,wish,wishList,wishStar,wishArray,wishHandler,setWish,setPayHead,setPayRoom,selectday,setSelectday} = useContext(ResortDateContext);
 
     //호텔의 객실별 투숙객 인원 불러오기
     //위시리스트의 객실 리스트 필터링
@@ -140,7 +142,12 @@ console.log(wishMinMax);
             <div className="detail-content">
                 <div className="detail-left" ref={triggerRef}>                       
                     <div className="room-select" style={{borderTop:'0px'}}>
-                        <p className='room-title'>찜한 목록</p>
+                        <p className='room-title wish'>찜한 목록
+                            <span onClick={()=>{
+                                setWish([]);
+                                Cookie.remove('wishList');
+                            }}>전체 찜 삭제</span>
+                        </p>
                         {search && !dateFilter
                         ?(
                             <div className="empty-room">
@@ -168,12 +175,12 @@ console.log(wishMinMax);
                                 {(search && headFilter.length >= 1 ? headFilter : wishArray).map((item,index)=>(
                                     <li key={index}>
                                         <div className="room-left">
-                                            <a href={`/detail/${item.id}`}>
+                                            <Link to={`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)} >
                                                 <img src={`/img/${item.id}-1.jpg`} alt={item.hotelName} />
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className="room-right">
-                                            <h2><a href={`/detail/${item.id}`}>{item.hotelName}</a></h2>
+                                            <h2><Link to={`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>{item.hotelName}</Link></h2>
                                             <div className="room-intro">
                                                 <div className="intro-left">
                                                     {wishStar[index] && wishStar[index].map((star, ind) => (
@@ -185,7 +192,10 @@ console.log(wishMinMax);
                                                     <span className='scoreCount'>{(item.scoreCount).toLocaleString()}명 평가</span>
                                                 </div>
                                                 <div className="intro-right">
-                                                    <a href={`/detail/${item.id}`} className='pay'>상세정보 <i className="fa-solid fa-angle-right"></i></a>
+                                                    <button type='button' className='pay' onClick={()=>wishHandler(item.id)}>
+                                                        찜 삭제하기<i className="fa-solid fa-angle-right"></i>
+                                                    </button>
+                                                    {/* <a href={`/detail/${item.id}`} className='pay'>찜 삭제 <i className="fa-solid fa-angle-right"></i></a> */}
                                                 </div>
                                             </div>
                                             <div className="room-info">
@@ -222,7 +232,7 @@ console.log(wishMinMax);
                                                         }></i>
                                                     </button>
                                                     {/* <button type='button' className='cart'><i className="fa-solid fa-basket-shopping"></i></button> */}
-                                                    <a href={`/detail/${item.id}`} className='pay'>상세보기</a>
+                                                    <Link to={`/detail/${item.id}`} className='pay' onClick={() => window.scrollTo(0,0)}>상세보기</Link>
                                                 </div>
                                             </div>
                                         </div>
