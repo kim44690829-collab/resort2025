@@ -24,6 +24,7 @@ export default function Header(){
         setMenuModal(false);
     })
 
+    // 로그아웃용 함수
     const logoutHandeler = () => {
         logout();
         alert('로그아웃 되었습니다.');
@@ -31,10 +32,12 @@ export default function Header(){
         setHeaderChange(0);
     }
 
+    // 컴포넌트 이동시 모달 닫기
     useEffect(() => {
         setMenuModal(false);
     },[navigate])
 
+    // 헤더 변경 함수
     const headChangeHandeler = (num) => {
         if(num === 1){
             setHeaderChange(0);
@@ -52,6 +55,7 @@ export default function Header(){
         window.scrollTo(0,0);
     }
 
+    // 메뉴 클릭시 모달 닫힘, 컴포넌트 이동
     const menuModalHandeler = (num) => {
         if(num === 1){
             setMenuModal(false);
@@ -75,6 +79,7 @@ export default function Header(){
         <div className="Header_container">
             {/* 누르면 메인 페이지로 이동하는 로고 */}
                 <img src="/mainlogo.png" alt="EcoStay 홈으로 바로가기" style={{width:'100px', height:'50px', cursor:'pointer'}} className="mainLogo" onClick={() => headChangeHandeler(1)} />
+            {/* 로그인 전 헤더 */}
             {!userNickName ? 
             <ul className="Header_right">
                 {/* 비회원 예약조회 */}
@@ -129,6 +134,7 @@ export default function Header(){
                 </li>
             </ul>
             :
+            // 로그인 후 헤더
             <ul className="Header_right2">
                 <li className="menu_list2" style={{marginRight:'15px'}}>
                     <span className="login_nickName">{userNickName}</span>님</li>
