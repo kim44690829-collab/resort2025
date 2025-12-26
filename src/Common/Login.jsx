@@ -25,6 +25,7 @@ export default function Login(){
     // 마우스 변경
     const [mouseCursor, setMouseCursor] = useState(false);
 
+    // php
     const login = async (e) => {
         e.preventDefault();
         try{
@@ -73,6 +74,7 @@ export default function Login(){
         setPwInput(pwValue)
     }
 
+    // 로그인 조건
     useEffect(() => {
         const pwCondition = pwInput.length > 7;
 
@@ -85,16 +87,15 @@ export default function Login(){
         }
     },[emailInput, pwInput])
 
-
     return(
         <div className="Login_container">
             <h2 className='Login_title'>이메일로 시작하기</h2>
             <form onSubmit={login}>
                 <div className='login_form'>
+                    {/* 이메일 */}
                     <label htmlFor="userEmail">
                         이메일<span style={{color:'red'}}>*</span>
                     </label>
-
                     <input type="email" 
                     id="userEmail" 
                     name="userEmail" 
@@ -102,6 +103,7 @@ export default function Login(){
                     value={emailInput}
                     onChange={emailHandeler}
                     />
+                    {/* 비밀번호 */}
                     <label htmlFor="userPw">
                         비밀번호<span style={{color:'red'}}>*</span>
                     </label>
@@ -113,6 +115,7 @@ export default function Login(){
                     onChange={pwHandeler}
                     />
                     <div className='remember'>
+                        {/* 이메일 저장(쿠키) */}
                         <div className='remember_left'>
                             <input type="checkbox" id="rememberMail" name='rememberMail' onChange={emailChkHandeler} />
                             <label htmlFor="rememberMail">이메일 저장</label>
@@ -132,6 +135,7 @@ export default function Login(){
                 </div>
             </form>
             <div className='SignUpGo'>
+                {/* 회원가입 폼으로 이동 */}
                 <p>계정이 없으신가요?</p>
                 <Link to='/signup1'>
                     <button type="button" className='EmailSignUp'>이메일로 회원가입</button>
