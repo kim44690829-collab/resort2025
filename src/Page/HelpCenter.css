@@ -34,7 +34,7 @@
     width: 600px;
 } 
 .helpCenter_text .text_title{
-    margin-bottom: 50px;
+    margin-bottom: 36px;
     font-size: 30px;
     font-weight: 600;
 }
@@ -43,21 +43,75 @@
     justify-content: space-between;
     padding: 25px 0 25px 0;
     border-bottom: 1px solid gray;
+    align-items: center;
 }
 .helpCenter_text .helpCenter_texts .textDownBtn{
     border: none;
     background-color: transparent;
 }
-.text_contents{
+.BtnChange{
+    transform: rotate(180deg);
+}
+.helpCenter_text .text_contents{
     padding: 25px 0 25px 0;
     line-height: 30px;
+}
+.helpCenter_text .text_contents .contents5{
+    background-color: #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    line-height: 20px;
+}
+.helpCenter_text .text_contents .contents6{
+    background-color: #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    line-height: 20px;
+}
+/* 공지사항 */
+.notice{
+    cursor: pointer;
+}
+.notice-date{
+    font-size: 12px;
+}
+.notice-contents{
+    margin-top: 30px;
+    line-height: 20px;
+}
+.noticeContentsBtn{
+    display: block;
+    margin: 30px auto;
+    width: 300px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #333;
+    background-color: transparent;
+}
+/* 1대1 문의 */
+.support-1on1{
+    height: 500px;
+    border-top: 2px solid black;
+    border-bottom: 1px solid black;
+    line-height: 500px;
+    text-align: center;
+}
+.sportBtn{
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    color: #333;
+    background-color: transparent;
 }
 /* 고객센터 전화번호 */
 .helpCenter_tel{
     border: 1px solid #ddd;
     border-radius: 10px;
     margin-left: 50px;
-    height: 652px;
+    height: 752px;
     background-color: #ddd;
 }
 .helpCenter_tel .helpCenter_tel1{
@@ -78,6 +132,20 @@
     font-size: 18px;
     border-bottom: 1px solid #ddd;
 }
+.helpCenter_tel .helpCenter_tel1 .chatLi{
+    height: 91px;
+}
+.chatBtn{
+    display: block;
+    width: 190px;
+    height: 51px;
+    margin: 0 auto;
+    border-radius: 10px;
+    border: #42799b;
+    background-color: #42799b;
+    color: #fff;
+}
+
 .helpCenter_tel .helpCenter_tel1 .tel_list .fa-phone{
     margin-right: 10px;
 }
@@ -109,67 +177,3 @@
     font-size: 11px;
     margin-left: 12px;
 }
-/* .signup_container{
-    width: 1200px;
-    margin: 10px auto;
-    margin-bottom: 200px;
-    margin-top: 200px;
-}
-.signup_container .signup_title{
-    text-align: center;
-    font-size: 20px;
-    margin: 50px 0 50px 0;
-    line-height: 30px;
-}
-.signup_container .agreeForm{
-    width: 700px;
-    margin: 10px auto;
-}
-.signup_container .agreeForm > input[type='checkbox'],
-.signup_container .agreeForm > .agree1 > .agree2 > input[type='checkbox']{
-    margin-right: 10px;
-}
-.signup_container .agreeForm .agree1{
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-}
-.signup_container .agreeForm .agreeBtn{
-    width: 700px;
-    padding: 15px 10px 15px 10px;
-    border-radius: 10px;
-    margin-top: 20px;
-    border: none;
-}
-
-.signup_container .agreeForm .agree1 .agreeSeeBtn{
-    border: none;
-    background-color: transparent;
-}
-.signup_container .agreeForm .agreeContentBox .contentTitle{
-    display: inline-block;
-    margin-bottom: 10px;
-}
-/* 1번 항목 - 이용약관 */
-/* .signup_container .agreeForm .agreeContentBox .agreeContent1{
-    width: 700px;
-    line-height: 1.5em;
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-.signup_container .agreeForm .agreeContentBox .agreeContent1 .agreeContent1Ol{
-    list-style-type: decimal;
-    padding-left: 40px;
-}
-.signup_container .agreeForm .agreeContentBox .agreeContent1 .agreeContent1Ol .agreeContent1Li{
-    margin-bottom: 6px;
-    list-style-type: decimal;
-}
-.signup_container .agreeForm .agreeContentBox .agreeContent1 .agreeContent1Ol .agreeContent1Li .agreeContent1UlLi{
-    margin-bottom: 6px;
-    margin-top: 6px;
-    margin-left: 30px;
-    list-style-type: disc;
-}  */

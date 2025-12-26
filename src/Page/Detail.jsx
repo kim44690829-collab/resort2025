@@ -39,7 +39,7 @@ export default function Detail(){
     const date = new Date().getDate()
 
     //모달 프로바이더
-    const {toggle,setModalContent} = useContext(ModalContext);
+    const {toggle,setModalContent,AddressCopy, AddressCopyClick} = useContext(ModalContext);
     
     //호텔별점 이미지
     const[starImg, setStarImg] = useState([]);
@@ -197,7 +197,11 @@ export default function Detail(){
         navigator.clipboard.writeText(`${Hotel.city === 'Sokcho'?'대한민국, 강원도 속초시':Hotel.city === 'Gyeongju'?'대한민국, 경상북도 경주시':Hotel.city === 'Busan'?'대한민국, 부산시':Hotel.city === 'Gangneung'?'대한민국, 강원도 강릉시':Hotel.city === 'Yeosu'?'대한민국, 전라남도 여수시':Hotel.city === 'Daejeon'?'대한민국, 대전시':Hotel.city === 'Gwangju'?'대한민국, 광주시':Hotel.city === 'Jeju'?'대한민국, 제주도':Hotel.city === 'Pohang'?'대한민국, 경상북도 포항시':Hotel.city === 'Seoul'?'대한민국, 서울시':Hotel.city === 'Tokyo'?'일본, 도쿄':Hotel.city === 'Sapporo'?'일본, 훗카이도 삿포로':Hotel.city === 'LosAngeles'?'미국, 캘리포니아 로스앤젤레스':Hotel.city === 'NewYork'?'미국, 뉴욕':Hotel.city === 'Guam'?'미국, 괌':Hotel.city === 'Zhangjiajie'?'중국, 후난성 장가계':Hotel.city === 'Shanghai'?'중국, 상하이':Hotel.city === 'Rome'?'이탈리아, 로마':Hotel.city === 'Venice'?'이탈리아, 베네치아':Hotel.city === 'Paris'?'프랑스, 파리':null} ${Hotel.hotelName}`);
         setModalContent(<p style={{fontSize:'18px',fontWeight:'700'}}>주소가 복사되었습니다.</p>);
         toggle();        
-    }  
+    }
+    //주소복사 버튼2
+    const addressCopy2 = () =>{
+        navigator.clipboard.writeText(`${Hotel.city === 'Sokcho'?'대한민국, 강원도 속초시':Hotel.city === 'Gyeongju'?'대한민국, 경상북도 경주시':Hotel.city === 'Busan'?'대한민국, 부산시':Hotel.city === 'Gangneung'?'대한민국, 강원도 강릉시':Hotel.city === 'Yeosu'?'대한민국, 전라남도 여수시':Hotel.city === 'Daejeon'?'대한민국, 대전시':Hotel.city === 'Gwangju'?'대한민국, 광주시':Hotel.city === 'Jeju'?'대한민국, 제주도':Hotel.city === 'Pohang'?'대한민국, 경상북도 포항시':Hotel.city === 'Seoul'?'대한민국, 서울시':Hotel.city === 'Tokyo'?'일본, 도쿄':Hotel.city === 'Sapporo'?'일본, 훗카이도 삿포로':Hotel.city === 'LosAngeles'?'미국, 캘리포니아 로스앤젤레스':Hotel.city === 'NewYork'?'미국, 뉴욕':Hotel.city === 'Guam'?'미국, 괌':Hotel.city === 'Zhangjiajie'?'중국, 후난성 장가계':Hotel.city === 'Shanghai'?'중국, 상하이':Hotel.city === 'Rome'?'이탈리아, 로마':Hotel.city === 'Venice'?'이탈리아, 베네치아':Hotel.city === 'Paris'?'프랑스, 파리':null} ${Hotel.hotelName}`);
+    }    
 
     //스크롤 내리면 오른쪽 부분 따라 내려오기
     const triggerRef = useRef(null);
@@ -379,12 +383,34 @@ export default function Detail(){
         }        
     }
 
+    const [slider, setSlider] = useState(false);
+    const [bigImg, setBigImg] = useState(`/img/${id}-1.jpg`);
+
 
     return(
         <section className="detail-wrap" onClick={()=>setCal(false)}>
+            {slider &&
+                <div className='hotel-modal-Overlay'>
+                    <div className="hotel-img-slider">
+                        <button className='closeBtn' onClick={()=>setSlider(false)}>
+                            <i className="fa-solid fa-xmark"></i>
+                        </button>
+                        <div className="hotel-img" style={{borderRadius:'7px',position:'relative'}}>
+                            <div className="bigImg">
+                                <img src={bigImg} alt={Hotel.hotelName} />
+                            </div>
+                            <div className="hotel-thumb">
+                                {Hotel.img.map((imgg,indd)=>(
+                                    <img src={imgg} alt={Hotel.hotelName} key={indd} onClick={()=>setBigImg(imgg)} />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
            <ul className="detail-img">
                 {Hotel.img.map((img,index)=>(
-                    <li key={index}>
+                    <li key={index} onClick={()=>setSlider(true)}>
                         <img src={img} alt={Hotel.hotelName} />
                     </li>
                 ))}                
@@ -427,7 +453,20 @@ export default function Detail(){
                                     <button type='button' onClick={shareClick}>
                                         <i className="fa-solid fa-share-nodes"></i>
                                     </button>
-                                    <button type='button'>
+                                    <button type='button' onClick={()=>{setModalContent(
+                                        <div className="hotel-map" style={{position:'relative'}}>
+                                            <p className='map-title'>위치안내</p>
+                                            <LeafletMap city={Hotel.city} hotelName={Hotel.hotelName} style={{width:'800px',height:'600px',border: '1px solid #e7e7e7',borderRadius:'10px'}} key={Hotel.id}/>
+                                            <p className='map-address'>
+                                                <i className="fa-solid fa-location-dot"></i>&nbsp;
+                                                {Hotel.city === 'Sokcho'?'대한민국, 강원도 속초시':Hotel.city === 'Gyeongju'?'대한민국, 경상북도 경주시':Hotel.city === 'Busan'?'대한민국, 부산시':Hotel.city === 'Gangneung'?'대한민국, 강원도 강릉시':Hotel.city === 'Yeosu'?'대한민국, 전라남도 여수시':Hotel.city === 'Daejeon'?'대한민국, 대전시':Hotel.city === 'Gwangju'?'대한민국, 광주시':Hotel.city === 'Jeju'?'대한민국, 제주도':Hotel.city === 'Pohang'?'대한민국, 경상북도 포항시':Hotel.city === 'Seoul'?'대한민국, 서울시':Hotel.city === 'Tokyo'?'일본, 도쿄':Hotel.city === 'Sapporo'?'일본, 훗카이도 삿포로':Hotel.city === 'LosAngeles'?'미국, 캘리포니아 로스앤젤레스':Hotel.city === 'NewYork'?'미국, 뉴욕':Hotel.city === 'Guam'?'미국, 괌':Hotel.city === 'Zhangjiajie'?'중국, 후난성 장가계':Hotel.city === 'Shanghai'?'중국, 상하이':Hotel.city === 'Rome'?'이탈리아, 로마':Hotel.city === 'Venice'?'이탈리아, 베네치아':Hotel.city === 'Paris'?'프랑스, 파리':null}
+                                                &nbsp;{Hotel.hotelName}
+                                                <button type='button' onClick={()=>{AddressCopyClick();addressCopy2();}}>주소복사</button>
+                                            </p>
+                                        </div>
+                                    );
+                                    toggle();
+                                    }}>
                                         <i className="fa-solid fa-location-dot"></i>
                                     </button>                   
                                 </div>
@@ -496,7 +535,28 @@ export default function Detail(){
                                                 </span>
                                             </div>
                                             <div className="intro-right">
-                                                <button type='button' onClick={()=>{setModalContent(<p>상세정보 준비중</p>);toggle();}}>상세정보 <i className="fa-solid fa-angle-right"></i></button>
+                                                <button type='button' onClick={()=>{
+                                                    setModalContent(
+                                                        <div className='room-explan'>
+                                                            <p className='room-tit'>{item.roomName}</p>
+                                                            <div className="room-part">
+                                                                <p className='tit'>객실 정보</p>
+                                                                <ul>
+                                                                    <li><span>대실</span> 최대 3시간 이용(마감시간 22시 까지)</li>
+                                                                    <li><span>체크인</span> 15:00 ~ <span>체크아웃</span> 11:00</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div className="room-part">
+                                                                <p className='tit'>할인 쿠폰 안내</p>
+                                                                <ul>
+                                                                    <li>할인 쿠폰은 예약페이지에서 사용이 가능합니다.</li>
+                                                                    <li>본 혜택은 제휴점 및 에코스테이 사정에 의해 변경/중지될 수 있습니다.</li>
+                                                                    <li>방문 결제 및 비회원 예약은 대상에서 제외됩니다.</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>                                            
+                                                    );
+                                            toggle();}}>상세정보 <i className="fa-solid fa-angle-right"></i></button>
                                             </div>
                                         </div>
                                         <div className="room-info">
@@ -523,7 +583,7 @@ export default function Detail(){
                                                         <span className='final-price'>{(Hotel.price + index * 12000).toLocaleString()}원<span>/1박</span></span>
                                                     </>
                                                 }
-                                                <button type='button' className='cart'><i className="fa-solid fa-basket-shopping"></i></button>
+                                                {/* <button type='button' className='cart'><i className="fa-solid fa-basket-shopping"></i></button> */}
                                                 <button type='button' className='pay' onClick={()=>payClick(head,item.id)} >예약하기</button>
                                             </div>
                                         </div>
@@ -635,7 +695,34 @@ export default function Detail(){
                                             </div>
                                             <div className="more">
                                                 <p className='more-txt'>더보기</p>
-                                                <button type='button'>
+                                                <button type='button' onClick={()=>{
+                                                    setModalContent(
+                                                        <>
+                                                        <h4 className='room-tit'>전체 객실 이용자 평가</h4>
+                                                        <div className='room-div'>
+                                                            <div className="hotel-img-wrap">
+                                                                <img src={`/img/${Hotel.id}-${index+2}.jpg`} alt={Hotel.hotelName} className='hotel-img'/>
+                                                            </div>
+                                                            <div className="review-txt-wrap">
+                                                                {item.score.map((review,ind)=>(
+                                                                    //여기서는 객실별 후기 3개씩만 보여지게
+                                                                    <p key={ind}>
+                                                                        <span className='room'>{item.roomName}</span>
+                                                                        {starRoom[index] && starRoom[index][ind] && starRoom[index][ind].map((star,i)=>(
+                                                                            <img src={star} alt="star" key={i} className='star' />
+                                                                        ))}
+                                                                        <span className='review'>{review}점</span>
+                                                                        <i className='comment-wrap'>
+                                                                            {smileRoom[index] && smileRoom[index][ind] && <img src={smileRoom[index][ind]} alt="score" className='score' />}
+                                                                            <span className='comment'>{item.comment[ind]}</span>
+                                                                        </i>
+                                                                    </p>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                        </>
+                                                    );
+                                                    toggle();}}>
                                                     <i className="fa-solid fa-angle-right"></i>
                                                 </button>
                                             </div>

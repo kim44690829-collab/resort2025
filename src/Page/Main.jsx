@@ -1,15 +1,15 @@
 import '../Page/Main.css';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, use } from 'react';
 import cookie from 'js-cookie';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ResortDateContext } from '../Api/ResortDate';
 import 'leaflet/dist/leaflet.css';
 import Calendar from './Calendar';
 
 export default function Main(){    
-    // 2025-12-19 병합2
+    // 2025-12-26 병합
     // 호텔, 객실데이터 useContext로 가져오는 훅
-    const {RoomData, HotelData, DayData, setDayData,town,setTown,serchHandler, wish, wishHandler} = useContext(ResortDateContext);
+    const {RoomData, HotelData, DayData, setDayData,town,setTown,serchHandler, wish, wishHandler, menuModal, setMenuModal} = useContext(ResortDateContext);
     // 호텔 input에 들어가는 지역, 호텔명 상태변수
     //const [hotelInput, setHotelInput] = useState('');
     // 호텔 input 아래 모달 상태변수
@@ -27,6 +27,7 @@ export default function Main(){
         {id: 9, localName : '제주'}, 
         {id: 10, localName : '포항'},
     ]
+
     // 인원 상태변수
     const [guestCount, setGuestCount] = useState(1)
 
@@ -62,6 +63,10 @@ export default function Main(){
     const [htypeModalOpen2, sethTypeModalOpen2] = useState(0);
     // 타입별 호텔을 담을 변수
     const [typeAndHotel, setTypeAndHotel] = useState([]);
+    // 해외 호텔 담을 변수
+    const [overseasHotel, setOverSeasHotel] = useState([])
+    // 국내
+    const [internalHotel, setInternalHotel] = useState([])
 
     // 호텔 유형별로 접근하기 위한 사진 map돌리기 위한 오브젝트 배열
     const hotelType = [
@@ -83,9 +88,22 @@ export default function Main(){
     ];
 
     // 호텔 해외 필터
-    const overseas = HotelData.filter(item => item.country !== 'Korea' && item.score >= 4);
-    const overseasRate = [...overseas].sort((a,b) => b.score - a.score);
-    console.log(overseas)
+    useEffect(() => {
+        const overseas = HotelData.filter(item => item.country !== 'Korea' && item.score >= 4);
+        const overseasRate = [...overseas].sort((a,b) => b.score - a.score);
+        setOverSeasHotel(overseasRate)
+    },[])
+    
+    // console.log(overseas)
+
+    // 호텔 국내 필터
+    useEffect(() => {
+        const internal = HotelData.filter(item => item.country === 'Korea');
+        const internalHotelSort =internal.sort((a,b) => b.score - a.score);
+        setInternalHotel(internalHotelSort)
+        // console.log('111111111111111111111111111'+internalHotelSort)
+    },[])
+    
 
     // 호텔 타입 모달 - map
     useEffect(() => {
@@ -99,7 +117,7 @@ export default function Main(){
         setTypeAndHotel(hotel_modal1)
     }, [htypeModalOpen])
 
-    // 관광명소 호텔 모달 - map
+    // 지역별 호텔 모달 - map
     useEffect(() => {
         const hotel_modal2 = HotelData.filter((item) => 
             (item.city === 'Seoul' ? '서울' : 
@@ -115,7 +133,7 @@ export default function Main(){
     const hotelCityRating = [...cityAndHotel].sort((a,b) => b.score - a.score);
 
     // 호텔 평점순으로 재배열
-    const hotelRating = [...HotelData].sort((a,b) => b.score - a.score);
+    // const hotelRating = [...HotelData].sort((a,b) => b.score - a.score);
     
     // 버튼을 클릭한 횟수를 저장하는 상태변수
     const [btnCount1, setBtnCount1] = useState(0);
@@ -248,7 +266,7 @@ export default function Main(){
             }else{
                 setCurrent(0)
             }
-        }, 5000);
+        }, 10000);
         return(() => {clearInterval(current)});
     },[currentImg])
 
@@ -359,7 +377,6 @@ export default function Main(){
                             </>}
                         </div>
                         <i className="fa-solid fa-magnifying-glass searchIcon"></i>
-                        
                         <button type='button' onClick={() => setOpenC(!openC)} className='calenertBtn'>
                             <i className="fa-solid fa-calendar"></i>
                             <span style={{marginRight:'5px'}}>{DayData.length < 2 ? `${year}-${month}-${date} - ${year}-${month}-${date + 1} ` : `${DayData[0]} - ${DayData[1]}`}</span>
@@ -399,6 +416,7 @@ export default function Main(){
                     </form>
                 </div>
             </div>
+
             {/* 이벤트 배너 */}
             <div className='eventBenner'>
                 <p className='eventTitle'>이벤트</p>
@@ -420,6 +438,7 @@ export default function Main(){
                     <span className={bennerCircle === 6 ? 'circleMain' : 'circle'}></span> */}
                 </div>
             </div>
+
             {/* 호텔 유형에 따라 나눔 */}
             <div className='hotelTypeWrap'>
                 <div className='hotelTypeTitle'>
@@ -443,7 +462,7 @@ export default function Main(){
                                             <ul className='Modal_hType_Ul'>
                                                 {typeAndHotel.slice(0,10).map((item) => (
                                                     <li key={item.id} className='Modal_hType_Li'>
-                                                        <Link to = {`/detail/${item.id}`}>
+                                                        <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
                                                             <div>
                                                                 <img src = {item.img[0]} alt={item.hotelName} className='Modal_hType_Img' />
                                                             </div>
@@ -469,7 +488,6 @@ export default function Main(){
                                                             {color:'#f94239'}
                                                         :
                                                             {color:'#6b6b6b'}
-                                                        
                                                         }></i>
                                                         </button>
                                                     </li> 
@@ -487,7 +505,8 @@ export default function Main(){
                     </ul>
                 </div>    
             </div>
-            {/* 인기 호텔 모음 */}
+
+            {/* 인기 호텔 모음 - 해외 */}
             <div className='popularAccom'>
                 <p className='popularAccomTitle'>해외 인기 스테이 PICK!</p>
                 <div className='popularAccomSub1'>
@@ -500,11 +519,11 @@ export default function Main(){
                     {/* 해외 호텔 map */}
                     <div className='slideBox'>
                         <ul className='popularAccomSub2' style={{marginLeft:`${slideMove1}px`}} >
-                            {overseasRate.slice(0,4).map((item) => (
+                            {overseasHotel.slice(0,4).map((item) => (
                                     <li key={item.id} style={{cursor:'pointer'}} className='popularAccomSub3'>
-                                        <Link to = {`/detail/${item.id}`}>
+                                        <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
                                             {/* <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' /> */}
-                                            <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
+                                            <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' />
                                             <p className='popularAccom_type'>{item.type}</p>
                                             <p className='popularAccom_name'>{item.hotelName}</p>
                                             <div className='popularAccom_review'>
@@ -538,10 +557,10 @@ export default function Main(){
                                         </button>
                                     </li>
                             ))}
-                            {overseasRate.slice(20,24).map((item) => (
+                            {overseasHotel.slice(20,24).map((item) => (
                                 <li key={item.id} style={{cursor:'pointer'}} className='popularAccomSub3'>
-                                    <Link to = {`/detail/${item.id}`}>
-                                        <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
+                                    <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
+                                        <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' />
                                         <p className='popularAccom_type'>{item.type}</p>
                                         <p className='popularAccom_name'>{item.hotelName}</p>
                                         <div className='popularAccom_review'>
@@ -574,10 +593,10 @@ export default function Main(){
                                     </button>
                                 </li>
                             ))}
-                            {overseasRate.slice(30,33).map((item) => (
+                            {overseasHotel.slice(30,33).map((item) => (
                                 <li key={item.id} style={{cursor:'pointer'}} className='popularAccomSub3'>
-                                    <Link to = {`/detail/${item.id}`}>
-                                        <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
+                                    <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
+                                        <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' />
                                         <p className='popularAccom_type'>{item.type}</p>
                                         <p className='popularAccom_name'>{item.hotelName}</p>
                                         <div className='popularAccom_review'>
@@ -620,7 +639,72 @@ export default function Main(){
                     }
                 </div>
             </div>
+            
             {/* 국내  인기 스테이 PICK! */}
+            <div className="left_main">                       
+                <div className="room-select_main" style={{borderTop:'0px'}}>
+                    <p className='room-title_main'>국내 인기 스테이 PICK!</p>
+                    <ul className='roomUl'>
+                        {internalHotel.slice(0,4).map((item,index)=>(
+                            <li key={index} style={{display:'flex'}}>
+                                <div className="room-left_main">
+                                    <a href={`/detail/${item.id}`}>
+                                        <img src={`/img/${item.id}-1.jpg`} alt={item.hotelName} />
+                                    </a>
+                                </div>
+                                <div className="room-right_main">
+                                    <h2><a href={`/detail/${item.id}`}>{item.hotelName}</a></h2>
+                                    <div className="room-intro_main">
+                                        <div className="intro-left_main">
+                                            <span>
+                                                <img src='/img/star-one.png' alt="score" />
+                                                <img src='/img/star-one.png' alt="score" />
+                                                <img src='/img/star-one.png' alt="score" />
+                                                <img src='/img/star-one.png' alt="score" />
+                                                <img src='/img/star-half.png' alt="score" />
+                                            </span>
+                                            <span className='starScore_main'>
+                                                {(item.score[index] - Math.floor(item.score[index]) === 0) ? item.score[index]+'.0' : item.score[index]}
+                                            </span>
+                                        </div>
+                                        <div className="intro-right_main">
+                                            <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
+                                                <button type='button'>상세정보 <i className="fa-solid fa-angle-right"></i></button>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                    <div className="room-info_main">
+                                        <p><i className="fa-regular fa-clock"></i> 체크인 <span className='bold_main'>15:00</span> ~ 체크아웃 <span className='bold_main'>11:00</span></p>
+                                        <p><i className="fa-solid fa-user-group"></i> 최대 투숙객 수 : 2 ~ 4명</p>
+                                        <p><i className="fa-solid fa-tag"></i> <span className='bold_main'>할인혜택 :</span>
+                                            <span className='red_main'>
+                                                {item.discount === 1 ? 
+                                                    '10%할인 이벤트 중'
+                                                :
+                                                    '회원가입시 10,000원 할인쿠폰'
+                                                }
+                                            </span>
+                                        </p>
+                                        <div className="room-pay_main">
+                                            {item.discount === 1 ? 
+                                                <>
+                                                    <span className='origin-price_main'>{(item.price).toLocaleString()}원</span>
+                                                    <span className='final-price_main'>{((item.price) - ((item.price)*0.1)).toLocaleString()}원<span>/1박</span></span>
+                                                </>                                                    
+                                            :                                                    
+                                                <>
+                                                    <span className='final-price_main'>{(item.price).toLocaleString()}원<span>/1박</span></span>
+                                                </>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div> 
+
             {/* 평점 - 호텔 평점순 */}
             <div className='spotsAndStays'>
                 <p className='spotsAndStaysTitle'>지역 평점 TOP!</p>
@@ -666,7 +750,7 @@ export default function Main(){
                                                 <ul className='Modal_hotel_Ul'>
                                                     {hotelCityRating.map((item) => (
                                                         <li key={item.id} className='Modal_hotel_Li'>
-                                                            <Link to = {`/detail/${item.id}`} className='hotelLink'>
+                                                            <Link to = {`/detail/${item.id}`} className='hotelLink' onClick={() => window.scrollTo(0,0)}>
                                                             <div>
                                                                 <img src = {item.img[0]} alt={item.hotelName} className='Modal_hotel_Img' />
                                                             </div>
@@ -757,6 +841,7 @@ export default function Main(){
                     }
                 </div>
             </div> */}
+
             {/* EcoStay 회원만의 특별한 혜택 */}
             <div className='EcoMember'>
                 <img src='middleBenner.jpg' alt='middleBenner' />
@@ -772,9 +857,9 @@ export default function Main(){
                     }
                     <div className='EcoMemberUlBox'>
                         <ul className='EcoMemberHotelAll' style={{marginLeft:`${slideMove4}px`}}>
-                            {HotelData.slice(0,10).map((item) => (
+                            {HotelData.slice(60,70).map((item) => (
                             <li key={item.id} className='EcoMemberHotelAllLi'>
-                                <Link to = {`/detail/${item.id}`} className='EcoMemberA'>
+                                <Link to = {`/detail/${item.id}`} className='EcoMemberA' onClick={() => window.scrollTo(0,0)}>
                                     <img src={item.img[0]} alt={item.hotelName} style={{width:'285px', height:'230px',borderRadius:'10px 0 0 10px'}}/>
                                     <div className='EcoMemberHotelAll-2'>
                                         <span className='bennerType'>{item.type}</span><br/>

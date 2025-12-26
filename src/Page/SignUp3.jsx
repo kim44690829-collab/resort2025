@@ -3,10 +3,12 @@ import { useState, useEffect, useContext } from 'react';
 import { ResortDateContext } from '../Api/ResortDate';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignUp3(){
+    const navigate = useNavigate();
     // 핸드폰 데이터 3개 합친 변수
-    const {userNumFront, userNumBack} = useContext(ResortDateContext);
+    const {userNumFront, setUserNumFront, userNumBack, setUserNumBack, setHeaderChange, userNickName} = useContext(ResortDateContext);
     // 회원가입 form에 들어가는 상태변수
     // 이메일
     const [userMail, setUserMail] = useState('');
@@ -25,6 +27,16 @@ export default function SignUp3(){
     const [nickname, setNickname] = useState('');
     // 마우스 변경
     const [mouseCursor, setMouseCursor] = useState(false);
+
+    // 도메인 배열
+    const ALLOWED_DOMAINS = [
+        "naver.com",
+        "gmail.com",
+        "daum.net",
+        "kakao.com",
+        "hanmail.net",
+        "nate.com",
+    ];
 
     // submit 함수 생성
     const signup = async (e) => {
@@ -56,6 +68,8 @@ export default function SignUp3(){
                 setBirthDate('');
                 setUserGender('');
                 setNickname('');
+                setUserNumFront('');
+                setUserNumBack('');
             }else{
                 console.log(res.data);
                 alert(res.data.message || '회원 가입 실패');
@@ -75,8 +89,30 @@ export default function SignUp3(){
     // 회원가입 종료 후 모달 핸들러
     const modalHandeler = () => {
         setSignupModalOpen(!signupModalOpen);
+        navigate('/');
+        setHeaderChange(0);
     }
 
+    // 이메일 형식
+    // / ~~~ / => 시작과 끝 (이 안에 정규식이 들어갈겁니다.)
+    // ^ => 문자열이 시작됩니다.
+    // [] : 문자 집합 / ^ (대괄호 안) : 부정(not) / \s : 공백 (스페이스, 탭 등) / @ : 골뱅이 / + : 1글자 이상
+    // [^\s@]+ => 공백과 골뱅이를 제외한 문자 집합 한글자 이상
+    // @ => 아이디 @ 도메인 구분자
+    // \. => .
+    // \를 사용하는 이유 => 정규식에서 .은 정말 아무문자나 상관없다는 뜻으로 a~z 1~9 @ 등의 특수기호 스페이스바까지 다 들어갈수있음
+    // \를 사용해서 특수한 의미의 .을 문자 그대로의 .으로 바꾸는 것
+    // {2,} => 2글자 이상
+
+    // 정규식 .test() => ()안에있는게 앞의 조건에 맞으면 true를 반환 아니면 false를 반환
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const isValidEmail = emailRegex.test(userMail);
+    // emailInput에서 받은 이메일 주소를 @기준으로 잘라서 배열로 만듦
+    // ex) aaaa@naver.com => ['aaaa', 'naver.com'] 의 [1] => 'naver.com' => 즉 도메인명을 가져오기 위한 로직(소문자로)
+    // 중간의 ?는 없으면 undefined를 반환
+    const domain = userMail.split("@")[1]?.toLowerCase();
+    // 기존에 위에서 배열에 저장한 도메인 명들 중에 사용자가 입력한 도메인명이 포함되는지 알아보기위한 로직
+    const isAllowedDomain = ALLOWED_DOMAINS.includes(domain);
 
     // 
     const m = Number(BirthMonth);
@@ -85,8 +121,8 @@ export default function SignUp3(){
     // 회원가입 시 버튼 활성화 조건
     useEffect(() => {
         if(
-            userMail.includes('@') && 
-            userMail.includes('.com') && 
+            isValidEmail &&
+            isAllowedDomain &&
             userPw.length >= 8 && 
             userPwConfirm === userPw && 
             BirthYear.length >= 4 && 
@@ -161,15 +197,13 @@ export default function SignUp3(){
             <>
                 <div className='overlay'></div>
                 <div className='signupModal'>
-                    <p className='p2'>감사합니다!</p>
+                    <img src='/mainlogo.png' alt='mainlogo' className='logomodal' />
                     <h1>회원가입이 완료되었습니다!</h1>
                     <p className='p1'>EcoStay로 오신걸 환영합니다!</p>
-                    <Link to='/'>
                         <button type='button' 
                         onClick={modalHandeler} 
                         style={{color:'#fff', backgroundColor:'#42799b', border:'none', cursor:'pointer'}}
                         className='signupModalBtn'>홈으로</button>
-                    </Link>
                 </div> 
             </>
             }

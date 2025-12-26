@@ -19,6 +19,7 @@ import Pay from './Page/Pay'
 import HelpCenter from './Page/HelpCenter'
 import Wish from './Page/Wish'
 import HotelSection from './Page/HotelSection'
+import HotelSection2 from './Page/HotelSection2'
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
             <Route path='/helpCenter' element={<HelpCenter />} />
             <Route path='/wish' element={<Wish />}/>
             <Route path='/hotelSection' element={<HotelSection />} />
+            <Route path='/hotelSection2' element={<HotelSection2 />} />
           </Routes>
           <Footer />
         </BrowserRouter>
