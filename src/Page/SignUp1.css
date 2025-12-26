@@ -35,6 +35,9 @@
     border: none;
     background-color: transparent;
 }
+.btnChange{
+    transform: rotate(180deg);
+}
 .signup_container .agreeForm .agreeContentBox .contentTitle{
     display: inline-block;
     margin-bottom: 10px;

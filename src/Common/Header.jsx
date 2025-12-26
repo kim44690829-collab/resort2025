@@ -8,8 +8,8 @@ import { useClickAway } from 'react-use';
 
 export default function Header(){
     const navigate = useNavigate();
-    const {userNickName, logout} = useContext(ResortDateContext);
-    const [headerChange, setHeaderChange] = useState(0);
+    const {userNickName, logout, headerChange, setHeaderChange} = useContext(ResortDateContext);
+    // const [headerChange, setHeaderChange] = useState(0);
     // 헤더 메뉴바 모달
     // useRef, useClickAway 를 사용하기 전 npm install react-use 를 해야 함.
     // 모달 on / off 는 원래 useState쓰는대로 사용하면 된다.
@@ -74,7 +74,7 @@ export default function Header(){
     return(
         <div className="Header_container">
             {/* 누르면 메인 페이지로 이동하는 로고 */}
-                <img src="../public/mainlogo.png" alt="EcoStay 홈으로 바로가기" style={{width:'100px', height:'50px', cursor:'pointer'}} className="mainLogo" onClick={() => headChangeHandeler(1)} />
+                <img src="/mainlogo.png" alt="EcoStay 홈으로 바로가기" style={{width:'100px', height:'50px', cursor:'pointer'}} className="mainLogo" onClick={() => headChangeHandeler(1)} />
             {!userNickName ? 
             <ul className="Header_right">
                 {/* 비회원 예약조회 */}
@@ -102,7 +102,28 @@ export default function Header(){
                 }
                 <li className="menu_list menu_btn">
                     {/* 메뉴 */}
-                    <button type="button" className="HeaderBtn" onClick={() => setMenuModal(!menuModal)} >
+                    {/* onMouseDown : 마우스가 눌리는 순간 발생 (1)
+                        onMouseUp : 마우스를 눌렀다가 떼는 순간 발생 (2)
+                        onClick : 마우스를 눌렀다가 뗀 이후에 발생 (3)
+                    */}
+                    {/* stopPropagation : 이벤트의 버블링을 막는 함수  / 이 함수를 쓴 것과 동일한 형태의 이벤트에만 적용
+                        필요한 이유 : 현재 onClick이 발생하는 순서 
+                        mousedown
+                        button
+                        → header
+                        → body
+                            → document  ← useClickAway 실행 -> false로 바뀌어서 모달이 닫힘
+                        mouseup
+                        click
+                        button ← onClick 실행 -> true로 다시 바뀌어서 모달이 다시 열림
+
+                        stopPropagation를 사용했을땐 mouseDown의 button에서 부모로 전파되지 못함.
+                        그 이후 mouseup실행, click실행 -> 모달 false로 바뀜.
+                    */}
+                    <button type="button" className="HeaderBtn" 
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onClick={() => setMenuModal(!menuModal)}
+                    >
                         <i className="fa-solid fa-bars"></i>
                     </button>
                 </li>
@@ -116,7 +137,10 @@ export default function Header(){
                 </li>
                 <li className="menu_list2 menu_btn">
                     {/* 메뉴 */}
-                    <button type="button" className="HeaderBtn" >
+                    <button type="button" className="HeaderBtn"
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onClick={() => setMenuModal((prev) => !prev)}
+                    >
                         <i className="fa-solid fa-bars"></i>
                     </button>
                 </li>

@@ -4,14 +4,22 @@ import { useState, useEffect, useContext } from 'react';
 import { ResortDateContext } from '../Api/ResortDate';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import cookie from 'js-cookie';
 
 export default function Login(){
     // 공유 데이터
     const {loginSave} = useContext(ResortDateContext)
     const navigate = useNavigate();
+
     // 이메일, 비밀번호 저장 상태변수
-    const [emailInput, setEmailInput] = useState('')
+    // 아이디 저장 쿠키
+    const [emailInput, setEmailInput] = useState(cookie.get('emailInput') || '');
     const [pwInput, setPwInput] = useState('')
+
+    // 아이디 저장 체크박스가 체크되면 => true 아니면 false
+    const saveId = cookie.get('emailInput');
+    const [emailChk, setEmailChk] = useState(saveId ? true : false);
+    
     // 조건을 만족하지 않으면 버튼 비활성회
     const [isDisabledLogin, setIsDisabledLogin] = useState(true);
     // 마우스 변경
@@ -40,6 +48,19 @@ export default function Login(){
             console.log('에러', error);
             alert('서버 연결 오류');
         }
+
+        if(emailChk){
+            const oneMinute = new Date(Date.now() + 1*60*1000);
+            cookie.set('emailInput',emailInput,{expires:oneMinute,path:'/'})
+        }else{
+            // 이메일 저장 체크를 하지 않으면 cookie삭제
+            cookie.remove('emailInput',{path:'/'})
+        }
+    }
+
+    //이메일 저장 체크박스 핸들러
+    const emailChkHandeler = (e) => {
+        setEmailChk(e.target.checked);
     }
 
     // 이메일, 비밀번호 onchange
@@ -53,7 +74,6 @@ export default function Login(){
     }
 
     useEffect(() => {
-        // const emailCondition =( emailInput.includes('@') + emailInput.includes('.com'));
         const pwCondition = pwInput.length > 7;
 
         if( emailInput.includes('@') && emailInput.includes('.com') && pwCondition){
@@ -94,7 +114,7 @@ export default function Login(){
                     />
                     <div className='remember'>
                         <div className='remember_left'>
-                            <input type="checkbox" id="rememberMail" name='rememberMail' />
+                            <input type="checkbox" id="rememberMail" name='rememberMail' onChange={emailChkHandeler} />
                             <label htmlFor="rememberMail">이메일 저장</label>
                         </div>
                         <button type="button" className='remember_right'>비밀번호 재설정</button>

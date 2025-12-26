@@ -33,7 +33,7 @@ export default function Footer(){
                 <div className="footer_link">
                     <div className="footer_logo">
                         <Link to='/'>
-                            <img src="../public/mainlogo.png" alt="EcoStay 홈으로 바로가기" style={{width:'100px', height:'50px', cursor:'pointer'}} className="mainLogo" />
+                            <img src="/footerLogo.png" alt="EcoStay 홈으로 바로가기" style={{width:'100px', height:'50px', cursor:'pointer'}} className="mainLogo" />
                         </Link>
                     </div>
                     <div className="footer_sns">

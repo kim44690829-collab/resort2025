@@ -506,7 +506,7 @@ export default function Main(){
                 </div>    
             </div>
 
-            {/* 인기 호텔 모음 */}
+            {/* 인기 호텔 모음 - 해외 */}
             <div className='popularAccom'>
                 <p className='popularAccomTitle'>해외 인기 스테이 PICK!</p>
                 <div className='popularAccomSub1'>
@@ -523,7 +523,7 @@ export default function Main(){
                                     <li key={item.id} style={{cursor:'pointer'}} className='popularAccomSub3'>
                                         <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
                                             {/* <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' /> */}
-                                            <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
+                                            <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' />
                                             <p className='popularAccom_type'>{item.type}</p>
                                             <p className='popularAccom_name'>{item.hotelName}</p>
                                             <div className='popularAccom_review'>
@@ -560,7 +560,7 @@ export default function Main(){
                             {overseasHotel.slice(20,24).map((item) => (
                                 <li key={item.id} style={{cursor:'pointer'}} className='popularAccomSub3'>
                                     <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
-                                        <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
+                                        <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' />
                                         <p className='popularAccom_type'>{item.type}</p>
                                         <p className='popularAccom_name'>{item.hotelName}</p>
                                         <div className='popularAccom_review'>
@@ -596,7 +596,7 @@ export default function Main(){
                             {overseasHotel.slice(30,33).map((item) => (
                                 <li key={item.id} style={{cursor:'pointer'}} className='popularAccomSub3'>
                                     <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
-                                        <img src='/img/1-1.jpg' alt={item.hotelName} className='popularAccomMainImg' />
+                                        <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' />
                                         <p className='popularAccom_type'>{item.type}</p>
                                         <p className='popularAccom_name'>{item.hotelName}</p>
                                         <div className='popularAccom_review'>
@@ -657,11 +657,11 @@ export default function Main(){
                                     <div className="room-intro_main">
                                         <div className="intro-left_main">
                                             <span>
-                                                <img src='../public/img/star-one.png' alt="score" />
-                                                <img src='../public/img/star-one.png' alt="score" />
-                                                <img src='../public/img/star-one.png' alt="score" />
-                                                <img src='../public/img/star-one.png' alt="score" />
-                                                <img src='../public/img/star-half.png' alt="score" />
+                                                <img src='/img/star-one.png' alt="score" />
+                                                <img src='/img/star-one.png' alt="score" />
+                                                <img src='/img/star-one.png' alt="score" />
+                                                <img src='/img/star-one.png' alt="score" />
+                                                <img src='/img/star-half.png' alt="score" />
                                             </span>
                                             <span className='starScore_main'>
                                                 {(item.score[index] - Math.floor(item.score[index]) === 0) ? item.score[index]+'.0' : item.score[index]}
@@ -857,7 +857,7 @@ export default function Main(){
                     }
                     <div className='EcoMemberUlBox'>
                         <ul className='EcoMemberHotelAll' style={{marginLeft:`${slideMove4}px`}}>
-                            {HotelData.slice(0,10).map((item) => (
+                            {HotelData.slice(60,70).map((item) => (
                             <li key={item.id} className='EcoMemberHotelAllLi'>
                                 <Link to = {`/detail/${item.id}`} className='EcoMemberA' onClick={() => window.scrollTo(0,0)}>
                                     <img src={item.img[0]} alt={item.hotelName} style={{width:'285px', height:'230px',borderRadius:'10px 0 0 10px'}}/>

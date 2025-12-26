@@ -34,7 +34,7 @@
 .signup3_container .signupForm .signup1 > input[type='text']{
     margin-bottom: 10px;
     width: 500px;
-    padding: 15px 10px 15px 10px;
+    padding: 15px 10px 15px 20px;
     border-radius: 10px;
     border: none;
     outline: none;
@@ -76,7 +76,7 @@
     margin-bottom: 10px;
 }
 .signup3_container .signupForm .signup4 > input[type='text']{
-    padding: 15px 10px 15px 10px;
+    padding: 15px 10px 15px 20px;
     border: none;
     outline: none;
     border-radius: 10px;
@@ -105,15 +105,22 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 350px;
     z-index: 100;
     background-color: #fff;
     border-radius: 10px;
 }
+.logomodal{
+    width: 300px;
+    height: 120px;
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 .signup3_container .signupModal > .p2{
     text-align: center;
-    margin: 150px 0 30px 0;
+    margin: 60px 0 30px 0;
 }
 .signup3_container .signupModal > .p1{
     text-align: center;
@@ -121,7 +128,7 @@
 }
 .signup3_container .signupModal > h1{
     text-align: center;
-    font-size: 30px;
+    font-size: 25px;
 }
 .signup3_container .signupModalBtn{
     display: block;
