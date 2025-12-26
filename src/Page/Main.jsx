@@ -7,7 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import Calendar from './Calendar';
 
 export default function Main(){    
-    // 2025-12-19 병합2
+    // 2025-12-26 병합
     // 호텔, 객실데이터 useContext로 가져오는 훅
     const {RoomData, HotelData, DayData, setDayData,town,setTown,serchHandler, wish, wishHandler, menuModal, setMenuModal} = useContext(ResortDateContext);
     // 호텔 input에 들어가는 지역, 호텔명 상태변수
