@@ -27,13 +27,10 @@ export default function Room(){
     //const [hotelSort,setHotelSort] = useState(1)
     // 종아요 버튼
     const [likeBtn,setLikeBtn] =useState(true)
-    // 선택한 날짜를 담을 변수
-    //const [DayData,setDayData] = useState([])
 
     //달력을 여닫기 위한 변수
     const [openC,setOpenC]=useState(false)
-    //도시 검색
-    //const [town,setTown] = useState('')
+
     const [test,setTest] = useState('ㅋㅋ')
     //검색어 한국어 , 영문으로 변환
     
@@ -42,9 +39,19 @@ export default function Room(){
     //날짜에 따른 목록 필터
     useEffect(()=>{
         let dateFilterCopy = [...dateFilter]
-        dateFilterCopy = HotelData.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
+        const townfilter = HotelData.filter((f)=>f.city===cityEn || f.country===countryEn)
+        console.log(cityEn)
+        console.log(countryEn)
+        if(cityEn===null && countryEn ===null){
+            dateFilterCopy = HotelData.filter((f)=>(f.startDate>=DayData[0] && f.startDate<=DayData[1]) || (f.endDate<=DayData[1] && f.endDate>=DayData[0]))
+        }else{
+            dateFilterCopy = townfilter.filter((f)=>(f.startDate>=DayData[0] && f.startDate<=DayData[1]) || (f.endDate<=DayData[1] && f.endDate>=DayData[0]))
+        }
+        
         setDateFilter(dateFilterCopy)
-    },[DayData])
+        console.log(dateFilterCopy)
+        console.log(DayData)
+    },[DayData,cityEn,countryEn])
 
     // 검색어 입력, 날짜 선택 필터
     /* const serchHandler =()=>{
@@ -84,7 +91,7 @@ export default function Room(){
         const selectfilter02 = myFilterCopy.filter((f)=>f.id>13 && f.id <27) // roomservice 항목 구분
         const selectfilter03 = myFilterCopy.filter((f)=>f.id>26 && f.id <=35) // otherService 항목 구분
 
-        const filterHotel = myhotel.filter((data)=>{ // 각 항목별로 만족하는것 필터링
+        const filterHotel = dateFilter.filter((data)=>{ // 각 항목별로 만족하는것 필터링
             const f1 = selectfilter02.every((filter)=>data.roomservice.includes(filter.name)); 
             const f2 = selectfilter01.every((filter)=>data.publicService.includes(filter.name)); 
             const f3 = selectfilter03.every((filter)=>data.otherService.includes(filter.name));
@@ -148,9 +155,11 @@ export default function Room(){
         }
         
          */
-
-    setmyhotel02(pricefilter)
-    //setmyhotel(dateFilter)
+    if(DayData.length===2 , openC === false){
+        setmyhotel02(pricefilter)
+        //setmyhotel(dateFilter)
+        console.log(myhotel)
+    }
         
 
     },[myFilter,minPrice,maxPrice,hotelSort,DayData,myhotel])
@@ -177,6 +186,11 @@ export default function Room(){
         if(myFilterCopy.findIndex((myFilterCopy)=>myFilterCopy.id === item.id) === -1){// 중복 확인용
             myFilterCopy.push(item)
             setMyfilter(myFilterCopy)
+        }else{
+            const filtering = myFilterCopy.filter((f)=>f.id !== item.id)
+            console.log(myFilterCopy)
+            console.log(item)
+            setMyfilter(filtering)
         }
         
         console.log(HotelData[0].roomservice)
@@ -234,15 +248,16 @@ export default function Room(){
     const townHandler =(e)=>{
         setTown(e.target.value)
     }
+        
     return(
         <>  
             {/* 상품 메뉴영역 */}
             <div className="Room_section">
                 <div className="serch_box">
-                    <input type="text" placeholder="여행지나 숙소를 검색해주세요 ex)파리,속초" className="city_name" onChange={(e)=>townHandler(e)} value={town}/>
+                    <input type="text" placeholder="도시나 나라를 검색해주세요 ex)파리,속초" className="city_name" onChange={(e)=>townHandler(e)} value={town}/>
                     <button type='button' onClick={() => setOpenC(!openC)} style={{border:!openC?'2px solid #42799b55':'2px solid #7ED6E4'}} className='calenertBtn'>
                         <i className="fa-solid fa-calendar" style={{color:!openC?'#42799b55':'#7ED6E4'}}></i>
-                        <span style={{marginRight:'5px'}}>{DayData.length < 2 ? `${year}-${month}-${date} - ${year}-${month}-${date + 1} ` : `${DayData[0]} - ${DayData[1]}`}</span>
+                        <span style={{marginRight:'5px'}}>{DayData.length < 2 ? '일정을 선택해 주세요': `${DayData[0]} - ${DayData[1]}`}</span>
                     </button>
                     <button type="button" className="serch_btn" onClick={()=>{serchHandler(),setOpenC(false)}}>검색하기</button>
                     {openC && 
@@ -257,37 +272,72 @@ export default function Room(){
                         <div className="filter01">
                             <h4 className="filter_tag">객내시설</h4>
                             {filter_roomservice.map((item,index)=>(
-                                <button key={index} className="fil_btn" type="button" onClick={()=>filterHandeler(item)}>
-                                    {item.name === '무선인터넷' ? <i className="fa-solid fa-wifi"> <span>무선인터넷</span></i> : item.name === '욕실용품' ? <i className="fa-solid fa-soap"> <span>욕실용품</span></i> : item.name === '샤워실' ? <i className="fa-solid fa-shower"> <span>샤워실</span></i> : item.name === 'TV' ? <i className="fa-solid fa-tv"> <span>텔레비전</span></i> : item.name === '실내수영장' ? <i className="fa-solid fa-water-ladder"> <span>실내수영장</span></i> : item.name === '욕조' ? <i className="fa-solid fa-bath"> <span>욕조</span></i> : item.name === '객실내취사' ? <i className="fa-solid fa-kitchen-set"> <span>객실내취사</span></i> : item.name === '금연' ? <i className="fa-solid fa-ban-smoking"> <span>금연</span></i> : item.name === '에어컨' ? <i className="fa-solid fa-fan"> <span>에어컨</span></i> : item.name === '드라이기' ? <i className="fa-solid fa-wind"> <span>드라이기</span></i> : item.name === '냉장고' ? <i className="fa-solid fa-snowflake"> <span>냉장고</span></i> : item.name === '개인콘센트' ? <i className="fa-solid fa-plug"> <span>개인콘센트</span></i> : item.name === '전기주전자' ? <i className="fa-solid fa-blender"> <span>전기주전자</span></i>:null}
+                                <button key={index} className="fil_btn" type="button" onClick={()=>filterHandeler(item)} style={{border:myFilter.findIndex((f)=>f.id===item.id) !== -1?'1px solid #42799b':'1px solid #ccc'}}>
+                                    {item.name === '무선인터넷' ? <i className="fa-solid fa-wifi" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>무선인터넷</span></i> 
+                                    : item.name === '욕실용품' ? <i className="fa-solid fa-soap" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>욕실용품</span></i> 
+                                    : item.name === '샤워실' ? <i className="fa-solid fa-shower" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>샤워실</span></i> 
+                                    : item.name === 'TV' ? <i className="fa-solid fa-tv" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>텔레비전</span></i> 
+                                    : item.name === '실내수영장' ? <i className="fa-solid fa-water-ladder" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>실내수영장</span></i> 
+                                    : item.name === '욕조' ? <i className="fa-solid fa-bath" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>욕조</span></i> 
+                                    : item.name === '객실내취사' ? <i className="fa-solid fa-kitchen-set" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>객실내취사</span></i> 
+                                    : item.name === '금연' ? <i className="fa-solid fa-ban-smoking" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>금연</span></i> 
+                                    : item.name === '에어컨' ? <i className="fa-solid fa-fan" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>에어컨</span></i> 
+                                    : item.name === '드라이기' ? <i className="fa-solid fa-wind" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>드라이기</span></i> 
+                                    : item.name === '냉장고' ? <i className="fa-solid fa-snowflake" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>냉장고</span></i> 
+                                    : item.name === '개인콘센트' ? <i className="fa-solid fa-plug" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>개인콘센트</span></i> 
+                                    : item.name === '전기주전자' ? <i className="fa-solid fa-blender" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>전기주전자</span></i>
+                                    :null}
                                 </button>
                             ))}
                         </div>
                         <div className="filter01">
                             <h4 className="filter_tag">공용시설</h4>
                             {filter_publicService.map((item,index)=>(
-                                <button key={index} className="fil_btn" type="button" onClick={()=>filterHandeler(item)}>
-                                    {item.name === '피트니스' ? <i className="fa-solid fa-dumbbell"> <span>피트니스</span></i>  : item.name === '레스토랑' ? <i className="fa-solid fa-utensils"> <span>레스토랑</span></i> : item.name === '사우나' ? <i className="fa-solid fa-hot-tub-person"> <span>사우나</span></i> : item.name === '실내수영장' ? <i className="fa-solid fa-water-ladder"> <span>실내수영장</span></i> : item.name === '야외수영장' ? <i className="fa-solid fa-person-swimming"> <span>야외수영장</span></i> : item.name === '편의점' ? <i className="fa-solid fa-store"> <span>편의점</span></i> : item.name === '바' ?  <i className="fa-solid fa-wine-glass"> <span>바</span></i> : item.name === '라운지' ? <i className="fa-solid fa-couch"> <span>라운지</span></i> : item.name === '엘리베이터' ? <i className="fa-solid fa-elevator"> <span>엘리베이터</span></i> : item.name === '비즈니스센터' ? <i className="fa-solid fa-briefcase"> <span>비즈니스센터</span></i> : item.name === '건조기' ? <i className="fa-solid fa-sun"> <span>건조기</span></i> : item.name === '탈수기' ? <i className="fa-solid fa-droplet"> <span>탈수기</span></i>  : item.name === '바베큐' ? <i className="fa-solid fa-drumstick-bite"> <span>바베큐</span></i> : null}
+                                <button key={index} className="fil_btn" type="button" onClick={()=>filterHandeler(item)} style={{border:myFilter.findIndex((f)=>f.id===item.id) !== -1?'1px solid #42799b':'1px solid #ccc'}}>
+                                    {item.name === '피트니스' ? <i className="fa-solid fa-dumbbell" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>피트니스</span></i>  
+                                    : item.name === '레스토랑' ? <i className="fa-solid fa-utensils" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>레스토랑</span></i> 
+                                    : item.name === '사우나' ? <i className="fa-solid fa-hot-tub-person" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>사우나</span></i> 
+                                    : item.name === '실내수영장' ? <i className="fa-solid fa-water-ladder" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>실내수영장</span></i> 
+                                    : item.name === '야외수영장' ? <i className="fa-solid fa-person-swimming" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>야외수영장</span></i> 
+                                    : item.name === '편의점' ? <i className="fa-solid fa-store" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>편의점</span></i> 
+                                    : item.name === '바' ?  <i className="fa-solid fa-wine-glass" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>바</span></i> 
+                                    : item.name === '라운지' ? <i className="fa-solid fa-couch" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>라운지</span></i> 
+                                    : item.name === '엘리베이터' ? <i className="fa-solid fa-elevator" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>엘리베이터</span></i> 
+                                    : item.name === '비즈니스센터' ? <i className="fa-solid fa-briefcase" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>비즈니스센터</span></i> 
+                                    : item.name === '건조기' ? <i className="fa-solid fa-sun" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>건조기</span></i>
+                                    : item.name === '탈수기' ? <i className="fa-solid fa-droplet" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>탈수기</span></i>  
+                                    : item.name === '바베큐' ? <i className="fa-solid fa-drumstick-bite" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>바베큐</span></i> 
+                                    : null}
                                 </button>
                             ))}
                         </div>
                         <div className="filter01">
                             <h4 className="filter_tag">기타시설</h4>
                             {filter_otherService.map((item,index)=>(
-                                <button key={index} className="fil_btn" type="button" onClick={()=>filterHandeler(item)}>
-                                    {item.name === '스프링클러' ? <i className="fa-solid fa-fire-extinguisher"> <span>스프링클러</span></i> : item.name === '반려견동반' ? <i className="fa-solid fa-dog"> <span>반려견동반</span></i> : item.name === '카드결제' ? <i className="fa-regular fa-credit-card"> <span>카드결제</span></i> : item.name === '짐보관가능' ? <i className="fa-solid fa-cart-flatbed-suitcase"> <span>짐보관가능</span></i> : item.name === '개인사물함' ? <i className="fa-solid fa-lock"> <span>개인사물함</span></i> : item.name === '픽업서비스' ? <i className="fa-solid fa-taxi"> <span>픽업서비스</span></i> : item.name === '캠프파이어' ?  <i className="fa-solid fa-campground"> <span>캠프파이어</span></i> : item.name === '무료주차' ? <i className="fa-solid fa-square-parking"> <span>무료주차</span></i> : item.name === '조식제공' ? <i className="fa-solid fa-bowl-food"> <span>조식제공</span></i> : null}
+                                <button key={index} className="fil_btn" type="button" onClick={()=>filterHandeler(item)} style={{border:myFilter.findIndex((f)=>f.id===item.id) !== -1?'1px solid #42799b':'1px solid #ccc'}}>
+                                    {item.name === '스프링클러' ? <i className="fa-solid fa-fire-extinguisher" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>스프링클러</span></i> 
+                                    : item.name === '반려견동반' ? <i className="fa-solid fa-dog" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>반려견동반</span></i> 
+                                    : item.name === '카드결제' ? <i className="fa-regular fa-credit-card" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>카드결제</span></i> 
+                                    : item.name === '짐보관가능' ? <i className="fa-solid fa-cart-flatbed-suitcase" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>짐보관가능</span></i> 
+                                    : item.name === '개인사물함' ? <i className="fa-solid fa-lock" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>개인사물함</span></i> 
+                                    : item.name === '픽업서비스' ? <i className="fa-solid fa-taxi" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>픽업서비스</span></i> 
+                                    : item.name === '캠프파이어' ?  <i className="fa-solid fa-campground" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>캠프파이어</span></i> 
+                                    : item.name === '무료주차' ? <i className="fa-solid fa-square-parking" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>무료주차</span></i> 
+                                    : item.name === '조식제공' ? <i className="fa-solid fa-bowl-food" style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#ccc'}}> <span style={{color:myFilter.findIndex((f)=>f.id===item.id) !== -1?'#42799b':'#777',fontWeight:myFilter.findIndex((f)=>f.id===item.id) !== -1?700:400}}>조식제공</span></i> 
+                                    : null}
                                 </button>
                             ))}
                         </div>
-                        <div className="under_filter">
+                        {/* <div className="under_filter">
                             {myFilter.map((item,index)=>(
                                 <button type="button" className="fil_btn" key={index} onClick={()=>removeFilter(item)}>{item.name} X</button>
                             ))}
-                        </div>
+                        </div> */}
                     </div>
                     <div className="right_filter">
                         <div className="under_filter">
                             <div className="map">
-                                <LeafletMap city={countryEn?countryEn:cityEn?cityEn:''} hotelName={town} style={{width:'100%',height:'200px',border: '1px solid #e7e7e7',borderRadius:'10px'}}/>    
+                                <LeafletMap city={countryEn?countryEn:cityEn?cityEn:''} hotelName={town} style={{width:'100%',height:'250px',border: '1px solid #e7e7e7',borderRadius:'10px'}}/>    
                             </div>
                         </div>
                         <div className="top_filter">
@@ -370,7 +420,7 @@ export default function Room(){
                                     <p className="menu_city">
                                         {item.city === 'Sokcho'?'대한민국, 강원도 속초시':item.city === 'Gyeongju'?'대한민국, 경상북도 경주시':item.city === 'Busan'?'대한민국, 부산시':item.city === 'Gangneung'?'대한민국, 강원도 강릉시':item.city === 'Yeosu'?'대한민국, 전라남도 여수시':item.city === 'Daejeon'?'대한민국, 대전시':item.city === 'Gwangju'?'대한민국, 광주시':item.city === 'Jeju'?'대한민국, 제주도':item.city === 'Pohang'?'대한민국, 경상북도 포항시':item.city === 'Seoul'?'대한민국, 서울시':item.city === 'Tokyo'?'일본, 도쿄':item.city === 'Sapporo'?'일본, 훗카이도 삿포로':item.city === 'LosAngeles'?'미국, 캘리포니아 로스앤젤레스':item.city === 'New York'?'미국, 뉴욕':item.city === 'Guam'?'미국, 괌':item.city === 'Zhangjiajie'?'중국, 후난성 장가계':item.city === 'Shanghai'?'중국, 상하이':item.city === 'Rome'?'이탈리아, 로마':item.city === 'Venice'?'이탈리아, 베네치아':item.city === 'Paris'?'프랑스, 파리':null}
                                     </p>
-                                    <p className="menu_score">{item.score}점</p>
+                                    <p className="menu_score"><i className="fa-solid fa-star" style={{lineHeight:'12px'}}></i> {item.score}점</p>
                                     <div className="service_list">
                                         <p style={{marginBottom:'10px'}}>
                                             기타시설: 
@@ -445,7 +495,7 @@ export default function Room(){
                                 </button>
                             </li>
                             
-                        )): <h2 style={{textAlign:'center',fontSize:'20px',fontWeight:600,marginTop:'60px'}}>검색된 상품이 없습니다.</h2>}
+                        )): <h2 style={{textAlign:'center',fontSize:'20px',fontWeight:600,marginTop:'60px'}}>{DayData.length<2?'원하시는 일자를 선택해 주세요':'검색된 상품이 없습니다.'}</h2>}
                     </ul>
                 </div>
             </div>
