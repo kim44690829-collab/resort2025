@@ -6,6 +6,7 @@ import { ResortDateContext } from '../Api/ResortDate';
 import { ModalContext } from './Modal';
 import LeafletMap from '../Api/LeafletMap';
 import Calendar from './Calendar';
+import { Link } from 'react-router-dom';
 
 
 export default function Detail(){  
@@ -584,7 +585,7 @@ export default function Detail(){
                                                     </>
                                                 }
                                                 {/* <button type='button' className='cart'><i className="fa-solid fa-basket-shopping"></i></button> */}
-                                                <button type='button' className='pay' onClick={()=>payClick(head,item.id)} >예약하기</button>
+                                                <button type='button' className='pay' onClick={()=>{payClick(head,item.id); window.scrollTo(0,0)}} >예약하기</button>
                                             </div>
                                         </div>
                                     </div>
@@ -862,7 +863,7 @@ export default function Detail(){
                     <ul style={{transform: `translateX(-${307 * current01}px)`}}>
                         {RecommHotel.map((hotel,index)=>(
                             <li key={index}>
-                                <a href={`/detail/${hotel.id}`}>
+                                <Link to={`/detail/${hotel.id}`} onClick={() => window.scrollTo(0,0)}>
                                     <div className="hotel-img-wrap">
                                         <img src={`/img/${hotel.id}-1.jpg`} alt={hotel.hotelName} className='hotel-img'/>
                                     </div>
@@ -892,7 +893,7 @@ export default function Detail(){
                                             )}
                                         </div>
                                     </div>
-                                </a>
+                                </Link>
                                 <button type='button' onClick={()=>wishHandler(hotel.id)}>
                                     <i className="fa-solid fa-heart" style={
                                     wish.find((item) => item.id === Number(hotel.id)) ?
@@ -921,7 +922,7 @@ export default function Detail(){
                         <ul style={{transform: `translateX(-${307 * current02}px)`}}>
                             {wishArray.map((hotel,index)=>(
                                 <li key={index}>
-                                    <a href={`/detail/${hotel.id}`}>
+                                    <Link to={`/detail/${hotel.id}`} onClick={() => window.scrollTo(0,0)}>
                                         <div className="hotel-img-wrap">
                                             <img src={`/img/${hotel.id}-1.jpg`} alt={hotel.hotelName} className='hotel-img'/>
                                         </div>
@@ -951,7 +952,7 @@ export default function Detail(){
                                                 )}
                                             </div>
                                         </div>
-                                    </a>
+                                    </Link>
                                     <button type='button' onClick={()=>wishHandler(hotel.id)}>
                                         <i className="fa-solid fa-heart" style={
                                         wish.find((item) => item.id === Number(hotel.id)) ?

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ResortDateContext } from '../Api/ResortDate';
 import Calendar from './Calendar';
 import Cookie from 'js-cookie';
+import { Link } from 'react-router-dom';
 
 export default function Wish(){
     const navigate = useNavigate();
@@ -174,12 +175,12 @@ console.log(wishMinMax);
                                 {(search && headFilter.length >= 1 ? headFilter : wishArray).map((item,index)=>(
                                     <li key={index}>
                                         <div className="room-left">
-                                            <a href={`/detail/${item.id}`}>
+                                            <Link to={`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)} >
                                                 <img src={`/img/${item.id}-1.jpg`} alt={item.hotelName} />
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className="room-right">
-                                            <h2><a href={`/detail/${item.id}`}>{item.hotelName}</a></h2>
+                                            <h2><Link to={`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>{item.hotelName}</Link></h2>
                                             <div className="room-intro">
                                                 <div className="intro-left">
                                                     {wishStar[index] && wishStar[index].map((star, ind) => (
@@ -231,7 +232,7 @@ console.log(wishMinMax);
                                                         }></i>
                                                     </button>
                                                     {/* <button type='button' className='cart'><i className="fa-solid fa-basket-shopping"></i></button> */}
-                                                    <a href={`/detail/${item.id}`} className='pay'>상세보기</a>
+                                                    <Link to={`/detail/${item.id}`} className='pay' onClick={() => window.scrollTo(0,0)}>상세보기</Link>
                                                 </div>
                                             </div>
                                         </div>
