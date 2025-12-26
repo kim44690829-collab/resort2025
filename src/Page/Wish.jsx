@@ -179,16 +179,17 @@ console.log(wishMinMax);
                                                     {wishStar[index] && wishStar[index].map((star, ind) => (
                                                         <img src={star} alt="roomScore" key={ind} />
                                                     ))}
-                                                    <span className='starScore'>
-                                                        {(item.score[index] - Math.floor(item.score[index]) === 0) ? item.score[index]+'.0' : item.score[index]}
+                                                    <span className='starScore' style={{color:'#000'}}>
+                                                        {(item.score - Math.floor(item.score) === 0) ? item.score+'.0' : item.score}
                                                     </span>
+                                                    <span className='scoreCount'>{(item.scoreCount).toLocaleString()}명 평가</span>
                                                 </div>
                                                 <div className="intro-right">
-                                                    <button type='button' onClick={()=>{setModalContent(<p>상세정보 준비중</p>);toggle();}}>상세정보 <i className="fa-solid fa-angle-right"></i></button>
+                                                    <a href={`/detail/${item.id}`} className='pay'>상세정보 <i className="fa-solid fa-angle-right"></i></a>
                                                 </div>
                                             </div>
                                             <div className="room-info">
-                                                <p><i className="fa-solid fa-ban"></i> <span className='bold'>무료 취소불가</span></p>
+                                                <p><i class="fa-regular fa-calendar"></i> 예약가능일 : <span className='bold'>{item.startDate}~{item.endDate}</span></p>
                                                 <p><i className="fa-regular fa-clock"></i> 체크인 <span className='bold'>15:00</span> ~ 체크아웃 <span className='bold'>11:00</span></p>
                                                 <p><i className="fa-solid fa-user-group"></i> 최대 투숙객 수 : <span className='bold'>{wishMinMax.map(w=>w.hotelName===item.hotelName ? w.min:null)}~{wishMinMax.map(w=>w.hotelName===item.hotelName ? w.max:null)}명</span></p>
                                                 <p><i className="fa-solid fa-tag"></i> <span className='bold'>할인혜택 :</span>
@@ -211,7 +212,16 @@ console.log(wishMinMax);
                                                             <span className='final-price'>{(item.price).toLocaleString()}원<span>/1박</span></span>
                                                         </>
                                                     }
-                                                    <button type='button' className='cart'><i className="fa-solid fa-basket-shopping"></i></button>
+                                                    <button type='button' className='cart' onClick={()=>wishHandler(item.id)}>
+                                                        <i className="fa-solid fa-heart" style={
+                                                        wish.find((item) => item.id === Number(item.id)) ?
+                                                            {color:'#f94239'}
+                                                        :
+                                                            {color:'#6b6b6b'}
+                                                        
+                                                        }></i>
+                                                    </button>
+                                                    {/* <button type='button' className='cart'><i className="fa-solid fa-basket-shopping"></i></button> */}
                                                     <a href={`/detail/${item.id}`} className='pay'>상세보기</a>
                                                 </div>
                                             </div>
@@ -224,7 +234,7 @@ console.log(wishMinMax);
                         )}
                     </div>
                 </div>
-                <div className={`detail-right ${isFixed ? 'fixed' : null}`}>
+                <div className={`detail-right ${isFixed ? 'fixed' : null} wish`}>
                     {Cal &&
                         <div className="Cal" style={{position:'absolute',left:'-655px'}} onClick={ e =>{
                             setCal((Cal === true) ? true : false);
@@ -264,9 +274,9 @@ console.log(wishMinMax);
                         <button type='button' className='search' onClick={()=>{searchClick();setCal(false);}}>검색 적용</button>
                     </div>
                     <div className="hotel-select">
-                        <p className='select-tit'>예약 전 참고사항</p>
+                        <p className='select-tit'>검색 전 참고사항</p>
+                        <p className='select-txt'>· 검색 클릭전에는 찜을 추가하신 모든 호텔이 보여집니다.</p>
                         <p className='select-txt'>· 호텔별 <span className='bold'>예약가능 날짜</span>와 <span className='bold'>최대 투숙객 수</span>를  참고하셔서 검색 해주시기 바랍니다.</p>
-                        <p className='select-txt'>· <span className='bold red'>회원가입시 10,000원 할인쿠폰</span>이 지급됩니다.</p>
                     </div>
                 </div>
             </div>               
