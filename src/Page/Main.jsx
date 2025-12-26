@@ -9,7 +9,7 @@ import Calendar from './Calendar';
 export default function Main(){    
     // 2025-12-26 병합
     // 호텔, 객실데이터 useContext로 가져오는 훅
-    const {RoomData, HotelData, DayData, setDayData,town,setTown,serchHandler, wish, wishHandler, menuModal, setMenuModal} = useContext(ResortDateContext);
+    const {RoomData, HotelData, DayData, setDayData,town,setTown,serchHandler, wish, wishHandler, menuModal, setMenuModal,cityEn,countryEn,dateFilter,setDateFilter,townfilter} = useContext(ResortDateContext);
     // 호텔 input에 들어가는 지역, 호텔명 상태변수
     //const [hotelInput, setHotelInput] = useState('');
     // 호텔 input 아래 모달 상태변수
@@ -334,6 +334,23 @@ export default function Main(){
         }, 3000);
         return(() => {clearInterval(circles)})
     }, [eventImgS])
+
+    //날짜에 따른 목록 필터
+    useEffect(()=>{
+        let dateFilterCopy = [...dateFilter]
+        //const townfilter = HotelData.filter((f)=>f.city===cityEn || f.country===countryEn)
+        console.log(cityEn)
+        console.log(countryEn)
+        if(cityEn===null && countryEn ===null){
+            dateFilterCopy = HotelData.filter((f)=>(f.startDate>=DayData[0] && f.startDate<=DayData[1]) || (f.endDate<=DayData[1] && f.endDate>=DayData[0]))
+        }else{
+            dateFilterCopy = townfilter.filter((f)=>(f.startDate>=DayData[0] && f.startDate<=DayData[1]) || (f.endDate<=DayData[1] && f.endDate>=DayData[0]))
+        }
+        
+        setDateFilter(dateFilterCopy)
+        console.log(dateFilterCopy)
+        console.log(DayData)
+    },[DayData,cityEn,countryEn])
 
     return(
         <div className='main_container' onClick={closeUl1}>

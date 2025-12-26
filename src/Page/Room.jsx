@@ -8,7 +8,7 @@ import LeafletMap from '../Api/LeafletMap';
 
 export default function Room(){
     // 가져오는 호텔, 개실 데이터
-    const {HotelData,RoomData, hotelInput, setHotelInput, DayData, setDayData,countryEn,cityEn,town,setTown,serchHandler,hotelSort,setHotelSort,myhotel,setmyhotel,wish,wishStar,wishArray,wishHandler,} = useContext(ResortDateContext);
+    const {HotelData,RoomData, hotelInput, setHotelInput, DayData, setDayData,countryEn,cityEn,town,townfilter,setTown,serchHandler,dateFilter,setDateFilter,hotelSort,setHotelSort,myhotel,setmyhotel,wish,wishStar,wishArray,wishHandler,} = useContext(ResortDateContext);
     //const {selectDate,setSelectDate,setSelectday} = useContext(calendarAuth)
     /* console.log(selectDate) */
     /* 필터 목록 */
@@ -35,11 +35,11 @@ export default function Room(){
     //검색어 한국어 , 영문으로 변환
     
 
-    const [dateFilter,setDateFilter] = useState([])
+    //const [dateFilter,setDateFilter] = useState([])
     //날짜에 따른 목록 필터
     useEffect(()=>{
         let dateFilterCopy = [...dateFilter]
-        const townfilter = HotelData.filter((f)=>f.city===cityEn || f.country===countryEn)
+        //const townfilter = HotelData.filter((f)=>f.city===cityEn || f.country===countryEn)
         console.log(cityEn)
         console.log(countryEn)
         if(cityEn===null && countryEn ===null){
