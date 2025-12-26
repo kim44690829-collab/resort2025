@@ -3,11 +3,12 @@ import { useEffect,useContext, useState,useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ResortDateContext } from '../Api/ResortDate';
 import Calendar from './Calendar';
+import Cookie from 'js-cookie';
 
 export default function Wish(){
     const navigate = useNavigate();
 
-    const {RoomData, HotelData,DayData,wish,wishStar,wishArray,wishHandler,setPayHead,setPayRoom,selectday,setSelectday} = useContext(ResortDateContext);
+    const {RoomData, HotelData,DayData,wish,wishList,wishStar,wishArray,wishHandler,setWish,setPayHead,setPayRoom,selectday,setSelectday} = useContext(ResortDateContext);
 
     //호텔의 객실별 투숙객 인원 불러오기
     //위시리스트의 객실 리스트 필터링
@@ -140,7 +141,12 @@ console.log(wishMinMax);
             <div className="detail-content">
                 <div className="detail-left" ref={triggerRef}>                       
                     <div className="room-select" style={{borderTop:'0px'}}>
-                        <p className='room-title'>찜한 목록</p>
+                        <p className='room-title wish'>찜한 목록
+                            <span onClick={()=>{
+                                setWish([]);
+                                Cookie.remove('wishList');
+                            }}>전체 찜 삭제</span>
+                        </p>
                         {search && !dateFilter
                         ?(
                             <div className="empty-room">
@@ -185,7 +191,10 @@ console.log(wishMinMax);
                                                     <span className='scoreCount'>{(item.scoreCount).toLocaleString()}명 평가</span>
                                                 </div>
                                                 <div className="intro-right">
-                                                    <a href={`/detail/${item.id}`} className='pay'>상세정보 <i className="fa-solid fa-angle-right"></i></a>
+                                                    <button type='button' className='pay' onClick={()=>wishHandler(item.id)}>
+                                                        찜 삭제하기<i className="fa-solid fa-angle-right"></i>
+                                                    </button>
+                                                    {/* <a href={`/detail/${item.id}`} className='pay'>찜 삭제 <i className="fa-solid fa-angle-right"></i></a> */}
                                                 </div>
                                             </div>
                                             <div className="room-info">

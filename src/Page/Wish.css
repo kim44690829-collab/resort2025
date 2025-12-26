@@ -8,6 +8,23 @@
     margin-top: 18px;
     line-height: 238px;
 }
+.detail-wrap .detail-content .detail-left .room-select .room-title.wish{
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 31px;
+    padding-bottom: 0;
+}
+.detail-wrap .detail-content .detail-left .room-select .room-title.wish span{
+    text-align: right;
+    float: right;
+    font-size: 14px;
+    line-height: 17px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 6px 15px;
+    border: 1px solid #e7e7e7;
+    border-radius: 6px;
+}
 .detail-wrap .detail-content .detail-left .room-select ul li .room-right h2 a{
     font-size: 20px;
     font-weight: 600;
