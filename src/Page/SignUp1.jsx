@@ -23,27 +23,41 @@ export default function SignUp1(){
     const [isContent5, setIsContent5] = useState(false);
     const [isContent6, setIsContent6] = useState(false);
 
+    // caret 버튼 클릭시 버튼 방향 바꾸기
+    const [isBtnChange1, setIsBtnChange1] = useState(false);
+    const [isBtnChange2, setIsBtnChange2] = useState(false);
+    const [isBtnChange3, setIsBtnChange3] = useState(false);
+    const [isBtnChange4, setIsBtnChange4] = useState(false);
+    const [isBtnChange5, setIsBtnChange5] = useState(false);
+    const [isBtnChange6, setIsBtnChange6] = useState(false);
+
     // 마우스 변경
     const [mouseCursor, setMouseCursor] = useState(false);
 
     // // caret 버튼 클릭시 이용약관을 나타나게 하는 함수
     const contentHandeler1 = () => {
-        setIsContent1(!isContent1)
+        setIsContent1(!isContent1);
+        setIsBtnChange1(!isBtnChange1);
     }
     const contentHandeler2 = () => {
-        setIsContent2(!isContent2)
+        setIsContent2(!isContent2);
+        setIsBtnChange2(!isBtnChange2);
     }
     const contentHandeler3 = () => {
-        setIsContent3(!isContent3)
+        setIsContent3(!isContent3);
+        setIsBtnChange3(!isBtnChange3);
     }
     const contentHandeler4 = () => {
-        setIsContent4(!isContent4)
+        setIsContent4(!isContent4);
+        setIsBtnChange4(!isBtnChange4);
     }
     const contentHandeler5 = () => {
-        setIsContent5(!isContent5)
+        setIsContent5(!isContent5);
+        setIsBtnChange5(!isBtnChange5);
     }
     const contentHandeler6 = () => {
-        setIsContent6(!isContent6)
+        setIsContent6(!isContent6);
+        setIsBtnChange6(!isBtnChange6);
     }
 
     // 전체 동의 체크시 하위 동의 전부 체크
@@ -100,7 +114,7 @@ export default function SignUp1(){
                         <input type="checkbox" id='agreeTermsOfService' name='agreeTOS' checked={checkedItems.agreeTermsOfService} onChange={() => handleSingleChecked('agreeTermsOfService')} />
                         <label htmlFor="agreeTermsOfService">(필수) 이용약관</label>
                     </div>
-                    <button type="button" className='agreeSeeBtn' onClick={contentHandeler1}>
+                    <button type="button" className={`${isBtnChange1 ? 'agreeSeeBtn btnChange' : 'agreeSeeBtn'}`} onClick={contentHandeler1}>
                         <i className="fa-solid fa-caret-down"></i>
                     </button>
                 </div>
@@ -192,7 +206,7 @@ export default function SignUp1(){
                         <input type="checkbox" id='confirmAgeOver14' name='age14' checked={checkedItems.confirmAgeOver14} onChange={() => handleSingleChecked('confirmAgeOver14')} />
                         <label htmlFor="confirmAgeOver14">(필수) 만 14세 이상 확인</label>
                     </div>
-                    <button type="button" className='agreeSeeBtn' onClick={contentHandeler2}>
+                    <button type="button" className={`${isBtnChange2 ? 'agreeSeeBtn btnChange' : 'agreeSeeBtn'}`} onClick={contentHandeler2}>
                         <i className="fa-solid fa-caret-down"></i>
                     </button>
                 </div>
@@ -217,7 +231,7 @@ export default function SignUp1(){
                         <input type="checkbox" id='agreePrivacyPolicy' name='agreePrivacy' checked={checkedItems.agreePrivacyPolicy} onChange={() => handleSingleChecked('agreePrivacyPolicy')} />
                         <label htmlFor="agreePrivacyPolicy">(필수) 개인정보 수집 및 이용 동의</label>
                     </div>
-                    <button type="button" className='agreeSeeBtn' onClick={contentHandeler3}>
+                    <button type="button" className={`${isBtnChange3 ? 'agreeSeeBtn btnChange' : 'agreeSeeBtn'}`} onClick={contentHandeler3}>
                         <i className="fa-solid fa-caret-down"></i>
                     </button>
                 </div>
@@ -280,7 +294,7 @@ export default function SignUp1(){
                         <input type="checkbox" id='agreeOptionalPrivacy' name='optPrivacy' checked={checkedItems.agreeOptionalPrivacy} onChange={() => handleSingleChecked('agreeOptionalPrivacy')} />
                         <label htmlFor="agreeOptionalPrivacy">(선택) 개인정보 수집 및 이용 동의</label>
                     </div>
-                    <button type="button" className='agreeSeeBtn' onClick={contentHandeler4}>
+                    <button type="button" className={`${isBtnChange4 ? 'agreeSeeBtn btnChange' : 'agreeSeeBtn'}`} onClick={contentHandeler4}>
                         <i className="fa-solid fa-caret-down"></i> 
                     </button>
                 </div>
@@ -323,7 +337,7 @@ export default function SignUp1(){
                         <input type="checkbox" id='agreeMarketingNotifications' name='marketingOk' checked={checkedItems.agreeMarketingNotifications} onChange={() => handleSingleChecked('agreeMarketingNotifications')} />
                         <label htmlFor="agreeMarketingNotifications">(선택) 마케팅 알림 수신 동의</label>
                     </div>    
-                    <button type="button" className='agreeSeeBtn' onClick={contentHandeler5}>
+                    <button type="button" className={`${isBtnChange5 ? 'agreeSeeBtn btnChange' : 'agreeSeeBtn'}`}  onClick={contentHandeler5}>
                         <i className="fa-solid fa-caret-down"></i>
                     </button>
                 </div>
@@ -356,7 +370,7 @@ export default function SignUp1(){
                         <input type="checkbox" id='agreeLocationService' name='locService' checked={checkedItems.agreeLocationService} onChange={() => handleSingleChecked('agreeLocationService')} />
                         <label htmlFor="agreeLocationService">(선택) 위치기반 서비스 이용약관 동의</label>
                     </div>
-                    <button type="button" className='agreeSeeBtn' onClick={contentHandeler6}>
+                    <button type="button" className={`${isBtnChange6 ? 'agreeSeeBtn btnChange' : 'agreeSeeBtn'}`}  onClick={contentHandeler6}>
                         <i className="fa-solid fa-caret-down"></i>
                     </button>
                 </div>

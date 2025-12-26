@@ -6170,6 +6170,7 @@ export default function ResortDate({children}){
         }
     ];
 
+
     // 휴대폰 번호 상태저장 변수
     const [userNumFront, setUserNumFront] = useState('');
     const [userNumBack, setUserNumBack] = useState('');
@@ -6397,10 +6398,13 @@ export default function ResortDate({children}){
         }
         setmyhotel(overFilter)
     }
+
+    // 해더 변경
+    const [headerChange, setHeaderChange] = useState(0);
     
 
     return(
-        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler, payHead,setPayHead,payRoom,setPayRoom, userNumFront, setUserNumFront, userNumBack, setUserNumBack, userNickName, loginSave, logout,town,setTown,serchHandler,hotelSort,setHotelSort,myhotel,setmyhotel,cityEn,countryEn, Domestic, setDomestic}}>
+        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler, payHead,setPayHead,payRoom,setPayRoom, userNumFront, setUserNumFront, userNumBack, setUserNumBack, userNickName, loginSave, logout,town,setTown,serchHandler,hotelSort,setHotelSort,myhotel,setmyhotel,cityEn,countryEn, Domestic, setDomestic, headerChange, setHeaderChange}}>
             {children}
         </ResortDateContext.Provider>
     );

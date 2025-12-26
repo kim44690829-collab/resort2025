@@ -1,36 +1,33 @@
+import '../Page/HotelSection.css';
 import { useContext, useState, useEffect } from 'react';
 import { ResortDateContext } from '../Api/ResortDate';
 import { Link } from 'react-router-dom';
-import '../Page/HotelSection.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function HotelSection(){
+export default function HotelSection2(){
     const navigation = useNavigate();
     // 받아온 데이터
-    const {HotelData, wish, wishHandler, Domestic, setDomestic} = useContext(ResortDateContext)
-    const [moreSee1, setMoreSee1] = useState(9);
-    const [seeBtn1, setSeeBtn1] = useState(0);
+    const {HotelData, wish, wishHandler} = useContext(ResortDateContext)
+    const [moreSee2, setMoreSee2] = useState(9);
+    const [seeBtn2, setSeeBtn2] = useState(0);
 
-    // 더보기 버튼
-    const btnHandeler1 = () => {
-        if(seeBtn1 < 6){
-            setMoreSee1(moreSee1 + 9)
-            setSeeBtn1(seeBtn1 + 1)
+    const btnHandeler2 = () => {
+        if(seeBtn2 < 8){
+            setMoreSee2(moreSee2 + 9)
+            setSeeBtn2(seeBtn2 + 1)
         }else{
-            setSeeBtn1(0)
+            setSeeBtn2(0)
         }
     }
-    
-    // 국내 filter
-    const domesticHotel = HotelData.filter(item => item.country === 'Korea');
-    const domesticHotelSort = [...domesticHotel].sort((a,b) => b.score - a.score);
-    console.log('국내', domesticHotelSort)
+
+    // 해외 filter
+    const overseasHotel = HotelData.filter(item => item.country !== 'Korea');
+    const overseasHotelSort = [...overseasHotel].sort((a,b) => b.score - a.score);
+    console.log('해외', overseasHotelSort)
 
     const clickHandeler = () => {
-        navigation('/hotelSection2');
+        navigation('/hotelSection');
     }
-
-
 
     return(
         <div className="HotelSection_container">
@@ -38,25 +35,27 @@ export default function HotelSection(){
                 <li className='HotelSection_Hotel HotelAll'>
                     숙소
                 </li>
-                <li className='HotelSection_Hotel DomesticHotels'style={{fontWeight:'bold'}}>
+                <li className='HotelSection_Hotel DomesticHotels' onClick={clickHandeler}>
                     국내 숙소
                 </li>
-                <li className='HotelSection_Hotel overseasHotels' onClick={clickHandeler}>
+                <li className='HotelSection_Hotel overseasHotels' style={{fontWeight:'bold'}}>
                     해외 숙소
                 </li>
             </ul>
             <div>
-                <p className='HotelSection_title'>국내 숙소</p>
+                <p className='HotelSection_title'>해외 숙소</p>
                 <div className='HotelSection_wrap'>
                     <ul className='HotelUl' >
-                        {domesticHotelSort.slice(0,moreSee1).map((item) => (
+                        {overseasHotelSort.slice(0,moreSee2).map((item) => (
                             <li key={item.id} style={{cursor:'pointer'}} className='HotelLi'>
                                 <Link to = {`/detail/${item.id}`}>
-                                    <img src={item.img[0]} alt={item.hotelName} className='hotelSectionImg' style={{width:'280px', height:'169px'}} />
+                                    {/* <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' /> */}
+                                    <img src='/img/1-1.jpg' alt={item.hotelName} className='hotelSectionImg' style={{width:'280px', height:'169px'}}  />
                                     <p className='hotelSection_type'>{item.type}</p>
                                     <p className='hotelSection_name'>{item.hotelName}</p>
                                     <div className='hotelSection_review'>
                                         <span className='hotelSection_score'>
+                                            {/* <img src='/img/star-one.png' alt='star' style={{width:'15px', height:'15px'}}/> */}
                                             <i className="fa-solid fa-star"></i>
                                             <span className='starScore'>{item.score}</span>
                                         </span>
@@ -86,11 +85,9 @@ export default function HotelSection(){
                             </li>
                         ))}
                     </ul>
-                </div>
-                {seeBtn1 < 6 && <button type='button' className='moreSeeBtn' onClick={btnHandeler1}>더보기</button>}
-                
+                </div> 
+                {seeBtn2 < 8 && <button type='button' className='moreSeeBtn' onClick={btnHandeler2}>더보기</button>}
             </div>
         </div>
     )
-    
 }
