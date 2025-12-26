@@ -2,6 +2,7 @@ import { useState,useEffect } from "react";
 import '../Page/pay.css'
 import { useContext } from "react";
 import { ResortDateContext } from "../Api/ResortDate";
+import { Link } from "react-router-dom";
 
 export default function Pay(){
 
@@ -237,7 +238,10 @@ export default function Pay(){
                         </ul>
                         <div className="pay_modal_btn">
                             <button type="button" className="btns" style={{width:'125px'}} onClick={()=>setOpen(!open)}>취소</button>
-                            <button type="button" className="btns"style={{color:'#fff',backgroundColor:'#42799b'}} onClick={()=>{setOpen(!open),alert('결제가 완료되었습니다.')}}>동의 후 결제</button>
+                            <Link to='/' onClick={()=>{setOpen(!open),alert('결제가 완료되었습니다.'),window.scrollTo(0,0)}}>
+                                <button type="button" className="btns"style={{color:'#fff',backgroundColor:'#42799b'}}>동의 후 결제</button>
+                            </Link>
+                            
                         </div>
                     </div>
                 </div>:''}
