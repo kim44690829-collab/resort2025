@@ -34,6 +34,7 @@ export default function HotelSection(){
 
     return(
         <div className="HotelSection_container">
+            {/* 좌측 메뉴 */}
             <ul className="HotelSection_menu">
                 <li className='HotelSection_Hotel HotelAll'>
                     숙소

@@ -1,8 +1,14 @@
 import '../Page/Guest.css';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useContext } from 'react';
+import { ResortDateContext } from '../Api/ResortDate';
+import { useNavigate } from 'react-router-dom';
 
 export default function Guest(){
+    const navigate = useNavigate();
+    const {setHeaderChange} = useContext(ResortDateContext);
+
     // 이메일, 비밀번호 저장 상태변수
     const [reservationNum, setReservationNum] = useState('')
     const [isDisabledGuest, setIsDisabledGuest] = useState(true);
@@ -17,9 +23,16 @@ export default function Guest(){
         setReservationNum(reservationValue)
     }
 
+    // 회원 예약 조회로 변경 클릭시 로그인 화면으로 전환 -> 해더 변경
+    const loginGo = () => {
+        navigate('/login');
+        setHeaderChange(2);
+    }
+
     // 마우스 커서 변경
     const [mouseCursor, setMouseCursor] = useState(false);
 
+    // 예약번호, 휴대폰 번호 조건
     useEffect(() => {
         if(reservationNum.length >= 5 && guestNumFront.length === 4 &&  guestNumBack.length === 4){
             setIsDisabledGuest(false)
@@ -70,10 +83,8 @@ export default function Guest(){
                 </div>
             </form>
             {/* 회원이라면 로그인 */}
-            <div className='LoginGo'>
-                <Link to='/login'>
-                    <button type="button" className='userLogin'>회원 예약조회</button>
-                </Link>
+            <div className='LoginGo' onClick={loginGo}>
+                <button type="button" className='userLogin'>회원 예약조회</button>
             </div>
         </div>
     )

@@ -47,13 +47,14 @@ export default function HelpCenter(){
         setIsName6(!isName6);
     }
 
-    // 목록보기 버튼
+    // 공지사항 목록보기 버튼
     const noticeBtnHandeler = () => {
         setListType(2);
     }
 
     return(
         <div className="helpCenter_container">
+            {/* 왼쪽 메뉴 */}
             <div className='helpCenter_list'>
                 <ul>
                     <li className='list_title'>고객센터</li>
@@ -74,6 +75,7 @@ export default function HelpCenter(){
                     </li>
                 </ul>
             </div>
+            {/* 자주찾는 질문 */}
             {listType === 1 &&
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>자주 찾는 질문</h1>
@@ -264,6 +266,7 @@ export default function HelpCenter(){
                 </div>
             </div>)
             }
+            {/* 공지사항 메인 */}
             {listType === 2 && 
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>공지사항</h1>
@@ -284,6 +287,7 @@ export default function HelpCenter(){
                 </div>
             </div>)
             }
+            {/* 공지 1번 */}
             {listType === 3 &&
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>공지사항</h1>
@@ -309,6 +313,7 @@ export default function HelpCenter(){
                 
             </div>)
             }
+            {/* 공지 2번 */}
             {listType === 4 &&
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>공지사항</h1>
@@ -332,6 +337,7 @@ export default function HelpCenter(){
                 
             </div>)
             }
+            {/* 공지 3번 */}
             {listType === 5 &&
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>공지사항</h1>
@@ -354,6 +360,7 @@ export default function HelpCenter(){
                 <button type='button' className='noticeContentsBtn' onClick={noticeBtnHandeler}>목록 보기</button>
             </div>)
             }
+            {/* 공지 4번 */}
             {listType === 6 &&
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>공지사항</h1>
@@ -375,6 +382,7 @@ export default function HelpCenter(){
                 <button type='button' className='noticeContentsBtn' onClick={noticeBtnHandeler}>목록 보기</button>
             </div>)
             }
+            {/* 공지 5번 */}
             {listType === 7 &&
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>공지사항</h1>
@@ -397,6 +405,7 @@ export default function HelpCenter(){
                 <button type='button' className='noticeContentsBtn' onClick={noticeBtnHandeler}>목록 보기</button>
             </div>)
             }
+            {/* 1대1 문의 */}
             {listType === 8 && 
             (<div className='helpCenter_text'>
                 <h1 className='text_title'>1 대 1 문의</h1>
@@ -405,8 +414,8 @@ export default function HelpCenter(){
                 </div>
                 <button type='button' className='sportBtn'>문의하기</button>
             </div>)
-            
             }
+            {/* 우측 고객센터 전화번호 등 */}
             <div className='helpCenter_tel'>
                 <div className='helpCenter_tel1'>
                     <h1 className='tel1_title'>EcoStay 고객 센터</h1>

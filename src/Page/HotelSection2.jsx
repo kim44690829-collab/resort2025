@@ -50,7 +50,7 @@ export default function HotelSection2(){
                             <li key={item.id} style={{cursor:'pointer'}} className='HotelLi'>
                                 <Link to = {`/detail/${item.id}`}>
                                     {/* <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' /> */}
-                                    <img src='/img/1-1.jpg' alt={item.hotelName} className='hotelSectionImg' style={{width:'280px', height:'169px'}}  />
+                                    <img src={item.img[0]} alt={item.hotelName} className='hotelSectionImg' style={{width:'280px', height:'169px'}}  />
                                     <p className='hotelSection_type'>{item.type}</p>
                                     <p className='hotelSection_name'>{item.hotelName}</p>
                                     <div className='hotelSection_review'>
