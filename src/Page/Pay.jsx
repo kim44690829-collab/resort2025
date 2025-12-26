@@ -2,6 +2,7 @@ import { useState,useEffect } from "react";
 import '../Page/pay.css'
 import { useContext } from "react";
 import { ResortDateContext } from "../Api/ResortDate";
+import { Link } from "react-router-dom";
 
 export default function Pay(){
 
@@ -14,6 +15,8 @@ export default function Pay(){
     const myRoom = RoomData.filter((f)=>f.id===payRoom)
     //방에 해당하는 호텔 정보
     const roomprice = HotelData.filter((f)=>f.hotelName === myRoom[0].hotelName)
+    // 고객 전화번호
+    const [phone,setPhone] = useState('')
     //전체 선택 함수
     const chkAllHandler=()=>{
         if(chking[0].state===false){
@@ -71,6 +74,29 @@ export default function Pay(){
         }
         
     }
+    const payTypeHandler =(num)=>{
+        if(num===btnNum){
+            setBtnNum(0)
+        }else if(num===1){
+            setBtnNum(1)
+        }else if(num===2){
+            setBtnNum(2)
+        }else if(num===3){
+            setBtnNum(3)
+        }else if(num===4){
+            setBtnNum(4)
+        }else if(num===5){
+            setBtnNum(5)
+        }else if(num===6){
+            setBtnNum(6)
+        }else if(num===7){
+            setBtnNum(7)
+        }else if(num===8){
+            setBtnNum(8)
+        }else if(num===9){
+            setBtnNum(9)
+        }
+    }
     const totalPrice = roomprice[0].price*(new Date(DayData[1]).getTime()-new Date(DayData[0]).getTime())/(1000*24*60*60)
     return(
         <>
@@ -86,14 +112,14 @@ export default function Pay(){
                             </li>
                             <li className="guest_list">
                                 <p className="guest_sub_title">예약자 생년월일</p>
-                                <input type="text" className="guest_birth01" placeholder="ex) 19800101"/>
+                                <input type="text" className="guest_birth01" placeholder="ex) 19800101" maxLength={8}/>
                                 <span> - </span>
-                                <input type="text" className="guest_birth02"/>
+                                <input type="text" className="guest_birth02" maxLength={1}/>
                                 <span> ● ● ● ● ● ●</span>
                             </li>
                             <li className="guest_list">
                                 <p className="guest_sub_title">휴대폰 번호</p>
-                                <input type="text" placeholder="010-1234-5678" className="guest_phone"/>
+                                <input type="text" placeholder="'-' 를 빼고 작성해 주세요" className="guest_phone" maxLength={11} onChange={(e)=>setPhone(e.target.value)} value={phone}/>
                                 <button type="button" className="phone_btn">인증번호 발송 </button>
                                 <div className="phone_txt">
                                     <i className="fa-solid fa-circle-exclamation"></i>
@@ -105,15 +131,15 @@ export default function Pay(){
                         <div className="payline"></div>
                         <h4 className="pay_left_title">결제 수단</h4>
                         <ul className="pay_type">
-                            <li className="type_list"><button onClick={()=>setBtnNum(1)} type="button" className="type_btn" style={{backgroundColor:btnNum===1?'#fff':''}}><img src="payLogo5.png" alt="kakao pay" style={{height:'30px',width:'70px', marginTop:'10px'}}></img></button></li>
-                            <li className="type_list"><button onClick={()=>setBtnNum(2)} type="button" className="type_btn" style={{backgroundColor:btnNum===2?'#fff':''}}><img src="payLogo4.png" alt="kakao pay" style={{height:'13px',width:'70px'}}></img></button></li>
-                            <li className="type_list"><button onClick={()=>setBtnNum(3)} type="button" className="type_btn" style={{fontWeight:500,backgroundColor:btnNum===3?'#fff':''}}>신용/체크 카드</button></li>
-                            <li className="type_list"><button onClick={()=>setBtnNum(4)} type="button" className="type_btn" style={{fontWeight:500,backgroundColor:btnNum===4?'#fff':''}}>퀵계좌이체</button></li>
-                            <li className="type_list"><button onClick={()=>setBtnNum(5)} type="button" className="type_btn" style={{backgroundColor:btnNum===5?'#fff':''}}><img src="payLogo3.png" alt="kakao pay" style={{height:'30px',width:'70px',marginTop:'10px'}}></img></button></li>
-                            <li className="type_list"><button onClick={()=>setBtnNum(6)} type="button" className="type_btn" style={{backgroundColor:btnNum===6?'#fff':''}} ><img src="payLogo2.png" alt="kakao pay" style={{height:'30px',width:'70px',marginTop:'10px'}}></img></button></li>
-                            <li className="type_list"><button onClick={()=>setBtnNum(7)} type="button" className="type_btn" style={{backgroundColor:btnNum===7?'#fff':''}}><img src="payLogo1.png" alt="kakao pay" style={{height:'30px',width:'70px',marginTop:'10px'}}></img></button></li>
-                            <li className="type_list"><button onClick={()=>setBtnNum(8)} type="button" className="type_btn" style={{fontWeight:500,backgroundColor:btnNum===8?'#fff':''}}>법인 카드</button></li>
-                            <li className="type_list"><button onClick={()=>setBtnNum(9)} type="button" className="type_btn" style={{fontWeight:500,backgroundColor:btnNum===9?'#fff':''}}>휴대폰 결제</button></li>
+                            <li className="type_list"><button onClick={()=>payTypeHandler(1)} type="button" className="type_btn" style={{backgroundColor:btnNum===1?'#fff':''}}><img src="payLogo5.png" alt="kakao pay" style={{height:'30px',width:'70px', marginTop:'10px'}}></img></button></li>
+                            <li className="type_list"><button onClick={()=>payTypeHandler(2)} type="button" className="type_btn" style={{backgroundColor:btnNum===2?'#fff':''}}><img src="payLogo4.png" alt="kakao pay" style={{height:'13px',width:'70px'}}></img></button></li>
+                            <li className="type_list"><button onClick={()=>payTypeHandler(3)} type="button" className="type_btn" style={{fontWeight:500,backgroundColor:btnNum===3?'#fff':''}}>신용/체크 카드</button></li>
+                            <li className="type_list"><button onClick={()=>payTypeHandler(4)} type="button" className="type_btn" style={{fontWeight:500,backgroundColor:btnNum===4?'#fff':''}}>퀵계좌이체</button></li>
+                            <li className="type_list"><button onClick={()=>payTypeHandler(5)} type="button" className="type_btn" style={{backgroundColor:btnNum===5?'#fff':''}}><img src="payLogo3.png" alt="kakao pay" style={{height:'30px',width:'70px',marginTop:'10px'}}></img></button></li>
+                            <li className="type_list"><button onClick={()=>payTypeHandler(6)} type="button" className="type_btn" style={{backgroundColor:btnNum===6?'#fff':''}} ><img src="payLogo2.png" alt="kakao pay" style={{height:'30px',width:'70px',marginTop:'10px'}}></img></button></li>
+                            <li className="type_list"><button onClick={()=>payTypeHandler(7)} type="button" className="type_btn" style={{backgroundColor:btnNum===7?'#fff':''}}><img src="payLogo1.png" alt="kakao pay" style={{height:'30px',width:'70px',marginTop:'10px'}}></img></button></li>
+                            <li className="type_list"><button onClick={()=>payTypeHandler(8)} type="button" className="type_btn" style={{fontWeight:500,backgroundColor:btnNum===8?'#fff':''}}>법인 카드</button></li>
+                            <li className="type_list"><button onClick={()=>payTypeHandler(9)} type="button" className="type_btn" style={{fontWeight:500,backgroundColor:btnNum===9?'#fff':''}}>휴대폰 결제</button></li>
                         </ul>
                         <div className="paychk">
                             <input type="checkbox" name="pay_chk" id="pay_chk" />
@@ -183,7 +209,7 @@ export default function Pay(){
                                     <label htmlFor="agreement04" className="paybox_item">만 14세 이상 확인 (필수)</label>
                                 </div>
                             </div>
-                            <button type="button" className="paybox_btn" onClick={chking[0].state===true?()=>setOpen(!open):undefined}>{totalPrice.toLocaleString() }원 결제하기</button>
+                            <button type="button" className="paybox_btn" onClick={chking[0].state===true && btnNum !== 0 && phone.length === 11?()=>setOpen(!open):undefined}>{totalPrice.toLocaleString() }원 결제하기</button>
                         </div>
                     </div>
                 </div>
@@ -212,7 +238,10 @@ export default function Pay(){
                         </ul>
                         <div className="pay_modal_btn">
                             <button type="button" className="btns" style={{width:'125px'}} onClick={()=>setOpen(!open)}>취소</button>
-                            <button type="button" className="btns"style={{color:'#fff',backgroundColor:'#42799b'}} onClick={()=>setOpen(!open)}>동의 후 결제</button>
+                            <Link to='/' onClick={()=>{setOpen(!open),alert('결제가 완료되었습니다.'),window.scrollTo(0,0)}}>
+                                <button type="button" className="btns"style={{color:'#fff',backgroundColor:'#42799b'}}>동의 후 결제</button>
+                            </Link>
+                            
                         </div>
                     </div>
                 </div>:''}

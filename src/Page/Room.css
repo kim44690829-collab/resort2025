@@ -3,7 +3,7 @@
     width: 1200px;
     margin: 100px auto 0;
     box-sizing: border-box;
-    border-top: 2px solid #c7c7c7;
+    /* border-top: 2px solid #c7c7c7; */
 }
 .Room_section .serch_box{
     position: relative;
@@ -376,7 +376,7 @@
 .Room_section .room_menu .room_product .room_list{
     display: flex;
     justify-content: space-between;
-    height: 250px;
+    height: 280px;
     padding: 15px;
     border-bottom: 1px solid #ccc;
     gap: 10px;
@@ -385,7 +385,7 @@
 }
 .Room_section .room_menu .room_product .room_list .img_box{
     width: 350px;
-    height: 220px;
+    height: 250px;
     background-color: #fff;
     border-radius: 10px;
     text-align: center;
@@ -400,7 +400,7 @@
 .Room_section .room_menu .room_product .room_list .room_info{
     background-color: #fff;
     width: 800px;
-    height: 218px;
+    height: 248px;
     border-radius: 10px;
     position: relative;
     padding: 15px;
@@ -426,11 +426,13 @@
     color: #fff;
 }
 .Room_section .room_menu .room_product .room_list .room_info .service_list{
-    margin-top: 10px;
+    margin-top: 25px;
     background-color: #f5f7fc;
     padding: 15px;
     border-radius: 10px;
     width: 560px;
+    height: 120px;
+    box-sizing: border-box;
 }
 
 .Room_section .room_menu .room_product .room_list .room_info .service_list .service_item{
@@ -483,7 +485,7 @@
     font-size: 32px;
     font-weight: 600;
     position: absolute;
-    bottom: 15px;
+    bottom: 0px;
     right: 20px;
 }
 .Room_section .room_menu .room_product .room_list .menu_wishbtn{

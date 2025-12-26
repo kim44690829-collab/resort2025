@@ -45,22 +45,6 @@ export default function Room(){
         dateFilterCopy = HotelData.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
         setDateFilter(dateFilterCopy)
     },[DayData])
-    /* useEffect(()=>{
-        console.log(dateFilter)
-        if (cityEn) {
-            const overFilter = dateFilter.filter(f => f.city === cityEn);
-            console.log(cityEn,'도시')
-            setmyhotel(overFilter)
-        } else if (countryEn) {
-            const overFilter = dateFilter.filter(f => f.country === countryEn);
-            console.log(countryEn,'나라')
-            setmyhotel(overFilter)
-        } else {
-            const overFilter = dateFilter;
-            setmyhotel(overFilter)
-        }
-        
-    },[myFilter,minPrice,maxPrice,hotelSort,DayData]) */
 
     // 검색어 입력, 날짜 선택 필터
     /* const serchHandler =()=>{
@@ -106,7 +90,7 @@ export default function Room(){
             const f3 = selectfilter03.every((filter)=>data.otherService.includes(filter.name));
             return f1&&f2&&f3
         })
-        const pricefilter = filterHotel.filter((f)=>f.price > minPrice && f.price<=maxPrice)
+        const pricefilter = filterHotel.filter((f)=>f.price > minPrice && f.price<=maxPrice) //위의 필터에서 가격이 포함하는 것만 필터링
         //console.log(pricefilter,'가격필터까지')
         //const dateFilter = pricefilter.filter((f)=>f.startDate>DayData[0] && f.endDate<DayData[1])
         /* if(hotelSort===1){
@@ -120,6 +104,7 @@ export default function Room(){
         }else{
             dateFilter.sort((a,b) => a.price - b.price)
         } */
+        // 정렬 방식 선택시 번호에 따라 목록의 정렬 변경
         if(hotelSort===1){
             pricefilter.sort((a,b) => a.id - b.id)
         }else if(hotelSort===2){
@@ -170,6 +155,7 @@ export default function Room(){
 
     },[myFilter,minPrice,maxPrice,hotelSort,DayData,myhotel])
 
+    // range 에서 최소값이 - 로 넘어가는것돠 최댓값이 최댓값을 초과하는것을 막는 로직
     useEffect(()=>{
         if(minPrice<0){
             setMinPrice(0)
@@ -184,20 +170,6 @@ export default function Room(){
 
     
 
-    // 최소가격이 변동될때
-   /*  useEffect(()=>{
-        const myhotelCopy = [...HotelData]
-        const minfilter = myhotelCopy.filter((f)=>f.price>minPrice)
-        setmyhotel(minfilter)
-    },[minPrice])
-    // 최대가격이 변동될때
-    useEffect(()=>{
-        const myhotelCopy = [...HotelData]
-        const maxfilter = myhotelCopy.filter((f)=>f.price<=maxPrice)
-        setmyhotel(maxfilter)
-    },[maxPrice]) */
-
-    //병합 dkdkdkdk
     /* 필터의 항목 클릭시 적용 함수 */
     const filterHandeler=(item)=>{
         const myFilterCopy = [...myFilter]
@@ -208,10 +180,7 @@ export default function Room(){
         }
         
         console.log(HotelData[0].roomservice)
-        //const filterHotel = HotelData.filter((data)=>myFilterCopy.every((filter)=>data.roomservice.includes(filter.name)))
-        //console.log(filterHotel)
-        //setmyhotel(filterHotel)
-        console.log(myFilter,'추가 직후 마이필터')
+        //console.log(myFilter,'추가 직후 마이필터')
     }
 
 
@@ -220,7 +189,7 @@ export default function Room(){
         const myFilterCopy = [...myFilter]
         const dleFilter = myFilterCopy.filter((myFilterCopy)=>myFilterCopy.id !== item.id) // filter을 이용한 삭제
         setMyfilter(dleFilter)
-        console.log(myFilter,'삭제 직후 마이필터')
+        //console.log(myFilter,'삭제 직후 마이필터')
     }
 
     //정렬 함수
@@ -261,6 +230,7 @@ export default function Room(){
     const month = new Date().getMonth()
     const date = new Date().getDate()
 
+    // 검색어 입력한것 저장
     const townHandler =(e)=>{
         setTown(e.target.value)
     }
@@ -274,7 +244,7 @@ export default function Room(){
                         <i className="fa-solid fa-calendar" style={{color:!openC?'#42799b55':'#7ED6E4'}}></i>
                         <span style={{marginRight:'5px'}}>{DayData.length < 2 ? `${year}-${month}-${date} - ${year}-${month}-${date + 1} ` : `${DayData[0]} - ${DayData[1]}`}</span>
                     </button>
-                    <button type="button" className="serch_btn" onClick={serchHandler}>검색하기</button>
+                    <button type="button" className="serch_btn" onClick={()=>{serchHandler(),setOpenC(false)}}>검색하기</button>
                     {openC && 
                     <div className="calendar_box">
                         <Calendar/>
@@ -391,10 +361,10 @@ export default function Room(){
                         {myhotel02.length !== 0?myhotel02.map((item)=>(
                             
                             <li key={item.id} className="room_list">
-                                <Link to={`/detail/${item.id}`}>
+                                <Link to={`/detail/${item.id}` } onClick={() => window.scrollTo(0, 0)}>
                                 <div className="img_box"><img src={item.img[0]} alt={`${item.img[0]}이미지`} className="hotelimg"/></div>
                                 </Link>
-                                <Link to={`/detail/${item.id}`}>
+                                <Link to={`/detail/${item.id}`} onClick={() => window.scrollTo(0, 0)}> {/*링크 클릭시 윈도우 최상단으로 이동*/}
                                 <div className="room_info">
                                     <h2 className="menu_title">{item.hotelName}</h2>
                                     <p className="menu_city">
@@ -418,7 +388,7 @@ export default function Room(){
                                                 </span>
                                             ))}
                                         </p>
-                                        <p style={{marginBottom:'10px'}}>
+                                        <p style={{}}>
                                             객내시설: 
                                             {item.roomservice.map((item,index)=>(
                                                 <span key={index} className="service_item" style={{color:myFilter.findIndex((f)=>f.name===item)>=0?'#42799b':'#333',fontWeight:myFilter.findIndex((f)=>f.name===item)>=0?600:400}}>
@@ -475,7 +445,7 @@ export default function Room(){
                                 </button>
                             </li>
                             
-                        )): <h2>검색된 상품이 없습니다.</h2>}
+                        )): <h2 style={{textAlign:'center',fontSize:'20px',fontWeight:600,marginTop:'60px'}}>검색된 상품이 없습니다.</h2>}
                     </ul>
                 </div>
             </div>

@@ -117,9 +117,7 @@
     line-height: 48px;
     background-color: #f5f7fa;
 }
-.paysection .pay_info .user_info .pay_type .type_list .type_btn:focus{
-    background-color: #fff;
-}
+
 .paysection .pay_info .user_info .pay_type .type_list{
     width: 280px;
     height: 48px;
