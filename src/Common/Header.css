@@ -52,20 +52,21 @@
 .logoutBtn:hover{
     text-decoration: underline;
     color: #42799b;
-}
+}   
 /* 메뉴 클릭 시 모달 */
 .Header_container .menus{
     position: absolute;
-    top: 60px;
+    top: 65px;
     right: 40px;
     width: 200px;
-    /* height: 100vh; */
+    height: 224px;
     z-index: 900;
     background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 .Header_container .menus .menus_sub{
     margin: 0 auto;
-    padding: 10px 0 10px 0;
+    padding: 0px 0 0px 0;
 }
 .Header_container .menus  .menus_sub .domestic-hotels,
 .Header_container .menus  .menus_sub .wishList_menu,
@@ -81,10 +82,12 @@
 .international-hotels,
 .support-center{
     background-color: rgba(255, 255, 255, 0);
+    height: 56px;
 }
 .domestic-hotels:hover,
 .wishList_menu:hover,
 .international-hotels:hover,
 .support-center:hover{
-    text-decoration: underline;
+    background-color: #f5f7fc;
+    font-weight: bold;
 }
