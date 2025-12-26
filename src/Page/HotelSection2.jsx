@@ -48,7 +48,7 @@ export default function HotelSection2(){
                     <ul className='HotelUl' >
                         {overseasHotelSort.slice(0,moreSee2).map((item) => (
                             <li key={item.id} style={{cursor:'pointer'}} className='HotelLi'>
-                                <Link to = {`/detail/${item.id}`}>
+                                <Link to = {`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
                                     {/* <img src={item.img[0]} alt={item.hotelName} className='popularAccomMainImg' /> */}
                                     <img src={item.img[0]} alt={item.hotelName} className='hotelSectionImg' style={{width:'280px', height:'169px'}}  />
                                     <p className='hotelSection_type'>{item.type}</p>
