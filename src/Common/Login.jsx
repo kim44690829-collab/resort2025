@@ -29,7 +29,8 @@ export default function Login(){
     const login = async (e) => {
         e.preventDefault();
         try{
-            const res = await axios.post('/api/login.php',
+            // const res = await axios.post('/api/login.php',
+            const res = await axios.post('http://localhost/resort2025/backend/api/login.php',
                 {
                     userEmail: emailInput,
                     userPw: pwInput

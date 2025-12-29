@@ -6400,6 +6400,16 @@ export default function ResortDate({children}){
         setmyhotel(overFilter)
     }
 
+    // 닉네임
+    // const [nickname, setNickname] = useState(() => {
+    //     const saved = localStorage.getItem('nickname');
+    //     return saved ? JSON.parse(saved) : '';
+    // });
+
+    // useEffect(()=>{
+    //     localStorage.setItem('nickname',JSON.stringify(nickname))
+    // },[nickname])
+
     // 해더 변경
     const [headerChange, setHeaderChange] = useState(0);
     
@@ -6407,7 +6417,7 @@ export default function ResortDate({children}){
     const [dateFilter,setDateFilter] = useState([])
 
     return(
-        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler,setWish, payHead,setPayHead,payRoom,setPayRoom, userNumFront, setUserNumFront, userNumBack, setUserNumBack, userNickName, loginSave, logout,town,setTown,serchHandler,hotelSort,setHotelSort,myhotel,setmyhotel,cityEn,countryEn, Domestic, setDomestic, headerChange, setHeaderChange,dateFilter,setDateFilter,townfilter}}>
+        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler,setWish, payHead,setPayHead,payRoom,setPayRoom, userNumFront, setUserNumFront, userNumBack, setUserNumBack, userNickName, loginSave, logout,town,setTown,serchHandler,hotelSort,setHotelSort,myhotel,setmyhotel,cityEn,countryEn, Domestic, setDomestic, headerChange, setHeaderChange,dateFilter,setDateFilter,townfilter, /* nickname, setNickname*/}}>
             {children}
         </ResortDateContext.Provider>
     );

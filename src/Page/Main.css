@@ -66,11 +66,12 @@
 .main_container .mainImgBenner .hotelSearch .hotelInput #citySearch{
     width: 400px;
     height: 50px;
-    padding: 15px 10px 10px 10px;
+    padding: 12px 10px 10px 10px;
     padding-left: 40px;
     border-radius: 10px;
     border: none;
     outline: none;
+    line-height: 150px;
     background-color: rgb(228, 228, 228);
     /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); */
 }
