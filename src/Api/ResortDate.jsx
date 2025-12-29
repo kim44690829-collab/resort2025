@@ -6400,24 +6400,16 @@ export default function ResortDate({children}){
         setmyhotel(overFilter)
     }
 
-    // 닉네임
-    // const [nickname, setNickname] = useState(() => {
-    //     const saved = localStorage.getItem('nickname');
-    //     return saved ? JSON.parse(saved) : '';
-    // });
-
-    // useEffect(()=>{
-    //     localStorage.setItem('nickname',JSON.stringify(nickname))
-    // },[nickname])
-
     // 해더 변경
     const [headerChange, setHeaderChange] = useState(0);
     
     //날짜 필터 내용
     const [dateFilter,setDateFilter] = useState([])
 
+    // 예약자명
+    const [customer,setCustomer] = useState('')
     return(
-        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler,setWish, payHead,setPayHead,payRoom,setPayRoom, userNumFront, setUserNumFront, userNumBack, setUserNumBack, userNickName, loginSave, logout,town,setTown,serchHandler,hotelSort,setHotelSort,myhotel,setmyhotel,cityEn,countryEn, Domestic, setDomestic, headerChange, setHeaderChange,dateFilter,setDateFilter,townfilter, /* nickname, setNickname*/}}>
+        <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler,setWish, payHead,setPayHead,payRoom,setPayRoom, userNumFront, setUserNumFront, userNumBack, setUserNumBack, userNickName, loginSave, logout,town,setTown,serchHandler,hotelSort,setHotelSort,myhotel,setmyhotel,cityEn,countryEn, Domestic, setDomestic, headerChange, setHeaderChange,dateFilter,setDateFilter,townfilter,customer,setCustomer}}>
             {children}
         </ResortDateContext.Provider>
     );
