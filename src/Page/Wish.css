@@ -14,7 +14,10 @@
     line-height: 31px;
     padding-bottom: 0;
 }
-.detail-wrap .detail-content .detail-left .room-select .room-title.wish span{
+.detail-wrap .detail-content .detail-left .room-select .room-title.wish .thirty{
+    font-size: 14px;
+}
+.detail-wrap .detail-content .detail-left .room-select .room-title.wish .del{
     text-align: right;
     float: right;
     font-size: 14px;
