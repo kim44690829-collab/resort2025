@@ -251,11 +251,12 @@ export default function Room(){
         
     return(
         <>  
+        <div className="Room_wrap" onClick={()=>setOpenC(false)}>
             {/* 상품 메뉴영역 */}
             <div className="Room_section">
                 <div className="serch_box">
                     <input type="text" placeholder="도시나 나라를 검색해주세요 ex)파리,속초" className="city_name" onChange={(e)=>townHandler(e)} value={town}/>
-                    <button type='button' onClick={() => setOpenC(!openC)} style={{border:!openC?'2px solid #42799b55':'2px solid #7ED6E4'}} className='calenertBtn'>
+                    <button type='button' onClick={(e) => {setOpenC(!openC);e.stopPropagation();}} style={{border:!openC?'2px solid #42799b55':'2px solid #7ED6E4'}} className='calenertBtn'>
                         <i className="fa-solid fa-calendar" style={{color:!openC?'#42799b55':'#7ED6E4'}}></i>
                         <span style={{marginRight:'5px'}}>{DayData.length < 2 ? '일정을 선택해 주세요': `${DayData[0]} - ${DayData[1]}`}</span>
                     </button>
@@ -499,6 +500,7 @@ export default function Room(){
                     </ul>
                 </div>
             </div>
+        </div>
         </>
     )
 }

@@ -6404,7 +6404,7 @@ export default function ResortDate({children}){
     const [headerChange, setHeaderChange] = useState(0);
     
     //날짜 필터 내용
-    const [dateFilter,setDateFilter] = useState([])
+    const [dateFilter,setDateFilter] = useState([]);
 
     return(
         <ResortDateContext.Provider value={{RoomData, HotelData,DayData,setDayData,selectDate,setSelectDate,selectday,setSelectday,selectMonth,setSelectMonth,wish,wishStar,wishArray,wishHandler,setWish, payHead,setPayHead,payRoom,setPayRoom, userNumFront, setUserNumFront, userNumBack, setUserNumBack, userNickName, loginSave, logout,town,setTown,serchHandler,hotelSort,setHotelSort,myhotel,setmyhotel,cityEn,countryEn, Domestic, setDomestic, headerChange, setHeaderChange,dateFilter,setDateFilter,townfilter}}>
