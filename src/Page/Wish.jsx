@@ -143,8 +143,8 @@ console.log(wishMinMax);
                 <div className="detail-content">
                     <div className="detail-left" ref={triggerRef}>                       
                         <div className="room-select" style={{borderTop:'0px'}}>
-                            <p className='room-title wish'>찜한 목록
-                                <span onClick={()=>{
+                            <p className='room-title wish'>찜한 목록 <span className='thirty'>※ 찜한 후 30일이 지난 호텔은 목록에서 자동삭제됩니다.</span>
+                                <span className='del' onClick={()=>{
                                     setWish([]);
                                     Cookie.remove('wishList');
                                 }}>전체 찜 삭제</span>

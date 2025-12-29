@@ -243,7 +243,7 @@ export default function Room(){
     const year = new Date().getFullYear()
     const month = new Date().getMonth()
     const date = new Date().getDate()
-
+//
     // 검색어 입력한것 저장
     const townHandler =(e)=>{
         setTown(e.target.value)
@@ -256,13 +256,13 @@ export default function Room(){
             <div className="Room_section">
                 <div className="serch_box">
                     <input type="text" placeholder="도시나 나라를 검색해주세요 ex)파리,속초" className="city_name" onChange={(e)=>townHandler(e)} value={town}/>
-                    <button type='button' onClick={(e) => {setOpenC(!openC);e.stopPropagation();}} style={{border:!openC?'2px solid #42799b55':'2px solid #7ED6E4'}} className='calenertBtn'>
+                    <button type='button' onClick={(e) => {setOpenC(true);e.stopPropagation();}} style={{border:!openC?'2px solid #42799b55':'2px solid #7ED6E4'}} className='calenertBtn'>
                         <i className="fa-solid fa-calendar" style={{color:!openC?'#42799b55':'#7ED6E4'}}></i>
                         <span style={{marginRight:'5px'}}>{DayData.length < 2 ? '일정을 선택해 주세요': `${DayData[0]} - ${DayData[1]}`}</span>
                     </button>
                     <button type="button" className="serch_btn" onClick={()=>{serchHandler(),setOpenC(false)}}>검색하기</button>
                     {openC && 
-                    <div className="calendar_box">
+                    <div className="calendar_box" onClick={(e) => {setOpenC(true);e.stopPropagation();}}>
                         <Calendar/>
                     </div>
                     }
