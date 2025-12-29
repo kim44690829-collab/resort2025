@@ -355,6 +355,15 @@ export default function Main(){
         console.log(DayData)
     },[DayData,cityEn,countryEn])
 
+    // 모달이 열리면 화면 전체의 스크롤 제거
+    useEffect(() => {
+        document.body.style.overflow= spotModalOpen? "hidden" : "auto";
+    },[spotModalOpen])
+    
+    useEffect(() => {
+        document.body.style.overflow= htypeModalOpen? "hidden" : "auto";
+    },[htypeModalOpen])
+
     return(
         <div className='main_container' onClick={closeUl1}>
             {/* 베너 박스 */}

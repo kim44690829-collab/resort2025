@@ -363,3 +363,48 @@
     padding: 15px;
     border-radius: 10px;
 }
+.paysection .pay2_info{
+    text-align: center;
+    margin-top: 200px;
+}
+.paysection .pay2_info .pay2_title{
+    font-weight: 700;
+    font-size: 40px;
+    margin-bottom: 70px;
+}
+.paysection .pay2_info .pay2_coment{
+    margin: 20px 0;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+.paysection .pay2_info .pay2_table{
+    margin: 0 auto;
+    width: 600px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    padding: 20px 0;
+}
+.paysection .pay2_info .pay2_table .pay2_list{
+    text-align: left;
+    padding: 25px 25px 15px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.paysection .pay2_info .pay2_btns .pay2_btn{
+    width: 290px;
+    height: 60px;
+    border-radius: 10px;
+    margin-top: 80px;
+    font-weight: 600;
+} 
+.paysection .pay2_info .pay2_btns .pay_chk{
+    color: #42799b;
+    border: 2px solid #42799b;
+    background-color: #fff;
+}
+.paysection .pay2_info .pay2_btns .move_main{
+    margin-left: 20px;
+    background-color: #42799b;
+    color: #fff;
+    border: none;
+}

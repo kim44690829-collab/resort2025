@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 export default function SignUp3(){
     const navigate = useNavigate();
     // 핸드폰 데이터 3개 합친 변수
-    const {userNumFront, setUserNumFront, userNumBack, setUserNumBack, setHeaderChange, userNickName} = useContext(ResortDateContext);
+    const {userNumFront, setUserNumFront, userNumBack, setUserNumBack, setHeaderChange, userNickName, /* nickname, setNickname */} = useContext(ResortDateContext);
     // 회원가입 form에 들어가는 상태변수
     // 이메일
     const [userMail, setUserMail] = useState('');
@@ -23,8 +23,14 @@ export default function SignUp3(){
     
     // 성별
     const [userGender, setUserGender ] = useState('');
-    // 닉네임
+
     const [nickname, setNickname] = useState('');
+
+    useEffect(() => {
+        console.log('11111111111111111111')
+        console.log(nickname)
+    },[nickname]);
+
     // 마우스 변경
     const [mouseCursor, setMouseCursor] = useState(false);
 
@@ -47,6 +53,7 @@ export default function SignUp3(){
         const userBirth = `${BirthYear}-${BirthMonth.padStart(2,'0')}-${BirthDate.padStart(2,'0')}`;
         const userPhone = `010${userNumFront}${userNumBack}`;
         try{
+            // const res = await axios.post('/api/signup.php',
             const res = await axios.post('http://localhost/resort2025/backend/api/signup.php',
                 {
                     step: 3,                 // 서버에서 단계 구분
@@ -67,7 +74,6 @@ export default function SignUp3(){
                 setBirthMonth('');
                 setBirthDate('');
                 setUserGender('');
-                setNickname('');
                 setUserNumFront('');
                 setUserNumBack('');
             }else{
@@ -79,7 +85,6 @@ export default function SignUp3(){
             alert("서버 연결 오류")
         }
     }
-
 
     // 회원가입 폼에서 조건을 만족하지 못했을때 확인버튼 비활성화
     const [isDisabledSignup, setIsDisabledSignup] = useState(true);
@@ -114,7 +119,7 @@ export default function SignUp3(){
     // 기존에 위에서 배열에 저장한 도메인 명들 중에 사용자가 입력한 도메인명이 포함되는지 알아보기위한 로직
     const isAllowedDomain = ALLOWED_DOMAINS.includes(domain);
 
-    // 
+    // 생일
     const m = Number(BirthMonth);
     const d = Number(BirthDate);
 
@@ -129,7 +134,8 @@ export default function SignUp3(){
             (1 <= m && m <= 12) &&
             (1 <= d && d <= 31) &&
             userGender !== '' &&
-            nickname.length >= 2){
+            nickname !== null
+        ){
                 setIsDisabledSignup(false)
                 setMouseCursor(true)
             }else{
@@ -140,9 +146,37 @@ export default function SignUp3(){
 
     const today = new Date();
     const year = today.getFullYear();
-    const month = today.getMonth();
+    const month = today.getMonth() + 1;
     const date = today.getDate();
-    console.log(today);
+
+    const validateMailAlert = () => {
+        if (!userMail) return;
+        if(!isValidEmail){
+            alert('aaaa@naver.com과 같은 형식으로 입력해주세요')
+            return;
+        }
+        if(!isAllowedDomain){
+            alert('naver.com, gmail.com과 같은 도메인 주소로 입력해주세요')
+        }
+    }
+    const validatePwAlert = () => {
+        if (!userPw) return;
+        if(userPw.length < 8){
+            alert('최소 8자리 이상의 숫자로 입력해주세요')
+        }
+    }
+    const validatePwConfAlert = () => {
+        if (!userPwConfirm) return;
+        if(userPwConfirm !== userPw){
+            alert('위의 비밀번호와 동일한 번호로 입력해주세요')
+        }
+    }
+    const validateNickNameAlert = () => {
+        if (!nickname) return;
+        else if( 20 < nickname.length || nickname.length < 2){
+            alert('닉네임은 2글자 이상, 20글자 이하로 입력해주세요')
+        }
+    }
 
     return(
         <div className='signup3_container'>
@@ -153,17 +187,17 @@ export default function SignUp3(){
                 {/* 이메일 */}
                 <div className='signup1'>
                     <label htmlFor="userEmail">이메일<span style={{color:'red'}}>*</span></label>
-                    <input type="email" id='userEmail' name='userEmail' placeholder='abc@naver.com' value={userMail} onChange={(e) => setUserMail(e.target.value)}/>
+                    <input type="email" id='userEmail' name='userEmail' placeholder='abc@naver.com' value={userMail} onChange={(e) => setUserMail(e.target.value)} onBlur={validateMailAlert}/>
                 </div>
                 {/* 비밀번호 */}
                 <div className='signup1'>
                     <label htmlFor="userpw">비밀번호<span style={{color:'red'}}>*</span></label>
-                    <input type="password" id='userpw' name='userpw' placeholder='최소 8자 이상' value={userPw} onChange={(e) => setUserPw(e.target.value)} />
+                    <input type="password" id='userpw' name='userpw' placeholder='최소 8자 이상' value={userPw} onChange={(e) => setUserPw(e.target.value)} onBlur={validatePwAlert} />
                 </div>
                 {/* 비밀번호 확인 */}
                 <div className='signup1'>
                     <label htmlFor="pwConfirm">비밀번호 확인<span style={{color:'red'}}>*</span></label>
-                    <input type="password" id='pwConfirm' name='pwConfirm' placeholder='위 비밀번호와 동일하게 입력해주세요' value={userPwConfirm} onChange={(e) => setUserPwConfirm(e.target.value)} />
+                    <input type="password" id='pwConfirm' name='pwConfirm' placeholder='위 비밀번호와 동일하게 입력해주세요' value={userPwConfirm} onChange={(e) => setUserPwConfirm(e.target.value)} onBlur={validatePwConfAlert} />
                 </div>
                 {/* 생년월일 */}
                 <div className='signup2'>
@@ -185,7 +219,7 @@ export default function SignUp3(){
                 {/* 닉네임 */}
                 <div className='signup4'>
                     <label htmlFor="nickname">닉네임<span style={{color:'red'}}>*</span></label>
-                    <input type="text" id='nickname' name='nickname' value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder='2글자 이상 적어주세요' />
+                    <input type="text" id='nickname' name='nickname' value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder='2글자 이상 적어주세요' onBlur={validateNickNameAlert} />
                 </div>
                 {/* 버튼 */}
                 <button type='submit' 
@@ -205,7 +239,7 @@ export default function SignUp3(){
                 <div className='signupModal'>
                     {/* <img src='/mainlogo.png' alt='mainlogo' className='logomodal' /> */}
                     <h1>회원가입이 완료되었습니다!</h1>
-                    <p className='p1'>EcoStay로 오신걸 환영합니다!</p>
+                    <p className='p1'>{nickname}님 EcoStay로 오신걸 환영합니다!</p>
                     <img src='/coupon.png' alt='couponImg' className='coupon' />
                     <p className='couponDate'>오늘({year}.{month}.{date})부터 <span style={{color:'red', fontSize:'20px', fontWeight:'600'}}>‘한달’동안</span> 사용하실 수 있습니다!</p>
                     <button type='button' 

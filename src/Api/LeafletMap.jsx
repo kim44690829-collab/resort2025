@@ -1,9 +1,21 @@
 import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
-import markerIcon2x from '../assets/marker-icon-2x.png';
-import markerIcon from '../assets/marker-icon.png';
-import markerShadow from '../assets/marker-shadow.png';
+// import markerIcon2x from '../assets/marker-icon-2x.png';
+// import markerIcon from '../assets/marker-icon.png';
+// import markerShadow from '../assets/marker-shadow.png';
+
+const defaultIcon = L.icon({
+  iconUrl: '/marker-icon.png',
+  iconRetinaUrl: '/marker-icon-2x.png',
+  shadowUrl: '/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  shadowSize: [41, 41],
+});
+
+// 전역 기본 마커 아이콘 설정
+L.Marker.prototype.options.icon = defaultIcon;
 
 export default function LeafletMap({ style, city, hotelName }) {
   

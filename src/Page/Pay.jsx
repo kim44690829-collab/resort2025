@@ -3,10 +3,12 @@ import '../Page/pay.css'
 import { useContext } from "react";
 import { ResortDateContext } from "../Api/ResortDate";
 import { Link } from "react-router-dom";
+import { ModalContext } from './Modal';
 
 export default function Pay(){
 
-    const {payHead,setPayHead,payRoom,setPayRoom,HotelData,RoomData,DayData} = useContext(ResortDateContext)
+    const {payHead,setPayHead,payRoom,setPayRoom,HotelData,RoomData,DayData,customer,setCustomer} = useContext(ResortDateContext)
+    const {toggle,setModalContent,AddressCopy, AddressCopyClick} = useContext(ModalContext);
     //전체 동의 변수
     const [chking,setchking] = useState([{id:1,state:false},{id:2,state:false},{id:3,state:false},{id:4,state:false},{id:5,state:false}])
     //예약내역 확인창 변수
@@ -25,6 +27,7 @@ export default function Pay(){
             setchking([{id:1,state:false},{id:2,state:false},{id:3,state:false},{id:4,state:false},{id:5,state:false}])
         }
     }
+    //결제 수단 선택
     const [btnNum,setBtnNum] = useState(0)
     //개별 선택 함수
     const chkHandler=(num)=>{
@@ -96,8 +99,32 @@ export default function Pay(){
         }else if(num===9){
             setBtnNum(9)
         }
+        console.log(roomprice)
     }
     const totalPrice = roomprice[0].price*(new Date(DayData[1]).getTime()-new Date(DayData[0]).getTime())/(1000*24*60*60)
+
+    //생년월이
+    const [birth,setBirth] = useState('')
+    const payHandler =()=>{
+        if(chking[0].state===true && btnNum !== 0 && phone.length === 11 && customer.length !==0){
+            setOpen(!open)
+            console.log('확인')
+            console.log(open)
+        }else if(chking[0].state===false){
+            setModalContent(<p style={{fontSize:'18px',fontWeight:'700'}}>약관에 동의 해주세요.</p>)
+            toggle();
+        }else if(btnNum===0){
+            setModalContent(<p style={{fontSize:'18px',fontWeight:'700'}}>결제 수단을 선택해 주세요.</p>)
+            toggle();
+        }else if(phone.length < 11 || birth.length<8 || customer.length <1){
+            setModalContent(<p style={{fontSize:'18px',fontWeight:'700'}}>예약자 정보를 입력해주세요.</p>)
+            toggle();
+        }
+        console.log(chking[0].state)
+        console.log(btnNum)
+        console.log(phone.length)
+    }
+    console.log(payRoom)
     return(
         <>
             <div className="paysection">
@@ -108,11 +135,11 @@ export default function Pay(){
                         <ul className="guest_info">
                             <li className="guest_list">
                                 <p className="guest_sub_title">예약자 이름</p>
-                                <input type="text" placeholder="홍길동" className="guest_name"/>
+                                <input type="text" placeholder="홍길동" className="guest_name" value={customer} onChange={(e)=>{setCustomer(e.target.value)}}/>
                             </li>
                             <li className="guest_list">
                                 <p className="guest_sub_title">예약자 생년월일</p>
-                                <input type="text" className="guest_birth01" placeholder="ex) 19800101" maxLength={8}/>
+                                <input type="text" className="guest_birth01" placeholder="ex) 19800101" maxLength={8} onChange={(e)=>setBirth(e.target.value)} value={birth}/>
                                 <span> - </span>
                                 <input type="text" className="guest_birth02" maxLength={1}/>
                                 <span> ● ● ● ● ● ●</span>
@@ -149,7 +176,7 @@ export default function Pay(){
                     <div className="room_info">
                         <div className="room_box">
                             <h2 className="room_name">{myRoom[0].hotelName}</h2>
-                            <img src="/img/1-2.jpg" alt="roomImg" className="room_img"/>
+                            <img src={roomprice[0].img[(myRoom[0].id)%3===0?3:(myRoom[0].id)%3]} alt="roomImg" className="room_img"/>
                             <table className="room_table">
                                 <tbody>
                                     <tr>
@@ -209,7 +236,7 @@ export default function Pay(){
                                     <label htmlFor="agreement04" className="paybox_item">만 14세 이상 확인 (필수)</label>
                                 </div>
                             </div>
-                            <button type="button" className="paybox_btn" onClick={chking[0].state===true && btnNum !== 0 && phone.length === 11?()=>setOpen(!open):undefined}>{totalPrice.toLocaleString() }원 결제하기</button>
+                            <button type="button" className="paybox_btn" onClick={payHandler}>{totalPrice.toLocaleString()}원 결제하기</button>
                         </div>
                     </div>
                 </div>
@@ -238,7 +265,7 @@ export default function Pay(){
                         </ul>
                         <div className="pay_modal_btn">
                             <button type="button" className="btns" style={{width:'125px'}} onClick={()=>setOpen(!open)}>취소</button>
-                            <Link to='/' onClick={()=>{setOpen(!open),alert('결제가 완료되었습니다.'),window.scrollTo(0,0)}}>
+                            <Link to='/pay2' onClick={()=>{setOpen(!open),alert('결제가 완료되었습니다.'),window.scrollTo(0,0)}}>
                                 <button type="button" className="btns"style={{color:'#fff',backgroundColor:'#42799b'}}>동의 후 결제</button>
                             </Link>
                             
