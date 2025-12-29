@@ -6404,7 +6404,7 @@ export default function ResortDate({children}){
     const [headerChange, setHeaderChange] = useState(0);
     
     //날짜 필터 내용
-    const [dateFilter,setDateFilter] = useState([])
+    const [dateFilter,setDateFilter] = useState([]);
 
     // 예약자명
     const [customer,setCustomer] = useState('')

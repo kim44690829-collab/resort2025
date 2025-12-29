@@ -260,7 +260,7 @@ export default function Main(){
 
     // 이미지 배너
     const [currentImg, setCurrent] = useState(0);
-    const bennerImg = ['/bennerImg/benner2.jpg','/bennerImg/benner6.jpg','/bennerImg/benner7.jpg'];
+    const bennerImg = ['/bennerImg/benner2.webp','/bennerImg/benner6.webp','/bennerImg/benner7.webp'];
 
     useEffect(() => {
         const current = setInterval(() => {
