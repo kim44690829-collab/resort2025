@@ -9,7 +9,7 @@ import Calendar from './Calendar';
 export default function Main(){    
     // 2025-12-26 병합2
     // 호텔, 객실데이터 useContext로 가져오는 훅
-    const {RoomData, HotelData, DayData, setDayData,town,setTown,serchHandler, wish, wishHandler, menuModal, setMenuModal,cityEn,countryEn,dateFilter,setDateFilter,townfilter} = useContext(ResortDateContext);
+    const {selectMonth,setSelectMonth, RoomData, HotelData, DayData, setDayData,town,setTown,serchHandler, wish, wishHandler, menuModal, setMenuModal,cityEn,countryEn,dateFilter,setDateFilter,townfilter} = useContext(ResortDateContext);
     // 호텔 input에 들어가는 지역, 호텔명 상태변수
     //const [hotelInput, setHotelInput] = useState('');
     // 호텔 input 아래 모달 상태변수
@@ -67,6 +67,10 @@ export default function Main(){
     const [overseasHotel, setOverSeasHotel] = useState([])
     // 국내
     const [internalHotel, setInternalHotel] = useState([])
+
+    useEffect(()=>{
+        setSelectMonth(new Date('2026-03-01'))
+    },[])
 
     // 호텔 유형별로 접근하기 위한 사진 map돌리기 위한 오브젝트 배열
     const hotelType = [
@@ -669,12 +673,12 @@ export default function Main(){
                         {internalHotel.slice(0,4).map((item,index)=>(
                             <li key={index} style={{display:'flex'}}>
                                 <div className="room-left_main">
-                                    <a href={`/detail/${item.id}`}>
+                                    <Link to={`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>
                                         <img src={`/img/${item.id}-1.jpg`} alt={item.hotelName} />
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="room-right_main">
-                                    <h2><a href={`/detail/${item.id}`}>{item.hotelName}</a></h2>
+                                    <h2><Link to={`/detail/${item.id}`} onClick={() => window.scrollTo(0,0)}>{item.hotelName}</Link></h2>
                                     <div className="room-intro_main">
                                         <div className="intro-left_main">
                                             <span>

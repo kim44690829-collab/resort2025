@@ -16,6 +16,7 @@ import Detail from './Page/Detail'
 import Footer from './Common/Footer'
 import Guest from './Page/Guest'
 import Pay from './Page/Pay'
+import Pay2 from './Page/Pay2'
 import HelpCenter from './Page/HelpCenter'
 import Wish from './Page/Wish'
 import HotelSection from './Page/HotelSection'
@@ -39,6 +40,7 @@ function App() {
             <Route path='/detail/:id' element={<Detail />}/>  
             <Route path='/guest' element={<Guest />}/>  
             <Route path='/pay' element={<Pay />}/>  
+            <Route path='/pay2' element={<Pay2 />}/>  
             <Route path='/helpCenter' element={<HelpCenter />} />
             <Route path='/wish' element={<Wish />}/>
             <Route path='/hotelSection' element={<HotelSection />} />
