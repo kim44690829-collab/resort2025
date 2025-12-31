@@ -59,15 +59,19 @@ export default function Header(){
     const menuModalHandeler = (num) => {
         if(num === 1){
             setMenuModal(false);
+            setHeaderChange(0);
             navigate('/hotelSection')
         }else if(num === 2){
             setMenuModal(false);
+            setHeaderChange(0);
             navigate('/hotelSection2')
         }else if(num === 3){
             setMenuModal(false);
+            setHeaderChange(0);
             navigate('/wish')
         }else{
             setMenuModal(false);
+            setHeaderChange(0);
             navigate('/helpCenter')
         }
 

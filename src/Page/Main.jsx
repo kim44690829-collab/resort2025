@@ -357,12 +357,15 @@ export default function Main(){
 
     // 모달이 열리면 화면 전체의 스크롤 제거
     useEffect(() => {
-        document.body.style.overflow= spotModalOpen? "hidden" : "auto";
-    },[spotModalOpen])
-    
-    useEffect(() => {
-        document.body.style.overflow= htypeModalOpen? "hidden" : "auto";
-    },[htypeModalOpen])
+        const isAnyModalOpen = !!spotModalOpen || !!htypeModalOpen;
+
+        document.body.style.overflow = isAnyModalOpen ? "hidden" : "auto";
+
+        // ✅ 컴포넌트 언마운트(페이지 이동) 시 무조건 원복
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, [spotModalOpen, htypeModalOpen]);
 
     return(
         <div className='main_container' onClick={closeUl1}>

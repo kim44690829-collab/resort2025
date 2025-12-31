@@ -86,7 +86,7 @@
 }
 .main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .rankName{
     display: inline-block;
-    width: 420px;
+    width: 300px;
 }
 /* 검색창 클릭시 나오는 지역 css */
 .main_container .mainImgBenner .hotelSearch .hotelInput .rankBox .countryInRank,
@@ -98,7 +98,7 @@
 } */
 /* 검색창 ul */
 .main_container .mainImgBenner .hotelSearch .hotelInput .rankBox{
-    width: 500px;
+    width: 400px;
     height: 430px;
     margin: 10px 0 10px 0;
     position: absolute;

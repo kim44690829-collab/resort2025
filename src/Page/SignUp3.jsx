@@ -53,8 +53,8 @@ export default function SignUp3(){
         const userBirth = `${BirthYear}-${BirthMonth.padStart(2,'0')}-${BirthDate.padStart(2,'0')}`;
         const userPhone = `010${userNumFront}${userNumBack}`;
         try{
-            // const res = await axios.post('/api/signup.php',
-            const res = await axios.post('http://localhost/resort2025/backend/api/signup.php',
+            // const res = await axios.post('http://localhost/resort2025/backend/api/signup.php',
+             const res = await axios.post('/api/signup.php',
                 {
                     step: 3,                 // 서버에서 단계 구분
                     userEmail: userMail,
